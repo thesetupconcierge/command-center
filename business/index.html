@@ -975,20 +975,212 @@
         flex: 1;
         min-width: 200px;
       }
+
+      /* Move right column (Next Actions, Captain's Log) above center tasks */
+      .right-col {
+        order: -1;
+      }
     }
 
     @media (max-width: 600px) {
-      .header {
-        padding: 10px 14px;
+      html {
+        font-size: 13px;
       }
 
-      .main {
-        padding: 14px;
+      .header {
+        padding: 8px 12px;
+      }
+
+      .header-inner {
+        gap: 8px;
+      }
+
+      /* Compact brand on mobile */
+      .brand {
+        font-size: 0.95rem;
+        gap: 8px;
+      }
+
+      .brand-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+        border-radius: 6px;
+      }
+
+      /* Scrollable quick-links strip instead of hiding */
+      .quick-links {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 6px;
+        padding-bottom: 2px;
+        flex-wrap: nowrap;
+        max-width: 100%;
+      }
+
+      .quick-links::-webkit-scrollbar {
+        display: none;
+      }
+
+      .quick-link {
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding: 6px 10px;
+        font-size: 0.72rem;
+        min-height: 34px;
+      }
+
+      .gear-btn {
+        flex-shrink: 0;
+        min-height: 34px;
+        padding: 6px 8px;
+      }
+
+      /* Scorecard bar — compact */
+      .scorecard-bar {
         gap: 14px;
       }
 
-      .quick-links {
+      .score-item {
+        font-size: 0.75rem;
+      }
+
+      .score-ring {
+        width: 30px;
+        height: 30px;
+      }
+
+      /* Main content — tighter */
+      .main {
+        padding: 12px;
+        gap: 12px;
+      }
+
+      /* Left col — stack cards vertically on phone */
+      .left-col {
+        flex-direction: column;
+      }
+
+      .left-col .card {
+        min-width: 100%;
+      }
+
+      /* Big progress ring — smaller on phone */
+      .big-ring-wrap {
+        padding: 20px 16px;
+      }
+
+      .big-ring {
+        width: 110px;
+        height: 110px;
+      }
+
+      .big-ring-pct .num {
+        font-size: 1.8rem;
+      }
+
+      /* Cards — tighter padding */
+      .card {
+        padding: 14px;
+        border-radius: 12px;
+      }
+
+      /* Task items — better touch targets */
+      .task-item {
+        padding: 10px;
+        gap: 8px;
+      }
+
+      .task-check {
+        width: 26px;
+        height: 26px;
+        min-width: 26px;
+        border-radius: 8px;
+      }
+
+      .task-text {
+        font-size: 0.82rem;
+      }
+
+      /* Section headers — touch-friendly */
+      .section-header {
+        padding: 12px 0;
+      }
+
+      /* Spotlight / Next Actions — compact */
+      .spotlight-card {
+        max-height: none;
+      }
+
+      .action-item {
+        padding: 10px;
+      }
+
+      /* Captain's Log — reasonable height on phone */
+      .log-entries {
+        max-height: 200px;
+      }
+
+      .log-input {
+        font-size: 0.85rem;
+        min-height: 40px;
+      }
+
+      /* Filters — scrollable on phone */
+      .filters {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+      }
+
+      .filters::-webkit-scrollbar {
         display: none;
+      }
+
+      .filter-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+        min-height: 34px;
+      }
+
+      /* Revenue bar */
+      .revenue-labels {
+        font-size: 0.68rem;
+      }
+
+      /* Export button */
+      .export-btn {
+        min-height: 40px;
+      }
+
+      /* Settings modal — full width on phone */
+      .settings-modal {
+        width: 95vw;
+        padding: 20px;
+      }
+    }
+
+    /* iPhone SE and very small screens */
+    @media (max-width: 380px) {
+      html {
+        font-size: 12px;
+      }
+
+      .main {
+        padding: 8px;
+        gap: 10px;
+      }
+
+      .brand span {
+        display: none;
+      }
+
+      .big-ring {
+        width: 90px;
+        height: 90px;
       }
     }
 
