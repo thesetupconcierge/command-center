@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Center — Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #06060b;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text: #e4e4e7;
+            --text-dim: #71717a;
+            --text-bright: #fafafa;
+            --gold: #FFB81C;
+            --blue: #3b82f6;
+            --green: #4ade80;
+            --purple: #a78bfa;
+            --radius: 20px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Ambient glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -40%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255, 184, 28, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hub {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--gold), #e6a000);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #000;
+            box-shadow: 0 4px 20px rgba(255, 184, 28, 0.3);
+        }
+
+        .brand h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-bottom: 48px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 500px) {
+            .cards {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .brand h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-business::before {
+            background: linear-gradient(135deg, rgba(255, 184, 28, 0.08), transparent);
+        }
+
+        .card-business:hover {
+            border-color: rgba(255, 184, 28, 0.25);
+        }
+
+        .card-career::before {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), transparent);
+        }
+
+        .card-career:hover {
+            border-color: rgba(59, 130, 246, 0.25);
+        }
+
+        .card-emoji {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 6px;
+        }
+
+        .card-desc {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .card-badge {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-gold {
+            background: rgba(255, 184, 28, 0.15);
+            color: var(--gold);
+        }
+
+        .badge-blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--blue);
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            z-index: 1;
+        }
+
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* Pulse animation on the emoji */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .card:hover .card-emoji {
+            animation: float 1.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hub">
+        <div class="brand">
+            <div class="brand-icon">SC</div>
+            <h1>Command Center</h1>
+        </div>
+        <p class="subtitle">Your ecosystem at a glance. Pick your lane.</p>
+
+        <div class="cards">
+            <a href="business/" class="card card-business">
+                <span class="card-emoji">🏢</span>
+                <div class="card-title">Business Ops</div>
+                <div class="card-desc">Setup Concierge · WNQ · Black Nexus · Revenue tracking · Client tasks</div>
+                <span class="card-badge badge-gold">SETUP CONCIERGE</span>
+            </a>
+
+            <a href="career/" class="card card-career">
+                <span class="card-emoji">🚀</span>
+                <div class="card-title">Career Hub</div>
+                <div class="card-desc">Opportunities · Applications · Interview prep · Skills · Networking</div>
+                <span class="card-badge badge-blue">CAREER HUB</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        Built by <a href="#">The Setup Concierge</a> · ☁️ Gist-synced across devices
+    </div>
+</body>
+
+</html>

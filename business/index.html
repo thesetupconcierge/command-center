@@ -1,0 +1,2180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setup Concierge — Command Center</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: rgba(255, 255, 255, 0.04);
+      --bg-card-hover: rgba(255, 255, 255, 0.07);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #e4e4e7;
+      --text-dim: #71717a;
+      --text-bright: #fafafa;
+      --gold: #FFB81C;
+      --gold-dim: rgba(255, 184, 28, 0.15);
+      --blue: #3b82f6;
+      --blue-dim: rgba(59, 130, 246, 0.15);
+      --green: #4ade80;
+      --green-dim: rgba(74, 222, 128, 0.15);
+      --orange: #f59e0b;
+      --orange-dim: rgba(245, 158, 11, 0.15);
+      --red: #ef4444;
+      --red-dim: rgba(239, 68, 68, 0.15);
+      --purple: #a78bfa;
+      --purple-dim: rgba(167, 139, 250, 0.15);
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.06);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    html {
+      font-size: 14px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at 20% 20%, rgba(255, 184, 28, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    /* ========== SCROLLBAR ========== */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* ========== LAYOUT ========== */
+    .app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+    }
+
+    .header-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-bright);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--gold), #e6a000);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #000;
+      font-weight: 800;
+    }
+
+    .quick-links {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .quick-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .quick-link:hover {
+      background: var(--bg-card-hover);
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .scorecard-bar {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .score-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+    }
+
+    .score-ring {
+      width: 36px;
+      height: 36px;
+      position: relative;
+    }
+
+    .score-ring svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .score-ring circle {
+      fill: none;
+      stroke-width: 3;
+      cx: 18;
+      cy: 18;
+      r: 15;
+    }
+
+    .score-ring .bg {
+      stroke: var(--border);
+    }
+
+    .score-ring .fill {
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .score-pct {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--text-bright);
+    }
+
+    .main {
+      flex: 1;
+      max-width: 1600px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 260px 1fr 320px;
+      gap: 20px;
+      padding: 20px 24px;
+    }
+
+    /* ========== CARDS ========== */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .card-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* ========== LEFT COLUMN ========== */
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Big Progress Ring */
+    .big-ring-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 20px;
+    }
+
+    .big-ring {
+      width: 140px;
+      height: 140px;
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .big-ring svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .big-ring circle {
+      fill: none;
+      cx: 70;
+      cy: 70;
+      r: 62;
+    }
+
+    .big-ring .bg {
+      stroke: var(--border);
+      stroke-width: 6;
+    }
+
+    .big-ring .fill {
+      stroke-width: 6;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .big-ring-pct {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .big-ring-pct .num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      line-height: 1;
+    }
+
+    .big-ring-pct .label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.82rem;
+    }
+
+    .stat-row:last-child {
+      border-bottom: none;
+    }
+
+    .stat-label {
+      color: var(--text-dim);
+    }
+
+    .stat-value {
+      font-weight: 700;
+      color: var(--text-bright);
+    }
+
+    .stat-value.blocked {
+      color: var(--red);
+    }
+
+    .stat-value.done {
+      color: var(--green);
+    }
+
+    /* Revenue */
+    .revenue-bar-wrap {
+      background: var(--border);
+      border-radius: 6px;
+      height: 8px;
+      overflow: hidden;
+      margin: 8px 0 4px;
+    }
+
+    .revenue-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), #e6a000);
+      border-radius: 6px;
+      transition: width 0.8s ease;
+    }
+
+    .revenue-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== CENTER COLUMN ========== */
+    .center-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .filter-btn.active[data-filter="wnq"] {
+      background: var(--blue-dim);
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .filter-btn.active[data-filter="sc"] {
+      background: var(--purple-dim);
+      border-color: var(--purple);
+      color: var(--purple);
+    }
+
+    .filter-btn.active[data-filter="bn"] {
+      background: var(--green-dim);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .filter-btn.active[data-filter="backlog"] {
+      background: var(--orange-dim);
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    /* Task Sections */
+    .task-section {}
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-badge {
+      font-size: 0.68rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .section-chevron {
+      transition: transform 0.3s;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    .section-header.collapsed .section-chevron {
+      transform: rotate(-90deg);
+    }
+
+    .task-list {
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s;
+    }
+
+    .task-list.collapsed {
+      max-height: 0 !important;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Task Items */
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s;
+      cursor: default;
+    }
+
+    .task-item:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .task-item.blocked {
+      border-left: 3px solid var(--red);
+      opacity: 0.6;
+    }
+
+    .task-item.blocked:hover {
+      opacity: 0.85;
+    }
+
+    .task-check {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 1px;
+      font-size: 0.7rem;
+      color: transparent;
+      position: relative;
+    }
+
+    .task-check:hover {
+      border-color: var(--gold);
+    }
+
+    .task-check[data-state="progress"] {
+      border-color: var(--orange);
+      background: var(--orange-dim);
+      color: var(--orange);
+    }
+
+    .task-check[data-state="done"] {
+      border-color: var(--green);
+      background: var(--green-dim);
+      color: var(--green);
+    }
+
+    .task-check[data-state="done"]::after {
+      content: '✓';
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .task-check[data-state="progress"]::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+      }
+    }
+
+    .task-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .task-text {
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .task-item[data-status="done"] .task-text {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+
+    .task-meta {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .task-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .tag-phase {
+      background: var(--blue-dim);
+      color: var(--blue);
+    }
+
+    .tag-blocked {
+      background: var(--red-dim);
+      color: var(--red);
+    }
+
+    .tag-needs-client {
+      background: var(--orange-dim);
+      color: var(--orange);
+    }
+
+    /* ========== NEXT ACTIONS SPOTLIGHT ========== */
+    .spotlight-card {
+      border: 1px solid var(--gold);
+      background: rgba(255, 184, 28, 0.04);
+      animation: spotlight-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes spotlight-pulse {
+
+      0%,
+      100% {
+        border-color: var(--gold);
+      }
+
+      50% {
+        border-color: rgba(255, 184, 28, 0.3);
+      }
+    }
+
+    .spotlight-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .spotlight-count {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    .action-item:last-child {
+      border-bottom: none;
+    }
+
+    .action-item:hover {
+      opacity: 0.8;
+    }
+
+    .action-item.completed {
+      opacity: 0.35;
+      text-decoration: line-through;
+    }
+
+    .action-check {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+      font-size: 0.7rem;
+      transition: all 0.2s;
+    }
+
+    .action-item.completed .action-check {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+    }
+
+    .action-item.completed .action-check::after {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .action-text {
+      flex: 1;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .action-source {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .action-urgency {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 1px 5px;
+      border-radius: 4px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .urgency-now {
+      background: var(--red-dim);
+      color: var(--red);
+    }
+
+    .urgency-soon {
+      background: var(--orange-dim);
+      color: var(--orange);
+    }
+
+    .urgency-later {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-dim);
+    }
+
+    /* ========== RIGHT COLUMN ========== */
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Captain's Log */
+    .log-entries {
+      flex: 1;
+      max-height: 450px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .log-entry {
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--border);
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .log-entry[data-tag="decision"] {
+      border-left-color: var(--blue);
+    }
+
+    .log-entry[data-tag="win"] {
+      border-left-color: var(--green);
+    }
+
+    .log-entry[data-tag="blocker"] {
+      border-left-color: var(--red);
+    }
+
+    .log-entry[data-tag="idea"] {
+      border-left-color: var(--purple);
+    }
+
+    .log-time {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .log-tag {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .log-tag[data-tag="decision"] {
+      background: var(--blue-dim);
+      color: var(--blue);
+    }
+
+    .log-tag[data-tag="win"] {
+      background: var(--green-dim);
+      color: var(--green);
+    }
+
+    .log-tag[data-tag="blocker"] {
+      background: var(--red-dim);
+      color: var(--red);
+    }
+
+    .log-tag[data-tag="idea"] {
+      background: var(--purple-dim);
+      color: var(--purple);
+    }
+
+    .log-text {
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .log-delete {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.7rem;
+      padding: 2px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .log-entry:hover .log-delete {
+      opacity: 1;
+    }
+
+    .log-delete:hover {
+      color: var(--red);
+    }
+
+    .log-input-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .log-tags {
+      display: flex;
+      gap: 4px;
+    }
+
+    .log-tag-btn {
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-dim);
+      font-size: 0.68rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .log-tag-btn:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .log-tag-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    .log-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-family: inherit;
+      resize: none;
+      outline: none;
+      transition: border-color 0.2s;
+      min-height: 42px;
+    }
+
+    .log-input:focus {
+      border-color: var(--gold);
+    }
+
+    .log-input::placeholder {
+      color: var(--text-dim);
+    }
+
+    /* Export */
+    .export-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .export-btn:hover {
+      background: var(--bg-card-hover);
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .export-btn.copied {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    /* Synced */
+    .synced {
+      text-align: center;
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      padding: 8px 0;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1100px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      .left-col {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .left-col .card {
+        flex: 1;
+        min-width: 200px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        padding: 10px 14px;
+      }
+
+      .main {
+        padding: 14px;
+        gap: 14px;
+      }
+
+      .quick-links {
+        display: none;
+      }
+    }
+
+    /* ========== CELEBRATION EFFECTS ========== */
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .confetti-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      opacity: 1;
+      animation: confetti-fly 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    .confetti-particle.circle {
+      border-radius: 50%;
+      width: 6px;
+      height: 6px;
+    }
+
+    .confetti-particle.star {
+      width: 0;
+      height: 0;
+      background: none !important;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 8px solid var(--gold);
+    }
+
+    @keyframes confetti-fly {
+      0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0);
+        opacity: 0;
+      }
+    }
+
+    .task-check[data-state="done"] {
+      animation: check-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes check-pop {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.4);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .celebration-flash {
+      animation: flash-glow 0.6s ease-out;
+    }
+
+    @keyframes flash-glow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 184, 28, 0.6);
+      }
+
+      50% {
+        box-shadow: 0 0 20px 8px rgba(255, 184, 28, 0.3);
+      }
+
+      100% {
+        box-shadow: none;
+      }
+    }
+
+    /* ========== GIST SYNC SETTINGS ========== */
+    .settings-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .settings-overlay.open {
+      display: flex;
+    }
+
+    .settings-modal {
+      background: #1a1a2e;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      width: min(420px, 90vw);
+      box-shadow: var(--shadow);
+    }
+
+    .settings-modal h3 {
+      color: var(--text-bright);
+      margin-bottom: 4px;
+      font-size: 1.1rem;
+    }
+
+    .settings-modal .subtitle {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      margin-bottom: 20px;
+    }
+
+    .settings-field {
+      margin-bottom: 14px;
+    }
+
+    .settings-field label {
+      display: block;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .settings-field input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      padding: 10px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .settings-field input:focus {
+      border-color: var(--gold);
+    }
+
+    .settings-field input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .settings-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .settings-actions button {
+      flex: 1;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-save {
+      background: var(--gold);
+      color: #000;
+      border-color: var(--gold) !important;
+      font-weight: 600;
+    }
+
+    .btn-save:hover {
+      opacity: 0.9;
+    }
+
+    .btn-cancel {
+      background: transparent;
+      color: var(--text-dim);
+    }
+
+    .btn-cancel:hover {
+      color: var(--text);
+    }
+
+    .btn-test {
+      background: var(--blue-dim);
+      color: var(--blue);
+      border-color: rgba(59, 130, 246, 0.3) !important;
+    }
+
+    .btn-test:hover {
+      opacity: 0.9;
+    }
+
+    .sync-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .sync-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      transition: background 0.3s;
+    }
+
+    .sync-dot.synced {
+      background: var(--green);
+    }
+
+    .sync-dot.syncing {
+      background: var(--gold);
+      animation: pulse-dot 1s infinite;
+    }
+
+    .sync-dot.error {
+      background: var(--red);
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    .gear-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: 6px 10px;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .gear-btn:hover {
+      color: var(--text);
+      border-color: var(--gold);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-inner">
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+          <div class="brand">
+            <div class="brand-icon">SC</div>
+            <span>Command Center</span>
+          </div>
+          <div class="scorecard-bar" id="scorecard"></div>
+        </div>
+        <div class="quick-links">
+          <a class="quick-link" href="guides.html">📚 Guides</a>
+          <a class="quick-link" href="https://github.com/blacknexuscda" target="_blank">🐙 GitHub</a>
+          <a class="quick-link" href="https://setupconcierge.com/wp-admin" target="_blank">⚡ WordPress</a>
+          <a class="quick-link" href="https://manage.wix.com" target="_blank">🌐 Wix</a>
+          <button class="quick-link" onclick="exportSnapshot()">📋 Export</button>
+          <button class="gear-btn" onclick="toggleSettings()" title="Sync Settings">⚙️</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- SETTINGS MODAL -->
+    <div class="settings-overlay" id="settingsOverlay" onclick="if(event.target===this)toggleSettings()">
+      <div class="settings-modal">
+        <h3>☁️ Cloud Sync Settings</h3>
+        <div class="subtitle">Sync dashboard state across devices via a private GitHub Gist. Credentials are stored only
+          in this browser's localStorage — never committed to any repo.</div>
+        <div class="settings-field">
+          <label>Gist ID</label>
+          <input type="text" id="gistIdInput" placeholder="e.g. a1b2c3d4e5f6..." />
+        </div>
+        <div class="settings-field">
+          <label>GitHub Personal Access Token (gist scope only)</label>
+          <input type="password" id="gistPatInput" placeholder="ghp_xxxxxxxxxxxx" />
+        </div>
+        <div class="settings-actions">
+          <button class="btn-cancel" onclick="toggleSettings()">Cancel</button>
+          <button class="btn-test" id="testSyncBtn" onclick="testGistConnection()">Test Connection</button>
+          <button class="btn-save" onclick="saveGistSettings()">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <!-- LEFT -->
+      <aside class="left-col">
+        <div class="card big-ring-wrap" id="overallProgress"></div>
+
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--gold)"></span> Stats</div>
+          <div id="statsPanel"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--green)"></span> Revenue — Feb 2026</div>
+          <div class="stat-row">
+            <span class="stat-label">Invoiced</span>
+            <span class="stat-value" style="color:var(--gold)">$400</span>
+          </div>
+          <div class="revenue-bar-wrap">
+            <div class="revenue-bar-fill" style="width: 16%"></div>
+          </div>
+          <div class="revenue-labels">
+            <span>$0</span>
+            <span>Goal: $2,500</span>
+          </div>
+          <div class="stat-row" style="margin-top:10px;">
+            <span class="stat-label">WNQ Photo Session</span>
+            <span class="stat-value" style="color:var(--green);font-size:0.75rem;">✅ Invoiced</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span class="dot" style="background:var(--green)"></span> BN Docs</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <a href="../Black Nexus/Strategy/Markdown/github_collaboration_guide_2026-02-10.md"
+              style="color:var(--text-dim);font-size:0.78rem;text-decoration:none;"
+              onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-dim)'">📄 GitHub
+              Collaboration Guide</a>
+            <a href="../Black Nexus/Tasks/Markdown/jb_dashboard_project_brief_2026-02-10.md"
+              style="color:var(--text-dim);font-size:0.78rem;text-decoration:none;"
+              onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-dim)'">📋 JB Project
+              Brief</a>
+            <a href="../Black Nexus/Tasks/Markdown/clickup_jb_dashboard_task_2026-02-10.md"
+              style="color:var(--text-dim);font-size:0.78rem;text-decoration:none;"
+              onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-dim)'">📌 ClickUp
+              Task Template</a>
+            <a href="../Black Nexus/Tasks/Markdown/daily_summary_2026-02-10.md"
+              style="color:var(--text-dim);font-size:0.78rem;text-decoration:none;"
+              onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-dim)'">📊 Daily
+              Summary (Feb 10)</a>
+            <a href="https://github.com/blacknexuscda/command-center" target="_blank"
+              style="color:var(--text-dim);font-size:0.78rem;text-decoration:none;"
+              onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-dim)'">🔗
+              command-center repo</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER -->
+      <main class="center-col">
+        <div class="card" style="padding:12px 16px;">
+          <div class="filters" id="filters"></div>
+        </div>
+        <div id="taskSections"></div>
+      </main>
+
+      <!-- RIGHT -->
+      <aside class="right-col">
+        <div class="card spotlight-card">
+          <div class="card-title spotlight-title">
+            <span><span class="dot" style="background:var(--gold)"></span> Next Actions</span>
+            <span class="spotlight-count" id="actionCount"></span>
+          </div>
+          <div id="actionList"></div>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;flex:1;">
+          <div class="card-title"><span class="dot" style="background:var(--blue)"></span> Captain's Log</div>
+          <div class="log-entries" id="logEntries"></div>
+          <div class="log-input-wrap">
+            <div class="log-tags" id="logTags"></div>
+            <textarea class="log-input" id="logInput" placeholder="Log a note... (Enter to save)" rows="1"></textarea>
+          </div>
+        </div>
+        <button class="export-btn" onclick="exportSnapshot()">📋 Export Snapshot to Clipboard</button>
+        <div class="synced" id="syncedTime"></div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // ==================== DATA ====================
+    const TASK_DATA = {
+      wnq_phase1: {
+        area: "wnq", title: "WNQ — Phase 1: Foundation Polish", badge: "In Progress", badgeColor: "var(--orange)",
+        tasks: [
+          { id: "w1", text: "Add social media icon buttons (TikTok, IG) to header/footer" },
+          { id: "w2", text: "Elevate lion mascot — favicon, header, social avatars" },
+          { id: "w3", text: "Add brand pillars — Strength & Community shown, add Integrity", partialNote: "Strength/Community done, Integrity missing" },
+          { id: "w4", text: "Update event dates from TBD to actual dates", blocked: true, blockedNote: "Needs dates from WNQ" },
+          { id: "w5", text: "SEO optimization — title tags, meta descriptions" },
+          { id: "w6", text: "Mobile responsiveness check and fixes", preChecked: true },
+          { id: "w7", text: "Elevate newsletter signup — moved to footer section", preChecked: true },
+          { id: "w8", text: "✅ Board confirmed: 3 members (Ike Riley, Terrence Acquah, Carley Riley) — cutouts ready", preChecked: true },
+          { id: "w26", text: "Hero section — lion mascot, headline, tagline, gold CTA", preChecked: true },
+          { id: "w27", text: "Fix social links — still pointing to default Wix pages" },
+          { id: "w28", text: "Add Board Members section with cutout photos + bios" },
+          { id: "w29", text: "Fix nav — key pages still hidden under 'More' dropdown" },
+          { id: "w30", text: "Fix typo: 'sprawling' still in footer (fixed in scrolling bar)" },
+          { id: "w31", text: "Rename /general-8 URL to /legacy or /ike-riley-sr" },
+          { id: "w32", text: "Apply gold accent (#FFB81C) to buttons and CTAs", preChecked: true }
+        ]
+      },
+      wnq_phase2: {
+        area: "wnq", title: "WNQ — Phase 2: Tribute & Scholarship", badge: "Week of Feb 17", badgeColor: "var(--red)",
+        tasks: [
+          { id: "w9", text: "Build Coach Ike Riley Sr. Tribute page (museum feel)" },
+          { id: "w10", text: "Transfer photos from original /ike-riley-sr-life page" },
+          { id: "w11", text: "Build In Loving Memory section" },
+          { id: "w12", text: "Build Ike Riley Sr Memorial Scholarship page" },
+          { id: "w13", text: "Link scholarship within the tribute page" },
+          { id: "w14", text: "Add Coach's quote highlights as pull-quote sections" }
+        ]
+      },
+      wnq_phase3: {
+        area: "wnq", title: "WNQ — Phase 3: Engagement & Membership", badge: "Week of Feb 24", badgeColor: "var(--orange)",
+        tasks: [
+          { id: "w15", text: "Configure Members page with tier explanations" },
+          { id: "w16", text: "Set up Wix Pricing Plans (Warrior + Legacy tiers)" },
+          { id: "w17", text: "Build Testimony / Testimonials page", blocked: true, blockedNote: "Needs content from client" },
+          { id: "w18", text: "Add impact stats section to Home", blocked: true, blockedNote: "Needs stats from WNQ" }
+        ]
+      },
+      wnq_phase4: {
+        area: "wnq", title: "WNQ — Phase 4: Growth & Launch", badge: "March 3+", badgeColor: "var(--green)",
+        tasks: [
+          { id: "w19", text: "Photo gallery page for past events" },
+          { id: "w20", text: "Blog strategy — activate or remove" },
+          { id: "w21", text: "Sponsor / Partner showcase section" },
+          { id: "w22", text: "Finalize Brand Identity guide (colors, fonts, mascot)" },
+          { id: "w23", text: "Domain migration (staging → warriorsneverquit.com)" },
+          { id: "w24", text: "Final QA pass — links, mobile, SEO, speed" }
+        ]
+      },
+      wnq_admin: {
+        area: "wnq", title: "WNQ — Invoicing & Admin", badge: "Done", badgeColor: "var(--green)",
+        tasks: [
+          { id: "w25", text: "Feb 7 photo session invoice sent ($400)", preChecked: true }
+        ]
+      },
+      sc_website: {
+        area: "sc", title: "Setup Concierge Website", badge: "This Week", badgeColor: "var(--purple)",
+        tasks: [
+          { id: "s1", text: "Update hero subheadline on homepage" },
+          { id: "s2", text: "Add 4th service pillar — \"Ongoing Brand Support\"" },
+          { id: "s3", text: "Create /event-photography page ($600/$2K/$6.5K)" },
+          { id: "s4", text: "Add Event Photography to Services nav" },
+          { id: "s5", text: "Add WNQ case study — \"Our Work in Action\"" },
+          { id: "s6", text: "Update intake form with new service options" },
+          { id: "s7", text: "Preview & test all changes (mobile + desktop)" },
+          { id: "s8", text: "Update service agreement with photography clauses" },
+          { id: "s9", text: "Add booking lead time + cancellation policy" },
+          { id: "s10", text: "Competitive pricing scan (5 Chicago photographers)" }
+        ]
+      },
+      bn_phase1: {
+        area: "bn", title: "Black Nexus — Entity Formation", badge: "Phase 1", badgeColor: "var(--green)",
+        tasks: [
+          { id: "b1", text: "File Articles of Organization (Wyoming)" },
+          { id: "b2", text: "Appoint Wyoming Registered Agent" },
+          { id: "b3", text: "Draft Operating Agreement (51/49 voting, 50/50 profit)" },
+          { id: "b4", text: "Partner reviews and signs Operating Agreement" },
+          { id: "b5", text: "Obtain EIN from IRS" },
+          { id: "b6", text: "Get Wyoming Certificate of Good Standing" },
+          { id: "b7", text: "File Illinois Foreign LLC Application" },
+          { id: "b8", text: "Appoint Illinois Registered Agent" }
+        ]
+      },
+      bn_phase2: {
+        area: "bn", title: "Black Nexus — Branding & Identity", badge: "Phase 2", badgeColor: "var(--green)",
+        tasks: [
+          { id: "b9", text: "Define brand positioning and one-liner" },
+          { id: "b10", text: "Create logo (primary + icon)" },
+          { id: "b11", text: "Establish color palette and typography" },
+          { id: "b12", text: "Design social media templates" },
+          { id: "b13", text: "Create pitch deck template" }
+        ]
+      },
+      bn_collab: {
+        area: "bn", title: "Black Nexus — GitHub & Collaboration", badge: "3/5 Done", badgeColor: "var(--green)",
+        tasks: [
+          { id: "b23", text: "GitHub collaboration guide created (JB = jblaflare-code)", preChecked: true },
+          { id: "b24", text: "GitHub org created: blacknexuscda (Free plan)", preChecked: true },
+          { id: "b25", text: "JB Scott (jblaflare-code) invited — pending acceptance", preChecked: true },
+          { id: "b26", text: "Create first repo (brand-kit) and push initial files" },
+          { id: "b27", text: "Enable branch protection on main (require PR + 1 approval)" }
+        ]
+      },
+      bn_phase3: {
+        area: "bn", title: "Black Nexus — Operations Setup", badge: "Phase 3", badgeColor: "var(--green)",
+        tasks: [
+          { id: "b14", text: "Open Black Nexus business bank account" },
+          { id: "b15", text: "Draft Management Agreement (SC → BN)" },
+          { id: "b16", text: "Draft Partner Vesting Schedule" },
+          { id: "b17", text: "Set up bookkeeping (Wave or QuickBooks)" },
+          { id: "b18", text: "Create SOP library" }
+        ]
+      },
+      bn_phase4: {
+        area: "bn", title: "Black Nexus — Go-to-Market", badge: "Phase 4", badgeColor: "var(--green)",
+        tasks: [
+          { id: "b19", text: "Launch Black Nexus website or landing page" },
+          { id: "b20", text: "Announce on social media" },
+          { id: "b21", text: "Identify first 3 outreach targets" },
+          { id: "b22", text: "Close first Black Nexus client" }
+        ]
+      },
+      backlog: {
+        area: "backlog", title: "Backlog — Cross-Cutting", badge: "Ongoing", badgeColor: "var(--text-dim)",
+        tasks: [
+          { id: "x1", text: "Add Black Nexus as featured client on setupconcierge.com" },
+          { id: "x2", text: "Create service package pricing tiers" },
+          { id: "x3", text: "Document WNQ case study (before/after)" },
+          { id: "x4", text: "Determine V8 Engine IP ownership" },
+          { id: "x5", text: "V8 Engine beta launch strategy" },
+          { id: "x6", text: "Launch \"Creator Tech\" content series" },
+          { id: "x7", text: "Build partner's social media skills" },
+          { id: "x8", text: "Install Hotjar/Clarity for heatmaps" }
+        ]
+      },
+      arch_mobile: {
+        area: "backlog", title: "🏗️ Architecture & Mobile Dev Stack", badge: "Priority", badgeColor: "var(--gold)",
+        tasks: [
+          { id: "arch1", text: "Collapse V8 dual-repo into single repo (eliminate manual sync risk) ✅", preChecked: true },
+          { id: "arch2", text: "Create devcontainer.json for V8 repo (Codespaces-ready) ✅", preChecked: true },
+          { id: "arch3", text: "Test full V8 dev loop from iPad via GitHub Codespaces" },
+          { id: "arch4", text: "Label repos in README: CORE / SERVICE / PRODUCT / TOOL ✅", preChecked: true },
+          { id: "arch5", text: "Set standardized branch discipline (main → dev → feature/*) ✅", preChecked: true },
+          { id: "arch6", text: "Add lint + typecheck scripts to V8 package.json ✅", preChecked: true },
+          { id: "arch7", text: "Document commit convention (logbook-style, surgical commits) ✅", preChecked: true },
+          { id: "arch8", text: "Write 3-year ecosystem vision paragraph" },
+          { id: "arch9", text: "Ecosystem Map v1 completed ✅", preChecked: true },
+          { id: "arch10", text: "8-Question Audit on V8 Engine completed ✅", preChecked: true },
+          { id: "arch11", text: "Layer Order confirmed ✅", preChecked: true },
+          { id: "arch12", text: "Panel reviewed architecture + mobile dev strategy ✅", preChecked: true }
+        ]
+      }
+    };
+
+    const AREA_META = {
+      wnq: { label: "WNQ", color: "var(--blue)" },
+      sc: { label: "SC Website", color: "var(--purple)" },
+      bn: { label: "Black Nexus", color: "var(--green)" },
+      backlog: { label: "Backlog", color: "var(--orange)" }
+    };
+
+    const LOG_TAGS = ["decision", "win", "blocker", "idea"];
+
+    // ==================== NEXT ACTIONS ====================
+    // These are personal action items surfaced from sessions.
+    // Updated by /consolidate workflow (Step 5) or manually.
+    const NEXT_ACTIONS = [
+      {
+        id: "a1",
+        text: "Send JB the project brief + collaboration guide PDFs",
+        urgency: "now",
+        source: "Session — Feb 10",
+        area: "bn"
+      },
+      {
+        id: "a2",
+        text: "Confirm JB accepted the GitHub org invite (check blacknexuscda/people)",
+        urgency: "soon",
+        source: "Session — Feb 10",
+        area: "bn"
+      },
+      {
+        id: "a3",
+        text: "Create ClickUp task from template (clickup_jb_dashboard_task_2026-02-10.md)",
+        urgency: "soon",
+        source: "Session — Feb 10",
+        area: "bn"
+      },
+      {
+        id: "a4",
+        text: "Enable branch protection on command-center main (require PR + 1 approval)",
+        urgency: "soon",
+        source: "Session — Feb 10",
+        area: "bn"
+      },
+      {
+        id: "a5",
+        text: "Regenerate dashboard reference doc (dashboard_2026-02-08.md is stale)",
+        urgency: "later",
+        source: "Panel Review — Feb 10",
+        area: "sc"
+      },
+      {
+        id: "a6",
+        text: "Fix Career Hub dashboard clipping issues",
+        urgency: "later",
+        source: "Session — Feb 10",
+        area: "backlog"
+      },
+      {
+        id: "a7",
+        text: "Upgrade Career Hub dashboard to match Setup Concierge — add Next Actions, Guides page, Captain's Log, and context-aware features",
+        urgency: "soon",
+        source: "Session — Feb 10",
+        area: "backlog"
+      },
+      {
+        id: "a8",
+        text: "Update Career Hub with finalized AbbVie thank-you email file",
+        urgency: "soon",
+        source: "Session — Feb 11",
+        area: "backlog"
+      },
+      {
+        id: "a9",
+        text: "Collapse V8 Engine dual-repo into single repo (highest architectural risk)",
+        urgency: "now",
+        source: "Architecture Audit — Feb 11",
+        area: "backlog"
+      },
+      {
+        id: "a10",
+        text: "Create devcontainer.json + test V8 dev loop from iPad via Codespaces (free tier)",
+        urgency: "soon",
+        source: "Architecture Audit — Feb 11",
+        area: "backlog"
+      },
+      {
+        id: "a11",
+        text: "Label all repos with role: CORE / SERVICE / PRODUCT / TOOL in README",
+        urgency: "soon",
+        source: "Architecture Audit — Feb 11",
+        area: "backlog"
+      },
+      {
+        id: "a12",
+        text: "Set branch discipline (main / dev / feature/*) across all repos",
+        urgency: "later",
+        source: "Architecture Audit — Feb 11",
+        area: "backlog"
+      }
+    ];
+
+    // ==================== STATE ====================
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem('sc_dashboard_state');
+        if (saved) return JSON.parse(saved);
+      } catch (e) { }
+      return { tasks: {}, logs: [], collapsed: {} };
+    }
+
+    function saveState() {
+      localStorage.setItem('sc_dashboard_state', JSON.stringify(state));
+      debouncedGistSync();
+    }
+
+    // ==================== GIST SYNC ====================
+    const GIST_FILENAME = 'sc_dashboard_state.json';
+    let syncTimer = null;
+    let lastSyncTime = null;
+
+    function getGistConfig() {
+      try {
+        const cfg = localStorage.getItem('sc_gist_config');
+        return cfg ? JSON.parse(cfg) : null;
+      } catch (e) { return null; }
+    }
+
+    function debouncedGistSync() {
+      if (syncTimer) clearTimeout(syncTimer);
+      syncTimer = setTimeout(() => syncToGist(), 2000);
+    }
+
+    async function syncToGist() {
+      const cfg = getGistConfig();
+      if (!cfg) return;
+      setSyncStatus('syncing');
+      try {
+        const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${cfg.pat}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github+json'
+          },
+          body: JSON.stringify({
+            files: {
+              [GIST_FILENAME]: {
+                content: JSON.stringify(state, null, 2)
+              }
+            }
+          })
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        lastSyncTime = new Date();
+        setSyncStatus('synced');
+        renderSynced();
+      } catch (e) {
+        console.error('Gist sync error:', e);
+        setSyncStatus('error');
+      }
+    }
+
+    async function syncFromGist() {
+      const cfg = getGistConfig();
+      if (!cfg) return;
+      setSyncStatus('syncing');
+      try {
+        const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+          headers: {
+            'Authorization': `Bearer ${cfg.pat}`,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const gist = await res.json();
+        const file = gist.files[GIST_FILENAME];
+        if (file && file.content && file.content.trim() !== '{}') {
+          const remote = JSON.parse(file.content);
+          // Merge: remote wins for tasks/completedActions, concat unique logs
+          state.tasks = { ...state.tasks, ...remote.tasks };
+          state.collapsed = { ...state.collapsed, ...remote.collapsed };
+          state.completedActions = { ...(state.completedActions || {}), ...(remote.completedActions || {}) };
+          if (remote.logs && remote.logs.length) {
+            const existingTimes = new Set(state.logs.map(l => l.time + l.text));
+            remote.logs.forEach(l => {
+              if (!existingTimes.has(l.time + l.text)) state.logs.push(l);
+            });
+          }
+          localStorage.setItem('sc_dashboard_state', JSON.stringify(state));
+        }
+        lastSyncTime = new Date();
+        setSyncStatus('synced');
+        renderSynced();
+        render();
+      } catch (e) {
+        console.error('Gist load error:', e);
+        setSyncStatus('error');
+      }
+    }
+
+    function setSyncStatus(status) {
+      const dot = document.getElementById('syncDot');
+      if (dot) {
+        dot.className = 'sync-dot ' + status;
+      }
+    }
+
+    // Settings UI
+    function toggleSettings() {
+      const overlay = document.getElementById('settingsOverlay');
+      const isOpen = overlay.classList.toggle('open');
+      if (isOpen) {
+        const cfg = getGistConfig();
+        if (cfg) {
+          document.getElementById('gistIdInput').value = cfg.gistId || '';
+          document.getElementById('gistPatInput').value = cfg.pat || '';
+        }
+      }
+    }
+
+    function saveGistSettings() {
+      const gistId = document.getElementById('gistIdInput').value.trim();
+      const pat = document.getElementById('gistPatInput').value.trim();
+      if (!gistId || !pat) {
+        alert('Both Gist ID and PAT are required.');
+        return;
+      }
+      localStorage.setItem('sc_gist_config', JSON.stringify({ gistId, pat }));
+      toggleSettings();
+      syncFromGist();
+    }
+
+    async function testGistConnection() {
+      const gistId = document.getElementById('gistIdInput').value.trim();
+      const pat = document.getElementById('gistPatInput').value.trim();
+      const btn = document.getElementById('testSyncBtn');
+      if (!gistId || !pat) {
+        btn.textContent = '❌ Fill both fields';
+        setTimeout(() => btn.textContent = 'Test Connection', 2000);
+        return;
+      }
+      btn.textContent = '⏳ Testing...';
+      try {
+        const res = await fetch(`https://api.github.com/gists/${gistId}`, {
+          headers: {
+            'Authorization': `Bearer ${pat}`,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+        if (res.ok) {
+          const gist = await res.json();
+          const hasFile = gist.files[GIST_FILENAME];
+          btn.textContent = hasFile ? '✅ Connected!' : '⚠️ Gist found but missing file';
+        } else {
+          btn.textContent = `❌ HTTP ${res.status}`;
+        }
+      } catch (e) {
+        btn.textContent = '❌ Network error';
+      }
+      setTimeout(() => btn.textContent = 'Test Connection', 3000);
+    }
+
+    // ==================== NEXT ACTIONS RENDER ====================
+    function renderActions() {
+      const list = document.getElementById('actionList');
+      const countEl = document.getElementById('actionCount');
+      const completedActions = state.completedActions || {};
+      const pending = NEXT_ACTIONS.filter(a => !completedActions[a.id]);
+      countEl.textContent = pending.length > 0 ? `${pending.length} pending` : 'All clear ✨';
+
+      list.innerHTML = NEXT_ACTIONS.map(a => {
+        const done = completedActions[a.id];
+        const areaInfo = AREA_META[a.area] || { label: '', color: 'var(--text-dim)' };
+        return `
+          <div class="action-item ${done ? 'completed' : ''}" onclick="toggleAction('${a.id}')">
+            <div class="action-check"></div>
+            <div class="action-text">
+              ${a.text}
+              <div class="action-source">${a.source} · <span style="color:${areaInfo.color}">${areaInfo.label}</span></div>
+            </div>
+            <span class="action-urgency urgency-${a.urgency}">${a.urgency}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleAction(id) {
+      if (!state.completedActions) state.completedActions = {};
+      state.completedActions[id] = !state.completedActions[id];
+      saveState();
+      renderActions();
+    }
+
+    function getTaskState(id) {
+      if (state.tasks[id]) return state.tasks[id];
+      // Check if task is pre-checked in TASK_DATA
+      for (const section of Object.values(TASK_DATA)) {
+        const task = section.tasks.find(t => t.id === id);
+        if (task && task.preChecked) return "done";
+      }
+      return "todo";
+    }
+
+    function cycleTask(id, event) {
+      const current = getTaskState(id);
+      const next = current === "todo" ? "progress" : current === "progress" ? "done" : "todo";
+      state.tasks[id] = next;
+      saveState();
+      if (next === "done") {
+        const el = event ? event.target : null;
+        celebrate(el);
+      }
+      render();
+    }
+
+    function celebrate(el) {
+      const colors = ['var(--gold)', 'var(--green)', 'var(--blue)', 'var(--purple)', '#fff'];
+      const shapes = ['', 'circle', 'star'];
+      const container = document.createElement('div');
+      container.className = 'confetti-container';
+      document.body.appendChild(container);
+
+      const rect = el ? el.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2 };
+      const cx = rect.left + 10;
+      const cy = rect.top + 10;
+
+      for (let i = 0; i < 28; i++) {
+        const p = document.createElement('div');
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        p.className = `confetti-particle ${shape}`;
+        const angle = (Math.random() * 360) * (Math.PI / 180);
+        const dist = 60 + Math.random() * 120;
+        const tx = Math.cos(angle) * dist;
+        const ty = Math.sin(angle) * dist - 40;
+        const rot = (Math.random() - 0.5) * 720;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        p.style.cssText = `
+          left: ${cx}px; top: ${cy}px;
+          background: ${color};
+          --tx: ${tx}px; --ty: ${ty}px; --rot: ${rot}deg;
+          animation-duration: ${0.6 + Math.random() * 0.6}s;
+          animation-delay: ${Math.random() * 0.1}s;
+        `;
+        if (shape === 'star') p.style.borderBottomColor = color;
+        container.appendChild(p);
+      }
+
+      // Gold flash on the task row
+      if (el) {
+        const row = el.closest('.task-item');
+        if (row) {
+          row.classList.add('celebration-flash');
+          row.addEventListener('animationend', () => row.classList.remove('celebration-flash'), { once: true });
+        }
+      }
+
+      setTimeout(() => container.remove(), 1400);
+    }
+
+    // ==================== RENDER ====================
+    let activeFilter = "all";
+
+    function render() {
+      renderScorecard();
+      renderProgress();
+      renderStats();
+      renderFilters();
+      renderTasks();
+      renderActions();
+      renderLog();
+      renderSynced();
+    }
+
+    function renderScorecard() {
+      const bar = document.getElementById('scorecard');
+      const areas = ["wnq", "sc", "bn"];
+      bar.innerHTML = areas.map(a => {
+        const tasks = getAllTasksForArea(a);
+        const done = tasks.filter(t => getTaskState(t.id) === "done").length;
+        const pct = tasks.length ? Math.round((done / tasks.length) * 100) : 0;
+        const circ = 2 * Math.PI * 15;
+        const offset = circ - (pct / 100) * circ;
+        return `<div class="score-item">
+      <div class="score-ring">
+        <svg viewBox="0 0 36 36">
+          <circle class="bg" cx="18" cy="18" r="15"/>
+          <circle class="fill" cx="18" cy="18" r="15" stroke="${AREA_META[a].color}"
+            stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/>
+        </svg>
+        <span class="score-pct">${pct}%</span>
+      </div>
+      <span style="color:var(--text-dim);font-size:0.75rem;">${AREA_META[a].label}</span>
+    </div>`;
+      }).join('');
+    }
+
+    function renderProgress() {
+      const wrap = document.getElementById('overallProgress');
+      const all = getAllTasks();
+      const done = all.filter(t => getTaskState(t.id) === "done").length;
+      const progress = all.filter(t => getTaskState(t.id) === "progress").length;
+      const pct = all.length ? Math.round((done / all.length) * 100) : 0;
+      const circ = 2 * Math.PI * 62;
+      const offset = circ - (pct / 100) * circ;
+      wrap.innerHTML = `
+    <div class="big-ring">
+      <svg viewBox="0 0 140 140">
+        <circle class="bg" cx="70" cy="70" r="62"/>
+        <circle class="fill" cx="70" cy="70" r="62" stroke="url(#goldGrad)"
+          stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/>
+        <defs><linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="var(--gold)"/>
+          <stop offset="100%" stop-color="#e6a000"/>
+        </linearGradient></defs>
+      </svg>
+      <div class="big-ring-pct">
+        <div class="num">${pct}%</div>
+        <div class="label">${done}/${all.length} done</div>
+      </div>
+    </div>
+    <div style="font-size:0.72rem;color:var(--text-dim);text-align:center;">
+      ${progress} in progress · ${all.length - done - progress} remaining
+    </div>`;
+    }
+
+    function renderStats() {
+      const panel = document.getElementById('statsPanel');
+      const all = getAllTasks();
+      const done = all.filter(t => getTaskState(t.id) === "done").length;
+      const blocked = all.filter(t => t.blocked).length;
+      const inProg = all.filter(t => getTaskState(t.id) === "progress").length;
+      const clientBlocked = all.filter(t => t.blocked && getTaskState(t.id) !== "done").length;
+      panel.innerHTML = `
+    <div class="stat-row"><span class="stat-label">Total Tasks</span><span class="stat-value">${all.length}</span></div>
+    <div class="stat-row"><span class="stat-label">Completed</span><span class="stat-value done">${done}</span></div>
+    <div class="stat-row"><span class="stat-label">In Progress</span><span class="stat-value" style="color:var(--orange)">${inProg}</span></div>
+    <div class="stat-row"><span class="stat-label">Blocked on Client</span><span class="stat-value blocked">${clientBlocked}</span></div>
+  `;
+    }
+
+    function renderFilters() {
+      const wrap = document.getElementById('filters');
+      const items = [
+        { key: "all", label: "All" },
+        { key: "wnq", label: "🎯 WNQ" },
+        { key: "sc", label: "🏢 SC Website" },
+        { key: "bn", label: "⚡ Black Nexus" },
+        { key: "backlog", label: "📋 Backlog" }
+      ];
+      wrap.innerHTML = items.map(f =>
+        `<button class="filter-btn ${activeFilter === f.key ? 'active' : ''}" data-filter="${f.key}" onclick="setFilter('${f.key}')">${f.label}</button>`
+      ).join('');
+    }
+
+    function setFilter(f) {
+      activeFilter = f;
+      render();
+    }
+
+    function renderTasks() {
+      const container = document.getElementById('taskSections');
+      let html = '';
+      for (const [sectionId, section] of Object.entries(TASK_DATA)) {
+        if (activeFilter !== "all" && section.area !== activeFilter) continue;
+        const isCollapsed = state.collapsed[sectionId];
+        const tasks = section.tasks;
+        const done = tasks.filter(t => getTaskState(t.id) === "done").length;
+        html += `
+      <div class="card task-section" style="margin-bottom:12px;">
+        <div class="section-header ${isCollapsed ? 'collapsed' : ''}" onclick="toggleSection('${sectionId}')">
+          <div class="section-title">
+            <span>${section.title}</span>
+            <span class="section-badge" style="background:${section.badgeColor}20;color:${section.badgeColor}">${section.badge}</span>
+            <span style="font-size:0.72rem;color:var(--text-dim);font-weight:400;">${done}/${tasks.length}</span>
+          </div>
+          <span class="section-chevron">▼</span>
+        </div>
+        <div class="task-list ${isCollapsed ? 'collapsed' : ''}" style="max-height:${isCollapsed ? 0 : tasks.length * 60 + 100}px;">
+          ${tasks.map(t => renderTaskItem(t)).join('')}
+        </div>
+      </div>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function renderTaskItem(t) {
+      const s = getTaskState(t.id);
+      const blocked = t.blocked && s !== "done";
+      return `
+    <div class="task-item ${blocked ? 'blocked' : ''}" data-status="${s}">
+      <div class="task-check" data-state="${s}" onclick="cycleTask('${t.id}', event)" title="Click to cycle: Not Started → In Progress → Done"></div>
+      <div class="task-content">
+        <div class="task-text">${t.text}</div>
+        <div class="task-meta">
+          ${blocked ? `<span class="task-tag tag-blocked">⛔ Blocked</span>` : ''}
+          ${t.blockedNote && blocked ? `<span class="task-tag tag-needs-client">${t.blockedNote}</span>` : ''}
+        </div>
+      </div>
+    </div>`;
+    }
+
+    function toggleSection(id) {
+      state.collapsed[id] = !state.collapsed[id];
+      saveState();
+      render();
+    }
+
+    // ==================== LOG ====================
+    let activeLogTag = null;
+
+    function renderLog() {
+      const entries = document.getElementById('logEntries');
+      const tags = document.getElementById('logTags');
+
+      tags.innerHTML = LOG_TAGS.map(t =>
+        `<button class="log-tag-btn ${activeLogTag === t ? 'active' : ''}" onclick="toggleLogTag('${t}')">#${t}</button>`
+      ).join('');
+
+      if (!state.logs.length) {
+        entries.innerHTML = `<div style="text-align:center;padding:30px 10px;color:var(--text-dim);font-size:0.8rem;">
+      No entries yet.<br>Log your first note below.
+    </div>`;
+        return;
+      }
+
+      entries.innerHTML = state.logs.slice().reverse().map((log, i) => `
+    <div class="log-entry" data-tag="${log.tag || ''}">
+      <div class="log-time">
+        <span>${log.time}</span>
+        <span style="display:flex;align-items:center;gap:6px;">
+          ${log.tag ? `<span class="log-tag" data-tag="${log.tag}">#${log.tag}</span>` : ''}
+          <button class="log-delete" onclick="deleteLog(${state.logs.length - 1 - i})" title="Delete">✕</button>
+        </span>
+      </div>
+      <div class="log-text">${log.text}</div>
+    </div>
+  `).join('');
+
+      entries.scrollTop = 0;
+    }
+
+    function toggleLogTag(tag) {
+      activeLogTag = activeLogTag === tag ? null : tag;
+      renderLog();
+    }
+
+    function addLog(text) {
+      if (!text.trim()) return;
+      const now = new Date();
+      const time = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' · ' +
+        now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      state.logs.push({ text: text.trim(), tag: activeLogTag, time });
+      activeLogTag = null;
+      saveState();
+      renderLog();
+    }
+
+    function deleteLog(idx) {
+      state.logs.splice(idx, 1);
+      saveState();
+      renderLog();
+    }
+
+    function renderSynced() {
+      const cfg = getGistConfig();
+      const timeStr = lastSyncTime
+        ? lastSyncTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+        : null;
+      const syncMsg = cfg
+        ? (timeStr ? `☁️ Synced at ${timeStr}` : '☁️ Gist connected · waiting for first sync')
+        : '💾 Local only · click ⚙️ to enable cloud sync';
+      document.getElementById('syncedTime').innerHTML =
+        `<span class="sync-status"><span class="sync-dot ${cfg ? (lastSyncTime ? 'synced' : '') : ''}" id="syncDot"></span> ${syncMsg}</span>`;
+    }
+
+    // ==================== EXPORT ====================
+    function exportSnapshot() {
+      const all = getAllTasks();
+      const done = all.filter(t => getTaskState(t.id) === "done");
+      const inProg = all.filter(t => getTaskState(t.id) === "progress");
+      const blocked = all.filter(t => t.blocked && getTaskState(t.id) !== "done");
+      let txt = `# Setup Concierge Dashboard Snapshot\n`;
+      txt += `Date: ${new Date().toLocaleDateString()}\n\n`;
+      txt += `## Scorecard\n`;
+      txt += `- Total: ${all.length} | Done: ${done.length} | In Progress: ${inProg.length} | Blocked: ${blocked.length}\n\n`;
+      if (done.length) {
+        txt += `## Completed\n`;
+        done.forEach(t => txt += `- ✅ ${t.text}\n`);
+        txt += '\n';
+      }
+      if (inProg.length) {
+        txt += `## In Progress\n`;
+        inProg.forEach(t => txt += `- 🔄 ${t.text}\n`);
+        txt += '\n';
+      }
+      if (state.logs.length) {
+        txt += `## Captain's Log (last 10)\n`;
+        state.logs.slice(-10).forEach(l => txt += `- [${l.time}] ${l.tag ? '#' + l.tag + ' ' : ''}${l.text}\n`);
+      }
+      navigator.clipboard.writeText(txt).then(() => {
+        const btn = document.querySelector('.export-btn');
+        btn.classList.add('copied');
+        btn.textContent = '✅ Copied to clipboard!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = '📋 Export Snapshot to Clipboard';
+        }, 2000);
+      });
+    }
+
+    // ==================== HELPERS ====================
+    function getAllTasks() {
+      return Object.values(TASK_DATA).flatMap(s => s.tasks);
+    }
+    function getAllTasksForArea(area) {
+      return Object.values(TASK_DATA).filter(s => s.area === area).flatMap(s => s.tasks);
+    }
+
+    // ==================== INIT ====================
+    document.getElementById('logInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        addLog(this.value);
+        this.value = '';
+      }
+    });
+
+    render();
+    // Auto-sync from Gist on startup if configured
+    if (getGistConfig()) syncFromGist();
+  </script>
+</body>
+
+</html>
