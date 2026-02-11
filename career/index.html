@@ -1043,6 +1043,302 @@
             margin-top: 4px;
         }
 
+        /* ========== HAMBURGER NAV DRAWER ========== */
+        .hamburger-btn {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-dim);
+            cursor: pointer;
+            padding: 6px 10px;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            min-height: 34px;
+        }
+
+        .hamburger-btn:hover {
+            color: var(--text);
+            border-color: var(--cyan);
+        }
+
+        .nav-drawer-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+            z-index: 500;
+        }
+
+        .nav-drawer-overlay.open {
+            display: block;
+        }
+
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background: #0f0f18;
+            border-left: 1px solid var(--border);
+            z-index: 501;
+            padding: 20px;
+            overflow-y: auto;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .nav-drawer.open {
+            right: 0;
+        }
+
+        .nav-drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-drawer-header span {
+            font-weight: 700;
+            color: var(--text-bright);
+            font-size: 0.95rem;
+        }
+
+        .nav-drawer-close {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .nav-drawer-close:hover {
+            color: var(--text);
+        }
+
+        .nav-drawer-section {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-dim);
+            padding: 10px 0 4px;
+            margin-top: 6px;
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-drawer-section:first-of-type {
+            border-top: none;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .nav-drawer-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.15s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .nav-drawer-link:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-bright);
+        }
+
+        /* ========== GIST SYNC SETTINGS ========== */
+        .settings-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .settings-overlay.open {
+            display: flex;
+        }
+
+        .settings-modal {
+            background: #1a1a2e;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            width: min(420px, 90vw);
+            box-shadow: var(--shadow);
+        }
+
+        .settings-modal h3 {
+            color: var(--text-bright);
+            margin-bottom: 4px;
+            font-size: 1.1rem;
+        }
+
+        .settings-modal .subtitle {
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            margin-bottom: 20px;
+        }
+
+        .settings-field {
+            margin-bottom: 14px;
+        }
+
+        .settings-field label {
+            display: block;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .settings-field input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            padding: 10px 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .settings-field input:focus {
+            border-color: var(--cyan);
+        }
+
+        .settings-field input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .settings-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .settings-actions button {
+            flex: 1;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-save {
+            background: var(--cyan);
+            color: #000;
+            border-color: var(--cyan) !important;
+            font-weight: 600;
+        }
+
+        .btn-save:hover {
+            opacity: 0.9;
+        }
+
+        .btn-cancel {
+            background: transparent;
+            color: var(--text-dim);
+        }
+
+        .btn-cancel:hover {
+            color: var(--text);
+        }
+
+        .btn-test {
+            background: var(--blue-dim);
+            color: var(--blue);
+            border-color: rgba(59, 130, 246, 0.3) !important;
+        }
+
+        .btn-test:hover {
+            opacity: 0.9;
+        }
+
+        .sync-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .sync-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-dim);
+            transition: background 0.3s;
+        }
+
+        .sync-dot.synced {
+            background: var(--green);
+        }
+
+        .sync-dot.syncing {
+            background: var(--cyan);
+            animation: pulse-dot 1s infinite;
+        }
+
+        .sync-dot.error {
+            background: var(--red);
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .gear-btn {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-dim);
+            cursor: pointer;
+            padding: 6px 10px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .gear-btn:hover {
+            color: var(--text);
+            border-color: var(--cyan);
+        }
+
         /* ========== RESPONSIVE ========== */
         @media (max-width: 1100px) {
             .main {
@@ -1059,20 +1355,183 @@
                 flex: 1;
                 min-width: 200px;
             }
+
+            .right-col {
+                order: -1;
+            }
         }
 
         @media (max-width: 600px) {
-            .header {
-                padding: 10px 14px;
+            html {
+                font-size: 13px;
             }
 
-            .main {
-                padding: 14px;
+            .header {
+                padding: 8px 12px;
+            }
+
+            .header-inner {
+                gap: 8px;
+            }
+
+            .brand {
+                font-size: 0.95rem;
+                gap: 8px;
+            }
+
+            .brand-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 13px;
+                border-radius: 6px;
+            }
+
+            /* Hide desktop links, show hamburger */
+            .quick-links {
+                display: none;
+            }
+
+            .hamburger-btn {
+                display: inline-flex;
+            }
+
+            /* Scorecard compact */
+            .scorecard-bar {
                 gap: 14px;
             }
 
-            .quick-links {
+            .score-item {
+                font-size: 0.75rem;
+            }
+
+            .score-label {
                 display: none;
+            }
+
+            .score-ring {
+                width: 30px;
+                height: 30px;
+            }
+
+            /* Main tighter */
+            .main {
+                padding: 12px;
+                gap: 12px;
+            }
+
+            .left-col {
+                flex-direction: column;
+            }
+
+            .left-col .card {
+                min-width: 100%;
+            }
+
+            .big-ring-wrap {
+                padding: 20px 16px;
+            }
+
+            .big-ring {
+                width: 110px;
+                height: 110px;
+            }
+
+            .big-ring-pct .num {
+                font-size: 1.8rem;
+            }
+
+            .card {
+                padding: 14px;
+                border-radius: 12px;
+            }
+
+            .task-item {
+                padding: 10px;
+                gap: 8px;
+            }
+
+            .task-check {
+                width: 26px;
+                height: 26px;
+                min-width: 26px;
+                border-radius: 8px;
+            }
+
+            .task-text {
+                font-size: 0.82rem;
+            }
+
+            .section-header {
+                padding: 12px 0;
+            }
+
+            .log-entries {
+                max-height: 200px;
+            }
+
+            .log-input {
+                font-size: 0.85rem;
+                min-height: 40px;
+            }
+
+            .filters {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                flex-wrap: nowrap;
+            }
+
+            .filters::-webkit-scrollbar {
+                display: none;
+            }
+
+            .filter-btn {
+                white-space: nowrap;
+                flex-shrink: 0;
+                min-height: 34px;
+            }
+
+            .export-btn {
+                min-height: 40px;
+            }
+
+            .settings-modal {
+                width: 95vw;
+                padding: 20px;
+            }
+        }
+
+        /* iPhone SE and very small screens */
+        @media (max-width: 380px) {
+            html {
+                font-size: 12px;
+            }
+
+            .main {
+                padding: 8px;
+                gap: 10px;
+            }
+
+            .brand span {
+                display: none;
+            }
+
+            .scorecard-bar {
+                gap: 10px;
+            }
+
+            .score-ring {
+                width: 26px;
+                height: 26px;
+            }
+
+            .big-ring {
+                width: 90px;
+                height: 90px;
+            }
+
+            .big-ring-pct .num {
+                font-size: 1.4rem;
             }
         }
 
@@ -1118,12 +1577,13 @@
         <!-- HEADER -->
         <header class="header">
             <div class="header-inner">
-                <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+                <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0;">
                     <div class="brand">
                         <div class="brand-icon">CH</div>
                         <span>Career Hub</span>
                     </div>
                     <div class="scorecard-bar" id="scorecard"></div>
+                    <button class="hamburger-btn" onclick="toggleDrawer()" title="Menu">☰</button>
                 </div>
                 <div class="quick-links">
                     <a class="quick-link" href="../">🏠 Hub</a>
@@ -1141,9 +1601,62 @@
                         Salary</a>
                     <button class="quick-link" onclick="openFolder()">📂 Open Folder</button>
                     <button class="quick-link" onclick="exportSnapshot()">📋 Export</button>
+                    <button class="gear-btn" onclick="toggleSettings()" title="Sync Settings">⚙️</button>
                 </div>
             </div>
         </header>
+
+        <!-- NAV DRAWER -->
+        <div class="nav-drawer-overlay" id="navOverlay" onclick="toggleDrawer()"></div>
+        <div class="nav-drawer" id="navDrawer">
+            <div class="nav-drawer-header">
+                <span>☰ Navigation</span>
+                <button class="nav-drawer-close" onclick="toggleDrawer()">✕</button>
+            </div>
+            <div class="nav-drawer-section">Navigate</div>
+            <a class="nav-drawer-link" href="../">🏠 Back to Hub</a>
+            <a class="nav-drawer-link" href="../business/">📊 Business Dashboard</a>
+            <div class="nav-drawer-section">Interview Prep</div>
+            <a class="nav-drawer-link"
+                href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Notes/panel_review_interview_strategy.md">📋
+                Strategy & Talking Points</a>
+            <a class="nav-drawer-link"
+                href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Questions/interview_questions.md">❓
+                Interview Questions</a>
+            <a class="nav-drawer-link"
+                href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Notes/company_research.md">🏢
+                Company Research</a>
+            <a class="nav-drawer-link"
+                href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Notes/salary_research.md">💰 Salary
+                Research</a>
+            <div class="nav-drawer-section">Actions</div>
+            <button class="nav-drawer-link" onclick="exportSnapshot(); toggleDrawer();">📋 Export Snapshot</button>
+            <button class="nav-drawer-link" onclick="copyLogNotes(); toggleDrawer();">📤 Copy Notes</button>
+            <button class="nav-drawer-link" onclick="toggleDrawer(); toggleSettings();">⚙️ Sync Settings</button>
+        </div>
+
+        <!-- SETTINGS MODAL -->
+        <div class="settings-overlay" id="settingsOverlay" onclick="if(event.target===this)toggleSettings()">
+            <div class="settings-modal">
+                <h3>☁️ Cloud Sync Settings</h3>
+                <div class="subtitle">Sync career hub state across devices via a private GitHub Gist. Credentials are
+                    stored only
+                    in this browser's localStorage — never committed to any repo.</div>
+                <div class="settings-field">
+                    <label>Gist ID</label>
+                    <input type="text" id="gistIdInput" placeholder="e.g. a1b2c3d4e5f6..." />
+                </div>
+                <div class="settings-field">
+                    <label>GitHub Personal Access Token (gist scope only)</label>
+                    <input type="password" id="gistPatInput" placeholder="ghp_xxxxxxxxxxxx" />
+                </div>
+                <div class="settings-actions">
+                    <button class="btn-cancel" onclick="toggleSettings()">Cancel</button>
+                    <button class="btn-test" id="testSyncBtn" onclick="testGistConnection()">Test Connection</button>
+                    <button class="btn-save" onclick="saveGistSettings()">Save</button>
+                </div>
+            </div>
+        </div>
 
         <!-- MAIN -->
         <div class="main">
@@ -1199,6 +1712,8 @@
                             rows="1"></textarea>
                     </div>
                 </div>
+                <button class="export-btn" onclick="copyLogNotes()" id="copyNotesBtn">📤 Copy Notes to
+                    Clipboard</button>
                 <button class="export-btn" onclick="exportSnapshot()">📋 Export Snapshot to Clipboard</button>
                 <div class="synced" id="syncedTime"></div>
             </aside>
@@ -1301,6 +1816,7 @@
 
         function saveState() {
             localStorage.setItem('career_hub_state', JSON.stringify(state));
+            debouncedGistSync();
         }
 
         function getTaskState(id) {
@@ -1378,7 +1894,7 @@
             </svg>
             <span class="score-pct">${pct}%</span>
           </div>
-          <span style="color:var(--text-dim);font-size:0.75rem;">${AREA_META[a].label}</span>
+          <span class="score-label" style="color:var(--text-dim);font-size:0.75rem;">${AREA_META[a].label}</span>
         </div>`;
             }).join('');
         }
@@ -1579,8 +2095,15 @@
         }
 
         function renderSynced() {
-            document.getElementById('syncedTime').textContent =
-                `Data saved in browser · ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+            const cfg = getGistConfig();
+            const timeStr = lastSyncTime
+                ? lastSyncTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+                : null;
+            const syncMsg = cfg
+                ? (timeStr ? `☁️ Synced at ${timeStr}` : '☁️ Gist connected · waiting for first sync')
+                : '💾 Local only · click ⚙️ to enable cloud sync';
+            document.getElementById('syncedTime').innerHTML =
+                `<span class="sync-status"><span class="sync-dot ${cfg ? (lastSyncTime ? 'synced' : '') : ''}" id="syncDot"></span> ${syncMsg}</span>`;
         }
 
         // ==================== EXPORT ====================
@@ -1770,6 +2293,182 @@
             requestAnimationFrame(animate);
         }
 
+        // ==================== GIST SYNC ====================
+        const GIST_FILENAME = 'ch_dashboard_state.json';
+        let syncTimer = null;
+        let lastSyncTime = null;
+
+        function getGistConfig() {
+            try {
+                const cfg = localStorage.getItem('sc_gist_config');
+                return cfg ? JSON.parse(cfg) : null;
+            } catch (e) { return null; }
+        }
+
+        function debouncedGistSync() {
+            if (syncTimer) clearTimeout(syncTimer);
+            syncTimer = setTimeout(() => syncToGist(), 2000);
+        }
+
+        async function syncToGist() {
+            const cfg = getGistConfig();
+            if (!cfg) return;
+            setSyncStatus('syncing');
+            try {
+                const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `Bearer ${cfg.pat}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github+json'
+                    },
+                    body: JSON.stringify({
+                        files: {
+                            [GIST_FILENAME]: {
+                                content: JSON.stringify(state, null, 2)
+                            }
+                        }
+                    })
+                });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                lastSyncTime = new Date();
+                setSyncStatus('synced');
+                renderSynced();
+            } catch (e) {
+                console.error('Gist sync error:', e);
+                setSyncStatus('error');
+            }
+        }
+
+        async function syncFromGist() {
+            const cfg = getGistConfig();
+            if (!cfg) return;
+            setSyncStatus('syncing');
+            try {
+                const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${cfg.pat}`,
+                        'Accept': 'application/vnd.github+json'
+                    }
+                });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const gist = await res.json();
+                const file = gist.files[GIST_FILENAME];
+                if (file && file.content && file.content.trim() !== '{}') {
+                    const remote = JSON.parse(file.content);
+                    state.tasks = { ...state.tasks, ...remote.tasks };
+                    state.collapsed = { ...state.collapsed, ...remote.collapsed };
+                    if (remote.logs && remote.logs.length) {
+                        const existingTimes = new Set(state.logs.map(l => l.time + l.text));
+                        remote.logs.forEach(l => {
+                            if (!existingTimes.has(l.time + l.text)) state.logs.push(l);
+                        });
+                    }
+                    localStorage.setItem('career_hub_state', JSON.stringify(state));
+                }
+                lastSyncTime = new Date();
+                setSyncStatus('synced');
+                renderSynced();
+                render();
+            } catch (e) {
+                console.error('Gist load error:', e);
+                setSyncStatus('error');
+            }
+        }
+
+        function setSyncStatus(status) {
+            const dot = document.getElementById('syncDot');
+            if (dot) {
+                dot.className = 'sync-dot ' + status;
+            }
+        }
+
+        // Settings UI
+        function toggleSettings() {
+            const overlay = document.getElementById('settingsOverlay');
+            const isOpen = overlay.classList.toggle('open');
+            if (isOpen) {
+                const cfg = getGistConfig();
+                if (cfg) {
+                    document.getElementById('gistIdInput').value = cfg.gistId || '';
+                    document.getElementById('gistPatInput').value = cfg.pat || '';
+                }
+            }
+        }
+
+        function saveGistSettings() {
+            const gistId = document.getElementById('gistIdInput').value.trim();
+            const pat = document.getElementById('gistPatInput').value.trim();
+            if (!gistId || !pat) {
+                alert('Both Gist ID and PAT are required.');
+                return;
+            }
+            localStorage.setItem('sc_gist_config', JSON.stringify({ gistId, pat }));
+            toggleSettings();
+            syncFromGist();
+        }
+
+        async function testGistConnection() {
+            const gistId = document.getElementById('gistIdInput').value.trim();
+            const pat = document.getElementById('gistPatInput').value.trim();
+            const btn = document.getElementById('testSyncBtn');
+            if (!gistId || !pat) {
+                btn.textContent = '❌ Fill both fields';
+                setTimeout(() => btn.textContent = 'Test Connection', 2000);
+                return;
+            }
+            btn.textContent = '⏳ Testing...';
+            try {
+                const res = await fetch(`https://api.github.com/gists/${gistId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${pat}`,
+                        'Accept': 'application/vnd.github+json'
+                    }
+                });
+                if (res.ok) {
+                    const gist = await res.json();
+                    const hasFile = gist.files[GIST_FILENAME];
+                    btn.textContent = hasFile ? '✅ Connected!' : '⚠️ Gist found but no career state yet';
+                } else {
+                    btn.textContent = `❌ HTTP ${res.status}`;
+                }
+            } catch (e) {
+                btn.textContent = '❌ Network error';
+            }
+            setTimeout(() => btn.textContent = 'Test Connection', 3000);
+        }
+
+        // ==================== NAV DRAWER ====================
+        function toggleDrawer() {
+            document.getElementById('navOverlay').classList.toggle('open');
+            document.getElementById('navDrawer').classList.toggle('open');
+        }
+
+        // ==================== COPY NOTES ====================
+        function copyLogNotes() {
+            const btn = document.getElementById('copyNotesBtn');
+            if (!state.logs || state.logs.length === 0) {
+                btn.textContent = '📤 No notes to copy';
+                setTimeout(() => btn.textContent = '📤 Copy Notes to Clipboard', 2000);
+                return;
+            }
+            const lines = ['# Career Hub — Prep Notes', ''];
+            state.logs.slice().reverse().forEach(log => {
+                const tag = log.tag ? ` #${log.tag}` : '';
+                lines.push(`### ${log.time}${tag}`);
+                lines.push(`> ${log.text}`);
+                lines.push('');
+            });
+            navigator.clipboard.writeText(lines.join('\n')).then(() => {
+                btn.classList.add('copied');
+                btn.textContent = '✅ Notes copied!';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.textContent = '📤 Copy Notes to Clipboard';
+                }, 2000);
+            });
+        }
+
         // ==================== HELPERS ====================
         function getAllTasks() {
             return Object.values(TASK_DATA).flatMap(s => s.tasks);
@@ -1791,6 +2490,8 @@
         setInterval(() => renderCountdown(), 60000);
 
         render();
+        // Auto-sync from Gist on startup if configured
+        if (getGistConfig()) syncFromGist();
     </script>
 </body>
 

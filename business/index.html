@@ -1030,6 +1030,15 @@
         padding: 6px 10px;
         font-size: 0.72rem;
         min-height: 34px;
+        display: none;
+      }
+
+      .hamburger-btn {
+        display: inline-flex;
+      }
+
+      .score-label {
+        display: none;
       }
 
       .gear-btn {
@@ -1440,6 +1449,129 @@
       color: var(--text);
       border-color: var(--gold);
     }
+
+    /* ========== HAMBURGER NAV DRAWER ========== */
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: 6px 10px;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+      min-height: 34px;
+    }
+
+    .hamburger-btn:hover {
+      color: var(--text);
+      border-color: var(--gold);
+    }
+
+    .nav-drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      z-index: 500;
+    }
+
+    .nav-drawer-overlay.open {
+      display: block;
+    }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100vh;
+      background: #0f0f18;
+      border-left: 1px solid var(--border);
+      z-index: 501;
+      padding: 20px;
+      overflow-y: auto;
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-drawer.open {
+      right: 0;
+    }
+
+    .nav-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-drawer-header span {
+      font-weight: 700;
+      color: var(--text-bright);
+      font-size: 0.95rem;
+    }
+
+    .nav-drawer-close {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+
+    .nav-drawer-close:hover {
+      color: var(--text);
+    }
+
+    .nav-drawer-section {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      padding: 10px 0 4px;
+      margin-top: 6px;
+      border-top: 1px solid var(--border);
+    }
+
+    .nav-drawer-section:first-of-type {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .nav-drawer-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+    }
+
+    .nav-drawer-link:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-bright);
+    }
   </style>
 </head>
 
@@ -1449,12 +1581,13 @@
     <!-- HEADER -->
     <header class="header">
       <div class="header-inner">
-        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0;">
           <div class="brand">
             <div class="brand-icon">SC</div>
             <span>Command Center</span>
           </div>
           <div class="scorecard-bar" id="scorecard"></div>
+          <button class="hamburger-btn" onclick="toggleDrawer()" title="Menu">☰</button>
         </div>
         <div class="quick-links">
           <a class="quick-link" href="../">🏠 Hub</a>
@@ -1467,6 +1600,28 @@
         </div>
       </div>
     </header>
+
+    <!-- NAV DRAWER -->
+    <div class="nav-drawer-overlay" id="navOverlay" onclick="toggleDrawer()"></div>
+    <div class="nav-drawer" id="navDrawer">
+      <div class="nav-drawer-header">
+        <span>☰ Navigation</span>
+        <button class="nav-drawer-close" onclick="toggleDrawer()">✕</button>
+      </div>
+      <div class="nav-drawer-section">Navigate</div>
+      <a class="nav-drawer-link" href="../">🏠 Back to Hub</a>
+      <a class="nav-drawer-link" href="../career/">🎯 Career Hub</a>
+      <a class="nav-drawer-link" href="guides.html">📚 Guides</a>
+      <div class="nav-drawer-section">External</div>
+      <a class="nav-drawer-link" href="https://github.com/blacknexuscda" target="_blank" rel="noopener">🐙 GitHub</a>
+      <a class="nav-drawer-link" href="https://setupconcierge.com/wp-admin" target="_blank" rel="noopener">⚡
+        WordPress</a>
+      <a class="nav-drawer-link" href="https://manage.wix.com" target="_blank" rel="noopener">🌐 Wix Studio</a>
+      <div class="nav-drawer-section">Actions</div>
+      <button class="nav-drawer-link" onclick="exportSnapshot(); toggleDrawer();">📋 Export Snapshot</button>
+      <button class="nav-drawer-link" onclick="copyLogNotes(); toggleDrawer();">📤 Copy Notes</button>
+      <button class="nav-drawer-link" onclick="toggleDrawer(); toggleSettings();">⚙️ Sync Settings</button>
+    </div>
 
     <!-- SETTINGS MODAL -->
     <div class="settings-overlay" id="settingsOverlay" onclick="if(event.target===this)toggleSettings()">
@@ -2129,7 +2284,7 @@
         </svg>
         <span class="score-pct">${pct}%</span>
       </div>
-      <span style="color:var(--text-dim);font-size:0.75rem;">${AREA_META[a].label}</span>
+      <span class="score-label" style="color:var(--text-dim);font-size:0.75rem;">${AREA_META[a].label}</span>
     </div>`;
       }).join('');
     }
@@ -2373,6 +2528,12 @@
           btn.textContent = '📤 Copy Notes to Clipboard';
         }, 2000);
       });
+    }
+
+    // ==================== NAV DRAWER ====================
+    function toggleDrawer() {
+      document.getElementById('navOverlay').classList.toggle('open');
+      document.getElementById('navDrawer').classList.toggle('open');
     }
 
     // ==================== HELPERS ====================
