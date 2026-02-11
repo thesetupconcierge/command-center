@@ -1572,6 +1572,7 @@
             <textarea class="log-input" id="logInput" placeholder="Log a note... (Enter to save)" rows="1"></textarea>
           </div>
         </div>
+        <button class="export-btn" onclick="copyLogNotes()" id="copyNotesBtn">📤 Copy Notes to Clipboard</button>
         <button class="export-btn" onclick="exportSnapshot()">📋 Export Snapshot to Clipboard</button>
         <div class="synced" id="syncedTime"></div>
       </aside>
@@ -2343,6 +2344,33 @@
         setTimeout(() => {
           btn.classList.remove('copied');
           btn.innerHTML = '📋 Export Snapshot to Clipboard';
+        }, 2000);
+      });
+    }
+    // ==================== COPY NOTES ====================
+    function copyLogNotes() {
+      const btn = document.getElementById('copyNotesBtn');
+      if (!state.logs || state.logs.length === 0) {
+        btn.textContent = '📤 No notes to copy';
+        setTimeout(() => btn.textContent = '📤 Copy Notes to Clipboard', 2000);
+        return;
+      }
+      const lines = ['# Captain\'s Log', ''];
+      state.logs.slice().reverse().forEach(log => {
+        const d = new Date(log.time);
+        const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const timeStr = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+        const tag = log.tag ? ` #${log.tag}` : '';
+        lines.push(`### ${dateStr} ${timeStr}${tag}`);
+        lines.push(`> ${log.text}`);
+        lines.push('');
+      });
+      navigator.clipboard.writeText(lines.join('\n')).then(() => {
+        btn.classList.add('copied');
+        btn.textContent = '✅ Notes copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.textContent = '📤 Copy Notes to Clipboard';
         }, 2000);
       });
     }
