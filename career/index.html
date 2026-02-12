@@ -1587,19 +1587,10 @@
                 </div>
                 <div class="quick-links">
                     <a class="quick-link" href="../index.html">🏠 Hub</a>
-                    <a class="quick-link"
-                        href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Notes/panel_review_interview_strategy.md">📋
-                        Strategy</a>
-                    <a class="quick-link"
-                        href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Questions/interview_questions.md">❓
-                        Questions</a>
-                    <a class="quick-link"
-                        href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Notes/company_research.md">🏢
-                        Company</a>
-                    <a class="quick-link"
-                        href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Notes/salary_research.md">💰
-                        Salary</a>
-                    <button class="quick-link" onclick="openFolder()">📂 Open Folder</button>
+                    <a class="quick-link" href="docs/panel_review_interview_strategy.md">📋 Strategy</a>
+                    <a class="quick-link" href="docs/interview_questions.md">❓ Questions</a>
+                    <a class="quick-link" href="docs/company_research.md">🏢 Company</a>
+                    <a class="quick-link" href="docs/salary_research.md">💰 Salary</a>
                     <button class="quick-link" onclick="exportSnapshot()">📋 Export</button>
                     <button class="gear-btn" onclick="toggleSettings()" title="Sync Settings">⚙️</button>
                 </div>
@@ -1617,18 +1608,10 @@
             <a class="nav-drawer-link" href="../index.html">🏠 Back to Hub</a>
             <a class="nav-drawer-link" href="../business/index.html">📊 Business Dashboard</a>
             <div class="nav-drawer-section">Interview Prep</div>
-            <a class="nav-drawer-link"
-                href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Notes/panel_review_interview_strategy.md">📋
-                Strategy & Talking Points</a>
-            <a class="nav-drawer-link"
-                href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Questions/interview_questions.md">❓
-                Interview Questions</a>
-            <a class="nav-drawer-link"
-                href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Notes/company_research.md">🏢
-                Company Research</a>
-            <a class="nav-drawer-link"
-                href="../Opportunities/AbbVie – Sterling Engineering/Interview Prep/Notes/salary_research.md">💰 Salary
-                Research</a>
+            <a class="nav-drawer-link" href="docs/panel_review_interview_strategy.md">📋 Strategy & Talking Points</a>
+            <a class="nav-drawer-link" href="docs/interview_questions.md">❓ Interview Questions</a>
+            <a class="nav-drawer-link" href="docs/company_research.md">🏢 Company Research</a>
+            <a class="nav-drawer-link" href="docs/salary_research.md">💰 Salary Research</a>
             <div class="nav-drawer-section">Actions</div>
             <button class="nav-drawer-link" onclick="exportSnapshot(); toggleDrawer();">📋 Export Snapshot</button>
             <button class="nav-drawer-link" onclick="copyLogNotes(); toggleDrawer();">📤 Copy Notes</button>
@@ -2139,47 +2122,47 @@
         }
 
         // ==================== PRINTABLE DOCS ====================
-        const BASE = '../Opportunities/AbbVie – Sterling Engineering';
+        const BASE = 'docs';
         const PRINTABLE_DOCS = [
             {
                 section: '⚡ Post-Interview', docs: [
-                    { name: 'Thank-You Email Draft', file: `${BASE}/Documents/thank_you_email_draft.pdf`, icon: '✉️', color: 'var(--cyan)' },
-                    { name: 'Reference Listing for Sterling', file: `${BASE}/Documents/Justice_McKinney_Reference_Listing.pdf`, icon: '👥', color: 'var(--orange)' },
+                    { name: 'Thank-You Email Draft', file: `${BASE}/thank_you_email_draft.pdf`, icon: '✉️', color: 'var(--cyan)' },
+                    { name: 'Reference Listing for Sterling', file: `${BASE}/Justice_McKinney_Reference_Listing.pdf`, icon: '👥', color: 'var(--orange)' },
                 ]
             },
             {
                 section: 'Must-Read', docs: [
-                    { name: 'Interview Strategy & Talking Points', file: `${BASE}/Interview Prep/Notes/panel_review_interview_strategy.pdf`, icon: '🎯', color: 'var(--cyan)' },
-                    { name: 'Tailored Resume (BAS-Focused)', file: `${BASE}/Documents/Resume Versions/Justice_McKinney_BAS_Focused.pdf`, icon: '📄', color: 'var(--blue)' },
-                    { name: 'Interview Questions', file: `${BASE}/Interview Prep/Questions/interview_questions.pdf`, icon: '❓', color: 'var(--purple)' },
+                    { name: 'Interview Strategy & Talking Points', file: `${BASE}/panel_review_interview_strategy.pdf`, icon: '🎯', color: 'var(--cyan)' },
+                    { name: 'Tailored Resume (BAS-Focused)', file: `${BASE}/Justice_McKinney_BAS_Focused.pdf`, icon: '📄', color: 'var(--blue)' },
+                    { name: 'Interview Questions', file: `${BASE}/interview_questions.pdf`, icon: '❓', color: 'var(--purple)' },
                 ]
             },
             {
                 section: 'Research', docs: [
-                    { name: 'Company Research — AbbVie & Sterling', file: `${BASE}/Interview Prep/Notes/company_research.pdf`, icon: '🏢', color: 'var(--teal)' },
-                    { name: 'Salary & Rate Research', file: `${BASE}/Interview Prep/Notes/salary_research.pdf`, icon: '💰', color: 'var(--green)' },
-                    { name: 'Reference Selection Strategy', file: `${BASE}/Interview Prep/Notes/reference_selection.pdf`, icon: '👥', color: 'var(--blue)' },
+                    { name: 'Company Research — AbbVie & Sterling', file: `${BASE}/company_research.pdf`, icon: '🏢', color: 'var(--teal)' },
+                    { name: 'Salary & Rate Research', file: `${BASE}/salary_research.pdf`, icon: '💰', color: 'var(--green)' },
+                    { name: 'Reference Selection Strategy', file: `${BASE}/reference_selection.pdf`, icon: '👥', color: 'var(--blue)' },
                 ]
             },
             {
                 section: 'Dossiers', docs: [
-                    { name: 'John Walters — Hiring Manager', file: `${BASE}/Interview Prep/LinkedIn Profiles/john_walters.pdf`, icon: '👔', color: 'var(--cyan)' },
-                    { name: 'Gino Pisano — Technical Peer', file: `${BASE}/Interview Prep/LinkedIn Profiles/gino_pisano.pdf`, icon: '🔧', color: 'var(--green)' },
-                    { name: 'Michael Ester — Senior Authority', file: `${BASE}/Interview Prep/LinkedIn Profiles/michael_ester.pdf`, icon: '🏗️', color: 'var(--purple)' },
+                    { name: 'John Walters — Hiring Manager', file: `${BASE}/john_walters.pdf`, icon: '👔', color: 'var(--cyan)' },
+                    { name: 'Gino Pisano — Technical Peer', file: `${BASE}/gino_pisano.pdf`, icon: '🔧', color: 'var(--green)' },
+                    { name: 'Michael Ester — Senior Authority', file: `${BASE}/michael_ester.pdf`, icon: '🏗️', color: 'var(--purple)' },
                 ]
             },
             {
                 section: 'Supporting Docs', docs: [
-                    { name: 'Certifications Summary', file: `${BASE}/Documents/certifications_summary.pdf`, icon: '🎓', color: 'var(--orange)' },
-                    { name: 'Screening Call Notes', file: `${BASE}/Meeting Notes/2026-02-09_screening_call.pdf`, icon: '📞', color: 'var(--teal)' },
-                    { name: 'Action Items', file: `${BASE}/Action Items/action_items.pdf`, icon: '✅', color: 'var(--green)' },
+                    { name: 'Certifications Summary', file: `${BASE}/certifications_summary.pdf`, icon: '🎓', color: 'var(--orange)' },
+                    { name: 'Screening Call Notes', file: `${BASE}/2026-02-09_screening_call.pdf`, icon: '📞', color: 'var(--teal)' },
+                    { name: 'Action Items', file: `${BASE}/action_items.pdf`, icon: '✅', color: 'var(--green)' },
                     { name: 'Opportunity Summary', file: `${BASE}/_summary.pdf`, icon: '📋', color: 'var(--blue)' },
                 ]
             },
             {
                 section: 'Sterling HR Guides', docs: [
-                    { name: 'Video Interview Guide', file: `${BASE}/Documents/HR and Onboarding Docs/Sterling Engineering 1.7.22 Guide to Video Interviews.pdf`, icon: '🎥', color: 'var(--orange)' },
-                    { name: 'Interview Prep Guide', file: `${BASE}/Documents/HR and Onboarding Docs/Sterling Engineering 4.12.22 Interview prep concise guide.pdf`, icon: '📚', color: 'var(--purple)' },
+                    { name: 'Video Interview Guide', file: `${BASE}/Sterling Engineering 1.7.22 Guide to Video Interviews.pdf`, icon: '🎥', color: 'var(--orange)' },
+                    { name: 'Interview Prep Guide', file: `${BASE}/Sterling Engineering 4.12.22 Interview prep concise guide.pdf`, icon: '📚', color: 'var(--purple)' },
                 ]
             }
         ];
@@ -2199,12 +2182,6 @@
                 });
             });
             wrap.innerHTML = html;
-        }
-
-        function openFolder() {
-            // This opens the folder in File Explorer on Windows
-            // Works with file:// protocol in local browser context
-            window.open('file:///C:/GitHub%20Local/Career%20Hub/Opportunities/AbbVie%20–%20Sterling%20Engineering/', '_blank');
         }
 
         // ==================== CELEBRATIONS ====================
