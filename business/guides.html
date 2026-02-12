@@ -686,6 +686,8 @@
                 color: "var(--gold)",
                 docs: [
                     { name: "WNQ Website Revamp Proposal", file: "docs/wnq_website_revamp_proposal.md", type: "md", meta: "Feb 2026 · $3,000" },
+                    { name: "WNQ Board-Ready Proposal", file: "docs/wnq_proposal_board_ready.html", type: "html", meta: "Purple branded · Print-ready" },
+                    { name: "WNQ Proposal Email Draft", file: "docs/email_wnq_proposal_feb2026.md", type: "md", meta: "Send to Ike · Delivery checklist" },
                     { name: "Nonprofit Digital Revamp One-Pager", file: "docs/nonprofit_digital_revamp_onepager.md", type: "md", meta: "Productized offer · $3,500" },
                 ]
             },
@@ -819,6 +821,13 @@
             ">📥 Open PDF</a>
           </div>
         `;
+                actions.style.display = 'none';
+                return;
+            }
+
+            if (doc.type === 'html') {
+                // HTML: render in iframe for full styling
+                body.innerHTML = `<iframe src="${doc.file}" style="width:100%;height:100%;border:none;background:#fff;border-radius:8px;"></iframe>`;
                 actions.style.display = 'none';
                 return;
             }
