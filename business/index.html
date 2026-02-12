@@ -1664,15 +1664,23 @@
             <span class="stat-value" style="color:var(--gold)">$400</span>
           </div>
           <div class="revenue-bar-wrap">
-            <div class="revenue-bar-fill" style="width: 16%"></div>
+            <div class="revenue-bar-fill" style="width: 8%"></div>
           </div>
           <div class="revenue-labels">
             <span>$0</span>
-            <span>Goal: $2,500</span>
+            <span>Goal: $5,000/mo</span>
           </div>
           <div class="stat-row" style="margin-top:10px;">
             <span class="stat-label">WNQ Photo Session</span>
-            <span class="stat-value" style="color:var(--green);font-size:0.75rem;">✅ Invoiced</span>
+            <span class="stat-value" style="color:var(--green);font-size:0.75rem;">✅ $400</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">WNQ Website Revamp</span>
+            <span class="stat-value" style="color:var(--orange);font-size:0.75rem;">⏳ $3,000</span>
+          </div>
+          <div
+            style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:0.7rem;color:var(--text-dim);">
+            Strategy: A→B · Consulting first, V8 launch after $5K/mo
           </div>
         </div>
 
@@ -1862,34 +1870,58 @@
           { id: "b22", text: "Close first Black Nexus client" }
         ]
       },
+      phase1a: {
+        area: "sc", title: "⚡ Phase 1A — Monetization Sprint", badge: "Launch Feb 27", badgeColor: "var(--gold)",
+        tasks: [
+          { id: "p1a1", text: "Scope WNQ website as paid deliverable ($3,000 flat fee)", preChecked: true },
+          { id: "p1a0", text: "Send proposal + collect 50% upfront ($1,500) — Feb 12-13" },
+          { id: "p1a2", text: "Build WNQ site using existing pipeline — no mid-build refactoring" },
+          { id: "p1a6", text: "Capture proof: before/after screenshots, metrics, annotations" },
+          { id: "p1a7", text: "Soft pre-sell to board (Feb 25)" },
+          { id: "p1a3", text: "🎯 Launch WNQ website (Feb 27) + collect 50% ($1,500)" },
+          { id: "p1a4", text: "Create WNQ Case Study IMMEDIATELY on launch day" },
+          { id: "p1a8", text: "Referral ask + group email intro request" },
+          { id: "p1a5", text: "Outreach to 10 nonprofits with case study (Feb 28–Mar 2)" }
+        ]
+      },
+      phase1c: {
+        area: "sc", title: "🚀 Phase 1C — Sales Motion", badge: "After WNQ", badgeColor: "var(--purple)",
+        tasks: [
+          { id: "p1c1", text: "Setup Concierge landing page (simple, one CTA)" },
+          { id: "p1c2", text: "Add WNQ case study to landing page" },
+          { id: "p1c3", text: "Productized offer: Nonprofit Digital Revamp — $3,000 — 14 days" },
+          { id: "p1c4", text: "Get WNQ testimonial" }
+        ]
+      },
       backlog: {
         area: "backlog", title: "Backlog — Cross-Cutting", badge: "Ongoing", badgeColor: "var(--text-dim)",
         tasks: [
           { id: "x1", text: "Add Black Nexus as featured client on setupconcierge.com" },
           { id: "x2", text: "Create service package pricing tiers" },
-          { id: "x3", text: "Document WNQ case study (before/after)" },
           { id: "x4", text: "Determine V8 Engine IP ownership" },
-          { id: "x5", text: "V8 Engine beta launch strategy" },
+          { id: "x5", text: "V8 Engine launch sprint (after $5K/mo consulting)", blocked: true, blockedNote: "Blocked until consulting revenue established" },
           { id: "x6", text: "Launch \"Creator Tech\" content series" },
           { id: "x7", text: "Build partner's social media skills" },
           { id: "x8", text: "Install Hotjar/Clarity for heatmaps" }
         ]
       },
       arch_mobile: {
-        area: "backlog", title: "🏗️ Architecture & Mobile Dev Stack", badge: "Priority", badgeColor: "var(--gold)",
+        area: "backlog", title: "🏗️ Architecture & Antigravity OS", badge: "Phase 0 Done", badgeColor: "var(--green)",
         tasks: [
-          { id: "arch1", text: "Collapse V8 dual-repo into single repo (eliminate manual sync risk) ✅", preChecked: true },
-          { id: "arch2", text: "Create devcontainer.json for V8 repo (Codespaces-ready) ✅", preChecked: true },
+          { id: "arch1", text: "Collapse V8 dual-repo into single repo ✅", preChecked: true },
+          { id: "arch2", text: "Create devcontainer.json for V8 repo ✅", preChecked: true },
           { id: "arch3", text: "Test full V8 dev loop from iPad via GitHub Codespaces" },
           { id: "arch4", text: "Label repos in README: CORE / SERVICE / PRODUCT / TOOL ✅", preChecked: true },
-          { id: "arch5", text: "Set standardized branch discipline (main → dev → feature/*) ✅", preChecked: true },
+          { id: "arch5", text: "Set standardized branch discipline ✅", preChecked: true },
           { id: "arch6", text: "Add lint + typecheck scripts to V8 package.json ✅", preChecked: true },
-          { id: "arch7", text: "Document commit convention (logbook-style, surgical commits) ✅", preChecked: true },
-          { id: "arch8", text: "Write 3-year ecosystem vision paragraph" },
+          { id: "arch7", text: "Document commit convention ✅", preChecked: true },
           { id: "arch9", text: "Ecosystem Map v1 completed ✅", preChecked: true },
-          { id: "arch10", text: "8-Question Audit on V8 Engine completed ✅", preChecked: true },
+          { id: "arch10", text: "Antigravity OS Phase 0 — repo, registry, decision log, contract ✅", preChecked: true },
           { id: "arch11", text: "Layer Order confirmed ✅", preChecked: true },
-          { id: "arch12", text: "Panel reviewed architecture + mobile dev strategy ✅", preChecked: true }
+          { id: "arch12", text: "Revenue strategy: A→B sequencing committed ✅", preChecked: true },
+          { id: "arch13", text: "Phase 1B: Distill delivery patterns after WNQ build" },
+          { id: "arch14", text: "Phase 1B: Improve /build-site based on real usage" },
+          { id: "arch15", text: "Phase 1B: Template client contract / SOW" }
         ]
       }
     };
@@ -1965,31 +1997,31 @@
       },
       {
         id: "a9",
-        text: "Collapse V8 Engine dual-repo into single repo (highest architectural risk)",
+        text: "Build WNQ website using /build-site pipeline — $3,000 deliverable",
         urgency: "now",
-        source: "Architecture Audit — Feb 11",
-        area: "backlog"
+        source: "CTO Revenue Strategy — Feb 11",
+        area: "sc"
       },
       {
         id: "a10",
-        text: "Create devcontainer.json + test V8 dev loop from iPad via Codespaces (free tier)",
+        text: "Create WNQ Case Study (before/after screenshots, timeline, outcome)",
         urgency: "soon",
-        source: "Architecture Audit — Feb 11",
-        area: "backlog"
+        source: "CTO Revenue Strategy — Feb 11",
+        area: "sc"
       },
       {
         id: "a11",
-        text: "Label all repos with role: CORE / SERVICE / PRODUCT / TOOL in README",
+        text: "Build Setup Concierge landing page with productized offer + CTA",
         urgency: "soon",
-        source: "Architecture Audit — Feb 11",
-        area: "backlog"
+        source: "CTO Revenue Strategy — Feb 11",
+        area: "sc"
       },
       {
         id: "a12",
-        text: "Set branch discipline (main / dev / feature/*) across all repos",
-        urgency: "later",
-        source: "Architecture Audit — Feb 11",
-        area: "backlog"
+        text: "Outreach to 5 nonprofits with WNQ case study",
+        urgency: "soon",
+        source: "CTO Revenue Strategy — Feb 11",
+        area: "sc"
       }
     ];
 
