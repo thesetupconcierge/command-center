@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setup Concierge — Documents</title>
+    <title>Career Hub — Documents</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <style>
@@ -21,27 +21,25 @@
             --bg-card: rgba(255, 255, 255, 0.04);
             --bg-card-hover: rgba(255, 255, 255, 0.07);
             --border: rgba(255, 255, 255, 0.08);
-            --text: #e4e4e7;
-            --text-dim: #71717a;
-            --text-bright: #fafafa;
-            --gold: #FFB81C;
-            --gold-dim: rgba(255, 184, 28, 0.15);
+            --text: rgba(255, 255, 255, 0.7);
+            --text-dim: rgba(255, 255, 255, 0.4);
+            --text-bright: rgba(255, 255, 255, 0.95);
+            --cyan: #00d4ff;
+            --cyan-dim: rgba(0, 212, 255, 0.1);
             --blue: #3b82f6;
-            --blue-dim: rgba(59, 130, 246, 0.15);
-            --green: #4ade80;
-            --green-dim: rgba(74, 222, 128, 0.15);
+            --blue-dim: rgba(59, 130, 246, 0.1);
+            --green: #10b981;
+            --green-dim: rgba(16, 185, 129, 0.1);
             --orange: #f59e0b;
-            --orange-dim: rgba(245, 158, 11, 0.15);
-            --purple: #a78bfa;
-            --purple-dim: rgba(167, 139, 250, 0.15);
+            --orange-dim: rgba(245, 158, 11, 0.1);
             --red: #ef4444;
-            --red-dim: rgba(239, 68, 68, 0.15);
+            --red-dim: rgba(239, 68, 68, 0.1);
+            --purple: #a855f7;
+            --purple-dim: rgba(168, 85, 247, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.06);
             --radius: 16px;
             --radius-sm: 10px;
-        }
-
-        html {
-            font-size: 14px;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
         body {
@@ -59,8 +57,8 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(ellipse at 20% 20%, rgba(255, 184, 28, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 50%);
+            background: radial-gradient(ellipse at 20% 20%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.02) 0%, transparent 50%);
             z-index: -1;
         }
 
@@ -72,7 +70,7 @@
             background: rgba(10, 10, 15, 0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
-            padding: 12px 24px;
+            padding: 10px 24px;
         }
 
         .header-inner {
@@ -81,8 +79,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
         }
 
         .brand {
@@ -99,7 +95,7 @@
         .brand-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, var(--gold), #e6a000);
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -112,37 +108,29 @@
         .nav-links {
             display: flex;
             gap: 6px;
-            flex-wrap: wrap;
         }
 
         .nav-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+            padding: 6px 14px;
             border-radius: 8px;
-            color: var(--text-dim);
             font-size: 0.78rem;
-            font-weight: 500;
+            color: var(--text-dim);
             text-decoration: none;
             transition: all 0.2s;
+            font-weight: 500;
         }
 
-        .nav-link:hover,
-        .nav-link.active {
-            background: var(--bg-card-hover);
+        .nav-link:hover {
             color: var(--text);
-            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .nav-link.active {
-            border-color: var(--gold);
-            color: var(--gold);
+            color: var(--cyan);
+            background: var(--cyan-dim);
         }
 
-        /* ========== MAIN LAYOUT ========== */
+        /* ========== LAYOUT ========== */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -170,9 +158,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 16px;
+            padding: 12px 16px;
             cursor: pointer;
-            user-select: none;
             transition: background 0.15s;
         }
 
@@ -198,8 +185,8 @@
             font-weight: 600;
             padding: 2px 7px;
             border-radius: 10px;
-            background: var(--gold-dim);
-            color: var(--gold);
+            background: var(--cyan-dim);
+            color: var(--cyan);
         }
 
         .section-chevron {
@@ -246,7 +233,7 @@
         }
 
         .doc-item.active {
-            border-left: 3px solid var(--gold);
+            border-left: 3px solid var(--cyan);
             padding-left: 13px;
         }
 
@@ -394,7 +381,7 @@
             width: 20px;
             height: 20px;
             border: 2px solid var(--border);
-            border-top-color: var(--gold);
+            border-top-color: var(--cyan);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             margin-left: 10px;
@@ -427,7 +414,7 @@
         .md-content h3 {
             font-size: 1rem;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--cyan);
             margin-top: 20px;
             margin-bottom: 8px;
         }
@@ -453,15 +440,15 @@
         }
 
         .md-content em {
-            color: var(--gold);
+            color: var(--cyan);
             font-style: italic;
         }
 
         .md-content blockquote {
-            border-left: 3px solid var(--gold);
+            border-left: 3px solid var(--cyan);
             padding: 10px 16px;
             margin: 12px 0;
-            background: var(--gold-dim);
+            background: var(--cyan-dim);
             border-radius: 0 8px 8px 0;
             color: var(--text);
             font-size: 0.9rem;
@@ -500,7 +487,7 @@
             border-radius: 4px;
             font-family: 'SF Mono', monospace;
             font-size: 0.85em;
-            color: var(--gold);
+            color: var(--cyan);
         }
 
         .md-content pre {
@@ -526,7 +513,7 @@
 
         .md-content input[type="checkbox"] {
             margin-right: 6px;
-            accent-color: var(--gold);
+            accent-color: var(--cyan);
         }
 
         /* ========== RESPONSIVE ========== */
@@ -630,7 +617,7 @@
         }
 
         .search-input:focus {
-            border-color: var(--gold);
+            border-color: var(--cyan);
         }
 
         .search-input::placeholder {
@@ -643,13 +630,14 @@
     <header class="header">
         <div class="header-inner">
             <a class="brand" href="./">
-                <div class="brand-icon">SC</div>
+                <div class="brand-icon">CH</div>
                 <span>Documents</span>
             </a>
             <div class="nav-links">
                 <a class="nav-link" href="index.html">📊 Dashboard</a>
                 <a class="nav-link active" href="guides.html">📚 Documents</a>
                 <a class="nav-link" href="../index.html">🏠 Hub</a>
+                <a class="nav-link" href="../business/guides.html">💼 Business Docs</a>
             </div>
             <button class="mobile-nav-toggle"
                 onclick="document.querySelector('.nav-links').style.display=this.dataset.open?'none':'flex';this.dataset.open=this.dataset.open?'':'1'">☰</button>
@@ -682,93 +670,69 @@
         // ==================== DOCUMENT REGISTRY ====================
         const DOCS = [
             {
-                section: "📋 Proposals & Offers",
-                color: "var(--gold)",
+                section: "🎯 AbbVie — Interview Prep",
+                color: "var(--cyan)",
                 docs: [
-                    { name: "WNQ Website Revamp Proposal", file: "docs/wnq_website_revamp_proposal.md", type: "md", meta: "Feb 2026 · $3,000" },
-                    { name: "WNQ Board-Ready Proposal", file: "docs/wnq_proposal_board_ready.html", type: "html", meta: "Purple branded · Print-ready" },
-                    { name: "WNQ Proposal Email Draft", file: "docs/email_wnq_proposal_feb2026.md", type: "md", meta: "Send to Ike · Delivery checklist" },
-                    { name: "Nonprofit Digital Revamp One-Pager", file: "docs/nonprofit_digital_revamp_onepager.md", type: "md", meta: "Productized offer · $3,500" },
+                    { name: "Interview Day Cheat Sheet", file: "docs/interview_day_cheat_sheet.md", type: "md", meta: "Quick reference · Must read" },
+                    { name: "STAR Stories Bank", file: "docs/star_stories_bank.md", type: "md", meta: "Behavioral answers" },
+                    { name: "Mock Q&A Drill", file: "docs/mock_qa_drill.md", type: "md", meta: "Practice questions" },
+                    { name: "Panel Review — Interview Strategy", file: "docs/panel_review_interview_strategy.md", type: "md", meta: "Advisory panel insights" },
+                    { name: "Interview Questions", file: "docs/interview_questions.md", type: "md", meta: "Prep questions" },
+                    { name: "Screening Call Notes", file: "docs/2026-02-09_screening_call.md", type: "md", meta: "Feb 9 · Initial screen" },
                 ]
             },
             {
-                section: "🧠 Strategy & Architecture",
+                section: "🏢 Company & Role Research",
                 color: "var(--blue)",
                 docs: [
-                    { name: "Decision Log", repo: "thesetupconcierge/antigravity", file: "architecture/decision-log.md", type: "md", meta: "Living document" },
-                    { name: "Antigravity Restructure Response", repo: "thesetupconcierge/antigravity", file: "docs/antigravity_restructure_response.md", type: "md", meta: "Master strategy doc" },
+                    { name: "Company Research — AbbVie", file: "docs/company_research.md", type: "md", meta: "Background & culture" },
+                    { name: "Salary Research", file: "docs/salary_research.md", type: "md", meta: "Market rates · Negotiation" },
+                    { name: "Certifications Summary", file: "docs/certifications_summary.md", type: "md", meta: "Relevant certs" },
                 ]
             },
             {
-                section: "📖 Playbook",
-                color: "var(--purple)",
-                docs: [
-                    { name: "01 — File Organization & Dating", repo: "thesetupconcierge/antigravity", file: "playbook/01-file-organization-and-dating.md", type: "md", meta: "Page 1" },
-                    { name: "02 — Automation Workflows", repo: "thesetupconcierge/antigravity", file: "playbook/02-automation-workflows-and-templates.md", type: "md", meta: "Page 2" },
-                    { name: "03 — Site Review & Panel Setup", repo: "thesetupconcierge/antigravity", file: "playbook/03-site-review-and-panel-setup.md", type: "md", meta: "Page 3" },
-                    { name: "04 — System Refinements", repo: "thesetupconcierge/antigravity", file: "playbook/04-system-refinements.md", type: "md", meta: "Page 4" },
-                    { name: "05 — Website Generation Pipeline", repo: "thesetupconcierge/antigravity", file: "playbook/05-website-generation-pipeline.md", type: "md", meta: "Page 5" },
-                    { name: "06 — CMS Deep Dive", repo: "thesetupconcierge/antigravity", file: "playbook/06-cms-deep-dive.md", type: "md", meta: "Page 6" },
-                    { name: "07 — Workflow Learning Guide", repo: "thesetupconcierge/antigravity", file: "playbook/07-workflow-learning-guide.md", type: "md", meta: "Page 7" },
-                ]
-            },
-            {
-                section: "🏷️ WNQ Client Docs",
+                section: "👥 Interviewer Intel",
                 color: "var(--green)",
                 docs: [
-                    { name: "Client Notes", file: "docs/client_notes_2026-02-06.pdf", type: "pdf", meta: "Feb 6, 2026" },
-                    { name: "WNQ Action Items", file: "docs/wnq_action_items_2026-02-08.pdf", type: "pdf", meta: "Feb 8, 2026" },
-                    { name: "Client Update & Game Plan", file: "docs/wnq_client_update_gameplan_2026-02-06.pdf", type: "pdf", meta: "Feb 6, 2026" },
-                    { name: "Photo Session Invoice Package", file: "docs/WNQ_photo_session_invoice_package_2026-02-07.pdf", type: "pdf", meta: "Feb 7, 2026" },
+                    { name: "Gino Pisano", file: "docs/gino_pisano.md", type: "md", meta: "Interviewer profile" },
+                    { name: "John Walters", file: "docs/john_walters.md", type: "md", meta: "Interviewer profile" },
+                    { name: "Michael Ester", file: "docs/michael_ester.md", type: "md", meta: "Interviewer profile" },
                 ]
             },
             {
-                section: "⚡ Black Nexus",
-                color: "var(--green)",
-                docs: [
-                    { name: "BN Strategy — Triple Asset Play", file: "docs/bn_strategy_2026-02-12.md", type: "md", meta: "Strategy · Feb 12" },
-                    { name: "JB Dashboard Project Brief", file: "docs/jb_dashboard_project_brief_2026-02-10.md", type: "md", meta: "Task for JB · Feb 10" },
-                    { name: "GitHub Collaboration Guide", file: "docs/github_collaboration_guide_2026-02-10.md", type: "md", meta: "Git workflow · Feb 10" },
-                    { name: "ClickUp Task Template", file: "docs/clickup_jb_dashboard_task_2026-02-10.md", type: "md", meta: "Project mgmt · Feb 10" },
-                    { name: "Partner Briefing", file: "docs/black_nexus_partner_briefing_2026-02-06.md", type: "md", meta: "Strategy · Feb 6" },
-                ]
-            },
-            {
-                section: "🏷️ WNQ Client Files",
-                color: "var(--blue)",
-                docs: [
-                    { name: "WNQ Action Items", file: "docs/wnq/wnq_action_items_2026-02-08.pdf", type: "pdf", meta: "Feb 8, 2026" },
-                    { name: "WNQ Client Update & Game Plan", file: "docs/wnq/wnq_client_update_gameplan_2026-02-06.pdf", type: "pdf", meta: "Feb 6, 2026" },
-                ]
-            },
-            {
-                section: "📖 Walkthrough PDFs",
-                color: "var(--purple)",
-                docs: [
-                    { name: "01 — File Organization & Dating", file: "docs/walkthroughs/01_file_organization_and_dating_2026-02-08.pdf", type: "pdf", meta: "Walkthrough · Feb 8" },
-                    { name: "02 — Automation Workflows", file: "docs/walkthroughs/02_automation_workflows_and_templates_2026-02-08.pdf", type: "pdf", meta: "Walkthrough · Feb 8" },
-                    { name: "03 — Site Review & Panel Setup", file: "docs/walkthroughs/03_site_review_and_panel_setup_2026-02-08.pdf", type: "pdf", meta: "Walkthrough · Feb 8" },
-                    { name: "04 — System Refinements", file: "docs/walkthroughs/04_system_refinements_2026-02-08.pdf", type: "pdf", meta: "Walkthrough · Feb 8" },
-                    { name: "05 — Website Generation Pipeline", file: "docs/walkthroughs/05_website_generation_pipeline_2026-02-08.pdf", type: "pdf", meta: "Walkthrough · Feb 8" },
-                    { name: "06 — CMS Deep Dive", file: "docs/walkthroughs/cms_deep_dive_2026-02-09.pdf", type: "pdf", meta: "Walkthrough · Feb 9" },
-                    { name: "07 — Workflow Learning Guide", file: "docs/walkthroughs/workflow_learning_guide_2026-02-10.pdf", type: "pdf", meta: "Walkthrough · Feb 10" },
-                ]
-            },
-            {
-                section: "📦 Resources & Templates",
+                section: "📄 Resumes & References",
                 color: "var(--orange)",
                 docs: [
-                    { name: "Dashboard Reference", file: "docs/resources/dashboard_2026-02-08.pdf", type: "pdf", meta: "Resource · Feb 8" },
-                    { name: "Naming Conventions", file: "docs/resources/naming_conventions_2026-02-08.pdf", type: "pdf", meta: "Resource · Feb 8" },
-                    { name: "Workflow Quick Reference", file: "docs/resources/workflow_quick_reference_2026-02-08.pdf", type: "pdf", meta: "Resource · Feb 8" },
-                    { name: "Automation Tips & Tricks", file: "docs/resources/automation_tips_and_tricks_2026-02-08.pdf", type: "pdf", meta: "Resource · Feb 8" },
-                    { name: "Invoice Template", file: "docs/templates/invoice_template.pdf", type: "pdf", meta: "Template" },
-                    { name: "Service Agreement Template", file: "docs/templates/service_agreement_template.pdf", type: "pdf", meta: "Template" },
-                    { name: "Site Brief Template", file: "docs/templates/site_brief_template.pdf", type: "pdf", meta: "Template" },
-                    { name: "Session Receipt Template", file: "docs/templates/session_receipt_template.pdf", type: "pdf", meta: "Template" },
-                    { name: "Meeting Notes Template", file: "docs/templates/meeting_notes_template.pdf", type: "pdf", meta: "Template" },
+                    { name: "BAS-Focused Resume", file: "docs/Justice_McKinney_BAS_Focused.md", type: "md", meta: "Tailored resume" },
+                    { name: "Reference Listing", file: "docs/Justice_McKinney_Reference_Listing.md", type: "md", meta: "Professional references" },
+                    { name: "Reference Selection Notes", file: "docs/reference_selection.md", type: "md", meta: "Selection rationale" },
                 ]
-            }
+            },
+            {
+                section: "📋 Action Items & Follow-Up",
+                color: "var(--purple)",
+                docs: [
+                    { name: "Action Items", file: "docs/action_items.md", type: "md", meta: "Next steps tracker" },
+                    { name: "Thank You Email Draft", file: "docs/thank_you_email_draft.md", type: "md", meta: "Post-interview" },
+                    { name: "Summary", file: "docs/_summary.md", type: "md", meta: "Overview" },
+                ]
+            },
+            {
+                section: "📥 PDF Versions",
+                color: "var(--red)",
+                docs: [
+                    { name: "Interview Day Cheat Sheet", file: "docs/interview_day_cheat_sheet.pdf", type: "pdf", meta: "PDF" },
+                    { name: "STAR Stories Bank", file: "docs/star_stories_bank.pdf", type: "pdf", meta: "PDF" },
+                    { name: "Mock Q&A Drill", file: "docs/mock_qa_drill.pdf", type: "pdf", meta: "PDF" },
+                    { name: "Panel Review Strategy", file: "docs/panel_review_interview_strategy.pdf", type: "pdf", meta: "PDF" },
+                    { name: "BAS-Focused Resume", file: "docs/Justice_McKinney_BAS_Focused.pdf", type: "pdf", meta: "PDF" },
+                    { name: "Reference Listing", file: "docs/Justice_McKinney_Reference_Listing.pdf", type: "pdf", meta: "PDF" },
+                    { name: "Company Research", file: "docs/company_research.pdf", type: "pdf", meta: "PDF" },
+                    { name: "Salary Research", file: "docs/salary_research.pdf", type: "pdf", meta: "PDF" },
+                    { name: "Screening Call Notes", file: "docs/2026-02-09_screening_call.pdf", type: "pdf", meta: "PDF" },
+                    { name: "Screening Call (Sterling)", file: "docs/Sterling Engineering - Justice McKinney (1).pdf", type: "pdf", meta: "PDF" },
+                ]
+            },
         ];
 
         let currentDoc = null;
@@ -840,19 +804,15 @@
             title.textContent = doc.name;
 
             if (doc.type === 'pdf') {
-                // PDFs: show message with download link
-                const pdfUrl = doc.repo
-                    ? `https://github.com/${doc.repo}/blob/main/${doc.file}`
-                    : doc.file;
                 body.innerHTML = `
           <div class="viewer-empty">
             <div class="viewer-empty-icon">📄</div>
             <div class="viewer-empty-text">PDF Document</div>
-            <a href="${pdfUrl}" target="_blank" style="
+            <a href="${doc.file}" target="_blank" style="
               display:inline-flex;align-items:center;gap:6px;
-              padding:10px 20px;background:var(--gold-dim);
-              border:1px solid var(--gold);border-radius:8px;
-              color:var(--gold);text-decoration:none;font-weight:600;
+              padding:10px 20px;background:var(--cyan-dim);
+              border:1px solid var(--cyan);border-radius:8px;
+              color:var(--cyan);text-decoration:none;font-weight:600;
               font-size:0.85rem;margin-top:8px;
             ">📥 Open PDF</a>
           </div>
@@ -862,7 +822,6 @@
             }
 
             if (doc.type === 'html') {
-                // HTML: render in iframe for full styling
                 body.innerHTML = `<iframe src="${doc.file}" style="width:100%;height:100%;border:none;background:#fff;border-radius:8px;"></iframe>`;
                 actions.style.display = 'none';
                 return;
@@ -889,21 +848,11 @@
                     body.innerHTML = `<div class="md-content">${renderMarkdown(md)}</div>`;
                 })
                 .catch(err => {
-                    const githubUrl = doc.repo
-                        ? `https://github.com/${doc.repo}/blob/main/${doc.file}`
-                        : doc.file;
                     body.innerHTML = `
             <div class="viewer-empty">
               <div class="viewer-empty-icon">⚠️</div>
               <div class="viewer-empty-text">Could not fetch document</div>
               <div style="font-size:0.75rem;color:var(--text-dim);margin-top:4px;">${err.message}</div>
-              <a href="${githubUrl}" target="_blank" style="
-                display:inline-flex;align-items:center;gap:6px;
-                padding:8px 16px;background:var(--blue-dim);
-                border:1px solid var(--blue);border-radius:8px;
-                color:var(--blue);text-decoration:none;font-weight:500;
-                font-size:0.82rem;margin-top:12px;
-              ">🔗 View on GitHub</a>
             </div>
           `;
                 });
