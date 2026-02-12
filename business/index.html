@@ -1194,6 +1194,205 @@
       }
     }
 
+    /* ========== EXTRACT MODAL ========== */
+    .extract-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 500;
+      backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .extract-overlay.open {
+      display: flex;
+    }
+
+    .extract-modal {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      width: 95vw;
+      max-width: 700px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .extract-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .extract-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-bright);
+    }
+
+    .extract-close {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .extract-close:hover {
+      color: var(--text);
+    }
+
+    .extract-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+    }
+
+    .extract-group {
+      margin-bottom: 20px;
+    }
+
+    .extract-group-header {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .extract-group-count {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 8px;
+    }
+
+    .extract-entry {
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border-radius: 8px;
+      margin-bottom: 6px;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      border-left: 3px solid var(--border);
+    }
+
+    .extract-entry-time {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-bottom: 2px;
+    }
+
+    .extract-empty {
+      color: var(--text-dim);
+      font-size: 0.78rem;
+      font-style: italic;
+    }
+
+    .extract-footer {
+      display: flex;
+      gap: 8px;
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .extract-btn {
+      flex: 1;
+      min-width: 120px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      text-align: center;
+    }
+
+    .extract-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .extract-btn.primary {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .extract-btn.primary:hover {
+      background: rgba(255, 184, 28, 0.25);
+    }
+
+    .extract-btn.danger {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .extract-btn.danger:hover {
+      background: var(--red-dim);
+    }
+
+    /* Archive drawer */
+    .archive-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+
+    .archive-toggle:hover {
+      background: var(--bg-card-hover);
+      color: var(--text);
+    }
+
+    .archive-entries {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .archive-entry {
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 6px;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      border-left: 2px solid var(--border);
+    }
+
+    .archive-entry-time {
+      font-size: 0.6rem;
+      opacity: 0.6;
+    }
+
     /* ========== CELEBRATION EFFECTS ========== */
     .confetti-container {
       position: fixed;
@@ -1618,9 +1817,12 @@
       <a class="nav-drawer-link" href="https://setupconcierge.com/wp-admin" target="_blank" rel="noopener">⚡
         WordPress</a>
       <a class="nav-drawer-link" href="https://manage.wix.com" target="_blank" rel="noopener">🌐 Wix Studio</a>
+      <div class="nav-drawer-section">Documents</div>
+      <a class="nav-drawer-link" href="guides.html" onclick="toggleDrawer();">📚 Documents Hub</a>
       <div class="nav-drawer-section">Actions</div>
       <button class="nav-drawer-link" onclick="exportSnapshot(); toggleDrawer();">📋 Export Snapshot</button>
       <button class="nav-drawer-link" onclick="copyLogNotes(); toggleDrawer();">📤 Copy Notes</button>
+      <button class="nav-drawer-link" onclick="openExtractModal(); toggleDrawer();">🔍 Extract & Archive Log</button>
       <button class="nav-drawer-link" onclick="toggleDrawer(); toggleSettings();">⚙️ Sync Settings</button>
     </div>
 
@@ -1737,9 +1939,27 @@
           </div>
         </div>
         <button class="export-btn" onclick="copyLogNotes()" id="copyNotesBtn">📤 Copy Notes to Clipboard</button>
+        <button class="export-btn" onclick="openExtractModal()">🔍 Extract & Archive</button>
         <button class="export-btn" onclick="exportSnapshot()">📋 Export Snapshot to Clipboard</button>
+        <div id="archiveSection"></div>
         <div class="synced" id="syncedTime"></div>
       </aside>
+    </div>
+  </div>
+
+  <!-- EXTRACT MODAL -->
+  <div class="extract-overlay" id="extractOverlay" onclick="if(event.target===this)closeExtractModal()">
+    <div class="extract-modal">
+      <div class="extract-header">
+        <h3>🔍 Extract & Archive Log</h3>
+        <button class="extract-close" onclick="closeExtractModal()">✕</button>
+      </div>
+      <div class="extract-body" id="extractBody"></div>
+      <div class="extract-footer">
+        <button class="extract-btn primary" onclick="copyExtracted()">📋 Copy Extracted</button>
+        <button class="extract-btn" onclick="archiveAndClear()">📦 Archive & Clear</button>
+        <button class="extract-btn danger" onclick="closeExtractModal()">Cancel</button>
+      </div>
     </div>
   </div>
 
@@ -2585,6 +2805,141 @@
       });
     }
 
+    // ==================== EXTRACT & ARCHIVE ====================
+    const EXTRACT_CONFIG = {
+      decision: { label: '📌 Decisions', color: 'var(--blue)', destination: 'Decision Log' },
+      win: { label: '🏆 Wins & Proof', color: 'var(--green)', destination: 'Case Study / Proof Assets' },
+      idea: { label: '💡 Ideas', color: 'var(--purple)', destination: 'Backlog' },
+      blocker: { label: '🚧 Blockers', color: 'var(--red)', destination: 'Resolution Queue' },
+      note: { label: '📝 Notes', color: 'var(--text-dim)', destination: 'Archive' }
+    };
+
+    function openExtractModal() {
+      const body = document.getElementById('extractBody');
+      if (!state.logs || state.logs.length === 0) {
+        body.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-dim);">No log entries to extract.</div>';
+        document.getElementById('extractOverlay').classList.add('open');
+        return;
+      }
+
+      // Group by tag
+      const groups = {};
+      const untagged = [];
+      state.logs.forEach(log => {
+        const tag = log.tag || 'note';
+        if (!groups[tag]) groups[tag] = [];
+        groups[tag].push(log);
+      });
+
+      let html = `<div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:16px;">
+        ${state.logs.length} entries will be categorized and formatted for extraction.
+      </div>`;
+
+      // Render each group
+      for (const [tag, config] of Object.entries(EXTRACT_CONFIG)) {
+        const entries = groups[tag] || [];
+        html += `<div class="extract-group">
+          <div class="extract-group-header" style="color:${config.color}">
+            ${config.label}
+            <span class="extract-group-count" style="background:${config.color}20;color:${config.color}">${entries.length}</span>
+            <span style="font-size:0.6rem;color:var(--text-dim);font-weight:400;text-transform:none;letter-spacing:normal;">→ ${config.destination}</span>
+          </div>`;
+
+        if (entries.length === 0) {
+          html += '<div class="extract-empty">No entries</div>';
+        } else {
+          entries.forEach(e => {
+            html += `<div class="extract-entry" style="border-left-color:${config.color}">
+              <div class="extract-entry-time">${e.time}</div>
+              <div>${e.text}</div>
+            </div>`;
+          });
+        }
+        html += '</div>';
+      }
+
+      body.innerHTML = html;
+      document.getElementById('extractOverlay').classList.add('open');
+    }
+
+    function closeExtractModal() {
+      document.getElementById('extractOverlay').classList.remove('open');
+    }
+
+    function copyExtracted() {
+      if (!state.logs || state.logs.length === 0) return;
+
+      const groups = {};
+      state.logs.forEach(log => {
+        const tag = log.tag || 'note';
+        if (!groups[tag]) groups[tag] = [];
+        groups[tag].push(log);
+      });
+
+      let md = `# Captain's Log — Extracted ${new Date().toLocaleDateString()}\n\n`;
+
+      for (const [tag, config] of Object.entries(EXTRACT_CONFIG)) {
+        const entries = groups[tag] || [];
+        if (entries.length === 0) continue;
+        md += `## ${config.label} → ${config.destination}\n\n`;
+        entries.forEach(e => {
+          md += `- **[${e.time}]** ${e.text}\n`;
+        });
+        md += '\n';
+      }
+
+      navigator.clipboard.writeText(md).then(() => {
+        const btn = document.querySelector('.extract-btn.primary');
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => btn.textContent = '📋 Copy Extracted', 2000);
+      });
+    }
+
+    function archiveAndClear() {
+      if (!state.logs || state.logs.length === 0) return;
+
+      // Move to archive
+      if (!state.archivedLogs) state.archivedLogs = [];
+      const now = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      state.archivedLogs.push({
+        archivedAt: now,
+        count: state.logs.length,
+        entries: [...state.logs]
+      });
+
+      // Clear active log
+      state.logs = [];
+      saveState();
+      closeExtractModal();
+      renderLog();
+      renderArchive();
+    }
+
+    function renderArchive() {
+      const section = document.getElementById('archiveSection');
+      if (!state.archivedLogs || state.archivedLogs.length === 0) {
+        section.innerHTML = '';
+        return;
+      }
+
+      const totalEntries = state.archivedLogs.reduce((sum, a) => sum + a.count, 0);
+      section.innerHTML = `
+        <div class="archive-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'flex':'none'">
+          <span>📦 Archive (${state.archivedLogs.length} batches · ${totalEntries} entries)</span>
+          <span>▼</span>
+        </div>
+        <div class="archive-entries" style="display:none;">
+          ${state.archivedLogs.slice().reverse().map((batch, i) => `
+            <div class="archive-entry">
+              <div class="archive-entry-time">Archived ${batch.archivedAt} · ${batch.count} entries</div>
+              ${batch.entries.slice(0, 3).map(e => `<div style="margin-top:2px;">${e.tag ? '#' + e.tag + ' ' : ''}${e.text.substring(0, 80)}${e.text.length > 80 ? '...' : ''}</div>`).join('')}
+              ${batch.entries.length > 3 ? `<div style="opacity:0.5;margin-top:2px;">+${batch.entries.length - 3} more</div>` : ''}
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
     // ==================== NAV DRAWER ====================
     function toggleDrawer() {
       document.getElementById('navOverlay').classList.toggle('open');
@@ -2609,6 +2964,7 @@
     });
 
     render();
+    renderArchive();
     // Auto-sync from Gist on startup if configured
     if (getGistConfig()) syncFromGist();
   </script>
