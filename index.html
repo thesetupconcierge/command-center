@@ -225,6 +225,8 @@
             transition: border-color 0.2s;
             margin-bottom: 24px;
             position: relative;
+            scroll-margin-top: 80px;
+            /* Account for sticky header */
         }
 
         .card-title {
@@ -680,7 +682,10 @@
             .main {
                 grid-template-columns: 1fr;
                 padding: 16px;
+                padding-top: 24px;
                 gap: 16px;
+                display: flex;
+                flex-direction: column;
             }
 
             .left-col,
@@ -695,6 +700,8 @@
             .status-bar {
                 padding: 10px 16px;
                 flex-wrap: wrap;
+                z-index: 2001;
+                /* Ensure stay above overlay */
             }
 
             .status-items {
@@ -718,6 +725,7 @@
             .hud-nav {
                 width: 100%;
                 justify-content: center;
+                margin-bottom: 12px;
             }
 
             .nav-btn {
@@ -733,6 +741,10 @@
 
             .big-ring-pct .num {
                 font-size: 1.6rem;
+            }
+
+            .finance-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -862,6 +874,8 @@
             border-radius: var(--radius);
             padding: 20px;
             margin-top: 24px;
+            scroll-margin-top: 80px;
+            /* Account for sticky header */
         }
 
         .finance-header {
@@ -1017,7 +1031,6 @@
         <button class="nav-btn active" id="btn-business" onclick="app.switchMode('business')">🏢 Business Hub</button>
         <button class="nav-btn" id="btn-career" onclick="app.switchMode('career')">🚀 Career Hub</button>
         <button class="nav-btn" id="btn-registry" onclick="app.switchMode('registry')">🗄️ Registry Hub</button>
-    </div>
     </div>
 
     <div class="main">
