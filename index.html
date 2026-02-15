@@ -478,6 +478,8 @@
             font-size: 0.88rem;
             color: var(--text);
             line-height: 1.5;
+            word-break: break-word;
+            overflow-wrap: anywhere;
         }
 
         .task-item[data-status="done"] .task-text {
@@ -550,6 +552,8 @@
         .log-text {
             font-size: 0.82rem;
             line-height: 1.4;
+            word-break: break-word;
+            overflow-wrap: anywhere;
         }
 
         /* ========== UTILS ========== */
@@ -787,17 +791,19 @@
             <span class="status-label">WNQ Health:</span>
             <span class="status-value" style="color:var(--green)">100% OPERATIONAL</span>
         </div>
+
+        <div class="status-item">
+            <button onclick="app.toggleSettings()"
+                style="background:none; border:none; cursor:pointer; color:var(--text-dim); font-size:1.1rem; padding: 4px; transition: color 0.2s;"
+                onmouseover="this.style.color='var(--primary)'"
+                onmouseout="this.style.color='var(--text-dim)'">⚙️</button>
+        </div>
     </div>
 
     <div class="hud-nav">
         <button class="nav-btn active" id="btn-business" onclick="app.switchMode('business')">🏢 Business
             Hub</button>
         <button class="nav-btn" id="btn-career" onclick="app.switchMode('career')">🚀 Career Hub</button>
-    </div>
-
-    <div class="status-item">
-        <button onclick="app.toggleSettings()"
-            style="background:none; border:none; cursor:pointer; color:var(--text-dim); font-size:1.2rem;">⚙️</button>
     </div>
     </div>
 
@@ -848,10 +854,10 @@
             </div>
 
             <div style="margin-top:16px; border-top:1px solid var(--border); padding-top:12px;">
-                <a href="../"
-                    style="color:var(--text-dim); text-decoration:none; font-size:0.7rem; display:flex; align-items:center; gap:6px;">
-                    ← Back to Launcher
-                </a>
+                <button onclick="app.lockHub()"
+                    style="background:none; border:none; color:var(--text-dim); text-decoration:none; font-size:0.7rem; display:flex; align-items:center; gap:6px; cursor:pointer;">
+                    🔒 Lock Hub
+                </button>
             </div>
         </div>
 
@@ -967,6 +973,20 @@
                     { id: "sa1", text: "Daily Summary: [Feb 14](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Resources/Walkthroughs/daily_summary_2026-02-14.md)", preChecked: true },
                     { id: "sa2", text: "Captain's Log: [Archive](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Resources/Walkthroughs/captains_log_2026-02-14.md)", preChecked: true }
                 ]
+            },
+            key_documents: {
+                lane: 'business', area: "docs", title: "📂 Key Documents", badge: "Live", badgeColor: "var(--purple)", tasks: [
+                    { id: "doc1", text: "Master Playbook [PDF](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Playbook/master_playbook.pdf)", preChecked: true },
+                    { id: "doc2", text: "Brand Kit [PDF](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Black%20Nexus/brand-kit.pdf)", preChecked: true },
+                    { id: "doc3", text: "Onboarding Guide [PDF](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Black%20Nexus/onboarding.pdf)", preChecked: true }
+                ]
+            },
+            career_onboarding_vault: {
+                lane: 'career', area: "docs", title: "🏢 Onboarding Vault", badge: "Priority", badgeColor: "var(--cyan)", tasks: [
+                    { id: "odoc1", text: "Sterling Benefits [PDF](file:///C:/GitHub%20Local/Career%20Hub/Onboarding/2026_Benefits_Guide.pdf)", preChecked: true },
+                    { id: "odoc2", text: "Xenqu Checklist [PDF](file:///C:/GitHub%20Local/Career%20Hub/Onboarding/Checklist.pdf)", preChecked: true },
+                    { id: "odoc3", text: "I-9 Verification [PDF](file:///C:/GitHub%20Local/Career%20Hub/Onboarding/I9_Complete.pdf)", preChecked: true }
+                ]
             }
         };
 
@@ -1031,6 +1051,7 @@
             }
 
             async init() {
+                if (!this.checkAuthentication()) return;
                 this.loadLocal();
                 const hash = window.location.hash.substring(1);
                 if (hash === 'career') this.switchMode('career');
@@ -1224,24 +1245,58 @@
             }
 
             handleDeepLink() {
-                const hash = window.location.hash.substring(1);
-                if (!hash) return;
-                const [mode, section] = hash.includes(':') ? hash.split(':') : [hash, null];
+                const fullHash = window.location.hash.substring(1);
+                if (!fullHash) return;
 
-                if (mode === 'career' || mode === 'business') {
-                    if (this.mode !== mode) this.switchMode(mode);
+                // Allow both mode:section and just mode
+                const [targetMode, sectionId] = fullHash.includes(':') ? fullHash.split(':') : [fullHash, null];
+
+                if (targetMode === 'career' || targetMode === 'business') {
+                    if (this.mode !== targetMode) {
+                        this.switchMode(targetMode);
+                    }
                 }
 
-                if (section) {
+                if (sectionId) {
+                    // Give the DOM a moment to re-render if we switched modes
                     setTimeout(() => {
-                        const el = document.getElementById(section);
+                        const el = document.getElementById(sectionId);
                         if (el) {
-                            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                             el.classList.add('section-highlight');
                             setTimeout(() => el.classList.remove('section-highlight'), 3000);
                         }
-                    }, 500);
+                    }, 300);
                 }
+            }
+
+            lockHub() {
+                localStorage.removeItem('sc_hub_authenticated');
+                location.reload();
+            }
+
+            checkAuthentication() {
+                const authenticated = localStorage.getItem('sc_hub_authenticated');
+                const cfg = this.getGistConfig();
+
+                // If no PAT/Gist configured, let them in to set it up
+                if (!cfg || !cfg.pat) return true;
+
+                if (!authenticated) {
+                    const pass = prompt('Enter Hub Passcode:');
+                    if (pass === cfg.pat.substring(0, 4)) {
+                        localStorage.setItem('sc_hub_authenticated', 'true');
+                        return true;
+                    } else {
+                        document.body.innerHTML = `<div style="height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; color:var(--text-dim); font-family:sans-serif;">
+                            <h1 style="color:var(--red)">Access Denied</h1>
+                            <p>Invalid Passcode.</p>
+                            <button onclick="location.reload()" style="margin-top:20px; background:var(--primary); border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">Retry</button>
+                        </div>`;
+                        return false;
+                    }
+                }
+                return true;
             }
 
             render() {
