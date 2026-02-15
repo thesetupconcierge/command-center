@@ -836,11 +836,18 @@
                     { id: "o4", text: "Process Worker Responsibility & Rental Car forms" }
                 ]
             },
-            career_siemens: {
-                lane: 'career', area: "technical", title: "🛠️ Siemens / PPCL Prep", badge: "New Role", badgeColor: "var(--cyan)", tasks: [
-                    { id: "s1", text: "Study PPCL Scripting syntax (SET, IF/THEN, GOTO)" },
-                    { id: "s2", text: "Review Desigo CC vs Insight architecture" },
-                    { id: "s3", text: "Research BACnet/IP and MS/TP field integration" }
+            clinical_finance: {
+                lane: 'business', area: "finance", title: "Clinical Finance", badge: "Burn/Income", badgeColor: "var(--purple)", tasks: [
+                    { id: "f1", text: "Import Monthly Burn Projection (Feb)", preChecked: false },
+                    { id: "f2", text: "Link Revenue Hub (Gist State)", preChecked: true },
+                    { id: "f3", text: "Reserve Buffer: 3-Month Minimum", preChecked: false }
+                ]
+            },
+            surgical_scripting: {
+                lane: 'career', area: "technical", title: "Surgical Scripting Lab", badge: "DevOps", badgeColor: "var(--cyan)", tasks: [
+                    { id: "sc1", text: "The V8 Console (Interactive Guide)", preChecked: false },
+                    { id: "sc2", text: "CLI Mastery: Surgical Shell Commands", preChecked: false },
+                    { id: "sc3", text: "Automation: Gist-to-Hub Sync Script", preChecked: false }
                 ]
             }
         };
@@ -863,6 +870,22 @@
                     {
                         q: "What does the command 'GOTO 100' do?",
                         options: ["Sets value to 100", "Jumps to line 100", "Waits for 100ms", "Stops execution"],
+                        correct: 1
+                    }
+                ]
+            },
+            coding_check: {
+                lane: 'career',
+                title: 'CDA Surgical Scripting Check',
+                questions: [
+                    {
+                        q: "Which protocol ensures dashboard state is synced globally?",
+                        options: ["Surgical Sync", "Git Push Only", "Local Storage Only", "Manual Copy"],
+                        correct: 0
+                    },
+                    {
+                        q: "What is the primary role of the Captain's Log?",
+                        options: ["Social Media Posts", "Clinical Event Streaming", "Billing Only", "Design Mockups"],
                         correct: 1
                     }
                 ]
@@ -1123,13 +1146,17 @@
 
                 // Sidebar Contextual
                 const sideCtx = document.getElementById('sidebar-contextual');
-                const diag = Object.entries(QUIZ_DATA).find(([id, q]) => q.lane === this.mode);
-                if (diag) {
+                const diagList = Object.entries(QUIZ_DATA).filter(([id, q]) => q.lane === this.mode);
+                if (diagList.length) {
                     sideCtx.innerHTML = `
                         <div class="card fade-in" style="margin-top:16px;">
-                            <div class="status-label">Diagnostic Tool</div>
-                            <div class="diag-badge" onclick="app.startQuiz('${diag[0]}')">
-                                ⚡ ${diag[1].title} Available
+                            <div class="status-label">Diagnostic Tools</div>
+                            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+                                ${diagList.map(([id, q]) => `
+                                    <div class="diag-badge" onclick="app.startQuiz('${id}')">
+                                        ⚡ ${q.title}
+                                    </div>
+                                `).join('')}
                             </div>
                         </div>
                     `;
