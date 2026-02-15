@@ -145,6 +145,20 @@
             color: var(--text-bright);
         }
 
+        .status-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+
+        .status-link:hover {
+            color: var(--primary);
+        }
+
         .revenue-mini-bar {
             width: 100px;
             height: 6px;
@@ -292,6 +306,51 @@
         .big-ring-pct .label {
             font-size: 0.7rem;
             color: var(--text-dim);
+        }
+
+        .task-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .deeplink-btn {
+            opacity: 0;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        .task-section-header:hover .deeplink-btn {
+            opacity: 1;
+        }
+
+        .deeplink-btn:hover {
+            color: var(--primary);
+        }
+
+        .section-highlight {
+            animation: highlight-pulse 2s ease-out;
+        }
+
+        @keyframes highlight-pulse {
+            0% {
+                box-shadow: 0 0 0 0 var(--primary-dim);
+                border-color: var(--primary);
+            }
+
+            50% {
+                box-shadow: 0 0 30px 0 var(--primary-dim);
+                border-color: var(--primary);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 transparent;
+                border-color: var(--border);
+            }
         }
 
         .stat-row {
@@ -606,6 +665,10 @@
                 <div class="revenue-mini-fill" id="revenue-fill"></div>
             </div>
             <span class="status-value" id="revenue-current">...</span>
+            <div style="display:flex;gap:16px;">
+                <a href="docs/Clinical_Data_Intensive_Architecture.md" class="status-link">📋 Strategy</a>
+                <a href="docs/wnq_wix_completion_guide_2026-02-12.md" class="status-link">🗺️ Roadmap</a>
+            </div>
         </div>
 
         <div class="status-item">
@@ -1004,6 +1067,34 @@
                 this.currentQuiz = null;
             }
 
+            copyDeepLink(sectionId) {
+                const url = new URL(window.location);
+                url.hash = `${this.mode}:${sectionId}`;
+                navigator.clipboard.writeText(url.href);
+                this.addLog(`Deep link copied: ${sectionId}`);
+            }
+
+            handleDeepLink() {
+                const hash = window.location.hash.substring(1);
+                if (!hash) return;
+                const [mode, section] = hash.includes(':') ? hash.split(':') : [hash, null];
+
+                if (mode === 'career' || mode === 'business') {
+                    if (this.mode !== mode) this.switchMode(mode);
+                }
+
+                if (section) {
+                    setTimeout(() => {
+                        const el = document.getElementById(`section-${section}`);
+                        if (el) {
+                            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            el.classList.add('section-highlight');
+                            setTimeout(() => el.classList.remove('section-highlight'), 3000);
+                        }
+                    }, 500);
+                }
+            }
+
             render() {
                 const laneTasks = Object.values(TASK_DATA).filter(s => s.lane === this.mode);
                 const allLaneTasks = laneTasks.flatMap(s => s.tasks);
@@ -1066,12 +1157,14 @@
                 // Sections
                 document.getElementById('task-sections-container').innerHTML = laneTasks.map(s => {
                     const sDone = s.tasks.filter(t => this.getTaskState(t.id) === 'done').length;
+                    const sectionId = s.title.toLowerCase().replace(/\s+/g, '-');
                     return `
-            <div class="card fade-in">
+            <div class="card fade-in" id="section-${sectionId}">
               <div class="task-section-header">
                 <div class="section-title">
                   ${s.title}
                   <span class="section-badge" style="background:${s.badgeColor}20;color:${s.badgeColor}">${s.badge}</span>
+                  <span class="deeplink-btn" title="Copy Deep Link" onclick="app.copyDeepLink('${sectionId}')">🔗</span>
                 </div>
                 <div class="status-label">${sDone}/${s.tasks.length}</div>
               </div>
@@ -1098,6 +1191,12 @@
         }
 
         const app = new MasterApp();
+
+        window.addEventListener('load', () => {
+            app.render();
+            app.handleDeepLink();
+        });
+        window.addEventListener('hashchange', () => app.handleDeepLink());
     </script>
 </body>
 
