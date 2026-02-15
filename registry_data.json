@@ -10,12 +10,12 @@
             {
                 "name": "Clinical Architecture",
                 "path": "Playbook/clinical-architecture.md",
-                "pdf": false
+                "pdf": true
             },
             {
                 "name": "WNQ Completion Roadmap",
                 "path": "WNQ/Action Items/Assets/Markdown/wnq_wix_completion_guide_2026-02-12.md",
-                "pdf": false
+                "pdf": true
             }
         ]
     },
