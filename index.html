@@ -600,6 +600,12 @@
                 <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Next Actions
                     Spotlight</div>
                 <div id="action-list"></div>
+                <div id="extra-links"
+                    style="margin-top:16px; border-top:1px solid var(--border); padding-top:12px; display:none;">
+                    <a id="tech-prep-link" href="career/siemens_prep.html" target="_blank"
+                        style="color:var(--cyan); text-decoration:none; font-size:0.75rem; font-weight:700;">📘 Siemens
+                        / PPCL Study Guide →</a>
+                </div>
             </div>
 
             <div id="task-sections-container">
@@ -696,6 +702,21 @@
                     { id: "d2", text: "PDF Archive of WNQ Project Proof" },
                     { id: "d3", text: "Generate Reference Listing PDF" }
                 ]
+            },
+            career_onboarding: {
+                lane: 'career', area: "onboarding", title: "📋 AbbVie Onboarding (Foundation)", badge: "19 Docs", badgeColor: "var(--purple)", tasks: [
+                    { id: "o1", text: "Review Benefits Guide & enrollment instructions" },
+                    { id: "o2", text: "Sign Arbitration & Consent forms" },
+                    { id: "o3", text: "Process IL W4 & Federal W4 withholdings" },
+                    { id: "o4", text: "Process Worker Responsibility & Rental Car forms" }
+                ]
+            },
+            career_siemens: {
+                lane: 'career', area: "technical", title: "🛠️ Siemens / PPCL Prep", badge: "New Role", badgeColor: "var(--cyan)", tasks: [
+                    { id: "s1", text: "Study PPCL Scripting syntax (SET, IF/THEN, GOTO)" },
+                    { id: "s2", text: "Review Desigo CC vs Insight architecture" },
+                    { id: "s3", text: "Research BACnet/IP and MS/TP field integration" }
+                ]
             }
         };
 
@@ -740,6 +761,11 @@
                 this.mode = mode;
                 document.body.setAttribute('data-theme', mode);
                 document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.id === `btn-${mode}`));
+
+                // Stricter separation
+                const title = document.querySelector('.status-bar span[style*="font-size:1rem"]');
+                if (title) title.innerText = mode === 'business' ? 'Business Master Hub' : 'Career Master Hub';
+
                 window.location.hash = mode;
                 this.render();
             }
@@ -880,6 +906,9 @@
              <div><div class="task-text" style="font-size:0.8rem;">${a.text}</div><div class="status-label" style="font-size:0.6rem;">${a.source}</div></div>
            </div>
         `).join('');
+
+                const extraLinks = document.getElementById('extra-links');
+                if (extraLinks) extraLinks.style.display = this.mode === 'career' ? 'block' : 'none';
 
                 // Sections
                 document.getElementById('task-sections-container').innerHTML = laneTasks.map(s => {
