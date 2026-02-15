@@ -1,0 +1,26 @@
+{
+    "gists": {
+        "master": "sc_dashboard_state.json",
+        "projects": {
+            "bn": {
+                "id": "project-specific-gist-id-for-black-nexus",
+                "name": "black_nexus_state.json",
+                "description": "Black Nexus — Shared Project Node"
+            }
+        }
+    },
+    "routing_rules": {
+        "bn": [
+            "bn",
+            "wnq"
+        ],
+        "private": [
+            "sc",
+            "backlog",
+            "followup",
+            "interview",
+            "docs",
+            "research"
+        ]
+    }
+}

@@ -4,10 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Command Center — Hub</title>
+    <title>Setup Concierge — Master Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <style>
+        /* ========== THEMES & VARIABLES ========== */
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #e4e4e7;
+            --text-dim: #71717a;
+            --text-bright: #fafafa;
+            --radius: 16px;
+            --radius-sm: 10px;
+
+            /* Colors */
+            --gold: #FFB81C;
+            --gold-dim: rgba(255, 184, 28, 0.15);
+            --blue: #3b82f6;
+            --blue-dim: rgba(59, 130, 246, 0.15);
+            --green: #4ade80;
+            --green-dim: rgba(74, 222, 128, 0.15);
+            --red: #ef4444;
+            --red-dim: rgba(239, 68, 68, 0.15);
+            --orange: #f59e0b;
+            --orange-dim: rgba(245, 158, 11, 0.15);
+            --purple: #a78bfa;
+            --purple-dim: rgba(167, 139, 250, 0.15);
+            --cyan: #22d3ee;
+            --cyan-dim: rgba(34, 211, 238, 0.15);
+
+            /* Business Theme (Default) */
+            --primary: var(--gold);
+            --primary-dim: var(--gold-dim);
+            --accent: var(--green);
+            --accent-dim: var(--green-dim);
+        }
+
+        [data-theme="career"] {
+            --primary: var(--cyan);
+            --primary-dim: var(--cyan-dim);
+            --accent: var(--blue);
+            --accent-dim: var(--blue-dim);
+        }
+
+        /* ========== RESET & BASE ========== */
         *,
         *::before,
         *::after {
@@ -16,18 +59,8 @@
             padding: 0;
         }
 
-        :root {
-            --bg: #06060b;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --text: #e4e4e7;
-            --text-dim: #71717a;
-            --text-bright: #fafafa;
-            --gold: #FFB81C;
-            --blue: #3b82f6;
-            --green: #4ade80;
-            --purple: #a78bfa;
-            --radius: 20px;
+        html {
+            font-size: 14px;
         }
 
         body {
@@ -35,236 +68,855 @@
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            transition: background 0.5s ease;
         }
 
         /* Ambient glow */
         body::before {
             content: '';
             position: fixed;
-            top: -40%;
-            left: -20%;
-            width: 140%;
-            height: 140%;
-            background: radial-gradient(ellipse at 30% 20%, rgba(255, 184, 28, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 0;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 20% 20%, var(--primary-dim) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, var(--accent-dim) 0%, transparent 50%);
+            z-index: -1;
+            transition: all 0.5s ease;
         }
 
-        .hub {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-            max-width: 700px;
+        /* ========== SCROLLBAR ========== */
+        ::-webkit-scrollbar {
+            width: 6px;
         }
 
-        .brand {
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ========== GLOBAL STATUS BAR ========== */
+        .status-bar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 24px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 14px;
-            margin-bottom: 8px;
-        }
-
-        .brand-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, var(--gold), #e6a000);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.1rem;
-            color: #000;
-            box-shadow: 0 4px 20px rgba(255, 184, 28, 0.3);
-        }
-
-        .brand h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text-bright);
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
-            color: var(--text-dim);
-            font-size: 0.85rem;
-            margin-bottom: 48px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            justify-content: space-between;
             gap: 20px;
         }
 
-        @media (max-width: 500px) {
-            .cards {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-
-            .brand h1 {
-                font-size: 1.3rem;
-            }
+        .status-items {
+            display: flex;
+            align-items: center;
+            gap: 32px;
         }
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius);
-            padding: 32px 24px;
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-label {
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.65rem;
+        }
+
+        .status-value {
+            color: var(--text-bright);
+        }
+
+        .revenue-mini-bar {
+            width: 100px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
             overflow: hidden;
+        }
+
+        .revenue-mini-fill {
+            height: 100%;
+            background: var(--gold);
+            transition: width 1s ease;
+        }
+
+        /* ========== HUD NAV (Context Switching) ========== */
+        .hud-nav {
+            background: var(--bg-card);
+            padding: 4px;
+            border-radius: 30px;
+            display: flex;
+            gap: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .nav-btn {
+            padding: 6px 18px;
+            border-radius: 26px;
+            font-size: 0.78rem;
+            font-weight: 700;
             cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            background: transparent;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
+        .nav-btn.active {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 4px 15px var(--primary-dim);
+        }
+
+        /* ========== LAYOUT ========== */
+        .main {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            gap: 24px;
+        }
+
+        /* ========== CARDS ========== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             border-radius: var(--radius);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card-business::before {
-            background: linear-gradient(135deg, rgba(255, 184, 28, 0.08), transparent);
-        }
-
-        .card-business:hover {
-            border-color: rgba(255, 184, 28, 0.25);
-        }
-
-        .card-career::before {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), transparent);
-        }
-
-        .card-career:hover {
-            border-color: rgba(59, 130, 246, 0.25);
-        }
-
-        .card-emoji {
-            font-size: 2.4rem;
-            margin-bottom: 16px;
-            display: block;
+            padding: 20px;
+            backdrop-filter: blur(12px);
+            transition: border-color 0.2s;
+            margin-bottom: 24px;
         }
 
         .card-title {
-            font-size: 1.15rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            color: var(--text-bright);
-            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .card-desc {
-            font-size: 0.78rem;
+        .card-title .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        /* ========== SIDEBARS ========== */
+        .left-col,
+        .right-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Progress Rings */
+        .big-ring-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .big-ring {
+            width: 140px;
+            height: 140px;
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .big-ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .big-ring circle {
+            fill: none;
+            cx: 70;
+            cy: 70;
+            r: 62;
+            stroke-width: 8;
+        }
+
+        .big-ring .bg {
+            stroke: var(--border);
+        }
+
+        .big-ring .fill {
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .big-ring-pct {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .big-ring-pct .num {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-bright);
+            line-height: 1;
+        }
+
+        .big-ring-pct .label {
+            font-size: 0.7rem;
             color: var(--text-dim);
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.82rem;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        /* ========== TASK LISTS ========== */
+        .task-section-header {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-badge {
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        .section-chevron {
+            transition: transform 0.3s;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        .section-header.collapsed .section-chevron {
+            transform: rotate(-90deg);
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            transition: background 0.15s;
+        }
+
+        .task-item:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .task-check {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border-radius: 6px;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 1px;
+        }
+
+        .task-check:hover {
+            border-color: var(--primary);
+        }
+
+        .task-check[data-state="progress"] {
+            border-color: var(--orange);
+            background: var(--orange-dim);
+        }
+
+        .task-check[data-state="progress"]::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--orange);
+        }
+
+        .task-check[data-state="done"] {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .task-check[data-state="done"]::after {
+            content: '✓';
+            color: #000;
+            font-weight: 800;
+            font-size: 0.85rem;
+        }
+
+        .task-text {
+            font-size: 0.88rem;
+            color: var(--text);
             line-height: 1.5;
         }
 
-        .card-badge {
-            display: inline-block;
-            margin-top: 16px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+        .task-item[data-status="done"] .task-text {
+            text-decoration: line-through;
+            opacity: 0.5;
         }
 
-        .badge-gold {
-            background: rgba(255, 184, 28, 0.15);
-            color: var(--gold);
+        /* ========== SPOTLIGHT ========== */
+        .spotlight-card {
+            border: 1px solid var(--primary);
+            background: var(--primary-dim);
+            border-radius: var(--radius);
         }
 
-        .badge-blue {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--blue);
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
         }
 
-        .footer {
-            position: fixed;
-            bottom: 20px;
+        .action-item:last-child {
+            border-bottom: none;
+        }
+
+        .action-check {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            margin-top: 2px;
+        }
+
+        .action-item.completed {
+            opacity: 0.4;
+            text-decoration: line-through;
+        }
+
+        .action-item.completed .action-check {
+            background: var(--primary);
+        }
+
+        /* ========== LOG ========== */
+        .log-entries {
+            max-height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .log-entry {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--border);
+        }
+
+        .log-time {
+            font-size: 0.65rem;
             color: var(--text-dim);
-            font-size: 0.7rem;
-            z-index: 1;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
         }
 
-        .footer a {
-            color: var(--gold);
-            text-decoration: none;
+        .log-text {
+            font-size: 0.82rem;
+            line-height: 1.4;
         }
 
-        /* Pulse animation on the emoji */
-        @keyframes float {
+        /* ========== UTILS ========== */
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
 
-            0%,
-            100% {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
                 transform: translateY(0);
             }
-
-            50% {
-                transform: translateY(-6px);
-            }
         }
 
-        .card:hover .card-emoji {
-            animation: float 1.5s ease-in-out infinite;
+        /* Settings Overlay */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overlay.open {
+            display: flex;
+        }
+
+        .settings-modal {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            width: 400px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .settings-modal h2 {
+            margin-bottom: 24px;
+            color: var(--text-bright);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            margin-bottom: 16px;
+            font-family: inherit;
         }
     </style>
 </head>
 
-<body>
-    <div class="hub">
-        <div class="brand">
-            <div class="brand-icon">SC</div>
-            <h1>Command Center</h1>
+<body data-theme="business">
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-items">
+            <div class="status-item">
+                <div
+                    style="width:28px; height:28px; background:var(--primary); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#000; transition: background 0.5s;">
+                    SC</div>
+                <span style="font-weight:700; font-size:1rem; letter-spacing:-0.02em;">Master Hub</span>
+                <div
+                    style="margin-left:12px; font-size:0.65rem; color:var(--text-dim); background:rgba(0,0,0,0.3); padding:4px 8px; border-radius:4px; border:1px solid var(--border); display:flex; align-items:center; gap:6px;">
+                    <span
+                        style="width:6px; height:6px; background:var(--green); border-radius:50%; box-shadow: 0 0 10px var(--green);"></span>
+                    Governed by **Sprint Command**
+                </div>
+            </div>
+
+            <div class="status-item" id="global-revenue">
+                <span class="status-label">Revenue Goal ($5K):</span>
+                <div class="revenue-mini-bar">
+                    <div class="revenue-mini-fill" id="revenue-fill"></div>
+                </div>
+                <span class="status-value" id="revenue-current">...</span>
+            </div>
+
+            <div class="status-item">
+                <span class="status-label">WNQ Health:</span>
+                <span class="status-value" style="color:var(--green)">100% OPERATIONAL</span>
+            </div>
         </div>
-        <p class="subtitle">Your ecosystem at a glance. Pick your lane.</p>
 
-        <div class="cards">
-            <a href="business/index.html" class="card card-business">
-                <span class="card-emoji">🏢</span>
-                <div class="card-title">Business Ops</div>
-                <div class="card-desc">Setup Concierge · WNQ · Black Nexus · Revenue tracking · Client tasks</div>
-                <span class="card-badge badge-gold">SETUP CONCIERGE</span>
-            </a>
+        <div class="hud-nav">
+            <button class="nav-btn active" id="btn-business" onclick="app.switchMode('business')">🏢 Business
+                Hub</button>
+            <button class="nav-btn" id="btn-career" onclick="app.switchMode('career')">🚀 Career Hub</button>
+        </div>
 
-            <a href="career/index.html" class="card card-career">
-                <span class="card-emoji">🚀</span>
-                <div class="card-title">Career Hub</div>
-                <div class="card-desc">Opportunities · Applications · Interview prep · Skills · Networking</div>
-                <span class="card-badge badge-blue">CAREER HUB</span>
-            </a>
+        <div class="status-item">
+            <button onclick="app.toggleSettings()"
+                style="background:none; border:none; cursor:pointer; color:var(--text-dim); font-size:1.2rem;">⚙️</button>
         </div>
     </div>
 
-    <div class="footer">
-        Built by <a href="https://setupconcierge.com" target="_blank">The Setup Concierge</a> · ☁️ Gist-synced across
-        devices
+    <div class="main">
+        <!-- Left Sidebar: Progress & Pulse -->
+        <div class="left-col">
+            <div class="card">
+                <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Mode Readiness</div>
+                <div id="readiness-ring"></div>
+                <div id="stats-panel" style="margin-top:16px;"></div>
+            </div>
+
+            <div id="sidebar-contextual">
+                <!-- Pipeline stages for Career, Service blocks for Business -->
+            </div>
+        </div>
+
+        <!-- Center: Task Engine -->
+        <div class="center-col">
+            <div class="card spotlight-card">
+                <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Next Actions
+                    Spotlight</div>
+                <div id="action-list"></div>
+            </div>
+
+            <div id="task-sections-container">
+                <!-- Rendered sections -->
+            </div>
+        </div>
+
+        <!-- Right: Logs & Knowledge -->
+        <div class="right-col">
+            <div class="card">
+                <div class="card-title"><span class="dot" style="background:var(--purple)"></span>Captain's Log</div>
+                <div class="log-entries" id="log-list"></div>
+                <div style="margin-top:16px; display:flex; gap:8px;">
+                    <input type="text" id="log-input" class="input-field" placeholder="New entry..."
+                        style="margin-bottom:0;" onkeydown="if(event.key==='Enter') app.addLog(this.value)">
+                    <button onclick="app.addLog(document.getElementById('log-input').value)"
+                        style="background:var(--primary); color:#000; border:none; padding:0 16px; border-radius:8px; font-weight:700; cursor:pointer;">+</button>
+                </div>
+            </div>
+
+            <div id="sync-status" style="font-size:0.65rem; color:var(--text-dim); text-align:right; padding:0 10px;">
+                <span id="sync-dot"
+                    style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--border); margin-right:4px;"></span>
+                <span id="sync-text">Local Only</span>
+                <div style="margin-top:8px; opacity:0.6; font-size:0.6rem;">
+                    V8.8.8 Engine • General Advisory Panel Audit: Feb 14
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Settings Modal -->
+    <div class="overlay" id="settings-overlay">
+        <div class="settings-modal fade-in">
+            <h2>⚙️ Hub Settings</h2>
+            <label class="status-label">GitHub Gist ID</label>
+            <input type="text" id="gist-id" class="input-field">
+            <label class="status-label">GitHub PAT</label>
+            <input type="password" id="gist-pat" class="input-field">
+            <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px;">
+                <button onclick="app.toggleSettings()"
+                    style="background:none; border:none; color:var(--text-dim); cursor:pointer;">Cancel</button>
+                <button onclick="app.saveSettings()"
+                    style="background:var(--primary); color:#000; border:none; padding:10px 24px; border-radius:8px; font-weight:700; cursor:pointer;">Save
+                    & Sync</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const TASK_DATA = {
+            // BUSINESS LANE
+            phase1a: {
+                lane: 'business', area: "sc", title: "⚡ Phase 1A — Monetization Sprint", badge: "Launch Feb 27", badgeColor: "var(--gold)", tasks: [
+                    { id: "p1a1", text: "Scope WNQ website as paid deliverable ($3,000 flat fee)", preChecked: true },
+                    { id: "p1a0", text: "Send proposal + collect 50% upfront ($1,500) — Feb 12-13" },
+                    { id: "p1a2", text: "Build WNQ site using existing pipeline" },
+                    { id: "p1a6", text: "Capture proof: before/after screenshots, metrics" },
+                    { id: "p1a7", text: "Soft pre-sell to board (Feb 25)" },
+                    { id: "p1a3", text: "🎯 Launch WNQ website (Feb 27) + collect 50% ($1,500)" },
+                    { id: "p1a4", text: "Create WNQ Case Study IMMEDIATELY on launch day" }
+                ]
+            },
+            wnq_build: {
+                lane: 'business', area: "wnq", title: "WNQ — Core Revamp Build", badge: "In Progress", badgeColor: "var(--blue)", tasks: [
+                    { id: "w21", text: "Hero section high-res board images integration", preChecked: true },
+                    { id: "w22", text: "Finalize Brand Identity guide (colors, fonts, mascot)" },
+                    { id: "w23", text: "Domain migration (staging → warriorsneverquit.com)" },
+                    { id: "w24", text: "Final QA pass — links, mobile, SEO, speed" }
+                ]
+            },
+            bn_collab: {
+                lane: 'business', area: "bn", title: "Black Nexus — GitHub & Collaboration", badge: "3/5 Done", badgeColor: "var(--green)", tasks: [
+                    { id: "b23", text: "GitHub collaboration guide created", preChecked: true },
+                    { id: "b24", text: "GitHub org created: blacknexuscda", preChecked: true },
+                    { id: "b25", text: "JB Scott invited — pending acceptance", preChecked: true },
+                    { id: "b26", text: "Create first repo (brand-kit) and push files" },
+                    { id: "b27", text: "Enable branch protection on main" }
+                ]
+            },
+
+            // CAREER LANE
+            prep_sterling: {
+                lane: 'career', area: "interview", title: "🎯 AbbVie / Sterling Preparation", badge: "Priority", badgeColor: "var(--cyan)", tasks: [
+                    { id: "c1", text: "Sterling/Xenqu Onboarding Paperwork", preChecked: true },
+                    { id: "c2", text: "Submit I-9 Documentation", preChecked: true },
+                    { id: "c3", text: "Onboarding Checklist v1 Completion" },
+                    { id: "c4", text: "Background Check Status Review" }
+                ]
+            },
+            career_docs: {
+                lane: 'career', area: "docs", title: "📄 Artifact Hardening", badge: "Ongoing", badgeColor: "var(--blue)", tasks: [
+                    { id: "d1", text: "Update Master Resume with Black Nexus credits" },
+                    { id: "d2", text: "PDF Archive of WNQ Project Proof" },
+                    { id: "d3", text: "Generate Reference Listing PDF" }
+                ]
+            }
+        };
+
+        const NEXT_ACTIONS = [
+            { id: "a16", text: "Sterling/Xenqu Onboarding Documentation (Checklist v1)", urgency: "now", source: "Founder Briefing — Feb 13", lane: "career" },
+            { id: "a17", text: "CBRE Clinical Operations Pitch (Proposal v1) @ 11AM Monday", urgency: "now", source: "Founder Briefing — Feb 13", lane: "business" },
+            { id: "a20", text: "Monitor GitHub Pages deployment for command-center", urgency: "soon", source: "Session — Feb 13", lane: "business" }
+        ];
+
+        class MasterApp {
+            constructor() {
+                this.mode = 'business';
+                this.state = {
+                    business: { tasks: {}, logs: [], completedActions: {}, collapsed: {} },
+                    career: { tasks: {}, logs: [], completedActions: {}, collapsed: {} }
+                };
+                this.syncTimer = null;
+                this.init();
+            }
+
+            async init() {
+                this.loadLocal();
+                const hash = window.location.hash.substring(1);
+                if (hash === 'career') this.switchMode('career');
+                else this.switchMode('business');
+
+                await this.syncFromGist();
+                this.render();
+            }
+
+            loadLocal() {
+                const saved = localStorage.getItem('master_hub_state');
+                if (saved) this.state = JSON.parse(saved);
+            }
+
+            saveLocal() {
+                localStorage.setItem('master_hub_state', JSON.stringify(this.state));
+                this.debouncedSync();
+            }
+
+            switchMode(mode) {
+                this.mode = mode;
+                document.body.setAttribute('data-theme', mode);
+                document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.id === `btn-${mode}`));
+                window.location.hash = mode;
+                this.render();
+            }
+
+            debouncedSync() {
+                if (this.syncTimer) clearTimeout(this.syncTimer);
+                this.syncTimer = setTimeout(() => this.syncToGist(), 3000);
+            }
+
+            async syncToGist() {
+                const cfg = this.getGistConfig();
+                if (!cfg) return;
+                this.setSyncStatus('syncing');
+                try {
+                    const filename = this.mode === 'business' ? 'sc_dashboard_state.json' : 'ch_dashboard_state.json';
+                    const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+                        method: 'PATCH',
+                        headers: { 'Authorization': `Bearer ${cfg.pat}`, 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ files: { [filename]: { content: JSON.stringify(this.state[this.mode], null, 2) } } })
+                    });
+                    if (res.ok) this.setSyncStatus('synced');
+                } catch (e) { this.setSyncStatus('error'); }
+            }
+
+            async syncFromGist() {
+                const cfg = this.getGistConfig();
+                if (!cfg) return;
+                this.setSyncStatus('syncing');
+                try {
+                    const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+                        headers: { 'Authorization': `Bearer ${cfg.pat}` }
+                    });
+                    if (res.ok) {
+                        const gist = await res.json();
+                        ['business', 'career'].forEach(lane => {
+                            const file = gist.files[lane === 'business' ? 'sc_dashboard_state.json' : 'ch_dashboard_state.json'];
+                            if (file && file.content) this.state[lane] = JSON.parse(file.content);
+                        });
+                        this.setSyncStatus('synced');
+                        this.render();
+                    }
+                } catch (e) { this.setSyncStatus('error'); }
+            }
+
+            getGistConfig() {
+                const saved = localStorage.getItem('sc_gist_config');
+                return saved ? JSON.parse(saved) : null;
+            }
+
+            setSyncStatus(status) {
+                const dot = document.getElementById('sync-dot');
+                const txt = document.getElementById('sync-text');
+                if (status === 'synced') { dot.style.background = 'var(--green)'; txt.innerText = 'Synced'; }
+                if (status === 'syncing') { dot.style.background = 'var(--orange)'; txt.innerText = 'Syncing...'; }
+                if (status === 'error') { dot.style.background = 'var(--red)'; txt.innerText = 'Sync Error'; }
+            }
+
+            getTaskState(id) {
+                if (this.state[this.mode].tasks[id]) return this.state[this.mode].tasks[id];
+                // Check preChecked
+                for (const s of Object.values(TASK_DATA)) {
+                    const t = s.tasks.find(x => x.id === id);
+                    if (t && t.preChecked) return 'done';
+                }
+                return 'todo';
+            }
+
+            cycleTask(id) {
+                const current = this.getTaskState(id);
+                const next = current === 'todo' ? 'progress' : current === 'progress' ? 'done' : 'todo';
+                this.state[this.mode].tasks[id] = next;
+                this.saveLocal();
+                this.render();
+            }
+
+            addLog(text) {
+                if (!text.trim()) return;
+                const now = new Date();
+                const time = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                this.state[this.mode].logs.unshift({ text: text.trim(), time });
+                document.getElementById('log-input').value = '';
+                this.saveLocal();
+                this.render();
+            }
+
+            toggleAction(id) {
+                this.state[this.mode].completedActions[id] = !this.state[this.mode].completedActions[id];
+                this.saveLocal();
+                this.render();
+            }
+
+            toggleSettings() { document.getElementById('settings-overlay').classList.toggle('open'); }
+
+            saveSettings() {
+                const id = document.getElementById('gist-id').value;
+                const pat = document.getElementById('gist-pat').value;
+                localStorage.setItem('sc_gist_config', JSON.stringify({ gistId: id, pat: pat }));
+                this.toggleSettings();
+                this.syncFromGist();
+            }
+
+            render() {
+                const laneTasks = Object.values(TASK_DATA).filter(s => s.lane === this.mode);
+                const allLaneTasks = laneTasks.flatMap(s => s.tasks);
+                const done = allLaneTasks.filter(t => this.getTaskState(t.id) === 'done').length;
+                const pct = allLaneTasks.length ? Math.round((done / allLaneTasks.length) * 100) : 0;
+
+                // Rings
+                const circ = 2 * Math.PI * 62;
+                const offset = circ - (pct / 100) * circ;
+                document.getElementById('readiness-ring').innerHTML = `
+          <div class="big-ring-wrap">
+            <div class="big-ring">
+              <svg viewBox="0 0 140 140">
+                <circle class="bg" cx="70" cy="70" r="62"/>
+                <circle class="fill" cx="70" cy="70" r="62" stroke="var(--primary)" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/>
+              </svg>
+              <div class="big-ring-pct"><div class="num">${pct}%</div><div class="label">${this.mode === 'business' ? 'Consulting Ready' : 'Interview Ready'}</div></div>
+            </div>
+          </div>`;
+
+                // Stats
+                document.getElementById('stats-panel').innerHTML = `
+          <div class="stat-row"><span class="status-label">Total Workload</span><span class="status-value">${allLaneTasks.length} units</span></div>
+          <div class="stat-row"><span class="status-label">Shipped</span><span class="status-value" style="color:var(--green)">${done}</span></div>
+        `;
+
+                // Revenue Spotlight (Only in Business, but Aiden wants it global? I'll keep it simple for now)
+                const rev = 2000;
+                document.getElementById('revenue-current').innerText = `$${rev.toLocaleString()}`;
+                document.getElementById('revenue-fill').style.width = `${(rev / 5000) * 100}%`;
+
+                // Actions
+                const actions = NEXT_ACTIONS.filter(a => a.lane === this.mode);
+                document.getElementById('action-list').innerHTML = actions.map(a => `
+           <div class="action-item ${this.state[this.mode].completedActions[a.id] ? 'completed' : ''}" onclick="app.toggleAction('${a.id}')">
+             <div class="action-check"></div>
+             <div><div class="task-text" style="font-size:0.8rem;">${a.text}</div><div class="status-label" style="font-size:0.6rem;">${a.source}</div></div>
+           </div>
+        `).join('');
+
+                // Sections
+                document.getElementById('task-sections-container').innerHTML = laneTasks.map(s => {
+                    const sDone = s.tasks.filter(t => this.getTaskState(t.id) === 'done').length;
+                    return `
+            <div class="card fade-in">
+              <div class="task-section-header">
+                <div class="section-title">
+                  ${s.title}
+                  <span class="section-badge" style="background:${s.badgeColor}20;color:${s.badgeColor}">${s.badge}</span>
+                </div>
+                <div class="status-label">${sDone}/${s.tasks.length}</div>
+              </div>
+              <div class="task-list">
+                ${s.tasks.map(t => `
+                  <div class="task-item" data-status="${this.getTaskState(t.id)}">
+                    <div class="task-check" data-state="${this.getTaskState(t.id)}" onclick="app.cycleTask('${t.id}')"></div>
+                    <div class="task-text">${t.text}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+                }).join('');
+
+                // Logs
+                document.getElementById('log-list').innerHTML = this.state[this.mode].logs.map(l => `
+          <div class="log-entry">
+            <div class="log-time">${l.time}</div>
+            <div class="log-text">${l.text}</div>
+          </div>
+        `).join('');
+            }
+        }
+
+        const app = new MasterApp();
+    </script>
 </body>
 
 </html>
