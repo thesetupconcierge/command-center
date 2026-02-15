@@ -1555,12 +1555,18 @@
                 await this.loadRegistryData();
                 this.updateFinance();
 
-                const hash = window.location.hash.substring(1);
-                if (hash === 'career') this.switchMode('career');
-                else this.switchMode('business');
+                const fullHash = window.location.hash.substring(1);
+                const [targetMode] = fullHash.includes(':') ? fullHash.split(':') : [fullHash, null];
+
+                if (targetMode === 'career' || targetMode === 'business' || targetMode === 'registry') {
+                    this.switchMode(targetMode);
+                } else {
+                    this.switchMode('business');
+                }
 
                 await this.syncFromGist();
                 this.render();
+                if (fullHash.includes(':')) this.handleDeepLink();
             }
 
             loadLocal() {
@@ -1588,7 +1594,12 @@
                 }
 
                 this.render();
-                window.location.hash = mode;
+
+                // Only update hash if it's a simple mode switch (no section deep link)
+                const currentHash = window.location.hash.substring(1);
+                if (!currentHash.includes(':') || currentHash.split(':')[0] !== mode) {
+                    window.location.hash = mode;
+                }
 
                 this.render();
             }
@@ -1930,10 +1941,10 @@
                 const fullHash = window.location.hash.substring(1);
                 if (!fullHash) return;
 
-                // Allow both mode:section and just mode
+                // Allow mode:section, just mode, or just section (if mode is current)
                 const [targetMode, sectionId] = fullHash.includes(':') ? fullHash.split(':') : [fullHash, null];
 
-                if (targetMode === 'career' || targetMode === 'business') {
+                if (targetMode === 'career' || targetMode === 'business' || targetMode === 'registry') {
                     if (this.mode !== targetMode) {
                         this.switchMode(targetMode);
                     }

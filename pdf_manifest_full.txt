@@ -1,0 +1,269 @@
+C:\GitHub Local\command-center\business\docs\01_file_organization_and_dating_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\02_automation_workflows_and_templates_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\03_site_review_and_panel_setup_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\04_system_refinements_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\05_website_generation_pipeline_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\automation_tips_and_tricks_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\black_nexus_partner_briefing_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\clickup_jb_dashboard_task_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\client_notes_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\cms_deep_dive_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\daily_summary_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\daily_summary_2026-02-14.pdf
+C:\GitHub Local\command-center\business\docs\dashboard_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\expert_advisory_panel_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\full_panel_review_2026-02.pdf
+C:\GitHub Local\command-center\business\docs\github_collaboration_guide_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\ike_riley_sr_tribute_content_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\implementation_plan_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\invoice_template.pdf
+C:\GitHub Local\command-center\business\docs\invoice_WNQ_photo_session_2026-02-07.pdf
+C:\GitHub Local\command-center\business\docs\jb_dashboard_project_brief_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\master_action_items_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\meeting_notes_template.pdf
+C:\GitHub Local\command-center\business\docs\membership_structure_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\naming_conventions_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\panel_consultation_dashboard_features_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\panel_refinement_photography_update_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\panel_response_site_review_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\panel_review_guides_page_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\panel_review_system_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\panel_review_web_dev_pipeline_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\phase1_execution_plan_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\README.pdf
+C:\GitHub Local\command-center\business\docs\scholarship_page_plan_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\service_agreement_template.pdf
+C:\GitHub Local\command-center\business\docs\service_agreement_WNQ_photo_session_2026-02-07.pdf
+C:\GitHub Local\command-center\business\docs\session_receipt_template.pdf
+C:\GitHub Local\command-center\business\docs\session_receipt_WNQ_photo_2026-02-07.pdf
+C:\GitHub Local\command-center\business\docs\setupconcierge_site_review_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\site_brief_template.pdf
+C:\GitHub Local\command-center\business\docs\strategic_business_framework_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\task_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\website_photography_update_proposal_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\website_update_implementation_guide_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\wix_copy_paste_guide_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\wnq_client_update_gameplan_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\WNQ_photo_session_invoice_package_2026-02-07.pdf
+C:\GitHub Local\command-center\business\docs\wnq_staging_site_audit_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\wnq_wix_completion_guide_2026-02-12.pdf
+C:\GitHub Local\command-center\business\docs\workflow_learning_guide_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\workflow_quick_reference_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Advisory Panel\Action Items\Assets\PDF\website_update_implementation_guide_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Advisory Panel\Consultations\Assets\PDF\panel_consultation_dashboard_features_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Advisory Panel\Consultations\Assets\PDF\panel_refinement_photography_update_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Advisory Panel\Consultations\Assets\PDF\panel_response_site_review_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Advisory Panel\Consultations\Assets\PDF\panel_review_guides_page_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\Advisory Panel\Consultations\Assets\PDF\panel_review_system_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Advisory Panel\Consultations\Assets\PDF\panel_review_web_dev_pipeline_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Advisory Panel\Consultations\Assets\PDF\setupconcierge_site_review_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Advisory Panel\Consultations\Assets\PDF\website_photography_update_proposal_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Advisory Panel\Consultations\Markdown\full_panel_review_2026-02.pdf
+C:\GitHub Local\command-center\business\docs\Black Nexus\Pitch Decks\PDF\black_nexus_partner_briefing_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Black Nexus\Pitch Decks\PDF\expert_advisory_panel_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Black Nexus\Strategy\PDF\github_collaboration_guide_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Black Nexus\Strategy\PDF\implementation_plan_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Black Nexus\Strategy\PDF\phase1_execution_plan_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Black Nexus\Strategy\PDF\strategic_business_framework_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Black Nexus\Tasks\PDF\clickup_jb_dashboard_task_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Black Nexus\Tasks\PDF\daily_summary_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Black Nexus\Tasks\PDF\jb_dashboard_project_brief_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Black Nexus\Tasks\PDF\task_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Dashboard\master_action_items_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\_summary.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Action Items\action_items.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Documents\certifications_summary.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Documents\Justice_McKinney_Reference_Listing.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Documents\thank_you_email_draft.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Documents\HR and Onboarding Docs\Sterling Engineering 1.7.22 Guide to Video Interviews.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Documents\HR and Onboarding Docs\Sterling Engineering 4.12.22 Interview prep concise guide.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Documents\Resume Versions\Justice_McKinney_BAS_Focused.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Documents\Resume Versions\Sterling Engineering - Justice McKinney (1).pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\LinkedIn Profiles\gino_pisano.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\LinkedIn Profiles\john_walters.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\LinkedIn Profiles\michael_ester.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\company_research.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\interview_day_cheat_sheet.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\panel_review_interview_strategy.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\reference_selection.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\salary_research.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\siemens_study_guide_complete.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\star_stories_bank.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Questions\interview_questions.pdf
+C:\GitHub Local\command-center\business\docs\Opportunities\AbbVie – Sterling Engineering\Meeting Notes\2026-02-09_screening_call.pdf
+C:\GitHub Local\command-center\business\docs\resources\automation_tips_and_tricks_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\resources\dashboard_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\resources\naming_conventions_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\resources\workflow_quick_reference_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\resources\Scripts\Photoshop\README.pdf
+C:\GitHub Local\command-center\business\docs\resources\Templates\invoice_template.pdf
+C:\GitHub Local\command-center\business\docs\resources\Templates\meeting_notes_template.pdf
+C:\GitHub Local\command-center\business\docs\resources\Templates\service_agreement_template.pdf
+C:\GitHub Local\command-center\business\docs\resources\Templates\session_receipt_template.pdf
+C:\GitHub Local\command-center\business\docs\resources\Templates\site_brief_template.pdf
+C:\GitHub Local\command-center\business\docs\resources\Walkthroughs\daily_summary_2026-02-14.pdf
+C:\GitHub Local\command-center\business\docs\resources\Walkthroughs\PDF\01_file_organization_and_dating_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\resources\Walkthroughs\PDF\02_automation_workflows_and_templates_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\resources\Walkthroughs\PDF\03_site_review_and_panel_setup_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\resources\Walkthroughs\PDF\04_system_refinements_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\resources\Walkthroughs\PDF\05_website_generation_pipeline_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\resources\Walkthroughs\PDF\cms_deep_dive_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\resources\Walkthroughs\PDF\workflow_learning_guide_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Advisory Panel\Action Items\Assets\PDF\website_update_implementation_guide_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Advisory Panel\Consultations\Assets\PDF\panel_consultation_dashboard_features_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Advisory Panel\Consultations\Assets\PDF\panel_refinement_photography_update_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Advisory Panel\Consultations\Assets\PDF\panel_response_site_review_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Advisory Panel\Consultations\Assets\PDF\panel_review_guides_page_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Advisory Panel\Consultations\Assets\PDF\panel_review_system_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Advisory Panel\Consultations\Assets\PDF\panel_review_web_dev_pipeline_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Advisory Panel\Consultations\Assets\PDF\setupconcierge_site_review_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Advisory Panel\Consultations\Assets\PDF\website_photography_update_proposal_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Advisory Panel\Consultations\Markdown\full_panel_review_2026-02.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Black Nexus\Pitch Decks\PDF\black_nexus_partner_briefing_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Black Nexus\Pitch Decks\PDF\expert_advisory_panel_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Black Nexus\Strategy\PDF\github_collaboration_guide_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Black Nexus\Strategy\PDF\implementation_plan_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Black Nexus\Strategy\PDF\phase1_execution_plan_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Black Nexus\Strategy\PDF\strategic_business_framework_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Black Nexus\Tasks\PDF\clickup_jb_dashboard_task_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Black Nexus\Tasks\PDF\daily_summary_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Black Nexus\Tasks\PDF\jb_dashboard_project_brief_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Black Nexus\Tasks\PDF\task_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Dashboard\master_action_items_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\automation_tips_and_tricks_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\dashboard_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\naming_conventions_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\workflow_quick_reference_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Scripts\Photoshop\README.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Templates\invoice_template.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Templates\meeting_notes_template.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Templates\service_agreement_template.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Templates\session_receipt_template.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Templates\site_brief_template.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Walkthroughs\daily_summary_2026-02-14.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Walkthroughs\PDF\01_file_organization_and_dating_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Walkthroughs\PDF\02_automation_workflows_and_templates_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Walkthroughs\PDF\03_site_review_and_panel_setup_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Walkthroughs\PDF\04_system_refinements_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Walkthroughs\PDF\05_website_generation_pipeline_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Walkthroughs\PDF\cms_deep_dive_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\Resources\Walkthroughs\PDF\workflow_learning_guide_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Action Items\Assets\PDF\wix_copy_paste_guide_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Action Items\Assets\PDF\wnq_staging_site_audit_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Action Items\Assets\PDF\wnq_wix_completion_guide_2026-02-12.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Sessions\2026-02-07 Photo Session\Assets\PDF\invoice_WNQ_photo_session_2026-02-07.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Sessions\2026-02-07 Photo Session\Assets\PDF\service_agreement_WNQ_photo_session_2026-02-07.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Sessions\2026-02-07 Photo Session\Assets\PDF\session_receipt_WNQ_photo_2026-02-07.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Sessions\2026-02-07 Photo Session\Assets\PDF\wnq_wix_completion_guide_2026-02-12.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Website & Strategy\Assets\PDF\client_notes_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Website & Strategy\Assets\PDF\ike_riley_sr_tribute_content_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Website & Strategy\Assets\PDF\membership_structure_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Website & Strategy\Assets\PDF\scholarship_page_plan_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\Setup Concierge\WNQ\Website & Strategy\Assets\PDF\wnq_wix_completion_guide_2026-02-12.pdf
+C:\GitHub Local\command-center\business\docs\templates\invoice_template.pdf
+C:\GitHub Local\command-center\business\docs\templates\meeting_notes_template.pdf
+C:\GitHub Local\command-center\business\docs\templates\service_agreement_template.pdf
+C:\GitHub Local\command-center\business\docs\templates\session_receipt_template.pdf
+C:\GitHub Local\command-center\business\docs\templates\site_brief_template.pdf
+C:\GitHub Local\command-center\business\docs\walkthroughs\01_file_organization_and_dating_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\walkthroughs\02_automation_workflows_and_templates_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\walkthroughs\03_site_review_and_panel_setup_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\walkthroughs\04_system_refinements_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\walkthroughs\05_website_generation_pipeline_2026-02-08.pdf
+C:\GitHub Local\command-center\business\docs\walkthroughs\cms_deep_dive_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\walkthroughs\workflow_learning_guide_2026-02-10.pdf
+C:\GitHub Local\command-center\business\docs\wnq\wnq_client_update_gameplan_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\wnq\wnq_wix_completion_guide_2026-02-12.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Action Items\Assets\PDF\wix_copy_paste_guide_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Action Items\Assets\PDF\wnq_staging_site_audit_2026-02-09.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Action Items\Assets\PDF\wnq_wix_completion_guide_2026-02-12.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Sessions\2026-02-07 Photo Session\Assets\PDF\invoice_WNQ_photo_session_2026-02-07.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Sessions\2026-02-07 Photo Session\Assets\PDF\service_agreement_WNQ_photo_session_2026-02-07.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Sessions\2026-02-07 Photo Session\Assets\PDF\session_receipt_WNQ_photo_2026-02-07.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Sessions\2026-02-07 Photo Session\Assets\PDF\wnq_wix_completion_guide_2026-02-12.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Website & Strategy\Assets\PDF\client_notes_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Website & Strategy\Assets\PDF\ike_riley_sr_tribute_content_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Website & Strategy\Assets\PDF\membership_structure_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Website & Strategy\Assets\PDF\scholarship_page_plan_2026-02-06.pdf
+C:\GitHub Local\command-center\business\docs\wnq\Website & Strategy\Assets\PDF\wnq_wix_completion_guide_2026-02-12.pdf
+C:\GitHub Local\command-center\career\docs\_summary.pdf
+C:\GitHub Local\command-center\career\docs\2026 Sterling Benefits Guide - E.pdf
+C:\GitHub Local\command-center\career\docs\2026-02-09_screening_call.pdf
+C:\GitHub Local\command-center\career\docs\AbbVie_Travel, Ent&Other Worker Business Expense Policy [SSA, Exhibit G].pdf
+C:\GitHub Local\command-center\career\docs\action_items.pdf
+C:\GitHub Local\command-center\career\docs\ADP Portal Welcome Info _ Instructions (1).pdf
+C:\GitHub Local\command-center\career\docs\certifications_summary.pdf
+C:\GitHub Local\command-center\career\docs\company_research.pdf
+C:\GitHub Local\command-center\career\docs\ESOPConnection Instructions-No Allocation Yet.pdf
+C:\GitHub Local\command-center\career\docs\FCRA Summary  (EN).pdf
+C:\GitHub Local\command-center\career\docs\gino_pisano.pdf
+C:\GitHub Local\command-center\career\docs\Illinois Contract Employee Handbook - REV 7.1.2024 (1).pdf
+C:\GitHub Local\command-center\career\docs\Important - Insurance Benefit Enrollment Instructions.pdf
+C:\GitHub Local\command-center\career\docs\interview_day_cheat_sheet.pdf
+C:\GitHub Local\command-center\career\docs\interview_questions.pdf
+C:\GitHub Local\command-center\career\docs\john_walters.pdf
+C:\GitHub Local\command-center\career\docs\Justice_McKinney_BAS_Focused.pdf
+C:\GitHub Local\command-center\career\docs\Justice_McKinney_Reference_Listing.pdf
+C:\GitHub Local\command-center\career\docs\McKinney_Justic_Arbitration_Agreemen.pdf
+C:\GitHub Local\command-center\career\docs\McKinney_Justic_CONSENT_TO_ELECTRONI.pdf
+C:\GitHub Local\command-center\career\docs\McKinney_Justic_Consumer_Report_Disc.pdf
+C:\GitHub Local\command-center\career\docs\McKinney_Justic_Employee_Handbook_Ac.pdf
+C:\GitHub Local\command-center\career\docs\McKinney_Justic_Employee_Rental_Car_.pdf
+C:\GitHub Local\command-center\career\docs\McKinney_Justic_IL_W4_Withholdings_F.pdf
+C:\GitHub Local\command-center\career\docs\McKinney_Justic_Offer_Letter (1).pdf
+C:\GitHub Local\command-center\career\docs\McKinney_Justic_Personal_Information.pdf
+C:\GitHub Local\command-center\career\docs\McKinney_Justic_W4_Federal.pdf
+C:\GitHub Local\command-center\career\docs\McKinney_Justic_Worker_Responsibilit.pdf
+C:\GitHub Local\command-center\career\docs\michael_ester.pdf
+C:\GitHub Local\command-center\career\docs\mock_qa_drill.pdf
+C:\GitHub Local\command-center\career\docs\panel_review_interview_strategy.pdf
+C:\GitHub Local\command-center\career\docs\reference_selection.pdf
+C:\GitHub Local\command-center\career\docs\salary_research.pdf
+C:\GitHub Local\command-center\career\docs\star_stories_bank.pdf
+C:\GitHub Local\command-center\career\docs\Sterling Engineering - Justice McKinney (1).pdf
+C:\GitHub Local\command-center\career\docs\Sterling Engineering 1.7.22 Guide to Video Interviews.pdf
+C:\GitHub Local\command-center\career\docs\Sterling Engineering 4.12.22 Interview prep concise guide.pdf
+C:\GitHub Local\command-center\career\docs\Sterling Staffing Benefits Notices 2026.pdf
+C:\GitHub Local\command-center\career\docs\thank_you_email_draft.pdf
+C:\GitHub Local\command-center\career\docs\TotalTalent.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\_summary.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Action Items\action_items.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Documents\certifications_summary.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Documents\Justice_McKinney_Reference_Listing.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Documents\thank_you_email_draft.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Documents\HR and Onboarding Docs\Sterling Engineering 1.7.22 Guide to Video Interviews.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Documents\HR and Onboarding Docs\Sterling Engineering 4.12.22 Interview prep concise guide.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Documents\Resume Versions\Justice_McKinney_BAS_Focused.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Documents\Resume Versions\Sterling Engineering - Justice McKinney (1).pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\LinkedIn Profiles\gino_pisano.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\LinkedIn Profiles\john_walters.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\LinkedIn Profiles\michael_ester.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\company_research.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\interview_day_cheat_sheet.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\panel_review_interview_strategy.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\reference_selection.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\salary_research.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\siemens_study_guide_complete.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Notes\star_stories_bank.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Interview Prep\Questions\interview_questions.pdf
+C:\GitHub Local\command-center\career\docs\Opportunities\AbbVie – Sterling Engineering\Meeting Notes\2026-02-09_screening_call.pdf
+C:\GitHub Local\command-center\career\onboarding\2026 Sterling Benefits Guide - E.pdf
+C:\GitHub Local\command-center\career\onboarding\AbbVie_Travel, Ent&Other Worker Business Expense Policy [SSA, Exhibit G].pdf
+C:\GitHub Local\command-center\career\onboarding\ADP Portal Welcome Info _ Instructions (1).pdf
+C:\GitHub Local\command-center\career\onboarding\ESOPConnection Instructions-No Allocation Yet.pdf
+C:\GitHub Local\command-center\career\onboarding\FCRA Summary  (EN).pdf
+C:\GitHub Local\command-center\career\onboarding\Illinois Contract Employee Handbook - REV 7.1.2024 (1).pdf
+C:\GitHub Local\command-center\career\onboarding\Important - Insurance Benefit Enrollment Instructions.pdf
+C:\GitHub Local\command-center\career\onboarding\McKinney_Justic_Arbitration_Agreemen.pdf
+C:\GitHub Local\command-center\career\onboarding\McKinney_Justic_CONSENT_TO_ELECTRONI.pdf
+C:\GitHub Local\command-center\career\onboarding\McKinney_Justic_Consumer_Report_Disc.pdf
+C:\GitHub Local\command-center\career\onboarding\McKinney_Justic_Employee_Handbook_Ac.pdf
+C:\GitHub Local\command-center\career\onboarding\McKinney_Justic_Employee_Rental_Car_.pdf
+C:\GitHub Local\command-center\career\onboarding\McKinney_Justic_IL_W4_Withholdings_F.pdf
+C:\GitHub Local\command-center\career\onboarding\McKinney_Justic_Offer_Letter (1).pdf
+C:\GitHub Local\command-center\career\onboarding\McKinney_Justic_Personal_Information.pdf
+C:\GitHub Local\command-center\career\onboarding\McKinney_Justic_W4_Federal.pdf
+C:\GitHub Local\command-center\career\onboarding\McKinney_Justic_Worker_Responsibilit.pdf
+C:\GitHub Local\command-center\career\onboarding\Sterling Staffing Benefits Notices 2026.pdf
+C:\GitHub Local\command-center\career\onboarding\TotalTalent.pdf
+C:\GitHub Local\command-center\playbook\surgical-scripting.pdf
