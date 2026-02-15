@@ -710,8 +710,25 @@
                 justify-content: space-between;
             }
 
-            #hub-title {
-                font-size: 0.9rem;
+            #hub-title,
+            .branding-logo {
+                display: none !important;
+            }
+
+            .status-bar::before {
+                content: 'SC';
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                background: linear-gradient(135deg, var(--gold), #e6a000);
+                color: #000;
+                border-radius: 8px;
+                font-weight: 800;
+                font-size: 0.85rem;
+                margin-right: 12px;
+                box-shadow: 0 2px 8px rgba(255, 184, 28, 0.2);
             }
 
             .status-item#global-revenue {
@@ -724,14 +741,20 @@
 
             .hud-nav {
                 width: 100%;
-                justify-content: center;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
                 margin-bottom: 12px;
             }
 
+            .nav-btn#btn-registry {
+                grid-column: span 2;
+            }
+
             .nav-btn {
-                flex: 1;
                 justify-content: center;
-                padding: 8px;
+                padding: 10px;
+                font-size: 0.85rem;
             }
 
             .big-ring {
@@ -982,6 +1005,121 @@
                 box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
             }
         }
+
+        /* ========== DOCUMENT VIEWER OVERLAY ========== */
+        .viewer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.98);
+            z-index: 3000;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+        }
+
+        .viewer-header {
+            position: sticky;
+            top: 0;
+            padding: 16px 24px;
+            background: rgba(15, 15, 20, 0.8);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .viewer-title {
+            font-weight: 700;
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        .viewer-close {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-bright);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .viewer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            width: 100%;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .viewer-content h1,
+        .viewer-content h2,
+        .viewer-content h3 {
+            color: var(--text-bright);
+            margin: 24px 0 16px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+        }
+
+        .viewer-content p {
+            margin-bottom: 16px;
+        }
+
+        .viewer-content ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .viewer-content code {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .viewer-content pre {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+        }
+
+        .viewer-content blockquote {
+            border-left: 4px solid var(--gold);
+            padding-left: 16px;
+            font-style: italic;
+            color: var(--text-dim);
+            margin: 20px 0;
+        }
+
+        .viewer-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .viewer-content a {
+            color: var(--gold);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .viewer-content {
+                padding: 20px 16px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 
@@ -989,7 +1127,7 @@
     <!-- Status Bar -->
     <div class="status-bar">
         <div class="status-items">
-            <div
+            <div class="branding-logo"
                 style="width:28px; height:28px; background:var(--primary); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#000; transition: background 0.5s;">
                 CD</div>
             <span id="hub-title" style="font-weight:700; font-size:1rem; letter-spacing:-0.02em;">Clinical Development
@@ -1120,13 +1258,26 @@
             </div>
         </div>
 
-        <div id="sync-status" style="font-size:0.65rem; color:var(--text-dim); text-align:right; padding:0 10px;">
+        <div id="sync-status" onclick="app.showSyncDetail()"
+            style="font-size:0.65rem; color:var(--text-dim); text-align:right; padding:0 10px; cursor:pointer;"
+            title="Click for details">
             <span id="sync-dot"
                 style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--border); margin-right:4px;"></span>
             <span id="sync-text">Local Only</span>
             <div style="margin-top:8px; opacity:0.6; font-size:0.6rem;">
                 V8.8.8 Engine • Last Session: Feb 14-15
             </div>
+        </div>
+    </div>
+
+    <!-- Document Viewer Overlay -->
+    <div class="viewer-overlay" id="doc-viewer">
+        <div class="viewer-header">
+            <span class="viewer-title" id="viewer-title">Document Reader</span>
+            <button class="viewer-close" onclick="app.closeReader()">Close</button>
+        </div>
+        <div class="viewer-content" id="viewer-content">
+            <!-- Content -->
         </div>
     </div>
     </div>
@@ -1313,8 +1464,22 @@
         class MasterApp {
             constructor() {
                 this.registryData = {};
-                this.syncTimer = null;
+                this.setupIntercept();
                 this.init();
+            }
+
+            setupIntercept() {
+                document.addEventListener('click', (e) => {
+                    const link = e.target.closest('a');
+                    if (!link) return;
+
+                    const href = link.getAttribute('href');
+                    if (href && href.endsWith('.md') && !href.startsWith('http')) {
+                        e.preventDefault();
+                        const title = link.innerText || "Document";
+                        this.openReader(href, title);
+                    }
+                });
             }
 
             async init() {
@@ -1370,7 +1535,10 @@
 
             async syncToGist() {
                 const cfg = this.getGistConfig();
-                if (!cfg) return;
+                if (!cfg || !cfg.pat || !cfg.gistId) {
+                    this.setSyncStatus('config_needed');
+                    return;
+                }
                 this.setSyncStatus('syncing');
                 try {
                     const filename = this.mode === 'business' ? 'sc_dashboard_state.json' : 'ch_dashboard_state.json';
@@ -1385,28 +1553,43 @@
                             }
                         })
                     });
-                    if (res.ok) this.setSyncStatus('synced');
-                } catch (e) { this.setSyncStatus('error'); }
+                    if (res.ok) {
+                        this.setSyncStatus('synced');
+                    } else {
+                        throw new Error(`HTTP ${res.status}`);
+                    }
+                } catch (e) {
+                    console.error("Gist Push Error:", e);
+                    this.setSyncStatus('error', e.message);
+                }
             }
 
             async syncFromGist() {
                 const cfg = this.getGistConfig();
-                if (!cfg) return;
+                if (!cfg || !cfg.pat || !cfg.gistId) {
+                    this.setSyncStatus('config_needed');
+                    return;
+                }
                 this.setSyncStatus('syncing');
                 try {
                     const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
                         headers: { 'Authorization': `Bearer ${cfg.pat}` }
                     });
-                    if (res.ok) {
-                        const gist = await res.json();
-                        ['business', 'career'].forEach(lane => {
-                            const file = gist.files[lane === 'business' ? 'sc_dashboard_state.json' : 'ch_dashboard_state.json'];
-                            if (file && file.content) this.state[lane] = JSON.parse(file.content);
-                        });
-                        this.setSyncStatus('synced');
-                        this.render();
-                    }
-                } catch (e) { this.setSyncStatus('error'); }
+                    if (res.status === 401) throw new Error('Unauthorized (Check PAT)');
+                    if (res.status === 404) throw new Error('Gist Not Found');
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+                    const gist = await res.json();
+                    ['business', 'career'].forEach(lane => {
+                        const file = gist.files[lane === 'business' ? 'sc_dashboard_state.json' : 'ch_dashboard_state.json'];
+                        if (file && file.content) this.state[lane] = JSON.parse(file.content);
+                    });
+                    this.setSyncStatus('synced');
+                    this.render();
+                } catch (e) {
+                    console.error("Gist Sync Error:", e);
+                    this.setSyncStatus('error', e.message);
+                }
             }
 
             sanitizePayload(data) {
@@ -1425,12 +1608,105 @@
                 return saved ? JSON.parse(saved) : null;
             }
 
-            setSyncStatus(status) {
+            setSyncStatus(status, detail = '') {
                 const dot = document.getElementById('sync-dot');
                 const txt = document.getElementById('sync-text');
-                if (status === 'synced') { dot.style.background = 'var(--green)'; txt.innerText = 'Synced'; }
-                if (status === 'syncing') { dot.style.background = 'var(--orange)'; txt.innerText = 'Syncing...'; }
-                if (status === 'error') { dot.style.background = 'var(--red)'; txt.innerText = 'Sync Error'; }
+                if (!dot || !txt) return;
+
+                this.lastSyncError = detail;
+
+                if (status === 'synced') {
+                    dot.style.background = 'var(--green)';
+                    txt.innerText = 'Synced';
+                } else if (status === 'syncing') {
+                    dot.style.background = 'var(--orange)';
+                    txt.innerText = 'Syncing...';
+                } else if (status === 'config_needed') {
+                    dot.style.background = 'var(--text-dim)';
+                    txt.innerText = 'Config Needed';
+                } else if (status === 'error') {
+                    dot.style.background = 'var(--red)';
+                    txt.innerText = 'Sync Error';
+                }
+            }
+
+            showSyncDetail() {
+                if (this.lastSyncError) {
+                    alert(`Sync Detail: ${this.lastSyncError}`);
+                } else {
+                    const cfg = this.getGistConfig();
+                    if (!cfg || !cfg.pat) alert("Status: Configuration Needed. Open settings to set PAT/Gist ID.");
+                    else alert("Status: Local Only. No errors recorded.");
+                }
+            }
+
+            async openReader(url, title = "Document") {
+                const overlay = document.getElementById('doc-viewer');
+                const content = document.getElementById('viewer-content');
+                const titleEl = document.getElementById('viewer-title');
+
+                if (!overlay || !content) return;
+
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                titleEl.innerText = title;
+                content.innerHTML = '<div style="text-align:center; padding:40px;">⌛ Loading engine...</div>';
+
+                try {
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+                    const raw = await res.text();
+                    content.innerHTML = this.parseMarkdown(raw);
+                    overlay.scrollTop = 0;
+                } catch (e) {
+                    content.innerHTML = `<div style="color:var(--red); padding:40px; border:1px solid var(--red); border-radius:8px; background:rgba(255,255,255,0.03);">
+                        <h3>Read Failure</h3>
+                        <p>${e.message}</p>
+                        <p style="margin-top:20px; font-size:0.8rem; opacity:0.6;">Path: ${url}</p>
+                    </div>`;
+                }
+            }
+
+            closeReader() {
+                document.getElementById('doc-viewer').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            parseMarkdown(text) {
+                // Ported regex parser from guides.html for zero-dependency speed
+                let html = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+                // Bold/Italic
+                html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+                html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+                // Headings
+                html = html.replace(/^# (.*)$/gm, '<h1>$1</h1>');
+                html = html.replace(/^## (.*)$/gm, '<h2>$1</h2>');
+                html = html.replace(/^### (.*)$/gm, '<h3>$1</h3>');
+
+                // Links/Deep Links
+                html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+                // Code
+                html = html.replace(/`(.*?)`/g, '<code>$1</code>');
+                html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+
+                // Checkboxes
+                html = html.replace(/- \[x\] (.+)/g, '<li><input type="checkbox" checked disabled> $1</li>');
+                html = html.replace(/- \[ \] (.+)/g, '<li><input type="checkbox" disabled> $1</li>');
+
+                // Lists
+                html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+                html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+                html = html.replace(/((<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+                // Paragraphs
+                html = html.replace(/^(?!<[a-z]|$)(.+)$/gm, '<p>$1</p>');
+                html = html.replace(/<p>\s*<\/p>/g, '');
+
+                return html;
             }
 
             async loadRegistryData() {
@@ -1785,8 +2061,8 @@
                                                 <div class="registry-meta">${doc.path.split('/').pop().split('.').shift()}</div>
                                             </div>
                                             <div class="registry-actions">
-                                                ${!doc.isOnlyPdf ? `<a href="${mdPath}" class="action-icon" title="View Markdown">📝</a>` : ''}
-                                                ${doc.pdf ? `<a href="${pdfPath}" class="action-icon pdf" title="View PDF">📕</a>` : ''}
+                                                ${!doc.isOnlyPdf ? `<a href="${mdPath}" class="action-icon" title="View Markdown" onclick="app.openReader('${mdPath}', '${doc.name}'); return false;">📝</a>` : ''}
+                                                ${doc.pdf ? `<a id="pdf-${key}" href="${pdfPath}" class="action-icon pdf" title="View PDF">📕</a>` : ''}
                                             </div>
                                         </div>
                                     `;
