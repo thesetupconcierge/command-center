@@ -1401,15 +1401,15 @@
             // SHARED / UTILITY
             session_archival: {
                 lane: 'business', area: "docs", title: "Session Archival", badge: "Feb 15", badgeColor: "var(--purple)", tasks: [
-                    { id: "sa1", text: "Daily Summary: [Feb 14](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Resources/Walkthroughs/daily_summary_2026-02-14.md)", preChecked: true },
-                    { id: "sa2", text: "Captain's Log: [Archive](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Resources/Walkthroughs/captains_log_2026-02-14.md)", preChecked: true }
+                    { id: "sa1", text: "Daily Summary: [Feb 14](business/docs/daily_summary_2026-02-14.md)", preChecked: true },
+                    { id: "sa2", text: "Captain's Log: [Archive](business/docs/captains_log_2026-02-14.md)", preChecked: true }
                 ]
             },
             key_documents: {
                 lane: 'shared', area: "docs", title: "📂 Master Documents", badge: "Global", badgeColor: "var(--purple)", tasks: [
-                    { id: "doc1", text: "Master Playbook [PDF](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Playbook/master_playbook.pdf)", preChecked: true },
-                    { id: "doc2", text: "Brand Kit [PDF](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Black%20Nexus/brand-kit.pdf)", preChecked: true },
-                    { id: "odoc1", text: "Sterling Benefits [PDF](file:///C:/GitHub%20Local/Career%20Hub/Onboarding/2026_Benefits_Guide.pdf)", preChecked: true }
+                    { id: "doc1", text: "Master Playbook [PDF](playbook/master_playbook.pdf)", preChecked: true },
+                    { id: "doc2", text: "Brand Kit [PDF](business/docs/brand-kit.pdf)", preChecked: true },
+                    { id: "odoc1", text: "Sterling Benefits [PDF](career/docs/2026_Benefits_Guide.pdf)", preChecked: true }
                 ]
             }
         };
@@ -1509,9 +1509,15 @@
                     const link = e.target.closest('a');
                     if (!link) return;
 
-                    const href = link.getAttribute('href');
+                    let href = link.getAttribute('href');
                     if (href && href.endsWith('.md') && !href.startsWith('http')) {
                         e.preventDefault();
+
+                        // Handle potential hardcoded local paths by resolving them
+                        if (href.includes('/') || href.includes('\\')) {
+                            href = this.resolveDocPath(href, false);
+                        }
+
                         const title = link.innerText || "Document";
                         this.openReader(href, title);
                     }
