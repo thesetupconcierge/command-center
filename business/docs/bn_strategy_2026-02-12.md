@@ -6,7 +6,7 @@
 
 ## What Black Nexus Is
 
-Black Nexus is a **creative development agency** centered around coding, content production, and digital storytelling. It operates as:
+Black Nexus is a **Clinical Development Agency (CDA)** centered around precision engineering, diagnostic rigor, and digital implementation. It operates as:
 
 1. **Setup Concierge success story** — "We took a coding student and built a full creative agency from scratch." This case study sells SC's services more than any pitch deck.
 2. **V8 Engine poster child** — BN produces shorts, video content, and stories using the V8 Engine pipeline. It's living proof the system works at production scale.

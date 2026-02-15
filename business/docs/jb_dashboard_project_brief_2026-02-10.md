@@ -191,5 +191,5 @@ file:///C:/GitHub Local/Business Ideas/Setup Concierge/Dashboard/index.html
 
 ---
 
-*Black Nexus CDA — Creative Development Agency*  
+*Black Nexus CDA — Clinical Development Agency*  
 *github.com/blacknexuscda*

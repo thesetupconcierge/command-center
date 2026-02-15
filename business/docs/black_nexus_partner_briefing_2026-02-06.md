@@ -6,7 +6,7 @@
 
 ## 🎯 What is Black Nexus?
 
-**Black Nexus** is a **Creative Development Agency** — we help businesses and creators build their brands, content, and digital presence.
+**Black Nexus** is a **Clinical Development Agency (CDA)** — we provide digital diagnostics and implementation for complex brand infrastructures.
 
 ### What We Do
 

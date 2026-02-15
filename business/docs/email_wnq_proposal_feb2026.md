@@ -1,43 +1,38 @@
-# Email to Ike — WNQ Digital Revamp Proposal
+# Email to Ike — WNQ Site Details (Post-Call Follow-Up)
 
 > **To:** Ike (WNQ)
-> **Subject:** Warriors Never Quit — Digital Revamp Proposal
+> **Subject:** WNQ site details — for you and the board
 > **Attachment:** `WNQ_Digital_Revamp_Proposal_SetupConcierge_Feb2026.pdf`
+> **When to send:** AFTER the phone call — not before
 
 ---
 
 Ike,
 
-First, I want to say I truly believe in what you're building with Warriors Never Quit.
+Great talking with you. Wanted to get this over while it's fresh.
 
-After reviewing the current site and thinking through how we can position WNQ for stronger community engagement and easier donations, I've put together a structured proposal for a full digital revamp.
+Attached is the full scope — everything we talked about, laid out so you can share it with Terrence and Carley if you need to.
 
-This is not just a redesign — it's a repositioning of your online presence to match the strength of your mission.
+Quick recap:
 
-Attached is a detailed breakdown including:
+- 6-page custom site built around Coach Riley's legacy and WNQ's mission
+- Your photos from our session integrated throughout
+- Mobile-first — looks great on every phone
+- Live by end of February
 
-- Scope of work
-- Timeline (Feb 12 – Feb 27 launch)
-- Investment structure
-- Optional ongoing support
+The preview you saw is just the start. Once we lock in, I can have the full site built within two weeks.
 
-Because of our existing relationship and the recent photography session, I've applied a returning client credit toward the total investment.
-
-Take a look and let me know when you'd like to review together. I can walk you through it live if helpful.
-
-Excited about what this could become for WNQ.
+Let me know how the board conversation goes — happy to jump on a call with them too if that helps.
 
 — Justice
-Setup Concierge
 
 ---
 
 ## Delivery Checklist
 
-- [ ] Export HTML to PDF → rename to `WNQ_Digital_Revamp_Proposal_SetupConcierge_Feb2026.pdf`
-- [ ] Upload PDF to DocSend (free tier — [docsend.com](https://docsend.com))
-- [ ] Confirm brand colors with Ike (purple vs blue primary)
-- [ ] Copy this email text into Gmail/Outlook
+- [ ] Call Ike first — DO NOT send this cold
+- [ ] After call: Open proposal HTML in browser → Print → Save as PDF
+- [ ] Rename to `WNQ_Digital_Revamp_Proposal_SetupConcierge_Feb2026.pdf`
+- [ ] Copy email text above into Gmail/Outlook
 - [ ] Attach the PDF
-- [ ] Optionally add DocSend link: "You can also view the proposal here: [link]"
-- [ ] Send
+- [ ] Send as follow-up to the conversation
