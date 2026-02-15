@@ -32,6 +32,7 @@ Run at the end of a session. It:
 6. **Playbook Staleness Check** — flags pages not updated in 7+ days
 7. **Dashboard Link Refresh** — suggests new docs to link
 8. **Security Sweep** — scans shared repos for strategic leaks before pushing
+9. **Coherence Audit** — 360° doc/registry sync & path audit
 
 ### `/deploy-dashboard` — Ship It
 
