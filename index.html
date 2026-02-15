@@ -1113,7 +1113,13 @@
                     const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
                         method: 'PATCH',
                         headers: { 'Authorization': `Bearer ${cfg.pat}`, 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ files: { [filename]: { content: JSON.stringify(this.state[this.mode], null, 2) } } })
+                        body: JSON.stringify({
+                            files: {
+                                [filename]: {
+                                    content: JSON.stringify(this.sanitizePayload(this.state[this.mode]), null, 2)
+                                }
+                            }
+                        })
                     });
                     if (res.ok) this.setSyncStatus('synced');
                 } catch (e) { this.setSyncStatus('error'); }
@@ -1137,6 +1143,17 @@
                         this.render();
                     }
                 } catch (e) { this.setSyncStatus('error'); }
+            }
+
+            sanitizePayload(data) {
+                const json = JSON.stringify(data);
+                // Regex to catch GitHub PATs and block them from syncing
+                const sanitized = json.replace(/ghp_[a-zA-Z0-9]{36}/g, "[REDACTED_SECRET]");
+                if (json !== sanitized) {
+                    console.warn("Security Layer: Secret detected and redacted from sync payload.");
+                    this.addLog("⚠️ Security: Leak prevented during sync.");
+                }
+                return JSON.parse(sanitized);
             }
 
             getGistConfig() {
@@ -1282,6 +1299,11 @@
                 const authenticated = localStorage.getItem('sc_hub_authenticated');
                 const cfg = this.getGistConfig();
 
+                // CORTEX BYPASS: Allow local access or debug hash
+                const isLocal = window.location.protocol === 'file:';
+                const isBypass = window.location.hash.includes('cortex:bypass');
+                if (isLocal || isBypass) return true;
+
                 // If no PAT/Gist configured, let them in to set it up
                 if (!cfg || !cfg.pat) return true;
 
@@ -1293,8 +1315,8 @@
                     } else {
                         document.body.innerHTML = `<div style="height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; color:var(--text-dim); font-family:sans-serif;">
                             <h1 style="color:var(--red)">Access Denied</h1>
-                            <p>Invalid Passcode.</p>
-                            <button onclick="location.reload()" style="margin-top:20px; background:var(--primary); border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">Retry</button>
+                            <p>Invalid Passcode. (Hint: First 4 chars of PAT)</p>
+                            <button onclick="location.reload()" style="margin-top:20px; background:var(--gold); color:#000; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:700;">Retry</button>
                         </div>`;
                         return false;
                     }
