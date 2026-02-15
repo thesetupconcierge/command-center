@@ -49,6 +49,7 @@ One command: stages, commits, and pushes `command-center` to GitHub Pages.
 | `/cleanup` | Remove empty folders and temp files |
 | `/search` | Full-text search across all business files |
 | `/panel-review` | Run advisory panel review of the whole system |
+| `/coherence` | 360-degree doc/registry sync & path audit |
 | `/organize-files` | Batch move/rename files into folder structures |
 
 ## Adding a New Workflow
