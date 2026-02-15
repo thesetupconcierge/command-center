@@ -7,7 +7,7 @@
     <title>Setup Concierge — Master Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <style>
+    <style id="main-styles">
         /* ========== THEMES & VARIABLES ========== */
         :root {
             --bg: #0a0a0f;
@@ -110,8 +110,8 @@
             top: 0;
             z-index: 1000;
             background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(24px);
             border-bottom: 1px solid var(--border);
             padding: 10px 24px;
             display: flex;
@@ -220,9 +220,11 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 20px;
+            -webkit-backdrop-filter: blur(12px);
             backdrop-filter: blur(12px);
             transition: border-color 0.2s;
             margin-bottom: 24px;
+            position: relative;
         }
 
         .card-title {
@@ -336,6 +338,13 @@
             animation: highlight-pulse 2s ease-out;
         }
 
+        /* Automatic Highlight via CSS :target */
+        section:target,
+        .card:target {
+            animation: highlight-pulse 2s ease-out;
+            border-color: var(--primary) !important;
+        }
+
         @keyframes highlight-pulse {
             0% {
                 box-shadow: 0 0 0 0 var(--primary-dim);
@@ -406,9 +415,16 @@
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            padding: 10px 12px;
+            padding: 12px 12px;
             border-radius: var(--radius-sm);
             transition: background 0.15s;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .task-item {
+                padding: 16px 12px;
+            }
         }
 
         .task-item:hover {
@@ -416,9 +432,9 @@
         }
 
         .task-check {
-            width: 22px;
-            height: 22px;
-            min-width: 22px;
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
             border-radius: 6px;
             border: 2px solid var(--border);
             display: flex;
@@ -575,6 +591,7 @@
             border-radius: var(--radius);
             padding: 32px;
             width: 400px;
+            max-width: 90vw;
             box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
         }
 
@@ -623,7 +640,7 @@
 
         .quiz-option.selected {
             border-color: var(--primary);
-            background: rgba(var(--primary-rgb), 0.1);
+            background: rgba(255, 184, 28, 0.1);
         }
 
         .diag-badge {
@@ -639,6 +656,101 @@
             cursor: pointer;
             margin-top: 8px;
         }
+
+        .hub-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Column Stabilization */
+        .left-col,
+        .center-col,
+        .right-col {
+            min-width: 0;
+        }
+
+        /* ========== MOBILE RESPONSIVENESS ========== */
+        @media (max-width: 1024px) {
+            .main {
+                grid-template-columns: 1fr;
+                padding: 16px;
+                gap: 16px;
+            }
+
+            .left-col,
+            .right-col {
+                order: 2;
+            }
+
+            .center-col {
+                order: 1;
+            }
+
+            .status-bar {
+                padding: 10px 16px;
+                flex-wrap: wrap;
+            }
+
+            .status-items {
+                gap: 16px;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            #hub-title {
+                font-size: 0.9rem;
+            }
+
+            .status-item#global-revenue {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 8px;
+                padding-top: 8px;
+                border-top: 1px solid var(--border);
+            }
+
+            .hud-nav {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-btn {
+                flex: 1;
+                justify-content: center;
+                padding: 8px;
+            }
+
+            .big-ring {
+                width: 100px;
+                height: 100px;
+            }
+
+            .big-ring-pct .num {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .status-items {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            #hub-title {
+                font-size: 0.85rem;
+            }
+
+            .status-item {
+                font-size: 0.75rem;
+            }
+
+            .card {
+                padding: 16px;
+            }
+        }
     </style>
 </head>
 
@@ -651,7 +763,7 @@
                 CD</div>
             <span id="hub-title" style="font-weight:700; font-size:1rem; letter-spacing:-0.02em;">Clinical Development
                 Agency</span>
-            <div
+            <div class="business-only"
                 style="margin-left:12px; font-size:0.65rem; color:var(--text-dim); background:rgba(0,0,0,0.3); padding:4px 8px; border-radius:4px; border:1px solid var(--border); display:flex; align-items:center; gap:6px;">
                 <span
                     style="width:6px; height:6px; background:var(--green); border-radius:50%; box-shadow: 0 0 10px var(--green);"></span>
@@ -659,7 +771,7 @@
             </div>
         </div>
 
-        <div class="status-item" id="global-revenue">
+        <div class="status-item business-only" id="global-revenue">
             <span class="status-label">Revenue Goal ($5K):</span>
             <div class="revenue-mini-bar">
                 <div class="revenue-mini-fill" id="revenue-fill"></div>
@@ -671,7 +783,7 @@
             </div>
         </div>
 
-        <div class="status-item">
+        <div class="status-item business-only">
             <span class="status-label">WNQ Health:</span>
             <span class="status-value" style="color:var(--green)">100% OPERATIONAL</span>
         </div>
@@ -849,6 +961,12 @@
                     { id: "sc2", text: "CLI Mastery: Surgical Shell Commands", preChecked: false },
                     { id: "sc3", text: "Automation: Gist-to-Hub Sync Script", preChecked: false }
                 ]
+            },
+            session_archival: {
+                lane: 'business', area: "docs", title: "Session Archival", badge: "Feb 14", badgeColor: "var(--purple)", tasks: [
+                    { id: "sa1", text: "Daily Summary: [Feb 14](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Resources/Walkthroughs/daily_summary_2026-02-14.md)", preChecked: true },
+                    { id: "sa2", text: "Captain's Log: [Archive](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Resources/Walkthroughs/captains_log_2026-02-14.md)", preChecked: true }
+                ]
             }
         };
 
@@ -949,6 +1067,11 @@
                 }
 
                 window.location.hash = mode;
+
+                // Contextual UI Toggles
+                const businessOnly = document.querySelectorAll('.business-only');
+                businessOnly.forEach(el => el.style.display = mode === 'business' ? 'flex' : 'none');
+
                 this.render();
             }
 
@@ -1111,7 +1234,7 @@
 
                 if (section) {
                     setTimeout(() => {
-                        const el = document.getElementById(`section-${section}`);
+                        const el = document.getElementById(section);
                         if (el) {
                             el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             el.classList.add('section-highlight');
@@ -1185,30 +1308,35 @@
                 if (extraLinks) extraLinks.style.display = this.mode === 'career' ? 'block' : 'none';
 
                 // Sections
-                document.getElementById('task-sections-container').innerHTML = laneTasks.map(s => {
+                document.getElementById('task-sections-container').innerHTML = `
+                    <div id="${this.mode}-portal" class="hub-container">
+                        ${laneTasks.map(s => {
                     const sDone = s.tasks.filter(t => this.getTaskState(t.id) === 'done').length;
-                    const sectionId = s.title.toLowerCase().replace(/\s+/g, '-');
+                    // Find the key in TASK_DATA for this section to use as ID
+                    const sectionKey = Object.keys(TASK_DATA).find(key => TASK_DATA[key] === s);
                     return `
-            <div class="card fade-in" id="section-${sectionId}">
-              <div class="task-section-header">
-                <div class="section-title">
-                  ${s.title}
-                  <span class="section-badge" style="background:${s.badgeColor}20;color:${s.badgeColor}">${s.badge}</span>
-                  <span class="deeplink-btn" title="Copy Deep Link" onclick="app.copyDeepLink('${sectionId}')">🔗</span>
-                </div>
-                <div class="status-label">${sDone}/${s.tasks.length}</div>
-              </div>
-              <div class="task-list">
-                ${s.tasks.map(t => `
-                  <div class="task-item" data-status="${this.getTaskState(t.id)}">
-                    <div class="task-check" data-state="${this.getTaskState(t.id)}" onclick="app.cycleTask('${t.id}')"></div>
-                    <div class="task-text">${t.text}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          `;
-                }).join('');
+                                <div class="card fade-in" id="${sectionKey}">
+                                  <div class="task-section-header">
+                                    <div class="section-title">
+                                      ${s.title}
+                                      <span class="section-badge" style="background:${s.badgeColor}20;color:${s.badgeColor}">${s.badge}</span>
+                                      <span class="deeplink-btn" title="Copy Deep Link" onclick="app.copyDeepLink('${sectionKey}')">🔗</span>
+                                    </div>
+                                    <div class="status-label">${sDone}/${s.tasks.length}</div>
+                                  </div>
+                                  <div class="task-list">
+                                    ${s.tasks.map(t => `
+                                      <div class="task-item" data-status="${this.getTaskState(t.id)}">
+                                        <div class="task-check" data-state="${this.getTaskState(t.id)}" onclick="app.cycleTask('${t.id}')"></div>
+                                        <div class="task-text">${t.text}</div>
+                                      </div>
+                                    `).join('')}
+                                  </div>
+                                </div>
+                              `;
+                }).join('')}
+                    </div>
+                `;
 
                 // Logs
                 document.getElementById('log-list').innerHTML = this.state[this.mode].logs.map(l => `
