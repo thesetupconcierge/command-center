@@ -783,7 +783,7 @@
             <span class="status-value" id="revenue-current">...</span>
             <div style="display:flex;gap:16px;">
                 <a href="playbook/clinical-architecture.md" class="status-link">📋 Strategy</a>
-                <a href="docs/wnq_wix_completion_guide_2026-02-12.md" class="status-link">🗺️ Roadmap</a>
+                <a href="business/docs/wnq_wix_completion_guide_2026-02-12.md" class="status-link">🗺️ Roadmap</a>
             </div>
         </div>
 
@@ -903,7 +903,7 @@
             phase1a: {
                 lane: 'business', area: "sc", title: "⚡ Phase 1A — Monetization Sprint", badge: "Launch Feb 27", badgeColor: "var(--gold)", tasks: [
                     { id: "p1a1", text: "Scope WNQ website as paid deliverable ($3,000 flat fee)", preChecked: true },
-                    { id: "p1a0", text: "Send proposal + collect 50% upfront ($1,500) — Feb 12-13" },
+                    { id: "p1a0", text: "Send proposal + collect 50% upfront ($1,500) — URGENT: Feb 15" },
                     { id: "p1a2", text: "Build WNQ site using existing pipeline" },
                     { id: "p1a6", text: "Capture proof: before/after screenshots, metrics" },
                     { id: "p1a7", text: "Soft pre-sell to board (Feb 25)" },
@@ -911,17 +911,26 @@
                     { id: "p1a4", text: "Create WNQ Case Study IMMEDIATELY on launch day" }
                 ]
             },
-            wnq_build: {
-                lane: 'business', area: "wnq", title: "WNQ — Core Revamp Build", badge: "Launch Feb 27", badgeColor: "var(--gold)", tasks: [
-                    { id: "w21", text: "Hero section high-res board images integration", preChecked: true },
-                    { id: "w22", text: "Finalize Brand Identity guide (colors, fonts, mascot)", preChecked: true },
-                    { id: "w25", text: "Scaffold Coach Tribute Memorial (Museum Style)" },
-                    { id: "w23", text: "Domain migration (staging → warriorsneverquit.com)" },
-                    { id: "w24", text: "Final QA pass — links, mobile, SEO, speed" }
+            wnq_phase1: {
+                lane: 'business', area: "wnq", title: "WNQ — Phase 1: Foundation Polish", badge: "In Progress", badgeColor: "var(--orange)", tasks: [
+                    { id: "w1", text: "Add social media icon buttons (TikTok, IG) to header/footer" },
+                    { id: "w2", text: "Elevate lion mascot — favicon, header, social avatars" },
+                    { id: "w3", text: "Add brand pillars — Strength & Community shown, add Integrity" },
+                    { id: "w5", text: "SEO optimization — title tags, meta descriptions" },
+                    { id: "w6", text: "Mobile responsiveness check and fixes", preChecked: true },
+                    { id: "w26", text: "Hero section — lion mascot, headline, tagline, gold CTA", preChecked: true },
+                    { id: "w32", text: "Apply gold accent (#FFB81C) to buttons and CTAs", preChecked: true }
+                ]
+            },
+            wnq_phase2: {
+                lane: 'business', area: "wnq", title: "WNQ — Phase 2: Tribute & Scholarship", badge: "Week of Feb 17", badgeColor: "var(--red)", tasks: [
+                    { id: "w9", text: "Build Coach Ike Riley Sr. Tribute page (museum feel)" },
+                    { id: "w12", text: "Build Ike Riley Sr Memorial Scholarship page" },
+                    { id: "w25_ref", text: "Scaffold Coach Tribute Memorial (Museum Style)" }
                 ]
             },
             bn_collab: {
-                lane: 'business', area: "bn", title: "Black Nexus — GitHub & Collaboration", badge: "3/5 Done", badgeColor: "var(--green)", tasks: [
+                lane: 'business', area: "bn", title: "Black Nexus — Collaboration Hub", badge: "Live", badgeColor: "var(--green)", tasks: [
                     { id: "b23", text: "GitHub collaboration guide created", preChecked: true },
                     { id: "b24", text: "GitHub org created: blacknexuscda", preChecked: true },
                     { id: "b25", text: "JB Scott invited — pending acceptance", preChecked: true },
@@ -931,61 +940,49 @@
             },
 
             // CAREER LANE
+            prep_siemens: {
+                lane: 'career', area: "technical", title: "📘 Siemens & PPCL Mastery", badge: "Priority", badgeColor: "var(--cyan)", tasks: [
+                    { id: "ppcl1", text: "Review Siemens Insight Console Operator Guide" },
+                    { id: "ppcl2", text: "Practice Conditional IF/THEN/ELSE Logic Blocks" },
+                    { id: "ppcl3", text: "Audit Desigo CC Graphics & Point Mapping Protocols" },
+                    { id: "ppcl4", text: "Technical Deep-Dive: BACnet/IP vs MS/TP Priority Arrays" }
+                ]
+            },
             prep_sterling: {
-                lane: 'career', area: "interview", title: "🎯 AbbVie / Sterling Preparation", badge: "Priority", badgeColor: "var(--cyan)", tasks: [
+                lane: 'career', area: "interview", title: "🎯 AbbVie / Sterling Follow-Up", badge: "Post-Interview", badgeColor: "var(--cyan)", tasks: [
                     { id: "c1", text: "Sterling/Xenqu Onboarding Paperwork", preChecked: true },
                     { id: "c2", text: "Submit I-9 Documentation", preChecked: true },
-                    { id: "c3", text: "Onboarding Checklist v1 Completion" },
-                    { id: "c4", text: "Background Check Status Review" }
+                    { id: "f1_ref", text: "Review & personalize thank-you email draft" },
+                    { id: "f3_ref", text: "Fill out Sterling Reference Request Form (.doc)" }
                 ]
             },
-            career_docs: {
-                lane: 'career', area: "docs", title: "📄 Artifact Hardening", badge: "Ongoing", badgeColor: "var(--blue)", tasks: [
-                    { id: "d1", text: "Update Master Resume with Black Nexus credits" },
-                    { id: "d2", text: "PDF Archive of WNQ Project Proof" },
-                    { id: "d3", text: "Generate Reference Listing PDF" }
-                ]
-            },
-            career_onboarding: {
-                lane: 'career', area: "onboarding", title: "📋 AbbVie Onboarding (Foundation)", badge: "19 Docs", badgeColor: "var(--purple)", tasks: [
-                    { id: "o1", text: "Review Benefits Guide & enrollment instructions" },
-                    { id: "o2", text: "Sign Arbitration & Consent forms" },
-                    { id: "o3", text: "Process IL W4 & Federal W4 withholdings" },
-                    { id: "o4", text: "Process Worker Responsibility & Rental Car forms" }
-                ]
-            },
-            clinical_finance: {
-                lane: 'business', area: "finance", title: "Clinical Finance", badge: "Burn/Income", badgeColor: "var(--purple)", tasks: [
-                    { id: "f1", text: "Import Monthly Burn Projection (Feb)", preChecked: false },
-                    { id: "f2", text: "Link Revenue Hub (Gist State)", preChecked: true },
-                    { id: "f3", text: "Reserve Buffer: 3-Month Minimum", preChecked: false }
+            career_intel: {
+                lane: 'career', area: "research", title: "🔍 Career Intelligence", badge: "Dossiers", badgeColor: "var(--teal)", tasks: [
+                    { id: "r1_ref", text: "LinkedIn dossier — Gino Pisano (Technical Peer)", preChecked: true },
+                    { id: "r2_ref", text: "LinkedIn dossier — John Walters (Hiring Manager)", preChecked: true },
+                    { id: "r3_ref", text: "LinkedIn dossier — Michael Ester (Senior Authority)", preChecked: true }
                 ]
             },
             surgical_scripting: {
-                lane: 'career', area: "technical", title: "Surgical Scripting Lab", badge: "DevOps", badgeColor: "var(--cyan)", tasks: [
+                lane: 'career', area: "technical", title: "Surgical Scripting Lab", badge: "V8 Engine", badgeColor: "var(--cyan)", tasks: [
                     { id: "sc1", text: "The V8 Console (Interactive Guide)", preChecked: false },
                     { id: "sc2", text: "CLI Mastery: Surgical Shell Commands", preChecked: false },
                     { id: "sc3", text: "Automation: Gist-to-Hub Sync Script", preChecked: false }
                 ]
             },
+
+            // SHARED / UTILITY
             session_archival: {
-                lane: 'business', area: "docs", title: "Session Archival", badge: "Feb 14", badgeColor: "var(--purple)", tasks: [
+                lane: 'business', area: "docs", title: "Session Archival", badge: "Feb 15", badgeColor: "var(--purple)", tasks: [
                     { id: "sa1", text: "Daily Summary: [Feb 14](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Resources/Walkthroughs/daily_summary_2026-02-14.md)", preChecked: true },
                     { id: "sa2", text: "Captain's Log: [Archive](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Resources/Walkthroughs/captains_log_2026-02-14.md)", preChecked: true }
                 ]
             },
             key_documents: {
-                lane: 'business', area: "docs", title: "📂 Key Documents", badge: "Live", badgeColor: "var(--purple)", tasks: [
+                lane: 'shared', area: "docs", title: "📂 Master Documents", badge: "Global", badgeColor: "var(--purple)", tasks: [
                     { id: "doc1", text: "Master Playbook [PDF](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Playbook/master_playbook.pdf)", preChecked: true },
                     { id: "doc2", text: "Brand Kit [PDF](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Black%20Nexus/brand-kit.pdf)", preChecked: true },
-                    { id: "doc3", text: "Onboarding Guide [PDF](file:///C:/GitHub%20Local/Business%20Ideas/Setup%20Concierge/Black%20Nexus/onboarding.pdf)", preChecked: true }
-                ]
-            },
-            career_onboarding_vault: {
-                lane: 'career', area: "docs", title: "🏢 Onboarding Vault", badge: "Priority", badgeColor: "var(--cyan)", tasks: [
-                    { id: "odoc1", text: "Sterling Benefits [PDF](file:///C:/GitHub%20Local/Career%20Hub/Onboarding/2026_Benefits_Guide.pdf)", preChecked: true },
-                    { id: "odoc2", text: "Xenqu Checklist [PDF](file:///C:/GitHub%20Local/Career%20Hub/Onboarding/Checklist.pdf)", preChecked: true },
-                    { id: "odoc3", text: "I-9 Verification [PDF](file:///C:/GitHub%20Local/Career%20Hub/Onboarding/I9_Complete.pdf)", preChecked: true }
+                    { id: "odoc1", text: "Sterling Benefits [PDF](file:///C:/GitHub%20Local/Career%20Hub/Onboarding/2026_Benefits_Guide.pdf)", preChecked: true }
                 ]
             }
         };
@@ -1031,12 +1028,18 @@
         };
 
         const NEXT_ACTIONS = [
-            { id: "a16", text: "Sterling/Xenqu Onboarding Documentation (Checklist v1)", urgency: "now", source: "Founder Briefing — Feb 13", lane: "career" },
-            { id: "a17", text: "CBRE Clinical Operations Pitch (Proposal v1) @ 11AM Monday", urgency: "now", source: "Founder Briefing — Feb 13", lane: "business" },
-            { id: "a20", text: "Monitor GitHub Pages deployment for command-center", urgency: "soon", source: "Session — Feb 13", lane: "business" },
-            { id: "a21", text: "Link Clinical OS protocol to Black Nexus onboarding track", urgency: "now", source: "Panel Review — Feb 14", lane: "business" },
-            { id: "a22", text: "Final iPhone test for Deep Link highlight visibility", urgency: "now", source: "Panel Review — Feb 14", lane: "career" },
-            { id: "a23", text: "Extract inline Hub CSS to hub-core.css", urgency: "soon", source: "Panel Review — Feb 14", lane: "business" }
+            // CAREER ACTIONS
+            { id: "a16", text: "Sterling/Xenqu Onboarding Documentation (Checklist v1)", urgency: "now", source: "Founder Briefing", lane: "career" },
+            { id: "a22", text: "Final iPhone test for Deep Link highlight visibility", urgency: "now", source: "Panel Review", lane: "career" },
+            { id: "a30", text: "Complete Siemens Platform Deep-Dive (Insight/Desigo)", urgency: "now", source: "Career Hub", lane: "career" },
+            { id: "a31", text: "Review Technical Talking Points for Siemens Peer Interview", urgency: "soon", source: "Career Hub", lane: "career" },
+
+            // BUSINESS ACTIONS
+            { id: "a17", text: "CBRE Clinical Operations Pitch (Proposal v1) @ 11AM Monday", urgency: "now", source: "Founder Briefing", lane: "business" },
+            { id: "a21", text: "Link Clinical OS protocol to Black Nexus onboarding track", urgency: "now", source: "Panel Review", lane: "business" },
+            { id: "a23", text: "Extract inline Hub CSS to hub-core.css", urgency: "soon", source: "Refactor", lane: "business" },
+            { id: "a32", text: "Audit 'antigravity/workflows' for manual vs auto drift", urgency: "now", source: "Morning Brief", lane: "business" },
+            { id: "a33", text: "Process raw foundation files into system refinements", urgency: "now", source: "Morning Brief", lane: "business" }
         ];
 
         class MasterApp {
@@ -1079,6 +1082,7 @@
                 // Clinical Branding Refresh
                 const title = document.getElementById('hub-title');
                 const badge = document.querySelector('.status-item div[style*="font-weight:800"]');
+                const businessOnly = document.querySelectorAll('.business-only');
 
                 if (title) {
                     title.innerText = mode === 'business' ? 'Clinical Development Agency' : 'Clinical Career Hub';
@@ -1090,7 +1094,6 @@
                 window.location.hash = mode;
 
                 // Contextual UI Toggles
-                const businessOnly = document.querySelectorAll('.business-only');
                 businessOnly.forEach(el => el.style.display = mode === 'business' ? 'flex' : 'none');
 
                 this.render();
@@ -1300,7 +1303,7 @@
             }
 
             render() {
-                const laneTasks = Object.values(TASK_DATA).filter(s => s.lane === this.mode);
+                const laneTasks = Object.values(TASK_DATA).filter(s => s.lane === this.mode || s.lane === 'shared');
                 const allLaneTasks = laneTasks.flatMap(s => s.tasks);
                 const done = allLaneTasks.filter(t => this.getTaskState(t.id) === 'done').length;
                 const pct = allLaneTasks.length ? Math.round((done / allLaneTasks.length) * 100) : 0;
@@ -1345,10 +1348,13 @@
                     sideCtx.innerHTML = '';
                 }
 
-                // Revenue Spotlight (Only in Business, but Aiden wants it global? I'll keep it simple for now)
-                const rev = 2000;
-                document.getElementById('revenue-current').innerText = `$${rev.toLocaleString()}`;
-                document.getElementById('revenue-fill').style.width = `${(rev / 5000) * 100}%`;
+                // Revenue Spotlight (Only in Business)
+                const rev = 400;
+                const revenuePanel = document.getElementById('global-revenue');
+                if (revenuePanel) {
+                    document.getElementById('revenue-current').innerText = `$${rev.toLocaleString()}`;
+                    document.getElementById('revenue-fill').style.width = `${(rev / 5000) * 100}%`;
+                }
 
                 // Actions
                 const actions = NEXT_ACTIONS.filter(a => a.lane === this.mode);
