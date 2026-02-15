@@ -1,0 +1,370 @@
+{
+    "advisory": {
+        "title": "Advisory Panel Archives",
+        "icon": "⚖️",
+        "lanes": [
+            "business",
+            "shared"
+        ],
+        "docs": [
+            {
+                "name": "Full Panel Review (Feb 2026)",
+                "path": "Advisory Panel/Consultations/Markdown/full_panel_review_2026-02.md",
+                "pdf": true
+            },
+            {
+                "name": "Manager Sync Tightening",
+                "path": "Advisory Panel/Consultations/Markdown/manager_sync_tightening_2026-02-13.md",
+                "pdf": false
+            },
+            {
+                "name": "Security & Privacy Protocol",
+                "path": "Advisory Panel/Consultations/Markdown/security_privacy_protocol_2026-02-13.md",
+                "pdf": false
+            },
+            {
+                "name": "Strategic Fold-in Proposal",
+                "path": "Advisory Panel/Consultations/Markdown/strategic_fold_in_proposal_2026-02-13.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Audit Bn Cda Pivot 2026",
+                "path": "Advisory Panel/Consultations/Markdown/panel_audit_bn_cda_pivot_2026-02-13.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Review 2026",
+                "path": "Advisory Panel/Consultations/Markdown/panel_review_2026-02-15.md",
+                "pdf": false
+            }
+        ]
+    },
+    "nexus": {
+        "title": "Black Nexus Strategics",
+        "icon": "⬢",
+        "lanes": [
+            "business"
+        ],
+        "docs": [
+            {
+                "name": "Strategic Business Framework",
+                "path": "Black Nexus/Strategy/Markdown/strategic_business_framework_2026-02-06.md",
+                "pdf": true
+            },
+            {
+                "name": "Phase 1 Execution Plan",
+                "path": "Black Nexus/Strategy/Markdown/phase1_execution_plan_2026-02-06.md",
+                "pdf": true
+            },
+            {
+                "name": "Partner Briefing (JB Scott)",
+                "path": "Black Nexus/Pitch Decks/Markdown/black_nexus_partner_briefing_2026-02-06.md",
+                "pdf": true
+            },
+            {
+                "name": "GitHub Collaboration Guide",
+                "path": "Black Nexus/Strategy/Markdown/github_collaboration_guide_2026-02-10.md",
+                "pdf": true
+            },
+            {
+                "name": "Implementation Plan 2026",
+                "path": "Black Nexus/Strategy/Markdown/implementation_plan_2026-02-06.md",
+                "pdf": false
+            },
+            {
+                "name": "Expert Advisory Panel 2026",
+                "path": "Black Nexus/Pitch Decks/Markdown/expert_advisory_panel_2026-02-06.md",
+                "pdf": false
+            }
+        ]
+    },
+    "concierge": {
+        "title": "Setup Concierge Playbook",
+        "icon": "📋",
+        "lanes": [
+            "business",
+            "shared"
+        ],
+        "docs": [
+            {
+                "name": "Automation Tips & Tricks",
+                "path": "Resources/automation_tips_and_tricks_2026-02-08.md",
+                "pdf": true
+            },
+            {
+                "name": "Naming Conventions",
+                "path": "Resources/naming_conventions_2026-02-08.md",
+                "pdf": true
+            },
+            {
+                "name": "Workflow Quick Reference",
+                "path": "Resources/workflow_quick_reference_2026-02-08.md",
+                "pdf": true
+            },
+            {
+                "name": "Dashboard Blueprint",
+                "path": "Resources/dashboard_2026-02-08.md",
+                "pdf": true
+            },
+            {
+                "name": "Branch Discipline Guide 2026",
+                "path": "Resources/branch_discipline_guide_2026-02-11.md",
+                "pdf": false
+            },
+            {
+                "name": "Commit Convention Guide 2026",
+                "path": "Resources/commit_convention_guide_2026-02-11.md",
+                "pdf": false
+            }
+        ]
+    },
+    "career": {
+        "title": "Career Mastery & Dossiers",
+        "icon": "🚀",
+        "lanes": [
+            "career"
+        ],
+        "docs": [
+            {
+                "name": "Interview Day Cheat Sheet",
+                "path": "career/docs/interview_day_cheat_sheet.md",
+                "pdf": true
+            },
+            {
+                "name": "Mock Q&A Drill",
+                "path": "career/docs/mock_qa_drill.md",
+                "pdf": true
+            },
+            {
+                "name": "Dossier: Gino Pisano",
+                "path": "career/docs/gino_pisano.md",
+                "pdf": true
+            },
+            {
+                "name": "Dossier: John Walters",
+                "path": "career/docs/john_walters.md",
+                "pdf": true
+            },
+            {
+                "name": "Dossier: Michael Ester",
+                "path": "career/docs/michael_ester.md",
+                "pdf": true
+            },
+            {
+                "name": "Justice McKinney - BAS Focused",
+                "path": "career/docs/Justice_McKinney_BAS_Focused.md",
+                "pdf": true
+            }
+        ]
+    },
+    "wnq": {
+        "title": "WNQ Project Archives",
+        "icon": "🦁",
+        "lanes": [
+            "business"
+        ],
+        "docs": [
+            {
+                "name": "WNQ Website Revamp Proposal",
+                "path": "WNQ/Website & Strategy/wnq_website_revamp_proposal.md",
+                "pdf": false
+            },
+            {
+                "name": "Ike Riley Sr. Tribute Content",
+                "path": "WNQ/Website & Strategy/ike_riley_sr_tribute_content_2026-02-06.pdf",
+                "pdf": true,
+                "isOnlyPdf": true
+            },
+            {
+                "name": "WNQ Staging Site Audit",
+                "path": "WNQ/Action Items/Assets/Markdown/wnq_staging_site_audit_2026-02-09.md",
+                "pdf": true
+            },
+            {
+                "name": "Wix Copy-Paste Guide",
+                "path": "WNQ/Action Items/Assets/Markdown/wix_copy_paste_guide_2026-02-09.md",
+                "pdf": true
+            },
+            {
+                "name": "Email Wnq Proposal Feb2026",
+                "path": "WNQ/Website & Strategy/email_wnq_proposal_feb2026.md",
+                "pdf": false
+            },
+            {
+                "name": "Nonprofit Digital Revamp Onepager",
+                "path": "WNQ/Website & Strategy/nonprofit_digital_revamp_onepager.md",
+                "pdf": false
+            },
+            {
+                "name": "Wnq Cda Case Study Template",
+                "path": "WNQ/Website & Strategy/wnq_cda_case_study_template.md",
+                "pdf": false
+            },
+            {
+                "name": "Wnq Ike Approach Plan",
+                "path": "WNQ/Website & Strategy/wnq_ike_approach_plan.md",
+                "pdf": false
+            }
+        ]
+    },
+    "history": {
+        "title": "Logs & Walkthroughs",
+        "icon": "🕰️",
+        "lanes": [
+            "business",
+            "shared"
+        ],
+        "docs": [
+            {
+                "name": "Captain's Log (Feb 14)",
+                "path": "Resources/Walkthroughs/captains_log_2026-02-14.md",
+                "pdf": false
+            },
+            {
+                "name": "Daily Summary (Feb 14)",
+                "path": "Resources/Walkthroughs/daily_summary_2026-02-14.md",
+                "pdf": true
+            },
+            {
+                "name": "Daily Summary (Feb 15)",
+                "path": "Resources/Walkthroughs/daily_summary_2026-02-15.md",
+                "pdf": false
+            },
+            {
+                "name": "Captain's Log (Feb 11)",
+                "path": "Resources/Walkthroughs/Markdown/captains_log_2026-02-11.md",
+                "pdf": false
+            },
+            {
+                "name": "Workflow Learning Guide",
+                "path": "Resources/Walkthroughs/Markdown/workflow_learning_guide_2026-02-10.md",
+                "pdf": false
+            },
+            {
+                "name": "CMS Deep Dive",
+                "path": "Resources/Walkthroughs/Markdown/cms_deep_dive_2026-02-09.md",
+                "pdf": false
+            },
+            {
+                "name": "01 File Organization And Dating 2026",
+                "path": "Resources/Walkthroughs/Markdown/01_file_organization_and_dating_2026-02-08.md",
+                "pdf": false
+            },
+            {
+                "name": "02 Automation Workflows And Templates 2026",
+                "path": "Resources/Walkthroughs/Markdown/02_automation_workflows_and_templates_2026-02-08.md",
+                "pdf": false
+            },
+            {
+                "name": "03 Site Review And Panel Setup 2026",
+                "path": "Resources/Walkthroughs/Markdown/03_site_review_and_panel_setup_2026-02-08.md",
+                "pdf": false
+            },
+            {
+                "name": "04 System Refinements 2026",
+                "path": "Resources/Walkthroughs/Markdown/04_system_refinements_2026-02-08.md",
+                "pdf": false
+            },
+            {
+                "name": "05 Website Generation Pipeline 2026",
+                "path": "Resources/Walkthroughs/Markdown/05_website_generation_pipeline_2026-02-08.md",
+                "pdf": false
+            },
+            {
+                "name": "Daily Summary 2026",
+                "path": "Resources/Walkthroughs/Markdown/daily_summary_2026-02-12.md",
+                "pdf": false
+            },
+            {
+                "name": "Daily Summary 2026",
+                "path": "Resources/Walkthroughs/Markdown/daily_summary_2026-02-13.md",
+                "pdf": false
+            }
+        ]
+    },
+    "ideas": {
+        "title": "Brainstorms & Future Mapping",
+        "icon": "💡",
+        "lanes": [
+            "business",
+            "shared"
+        ],
+        "docs": [
+            {
+                "name": "Action Triage Mobile Vs Terminal 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/action_triage_mobile_vs_terminal_2026-02-12.md",
+                "pdf": false
+            },
+            {
+                "name": "Ecosystem Architecture Audit 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/ecosystem_architecture_audit_2026-02-11.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Brainstorm Bn Governance 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/panel_brainstorm_bn_governance_2026-02-13.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Consultation Dashboard Features 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/panel_consultation_dashboard_features_2026-02-08.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Refinement Photography Update 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/panel_refinement_photography_update_2026-02-08.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Response Site Review 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/panel_response_site_review_2026-02-08.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Review Guides Page 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/panel_review_guides_page_2026-02-09.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Review Mobile Command Center 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/panel_review_mobile_command_center_2026-02-11.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Review System 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/panel_review_system_2026-02-10.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Review Web Dev Pipeline 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/panel_review_web_dev_pipeline_2026-02-08.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Review Wnq Website Build 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/panel_review_wnq_website_build_2026-02-12.md",
+                "pdf": false
+            },
+            {
+                "name": "Setupconcierge Site Review 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/setupconcierge_site_review_2026-02-08.md",
+                "pdf": false
+            },
+            {
+                "name": "Website Photography Update Proposal 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/website_photography_update_proposal_2026-02-08.md",
+                "pdf": false
+            },
+            {
+                "name": "README",
+                "path": "Strategy/Parking Lot/README.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Consultation Sterling Intake 2026",
+                "path": "Advisory Panel/Consultations/Assets/Markdown/panel_consultation_sterling_intake_2026-02-15.md",
+                "pdf": false
+            }
+        ]
+    }
+}

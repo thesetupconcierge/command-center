@@ -755,6 +755,219 @@
                 padding: 16px;
             }
         }
+
+        /* ========== REGISTRY HUB STYLES ========== */
+        .registry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .registry-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 14px 18px;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
+        }
+
+        .registry-item:hover {
+            border-color: var(--primary);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .registry-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .registry-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .registry-meta {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .registry-actions {
+            display: flex;
+            gap: 8px;
+            margin-left: 12px;
+        }
+
+        .action-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+        }
+
+        .action-icon:hover {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+        }
+
+        .action-icon.pdf:hover {
+            background: var(--red);
+            border-color: var(--red);
+            color: #fff;
+        }
+
+        .registry-lane-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin: 32px 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-bright);
+        }
+
+        .registry-lane-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* Finance Widget */
+        .finance-widget {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 24px;
+        }
+
+        .finance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .finance-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .growth-container {
+            margin-bottom: 20px;
+        }
+
+        .growth-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+        }
+
+        .growth-bar-bg {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .growth-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #10b981);
+            border-radius: 4px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .finance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .finance-stat {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+        }
+
+        .stat-label {
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-bright);
+        }
+
+        .time-shield {
+            margin-top: 16px;
+            padding: 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            color: #60a5fa;
+        }
+
+        .shield-pulse {
+            width: 8px;
+            height: 8px;
+            background: #3b82f6;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
+        }
     </style>
 </head>
 
@@ -801,9 +1014,9 @@
     </div>
 
     <div class="hud-nav">
-        <button class="nav-btn active" id="btn-business" onclick="app.switchMode('business')">🏢 Business
-            Hub</button>
+        <button class="nav-btn active" id="btn-business" onclick="app.switchMode('business')">🏢 Business Hub</button>
         <button class="nav-btn" id="btn-career" onclick="app.switchMode('career')">🚀 Career Hub</button>
+        <button class="nav-btn" id="btn-registry" onclick="app.switchMode('registry')">🗄️ Registry Hub</button>
     </div>
     </div>
 
@@ -814,6 +1027,39 @@
                 <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Mode Readiness</div>
                 <div id="readiness-ring"></div>
                 <div id="stats-panel" style="margin-top:16px;"></div>
+            </div>
+
+            <!-- Finance Tracker -->
+            <div class="finance-widget">
+                <div class="finance-header">
+                    <div class="finance-title">💰 Financial Engine</div>
+                </div>
+
+                <div class="growth-container">
+                    <div class="growth-label">
+                        <span>Ecosystem Growth</span>
+                        <span id="growthPercent" style="color: var(--accent);">0%</span>
+                    </div>
+                    <div class="growth-bar-bg">
+                        <div class="growth-bar-fill" id="growthBar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="finance-grid">
+                    <div class="finance-stat">
+                        <div class="stat-label">Proj. Gross (Monthly)</div>
+                        <div class="stat-value" id="projGross">$10,400</div>
+                    </div>
+                    <div class="finance-stat">
+                        <div class="stat-label">Clinical Rate</div>
+                        <div class="stat-value">$60/hr</div>
+                    </div>
+                </div>
+
+                <div class="time-shield">
+                    <div class="shield-pulse"></div>
+                    <div id="timeShieldStatus">Shield Active: 20:00 - 22:00</div>
+                </div>
             </div>
 
             <div id="sidebar-contextual">
@@ -887,6 +1133,14 @@
             <input type="text" id="gist-id" class="input-field">
             <label class="status-label">GitHub PAT</label>
             <input type="password" id="gist-pat" class="input-field">
+            <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:20px;">
+                <label class="status-label">🛠️ Maintenance</label>
+                <button onclick="app.clearLogs()"
+                    style="background:rgba(255, 68, 68, 0.1); color:var(--red); border:1px solid var(--red); padding:10px 16px; border-radius:8px; font-weight:700; cursor:pointer; width:100%; transition:all 0.2s;"
+                    onmouseover="this.style.background='var(--red)'; this.style.color='#fff';"
+                    onmouseout="this.style.background='rgba(255, 68, 68, 0.1)'; this.style.color='var(--red)';">Archive
+                    & Condense Session (Current Hub)</button>
+            </div>
             <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px;">
                 <button onclick="app.toggleSettings()"
                     style="background:none; border:none; color:var(--text-dim); cursor:pointer;">Cancel</button>
@@ -987,6 +1241,7 @@
             }
         };
 
+
         const QUIZ_DATA = {
             siemens_ppcl: {
                 lane: 'career',
@@ -1029,14 +1284,14 @@
 
         const NEXT_ACTIONS = [
             // CAREER ACTIONS
-            { id: "a16", text: "Sterling/Xenqu Onboarding Documentation (Checklist v1)", urgency: "now", source: "Founder Briefing", lane: "career" },
+            { id: "a16", text: "Sterling/Xenqu Onboarding Documentation (Checklist v1)", preChecked: true, urgency: "now", source: "Founder Briefing", lane: "career" },
             { id: "a22", text: "Final iPhone test for Deep Link highlight visibility", urgency: "now", source: "Panel Review", lane: "career" },
             { id: "a30", text: "Complete Siemens Platform Deep-Dive (Insight/Desigo)", urgency: "now", source: "Career Hub", lane: "career" },
             { id: "a31", text: "Review Technical Talking Points for Siemens Peer Interview", urgency: "soon", source: "Career Hub", lane: "career" },
 
             // BUSINESS ACTIONS
-            { id: "a17", text: "CBRE Clinical Operations Pitch (Proposal v1) @ 11AM Monday", urgency: "now", source: "Founder Briefing", lane: "business" },
-            { id: "a21", text: "Link Clinical OS protocol to Black Nexus onboarding track", urgency: "now", source: "Panel Review", lane: "business" },
+            { id: "a20", text: "Send WNQ Proposal + Collect 50% Upfront ($1,500)", urgency: "now", source: "Phase 1A Sprint", lane: "business" },
+            { id: "a21", text: "Link Clinical OS protocol to Black Nexus onboarding track", preChecked: true, urgency: "now", source: "Panel Review", lane: "business" },
             { id: "a23", text: "Extract inline Hub CSS to hub-core.css", urgency: "soon", source: "Refactor", lane: "business" },
             { id: "a32", text: "Audit 'antigravity/workflows' for manual vs auto drift", urgency: "now", source: "Morning Brief", lane: "business" },
             { id: "a33", text: "Process raw foundation files into system refinements", urgency: "now", source: "Morning Brief", lane: "business" }
@@ -1044,11 +1299,7 @@
 
         class MasterApp {
             constructor() {
-                this.mode = 'business';
-                this.state = {
-                    business: { tasks: {}, logs: [], completedActions: {}, collapsed: {} },
-                    career: { tasks: {}, logs: [], completedActions: {}, collapsed: {} }
-                };
+                this.registryData = {};
                 this.syncTimer = null;
                 this.init();
             }
@@ -1056,6 +1307,11 @@
             async init() {
                 if (!this.checkAuthentication()) return;
                 this.loadLocal();
+
+                // Fetch dynamic registry data
+                await this.loadRegistryData();
+                this.updateFinance();
+
                 const hash = window.location.hash.substring(1);
                 if (hash === 'career') this.switchMode('career');
                 else this.switchMode('business');
@@ -1076,25 +1332,20 @@
 
             switchMode(mode) {
                 this.mode = mode;
-                document.body.setAttribute('data-theme', mode);
-                document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.id === `btn-${mode}`));
+                document.body.setAttribute('data-theme', mode === 'registry' ? 'business' : mode);
+                document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+                document.getElementById(`btn-${mode}`).classList.add('active');
 
-                // Clinical Branding Refresh
-                const title = document.getElementById('hub-title');
-                const badge = document.querySelector('.status-item div[style*="font-weight:800"]');
-                const businessOnly = document.querySelectorAll('.business-only');
+                // Toggle lane-specific status elements
+                document.querySelectorAll('.business-only').forEach(el => el.style.display = (mode === 'business' || mode === 'registry') ? 'flex' : 'none');
 
-                if (title) {
-                    title.innerText = mode === 'business' ? 'Clinical Development Agency' : 'Clinical Career Hub';
-                }
-                if (badge) {
-                    badge.innerText = mode === 'business' ? 'CDA' : 'CCH';
+                // Initialize state if switching to a mode for the first time
+                if (!this.state[mode]) {
+                    this.state[mode] = { tasks: {}, logs: [], completedActions: {}, collapsed: {} };
                 }
 
+                this.render();
                 window.location.hash = mode;
-
-                // Contextual UI Toggles
-                businessOnly.forEach(el => el.style.display = mode === 'business' ? 'flex' : 'none');
 
                 this.render();
             }
@@ -1169,8 +1420,55 @@
                 if (status === 'error') { dot.style.background = 'var(--red)'; txt.innerText = 'Sync Error'; }
             }
 
+            async loadRegistryData() {
+                try {
+                    const res = await fetch('registry_data.json');
+                    if (res.ok) {
+                        this.registryData = await res.json();
+                        console.log("Registry Sync: Dynamic data loaded.");
+                    }
+                } catch (e) {
+                    console.error("Registry Sync: Failed to load dynamic data.", e);
+                }
+            }
+
+            updateFinance() {
+                // Baseline: Sterling $60/hr * 40hrs * 4.33 weeks = ~$10,400
+                const careerGross = 10400;
+                // Currently assume business revenue is starting at $2000 (Phase 1 Target)
+                const businessRevenue = 2000;
+                const totalEcosystem = careerGross + businessRevenue;
+                const growthFactor = (businessRevenue / careerGross) * 100;
+
+                const growthBar = document.getElementById('growthBar');
+                const growthPct = document.getElementById('growthPercent');
+                const projGross = document.getElementById('projGross');
+
+                if (growthBar) growthBar.style.width = `${Math.min(growthFactor, 100)}%`;
+                if (growthPct) growthPct.innerText = `${growthFactor.toFixed(1)}%`;
+                if (projGross) projGross.innerText = `$${totalEcosystem.toLocaleString()}`;
+
+                // Calculate Shield Status
+                const now = new Date();
+                const hour = now.getHours();
+                const statusEl = document.getElementById('timeShieldStatus');
+
+                if (statusEl) {
+                    if (hour >= 20 && hour <= 22) {
+                        statusEl.innerText = "Shield Active: Deep Work Mode";
+                        statusEl.parentElement.style.background = "rgba(59, 130, 246, 0.15)";
+                        statusEl.parentElement.style.borderColor = "#3b82f6";
+                    } else {
+                        statusEl.innerText = "Shield Standby: Sterling Hours";
+                        statusEl.parentElement.style.background = "rgba(16, 185, 129, 0.1)";
+                        statusEl.parentElement.style.borderColor = "rgba(16, 185, 129, 0.2)";
+                        statusEl.previousElementSibling.style.background = "#10b981"; // pulse
+                    }
+                }
+            }
+
             getTaskState(id) {
-                if (this.state[this.mode].tasks[id]) return this.state[this.mode].tasks[id];
+                if (this.state[this.mode] && this.state[this.mode].tasks && this.state[this.mode].tasks[id]) return this.state[this.mode].tasks[id];
                 // Check preChecked
                 for (const s of Object.values(TASK_DATA)) {
                     const t = s.tasks.find(x => x.id === id);
@@ -1196,6 +1494,15 @@
                 document.getElementById('log-input').value = '';
                 this.saveLocal();
                 this.render();
+            }
+
+            clearLogs() {
+                if (confirm(`⚠️ Are you sure you want to Archive & Condense all logs for the ${this.mode} hub? This purges the dashboard feed; ensure your extraction is complete first.`)) {
+                    this.state[this.mode].logs = [];
+                    this.addLog(`🧹 ${this.mode.charAt(0).toUpperCase() + this.mode.slice(1)} Session Archived & Condensed.`);
+                    this.saveLocal();
+                    this.render();
+                }
             }
 
             toggleAction(id) {
@@ -1398,43 +1705,86 @@
                 if (extraLinks) extraLinks.style.display = this.mode === 'career' ? 'block' : 'none';
 
                 // Sections
-                document.getElementById('task-sections-container').innerHTML = `
-                    <div id="${this.mode}-portal" class="hub-container">
-                        ${laneTasks.map(s => {
-                    const sDone = s.tasks.filter(t => this.getTaskState(t.id) === 'done').length;
-                    // Find the key in TASK_DATA for this section to use as ID
-                    const sectionKey = Object.keys(TASK_DATA).find(key => TASK_DATA[key] === s);
-                    return `
-                                <div class="card fade-in" id="${sectionKey}">
-                                  <div class="task-section-header">
-                                    <div class="section-title">
-                                      ${s.title}
-                                      <span class="section-badge" style="background:${s.badgeColor}20;color:${s.badgeColor}">${s.badge}</span>
-                                      <span class="deeplink-btn" title="Copy Deep Link" onclick="app.copyDeepLink('${sectionKey}')">🔗</span>
-                                    </div>
-                                    <div class="status-label">${sDone}/${s.tasks.length}</div>
-                                  </div>
-                                  <div class="task-list">
-                                    ${s.tasks.map(t => `
-                                      <div class="task-item" data-status="${this.getTaskState(t.id)}">
-                                        <div class="task-check" data-state="${this.getTaskState(t.id)}" onclick="app.cycleTask('${t.id}')"></div>
-                                        <div class="task-text">${t.text}</div>
+                if (this.mode === 'registry') {
+                    this.renderRegistry();
+                } else {
+                    document.getElementById('task-sections-container').innerHTML = `
+                        <div id="${this.mode}-portal" class="hub-container">
+                            ${laneTasks.map(s => {
+                        const sDone = s.tasks.filter(t => this.getTaskState(t.id) === 'done').length;
+                        // Find the key in TASK_DATA for this section to use as ID
+                        const sectionKey = Object.keys(TASK_DATA).find(key => TASK_DATA[key] === s);
+                        return `
+                                    <div class="card fade-in" id="${sectionKey}">
+                                      <div class="task-section-header">
+                                        <div class="section-title">
+                                          ${s.title}
+                                          <span class="section-badge" style="background:${s.badgeColor}20;color:${s.badgeColor}">${s.badge}</span>
+                                          <span class="deeplink-btn" title="Copy Deep Link" onclick="app.copyDeepLink('${sectionKey}')">🔗</span>
+                                        </div>
+                                        <div class="status-label">${sDone}/${s.tasks.length}</div>
                                       </div>
-                                    `).join('')}
-                                  </div>
-                                </div>
-                              `;
-                }).join('')}
-                    </div>
-                `;
+                                      <div class="task-list">
+                                        ${s.tasks.map(t => `
+                                          <div class="task-item" data-status="${this.getTaskState(t.id)}">
+                                            <div class="task-check" data-state="${this.getTaskState(t.id)}" onclick="app.cycleTask('${t.id}')"></div>
+                                            <div class="task-text">${t.text}</div>
+                                          </div>
+                                        `).join('')}
+                                      </div>
+                                    </div>
+                                  `;
+                    }).join('')}
+                        </div>
+                    `;
+                }
 
                 // Logs
-                document.getElementById('log-list').innerHTML = this.state[this.mode].logs.map(l => `
+                const currentLogs = (this.state[this.mode] && this.state[this.mode].logs) ? this.state[this.mode].logs : (this.state['business'] ? this.state['business'].logs : []);
+                document.getElementById('log-list').innerHTML = currentLogs.map(l => `
           <div class="log-entry">
             <div class="log-time">${l.time}</div>
             <div class="log-text">${l.text}</div>
           </div>
         `).join('');
+            }
+
+            renderRegistry() {
+                const container = document.getElementById('task-sections-container');
+                let html = '<div class="hub-container fade-in">';
+
+                Object.entries(this.registryData).forEach(([key, cat]) => {
+                    const isVisible = cat.lanes.includes(this.mode) || cat.lanes.includes('shared');
+                    if (!isVisible) return;
+
+                    html += `
+                        <div class="registry-lane">
+                            <div class="registry-lane-title">${cat.icon} ${cat.title}</div>
+                            <div class="registry-grid">
+                                ${cat.docs.map(doc => {
+                        const mdPath = doc.isOnlyPdf ? '#' : `../../Business Ideas/Setup Concierge/${doc.path}`;
+                        const pdfPath = doc.isOnlyPdf ? `../../Business Ideas/Setup Concierge/${doc.path}` : `../../Business Ideas/Setup Concierge/${doc.path.replace('.md', '.pdf').replace('/Markdown/', '/PDF/').replace('/Assets/Markdown/', '/Assets/PDF/').replace('career/docs/', 'career/docs/assets/PDF/')}`;
+
+                        return `
+                                        <div class="registry-item">
+                                            <div class="registry-info">
+                                                <div class="registry-name">${doc.name}</div>
+                                                <div class="registry-meta">${doc.path.split('/').pop().split('.').shift()}</div>
+                                            </div>
+                                            <div class="registry-actions">
+                                                ${!doc.isOnlyPdf ? `<a href="${mdPath}" class="action-icon" title="View Markdown">📝</a>` : ''}
+                                                ${doc.pdf ? `<a href="${pdfPath}" class="action-icon pdf" title="View PDF">📕</a>` : ''}
+                                            </div>
+                                        </div>
+                                    `;
+                    }).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+                container.innerHTML = html;
             }
         }
 
