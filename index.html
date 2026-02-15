@@ -1478,6 +1478,32 @@
                 this.init();
             }
 
+            resolveDocPath(rawPath, isPdf = false) {
+                if (!rawPath || rawPath === '#') return '#';
+
+                // Strip landing folder if present (e.g. Advisory Panel/...)
+                let filename = rawPath.split('/').pop();
+                let pathLower = rawPath.toLowerCase();
+
+                // 1. Career Documents
+                if (pathLower.includes('career/docs/')) {
+                    return `career/docs/${filename}${isPdf && !filename.endsWith('.pdf') ? '.pdf' : ''}`;
+                }
+
+                // 2. Playbook / Governance
+                if (pathLower.includes('playbook/')) {
+                    return `playbook/${filename}${isPdf && !filename.endsWith('.pdf') ? '.pdf' : ''}`;
+                }
+
+                // 3. Resources (PDF ONLY)
+                if (pathLower.includes('resources/') && isPdf) {
+                    return `business/docs/resources/${filename}${!filename.endsWith('.pdf') ? '.pdf' : ''}`;
+                }
+
+                // 4. Default Business Docs (Black Nexus, WNQ, Advisory Panel)
+                return `business/docs/${filename}${isPdf && !filename.endsWith('.pdf') ? '.pdf' : ''}`;
+            }
+
             setupIntercept() {
                 document.addEventListener('click', (e) => {
                     const link = e.target.closest('a');
@@ -2061,8 +2087,8 @@
                             <div class="registry-lane-title">${cat.icon} ${cat.title}</div>
                             <div class="registry-grid">
                                 ${cat.docs.map(doc => {
-                        const mdPath = doc.isOnlyPdf ? '#' : `../../Business Ideas/Setup Concierge/${doc.path}`;
-                        const pdfPath = doc.isOnlyPdf ? `../../Business Ideas/Setup Concierge/${doc.path}` : `../../Business Ideas/Setup Concierge/${doc.path.replace('.md', '.pdf').replace('/Markdown/', '/PDF/').replace('/Assets/Markdown/', '/Assets/PDF/').replace('career/docs/', 'career/docs/assets/PDF/')}`;
+                        const mdPath = doc.isOnlyPdf ? '#' : this.resolveDocPath(doc.path, false);
+                        const pdfPath = this.resolveDocPath(doc.path, true);
 
                         return `
                                         <div class="registry-item">

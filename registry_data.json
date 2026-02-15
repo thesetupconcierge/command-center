@@ -1,4 +1,24 @@
 {
+    "governance": {
+        "title": "Strategic Core",
+        "icon": "🎯",
+        "lanes": [
+            "business",
+            "shared"
+        ],
+        "docs": [
+            {
+                "name": "Clinical Architecture",
+                "path": "Playbook/clinical-architecture.md",
+                "pdf": false
+            },
+            {
+                "name": "WNQ Completion Roadmap",
+                "path": "WNQ/Action Items/Assets/Markdown/wnq_wix_completion_guide_2026-02-12.md",
+                "pdf": false
+            }
+        ]
+    },
     "advisory": {
         "title": "Advisory Panel Archives",
         "icon": "⚖️",
