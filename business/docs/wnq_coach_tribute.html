@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Tribute | Warriors Never Quit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050507;
+            --accent: #d4af37;
+            /* Gold */
+            --text: #e4e4e7;
+            --text-dim: #a1a1aa;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(212, 175, 55, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+        }
+
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: var(--text-dim);
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin: 100px auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .event {
+            margin-bottom: 80px;
+            width: 45%;
+            position: relative;
+        }
+
+        .event:nth-child(even) {
+            margin-left: auto;
+            text-align: left;
+        }
+
+        .event:nth-child(odd) {
+            text-align: right;
+        }
+
+        .event h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .event p {
+            color: var(--text-dim);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        footer {
+            padding: 100px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            background: linear-gradient(to top, rgba(212, 175, 55, 0.02), transparent);
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid var(--accent);
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background: var(--accent);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero">
+        <p>In Loving Memory of</p>
+        <h1>The Coach</h1>
+        <p>A legacy of strength, integrity, and the warriors he built. His vision continues within every life he
+            touched.</p>
+    </section>
+
+    <div class="timeline">
+        <div class="event">
+            <h3>The Foundation</h3>
+            <p>19XX — Early years and the spark of the warrior spirit.</p>
+            <div class="image-placeholder">[ Waiting for Historical Media ]</div>
+        </div>
+        <div class="event">
+            <h3>Building WNQ</h3>
+            <p>20XX — Establishing the mission to serve veterans and the community.</p>
+            <div class="image-placeholder">[ Waiting for Board Action Media ]</div>
+        </div>
+        <div class="event">
+            <h3>A Lasting Impact</h3>
+            <p>Present — The torch is passed to the next generation of leaders.</p>
+        </div>
+    </div>
+
+    <footer>
+        <h2 style="margin-bottom: 30px;">"Never Quit"</h2>
+        <a href="../index.html" class="back-link">Return to Site</a>
+    </footer>
+</body>
+
+</html>

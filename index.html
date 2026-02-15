@@ -541,43 +541,43 @@
     <!-- Status Bar -->
     <div class="status-bar">
         <div class="status-items">
-            <div class="status-item">
-                <div
-                    style="width:28px; height:28px; background:var(--primary); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#000; transition: background 0.5s;">
-                    SC</div>
-                <span style="font-weight:700; font-size:1rem; letter-spacing:-0.02em;">Master Hub</span>
-                <div
-                    style="margin-left:12px; font-size:0.65rem; color:var(--text-dim); background:rgba(0,0,0,0.3); padding:4px 8px; border-radius:4px; border:1px solid var(--border); display:flex; align-items:center; gap:6px;">
-                    <span
-                        style="width:6px; height:6px; background:var(--green); border-radius:50%; box-shadow: 0 0 10px var(--green);"></span>
-                    Governed by **Sprint Command**
-                </div>
-            </div>
-
-            <div class="status-item" id="global-revenue">
-                <span class="status-label">Revenue Goal ($5K):</span>
-                <div class="revenue-mini-bar">
-                    <div class="revenue-mini-fill" id="revenue-fill"></div>
-                </div>
-                <span class="status-value" id="revenue-current">...</span>
-            </div>
-
-            <div class="status-item">
-                <span class="status-label">WNQ Health:</span>
-                <span class="status-value" style="color:var(--green)">100% OPERATIONAL</span>
+            <div
+                style="width:28px; height:28px; background:var(--primary); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#000; transition: background 0.5s;">
+                CD</div>
+            <span id="hub-title" style="font-weight:700; font-size:1rem; letter-spacing:-0.02em;">Clinical Development
+                Agency</span>
+            <div
+                style="margin-left:12px; font-size:0.65rem; color:var(--text-dim); background:rgba(0,0,0,0.3); padding:4px 8px; border-radius:4px; border:1px solid var(--border); display:flex; align-items:center; gap:6px;">
+                <span
+                    style="width:6px; height:6px; background:var(--green); border-radius:50%; box-shadow: 0 0 10px var(--green);"></span>
+                Governed by **Sprint Command**
             </div>
         </div>
 
-        <div class="hud-nav">
-            <button class="nav-btn active" id="btn-business" onclick="app.switchMode('business')">🏢 Business
-                Hub</button>
-            <button class="nav-btn" id="btn-career" onclick="app.switchMode('career')">🚀 Career Hub</button>
+        <div class="status-item" id="global-revenue">
+            <span class="status-label">Revenue Goal ($5K):</span>
+            <div class="revenue-mini-bar">
+                <div class="revenue-mini-fill" id="revenue-fill"></div>
+            </div>
+            <span class="status-value" id="revenue-current">...</span>
         </div>
 
         <div class="status-item">
-            <button onclick="app.toggleSettings()"
-                style="background:none; border:none; cursor:pointer; color:var(--text-dim); font-size:1.2rem;">⚙️</button>
+            <span class="status-label">WNQ Health:</span>
+            <span class="status-value" style="color:var(--green)">100% OPERATIONAL</span>
         </div>
+    </div>
+
+    <div class="hud-nav">
+        <button class="nav-btn active" id="btn-business" onclick="app.switchMode('business')">🏢 Business
+            Hub</button>
+        <button class="nav-btn" id="btn-career" onclick="app.switchMode('career')">🚀 Career Hub</button>
+    </div>
+
+    <div class="status-item">
+        <button onclick="app.toggleSettings()"
+            style="background:none; border:none; cursor:pointer; color:var(--text-dim); font-size:1.2rem;">⚙️</button>
+    </div>
     </div>
 
     <div class="main">
@@ -626,15 +626,23 @@
                 </div>
             </div>
 
-            <div id="sync-status" style="font-size:0.65rem; color:var(--text-dim); text-align:right; padding:0 10px;">
-                <span id="sync-dot"
-                    style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--border); margin-right:4px;"></span>
-                <span id="sync-text">Local Only</span>
-                <div style="margin-top:8px; opacity:0.6; font-size:0.6rem;">
-                    V8.8.8 Engine • General Advisory Panel Audit: Feb 14
-                </div>
+            <div style="margin-top:16px; border-top:1px solid var(--border); padding-top:12px;">
+                <a href="../"
+                    style="color:var(--text-dim); text-decoration:none; font-size:0.7rem; display:flex; align-items:center; gap:6px;">
+                    ← Back to Launcher
+                </a>
             </div>
         </div>
+
+        <div id="sync-status" style="font-size:0.65rem; color:var(--text-dim); text-align:right; padding:0 10px;">
+            <span id="sync-dot"
+                style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--border); margin-right:4px;"></span>
+            <span id="sync-text">Local Only</span>
+            <div style="margin-top:8px; opacity:0.6; font-size:0.6rem;">
+                V8.8.8 Engine • Last Session: Feb 14-15
+            </div>
+        </div>
+    </div>
     </div>
 
     <!-- Settings Modal -->
@@ -670,9 +678,10 @@
                 ]
             },
             wnq_build: {
-                lane: 'business', area: "wnq", title: "WNQ — Core Revamp Build", badge: "In Progress", badgeColor: "var(--blue)", tasks: [
+                lane: 'business', area: "wnq", title: "WNQ — Core Revamp Build", badge: "Launch Feb 27", badgeColor: "var(--gold)", tasks: [
                     { id: "w21", text: "Hero section high-res board images integration", preChecked: true },
-                    { id: "w22", text: "Finalize Brand Identity guide (colors, fonts, mascot)" },
+                    { id: "w22", text: "Finalize Brand Identity guide (colors, fonts, mascot)", preChecked: true },
+                    { id: "w25", text: "Scaffold Coach Tribute Memorial (Museum Style)" },
                     { id: "w23", text: "Domain migration (staging → warriorsneverquit.com)" },
                     { id: "w24", text: "Final QA pass — links, mobile, SEO, speed" }
                 ]
@@ -762,9 +771,16 @@
                 document.body.setAttribute('data-theme', mode);
                 document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('active', btn.id === `btn-${mode}`));
 
-                // Stricter separation
-                const title = document.querySelector('.status-bar span[style*="font-size:1rem"]');
-                if (title) title.innerText = mode === 'business' ? 'Business Master Hub' : 'Career Master Hub';
+                // Clinical Branding Refresh
+                const title = document.getElementById('hub-title');
+                const badge = document.querySelector('.status-item div[style*="font-weight:800"]');
+
+                if (title) {
+                    title.innerText = mode === 'business' ? 'Clinical Development Agency' : 'Clinical Career Hub';
+                }
+                if (badge) {
+                    badge.innerText = mode === 'business' ? 'CDA' : 'CCH';
+                }
 
                 window.location.hash = mode;
                 this.render();
