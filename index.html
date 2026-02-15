@@ -698,20 +698,20 @@
             }
 
             .status-bar {
-                padding: 10px 16px;
+                padding: 6px 12px;
                 flex-wrap: wrap;
                 z-index: 2001;
-                /* Ensure stay above overlay */
             }
 
             .status-items {
-                gap: 16px;
+                gap: 12px;
                 width: 100%;
                 justify-content: space-between;
             }
 
             #hub-title,
-            .branding-logo {
+            .branding-logo,
+            .status-bar .business-only:not(#global-revenue) {
                 display: none !important;
             }
 
@@ -720,23 +720,29 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 32px;
-                height: 32px;
+                width: 24px;
+                height: 24px;
                 background: linear-gradient(135deg, var(--gold), #e6a000);
                 color: #000;
-                border-radius: 8px;
+                border-radius: 6px;
                 font-weight: 800;
-                font-size: 0.85rem;
-                margin-right: 12px;
-                box-shadow: 0 2px 8px rgba(255, 184, 28, 0.2);
+                font-size: 0.75rem;
+                margin-right: 8px;
+                box-shadow: 0 2px 4px rgba(255, 184, 28, 0.2);
             }
 
             .status-item#global-revenue {
                 width: 100%;
                 justify-content: space-between;
-                margin-top: 8px;
-                padding-top: 8px;
+                margin-top: 4px;
+                padding-top: 4px;
                 border-top: 1px solid var(--border);
+                font-size: 0.75rem;
+            }
+
+            .revenue-mini-bar {
+                width: 60px;
+                height: 4px;
             }
 
             .hud-nav {
@@ -1463,6 +1469,7 @@
 
         class MasterApp {
             constructor() {
+                this.state = { business: {}, career: {}, registry: {} };
                 this.registryData = {};
                 this.setupIntercept();
                 this.init();
