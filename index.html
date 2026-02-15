@@ -1488,33 +1488,35 @@
             resolveDocPath(rawPath, isPdf = false) {
                 if (!rawPath || rawPath === '#') return '#';
 
-                // Strip landing folder if present (e.g. Advisory Panel/...)
+                // Strip landing folder and clean filename
                 let filename = rawPath.split('/').pop();
 
                 // Strip .md if we are going for PDF
                 if (isPdf && filename.toLowerCase().endsWith('.md')) {
                     filename = filename.slice(0, -3);
+                } else if (isPdf && filename.toLowerCase().endsWith('.pdf')) {
+                    filename = filename.slice(0, -4);
                 }
 
                 let pathLower = rawPath.toLowerCase();
 
                 // 1. Career Documents
                 if (pathLower.includes('career/docs/')) {
-                    return `career/docs/${filename}${isPdf && !filename.toLowerCase().endsWith('.pdf') ? '.pdf' : ''}`;
+                    return `career/docs/${filename}${isPdf ? '.pdf' : ''}`;
                 }
 
                 // 2. Playbook / Governance
                 if (pathLower.includes('playbook/')) {
-                    return `playbook/${filename}${isPdf && !filename.toLowerCase().endsWith('.pdf') ? '.pdf' : ''}`;
+                    return `playbook/${filename}${isPdf ? '.pdf' : ''}`;
                 }
 
                 // 3. Resources (PDF ONLY)
                 if (pathLower.includes('resources/') && isPdf) {
-                    return `business/docs/resources/${filename}${!filename.toLowerCase().endsWith('.pdf') ? '.pdf' : ''}`;
+                    return `business/docs/resources/${filename}.pdf`;
                 }
 
                 // 4. Default Business Docs (Black Nexus, WNQ, Advisory Panel)
-                return `business/docs/${filename}${isPdf && !filename.toLowerCase().endsWith('.pdf') ? '.pdf' : ''}`;
+                return `business/docs/${filename}${isPdf ? '.pdf' : ''}`;
             }
 
             parseLinks(text) {
