@@ -63,7 +63,8 @@
         "title": "Black Nexus Strategics",
         "icon": "⬢",
         "lanes": [
-            "business"
+            "business",
+            "shared"
         ],
         "docs": [
             {

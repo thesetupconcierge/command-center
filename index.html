@@ -1504,6 +1504,14 @@
                 return `business/docs/${filename}${isPdf && !filename.endsWith('.pdf') ? '.pdf' : ''}`;
             }
 
+            parseLinks(text) {
+                if (!text) return '';
+                // Simple markdown link parser [label](url)
+                return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, label, url) => {
+                    return `<a href="${url}">${label}</a>`;
+                });
+            }
+
             setupIntercept() {
                 document.addEventListener('click', (e) => {
                     const link = e.target.closest('a');
@@ -2059,7 +2067,7 @@
                                         ${s.tasks.map(t => `
                                           <div class="task-item" data-status="${this.getTaskState(t.id)}">
                                             <div class="task-check" data-state="${this.getTaskState(t.id)}" onclick="app.cycleTask('${t.id}')"></div>
-                                            <div class="task-text">${t.text}</div>
+                                            <div class="task-text">${this.parseLinks(t.text)}</div>
                                           </div>
                                         `).join('')}
                                       </div>
