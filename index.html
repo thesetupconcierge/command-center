@@ -1191,6 +1191,7 @@
                 if (!text.trim()) return;
                 const now = new Date();
                 const time = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                if (!this.state[this.mode].logs) this.state[this.mode].logs = [];
                 this.state[this.mode].logs.unshift({ text: text.trim(), time });
                 document.getElementById('log-input').value = '';
                 this.saveLocal();
@@ -1380,12 +1381,18 @@
 
                 // Actions
                 const actions = NEXT_ACTIONS.filter(a => a.lane === this.mode);
-                document.getElementById('action-list').innerHTML = actions.map(a => `
-           <div class="action-item ${this.state[this.mode].completedActions[a.id] ? 'completed' : ''}" onclick="app.toggleAction('${a.id}')">
-             <div class="action-check"></div>
-             <div><div class="task-text" style="font-size:0.8rem;">${a.text}</div><div class="status-label" style="font-size:0.6rem;">${a.source}</div></div>
-           </div>
-        `).join('');
+                document.getElementById('action-list').innerHTML = actions.map(a => {
+                    const isDone = this.state[this.mode].completedActions && this.state[this.mode].completedActions[a.id];
+                    return `
+                        <div class="action-item ${isDone ? 'completed' : ''}" onclick="app.toggleAction('${a.id}')">
+                            <div class="action-check"></div>
+                            <div>
+                                <div class="task-text" style="font-size:0.8rem;">${a.text}</div>
+                                <div class="status-label" style="font-size:0.6rem;">${a.source}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
 
                 const extraLinks = document.getElementById('extra-links');
                 if (extraLinks) extraLinks.style.display = this.mode === 'career' ? 'block' : 'none';
