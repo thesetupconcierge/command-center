@@ -2043,7 +2043,7 @@
                 // Actions
                 const actions = NEXT_ACTIONS.filter(a => a.lane === this.mode);
                 document.getElementById('action-list').innerHTML = actions.map(a => {
-                    const isDone = this.state[this.mode].completedActions && this.state[this.mode].completedActions[a.id];
+                    const isDone = (this.state[this.mode].completedActions && this.state[this.mode].completedActions[a.id]) || a.preChecked;
                     return `
                         <div class="action-item ${isDone ? 'completed' : ''}" onclick="app.toggleAction('${a.id}')">
                             <div class="action-check"></div>
