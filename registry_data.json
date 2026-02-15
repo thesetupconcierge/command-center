@@ -9,7 +9,7 @@
         "docs": [
             {
                 "name": "Clinical Architecture",
-                "path": "Playbook/clinical_architecture.md",
+                "path": "Playbook/clinical-architecture.md",
                 "pdf": true
             },
             {
