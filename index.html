@@ -534,6 +534,52 @@
             margin-bottom: 16px;
             font-family: inherit;
         }
+
+        .quiz-modal {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .quiz-option {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .quiz-option:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--primary);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background: rgba(var(--primary-rgb), 0.1);
+        }
+
+        .diag-badge {
+            background: var(--gold-dim);
+            color: var(--gold);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
     </style>
 </head>
 
@@ -645,6 +691,13 @@
     </div>
     </div>
 
+    <!-- Quiz Overlay -->
+    <div class="overlay" id="quiz-overlay">
+        <div class="quiz-modal fade-in" id="quiz-content">
+            <!-- Dynamic Quiz Content -->
+        </div>
+    </div>
+
     <!-- Settings Modal -->
     <div class="overlay" id="settings-overlay">
         <div class="settings-modal fade-in">
@@ -725,6 +778,30 @@
                     { id: "s1", text: "Study PPCL Scripting syntax (SET, IF/THEN, GOTO)" },
                     { id: "s2", text: "Review Desigo CC vs Insight architecture" },
                     { id: "s3", text: "Research BACnet/IP and MS/TP field integration" }
+                ]
+            }
+        };
+
+        const QUIZ_DATA = {
+            siemens_ppcl: {
+                lane: 'career',
+                title: 'Siemens PPCL Syntax Diagnostic',
+                questions: [
+                    {
+                        q: "Which command is used to set a point to a specific value in PPCL?",
+                        options: ["VAL", "SET", "MOVE", "WRITE"],
+                        correct: 1
+                    },
+                    {
+                        q: "How do you define a conditional block in PPCL?",
+                        options: ["IF/THEN/ELSE", "WHEN/DO", "CASE/OF", "SWITCH/CASE"],
+                        correct: 0
+                    },
+                    {
+                        q: "What does the command 'GOTO 100' do?",
+                        options: ["Sets value to 100", "Jumps to line 100", "Waits for 100ms", "Stops execution"],
+                        correct: 1
+                    }
                 ]
             }
         };
@@ -883,6 +960,50 @@
                 this.syncFromGist();
             }
 
+            startQuiz(id) {
+                this.currentQuiz = { id, step: 0, score: 0 };
+                document.getElementById('quiz-overlay').classList.add('open');
+                this.renderQuiz();
+            }
+
+            renderQuiz() {
+                const qd = QUIZ_DATA[this.currentQuiz.id];
+                const step = qd.questions[this.currentQuiz.step];
+                const container = document.getElementById('quiz-content');
+
+                if (this.currentQuiz.step < qd.questions.length) {
+                    container.innerHTML = `
+                        <h3 style="margin-bottom:12px;color:var(--gold)">${qd.title}</h3>
+                        <div class="status-label" style="margin-bottom:20px">Question ${this.currentQuiz.step + 1} of ${qd.questions.length}</div>
+                        <p style="margin-bottom:24px;font-weight:600">${step.q}</p>
+                        ${step.options.map((opt, i) => `
+                            <div class="quiz-option" onclick="app.submitAnswer(${i})">${opt}</div>
+                        `).join('')}
+                    `;
+                } else {
+                    const final = Math.round((this.currentQuiz.score / qd.questions.length) * 100);
+                    container.innerHTML = `
+                        <h3 style="margin-bottom:12px;color:var(--green)">Diagnostic Complete</h3>
+                        <div style="font-size:3rem;font-weight:800;margin:20px 0">${final}%</div>
+                        <p style="margin-bottom:24px;color:var(--text-dim)">Knowledge verification saved to session log.</p>
+                        <button onclick="app.closeQuiz()" style="background:var(--primary);color:#000;border:none;padding:12px 24px;border-radius:8px;font-weight:700;cursor:pointer;width:100%">Close Diagnostic</button>
+                    `;
+                    this.addLog(`Completed ${qd.title}: Score ${final}%`);
+                }
+            }
+
+            submitAnswer(idx) {
+                const qd = QUIZ_DATA[this.currentQuiz.id];
+                if (idx === qd.questions[this.currentQuiz.step].correct) this.currentQuiz.score++;
+                this.currentQuiz.step++;
+                this.renderQuiz();
+            }
+
+            closeQuiz() {
+                document.getElementById('quiz-overlay').classList.remove('open');
+                this.currentQuiz = null;
+            }
+
             render() {
                 const laneTasks = Object.values(TASK_DATA).filter(s => s.lane === this.mode);
                 const allLaneTasks = laneTasks.flatMap(s => s.tasks);
@@ -908,6 +1029,22 @@
           <div class="stat-row"><span class="status-label">Total Workload</span><span class="status-value">${allLaneTasks.length} units</span></div>
           <div class="stat-row"><span class="status-label">Shipped</span><span class="status-value" style="color:var(--green)">${done}</span></div>
         `;
+
+                // Sidebar Contextual
+                const sideCtx = document.getElementById('sidebar-contextual');
+                const diag = Object.entries(QUIZ_DATA).find(([id, q]) => q.lane === this.mode);
+                if (diag) {
+                    sideCtx.innerHTML = `
+                        <div class="card fade-in" style="margin-top:16px;">
+                            <div class="status-label">Diagnostic Tool</div>
+                            <div class="diag-badge" onclick="app.startQuiz('${diag[0]}')">
+                                ⚡ ${diag[1].title} Available
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    sideCtx.innerHTML = '';
+                }
 
                 // Revenue Spotlight (Only in Business, but Aiden wants it global? I'll keep it simple for now)
                 const rev = 2000;
