@@ -83,65 +83,44 @@ Home | About | Coach's Legacy | Events | Donate | Volunteers | Contact
 
 ---
 
-### Step 6: Add Board Members Section ⏱️ 15 min
+### Step 6: The "Museum" Leadership Section ⏱️ 20 min
 
-1. Navigate to the **About** page (or Home, wherever board section should live)
-2. **Add Section** → blank section with 3 columns
-3. For each board member, add:
+Follow the **Sprint Command "Best Flow"** recommendation:
 
-**Column 1 — Ike Riley:**
-
-```
-Photo: Use best cutout photo from Lightroom Edited folder
-Name: Ike Riley
-Title: President & Founder
-Bio: Carrying forward the legacy of Coach Ike Riley Sr., Ike leads Warriors Never Quit with the same heart and conviction that built this community over 23 years. His mission: empower every young person who walks through WNQ's doors.
-```
-
-**Column 2 — Terrence Acquah:**
-
-```
-Photo: Use best cutout photo
-Name: Terrence Acquah
-Title: Board Member
-Bio: A dedicated community leader and supporter, Terrence brings strategic vision and hands-on commitment to WNQ's mission of empowering youth through sports, mentorship, and service.
-```
-
-**Column 3 — Carley Riley:**
-
-```
-Photo: Use best cutout photo
-Name: Carley Riley
-Title: Board Member
-Bio: Rooted in the Riley family legacy, Carley carries the torch of community impact — ensuring WNQ's programs honor Coach's vision while growing to meet the needs of today's youth.
-```
-
-1. Section title above the columns:
-
-```
-Our Board
-```
-
-1. Section subtitle:
-
-```
-Driven by Integrity & Strength — the pillars that define everything we do.
-```
-
-1. Style: Dark background, white text, gold accent on names/titles
+1. **Placement**: Directly below the Hero section.
+2. **Visual**: Use **Transparent Cut Outs** of the Board Members.
+3. **Content**:
+    - **Ike Riley** — Overlay his cutout over the "Leadership starts at home" legacy text.
+    - **Board Members** — Position Terrence and Carley as supporting silhouettes flanking the text.
+4. **Style**: Dark background (#1A1A1A), gold accenting on titles.
 
 ---
 
-### Step 7: Add "Integrity" to Brand Pillars ⏱️ 5 min
+### Step 7: The "Impact Pillars" Section ⏱️ 15 min
 
-1. Find the existing pillars section (currently shows "Strength" and "Community")
-2. Replace **"Community"** with **"Faith"** (client's confirmed pillars are: **Integrity, Strength, Faith**)
-3. Add **"Integrity"** if missing
-4. Final pillars strip should read:
+This section acts as the **Proof of Purpose** (Sports, Food, Events).
 
-```
-INTEGRITY  •  STRENGTH  •  FAITH
-```
+1. **Add a new section** with 3 distinct columns.
+2. **Column 1: 🏀 Sports Outreach**
+    - "Mentoring through athletics and youth clinics."
+3. **Column 2: 🥘 Community Assistance**
+    - "Clothing, food, and emergency support for our neighbors."
+4. **Column 3: 🎟️ Legacy Events**
+    - "Gathering the community through the Sneaker Ball and workshops."
+5. **Visual Identity**: Use monochrome photography with **gold vertical dividers**.
+
+---
+
+### Step 8: The Brand Trinity Strip ⏱️ 5 min
+
+1. Find the pillars section.
+2. Align with the confirmed brand trilogy:
+
+    ```
+    INTEGRITY  •  STRENGTH  •  FAITH
+    ```
+
+3. Position this directly *below* the Impact Pillars to link the work to the principles.
 
 ---
 
