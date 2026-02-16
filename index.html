@@ -1391,10 +1391,8 @@
                 ]
             },
             career_intel: {
-                lane: 'career', area: "research", title: "🔍 Career Intelligence", badge: "Dossiers", badgeColor: "var(--teal)", tasks: [
-                    { id: "r1_ref", text: "LinkedIn dossier — Gino Pisano (Technical Peer)", preChecked: true },
-                    { id: "r2_ref", text: "LinkedIn dossier — John Walters (Hiring Manager)", preChecked: true },
-                    { id: "r3_ref", text: "LinkedIn dossier — Michael Ester (Senior Authority)", preChecked: true }
+                lane: 'career', area: "research", title: "🔍 Career Intel — Completed Feb 15 ✅", badge: "Archive", badgeColor: "var(--teal)", tasks: [
+                    { id: "r_arc", text: "Dossiers for Gino, John, Michael archived to action_items_archive.md", preChecked: true }
                 ]
             },
             surgical_scripting: {
@@ -1407,16 +1405,13 @@
 
             // SHARED / UTILITY
             session_archival: {
-                lane: 'business', area: "docs", title: "Session Archival", badge: "Feb 15", badgeColor: "var(--purple)", tasks: [
-                    { id: "sa1", text: "Daily Summary: [Feb 14](business/docs/daily_summary_2026-02-14.md)", preChecked: true },
-                    { id: "sa2", text: "Captain's Log: [Archive](business/docs/captains_log_2026-02-14.md)", preChecked: true }
+                lane: 'business', area: "docs", title: "Session Archival — Completed Feb 15 ✅", badge: "Archive", badgeColor: "var(--purple)", tasks: [
+                    { id: "sa_arc", text: "Feb 14-15 logs and summaries archived.", preChecked: true }
                 ]
             },
             key_documents: {
-                lane: 'shared', area: "docs", title: "📂 Master Documents", badge: "Global", badgeColor: "var(--purple)", tasks: [
-                    { id: "doc1", text: "Master Playbook [PDF](playbook/master_playbook.pdf)", preChecked: true },
-                    { id: "doc2", text: "Brand Kit [PDF](business/docs/brand-kit.pdf)", preChecked: true },
-                    { id: "odoc1", text: "Sterling Benefits [PDF](career/docs/2026_Benefits_Guide.pdf)", preChecked: true }
+                lane: 'shared', area: "docs", title: "📂 Master Docs — Completed Feb 15 ✅", badge: "Archive", badgeColor: "var(--purple)", tasks: [
+                    { id: "kd_arc", text: "Playbook, Brand Kit, and Benefits Guide finalized.", preChecked: true }
                 ]
             }
         };
@@ -1464,14 +1459,11 @@
 
         const NEXT_ACTIONS = [
             // CAREER ACTIONS
-            { id: "a16", text: "Sterling/Xenqu Onboarding Documentation (Checklist v1)", preChecked: true, urgency: "now", source: "Founder Briefing", lane: "career" },
             { id: "a22", text: "Final iPhone test for Deep Link highlight visibility", urgency: "now", source: "Panel Review", lane: "career" },
             { id: "a30", text: "Complete Siemens Platform Deep-Dive (Insight/Desigo)", urgency: "now", source: "Career Hub", lane: "career" },
             { id: "a31", text: "Review Technical Talking Points for Siemens Peer Interview", urgency: "soon", source: "Career Hub", lane: "career" },
 
             // BUSINESS ACTIONS
-            { id: "a20", text: "WNQ Proposal (Drafted - Ready for Ike) + Collect 50% Upfront ($1,500)", preChecked: true, urgency: "now", source: "Phase 1A Sprint", lane: "business" },
-            { id: "a21", text: "Link Clinical OS protocol to Black Nexus onboarding track", preChecked: true, urgency: "now", source: "Panel Review", lane: "business" },
             { id: "a23", text: "Extract inline Hub CSS to hub-core.css", urgency: "soon", source: "Refactor", lane: "business" },
             { id: "a32", text: "Audit 'antigravity/workflows' for manual vs auto drift", urgency: "now", source: "Morning Brief", lane: "business" },
             { id: "a33", text: "Process raw foundation files into system refinements", urgency: "now", source: "Morning Brief", lane: "business" }
@@ -1800,8 +1792,8 @@
             updateFinance() {
                 // Baseline: Sterling $60/hr * 40hrs * 4.33 weeks = ~$10,400
                 const careerGross = 10400;
-                // Currently assume business revenue is starting at $2000 (Phase 1 Target)
-                const businessRevenue = 2000;
+                // Currently assume business revenue is starting at $400 (Actual current status)
+                const businessRevenue = 400;
                 const totalEcosystem = careerGross + businessRevenue;
                 const growthFactor = (businessRevenue / careerGross) * 100;
 
