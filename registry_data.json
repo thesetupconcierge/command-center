@@ -175,6 +175,11 @@
                 "name": "Justice McKinney - BAS Focused",
                 "path": "career/docs/Justice_McKinney_BAS_Focused.md",
                 "pdf": true
+            },
+            {
+                "name": "Sterling Onboarding Checklist",
+                "path": "career/onboarding/sterling_checklist.md",
+                "pdf": false
             }
         ]
     },
