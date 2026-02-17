@@ -567,6 +567,75 @@
             overflow-wrap: anywhere;
         }
 
+        /* Handoff Log Styling */
+        .log-entry[data-category="handoff"] {
+            border-left-color: var(--gold);
+            background: rgba(255, 184, 28, 0.05);
+        }
+
+        /* ========== RISK CARD ========== */
+        .risk-card {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            animation: risk-pulse 3s infinite;
+        }
+
+        .risk-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 1.2rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .risk-content {
+            flex: 1;
+        }
+
+        .risk-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--red);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2px;
+        }
+
+        .risk-msg {
+            font-size: 0.9rem;
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        @keyframes risk-pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2);
+                border-color: rgba(239, 68, 68, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 20px 0 rgba(239, 68, 68, 0.1);
+                border-color: rgba(239, 68, 68, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2);
+                border-color: rgba(239, 68, 68, 0.3);
+            }
+        }
+
         /* ========== UTILS ========== */
         .fade-in {
             animation: fadeIn 0.4s ease-out forwards;
@@ -1273,6 +1342,18 @@
 
         <!-- Center: Task Engine -->
         <div class="center-col">
+            <!-- Critical Risk Card -->
+            <div id="risk-card-container" style="display: none;">
+                <div class="risk-card">
+                    <div class="risk-icon">⚠️</div>
+                    <div class="risk-content">
+                        <div class="risk-title">System Blocker Detected</div>
+                        <div class="risk-msg" id="risk-message">Deployment Lag: Local dashboard has updates not yet
+                            pushed to live URL.</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card spotlight-card">
                 <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Next Actions
                     Spotlight</div>
@@ -1293,7 +1374,14 @@
         <!-- Right: Logs & Knowledge -->
         <div class="right-col">
             <div class="card">
-                <div class="card-title"><span class="dot" style="background:var(--purple)"></span>Captain's Log</div>
+                <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+                    <span><span class="dot" style="background:var(--purple)"></span>Captain's Log</span>
+                    <label
+                        style="font-size: 0.6rem; color: var(--text-dim); display:flex; align-items:center; gap:4px; cursor:pointer;"
+                        title="Show only handoffs/JB">
+                        <input type="checkbox" id="filter-handoff" onclick="app.render()"> Handoffs
+                    </label>
+                </div>
                 <div class="log-entries" id="log-list"></div>
                 <div style="margin-top:16px; display:flex; gap:8px;">
                     <input type="text" id="log-input" class="input-field" placeholder="New entry..."
@@ -1496,14 +1584,13 @@
 
         const NEXT_ACTIONS = [
             // CAREER ACTIONS
-            { id: "a22", text: "Final iPhone test for Deep Link highlight visibility", urgency: "now", source: "Panel Review", lane: "career" },
+            { id: "a22", text: "Final iPhone test for Deep Link highlight visibility (Pulse)", urgency: "now", source: "Panel Review", lane: "career" },
             { id: "a30", text: "Complete Siemens Platform Deep-Dive (Insight/Desigo)", urgency: "now", source: "Career Hub", lane: "career" },
             { id: "a31", text: "Review Technical Talking Points for Siemens Peer Interview", urgency: "soon", source: "Career Hub", lane: "career" },
 
             // BUSINESS ACTIONS
-            { id: "a23", text: "Extract inline Hub CSS to hub-core.css", urgency: "soon", source: "Refactor", lane: "business" },
-            { id: "a32", text: "Audit 'antigravity/workflows' for manual vs auto drift", urgency: "now", source: "Morning Brief", lane: "business" },
-            { id: "a33", text: "Process raw foundation files into system refinements", urgency: "now", source: "Morning Brief", lane: "business" },
+            { id: "a23", text: "Extract inline Hub CSS to hub-core.css (a23)", urgency: "soon", source: "Refactor", lane: "business" },
+            { id: "a35", text: "sc-setup: Initialize .agent/config/surgical_secrets.json", urgency: "now", source: "Ops", lane: "business" },
             { id: "a34", text: "Audit WNQ Staging Site for Best Flow narrative compliance", urgency: "later", source: "User Request", lane: "business" }
         ];
 
@@ -1595,8 +1682,25 @@
                 }
 
                 await this.syncFromGist();
+                this.checkRisks();
                 this.render();
                 if (fullHash.includes(':')) this.handleDeepLink();
+            }
+
+            checkRisks() {
+                const container = document.getElementById('risk-card-container');
+                const msg = document.getElementById('risk-message');
+                const cfg = this.getGistConfig();
+
+                // Logic for "Deployment Lag" or other blockers
+                // In a perfect world, we'd check git status via a local proxy, 
+                // but for now we flag missing Gist config as a high risk.
+                if (!cfg || !cfg.gistId || !cfg.pat) {
+                    msg.innerText = "Security Alert: Dashboard Sync is not configured. run 'csetup' in terminal.";
+                    container.style.display = 'block';
+                } else {
+                    container.style.display = 'none';
+                }
             }
 
             loadLocal() {
@@ -2140,13 +2244,24 @@
                 }
 
                 // Logs
-                const currentLogs = (this.state[this.mode] && this.state[this.mode].logs) ? this.state[this.mode].logs : (this.state['business'] ? this.state['business'].logs : []);
-                document.getElementById('log-list').innerHTML = currentLogs.map(l => `
-          <div class="log-entry">
-            <div class="log-time">${l.time}</div>
-            <div class="log-text">${l.text}</div>
-          </div>
-        `).join('');
+                const filterBtn = document.getElementById('filter-handoff');
+                const isFiltered = filterBtn ? filterBtn.checked : false;
+
+                let currentLogs = (this.state[this.mode] && this.state[this.mode].logs) ? this.state[this.mode].logs : (this.state['business'] ? this.state['business'].logs : []);
+
+                if (isFiltered) {
+                    currentLogs = currentLogs.filter(l => l.text.toLowerCase().includes('#handoff') || l.text.toLowerCase().includes('#jb'));
+                }
+
+                document.getElementById('log-list').innerHTML = currentLogs.map(l => {
+                    const isHandoff = l.text.toLowerCase().includes('#handoff') || l.text.toLowerCase().includes('#jb');
+                    return `
+                        <div class="log-entry" ${isHandoff ? 'data-category="handoff"' : ''}>
+                            <div class="log-time">${l.time}</div>
+                            <div class="log-text">${this.parseLinks(l.text)}</div>
+                        </div>
+                    `;
+                }).join('');
             }
 
             renderRegistry() {
