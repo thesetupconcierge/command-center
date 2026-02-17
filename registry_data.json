@@ -56,6 +56,11 @@
                 "name": "Panel Review 2026",
                 "path": "Advisory Panel/Consultations/Markdown/panel_review_2026-02-15.md",
                 "pdf": false
+            },
+            {
+                "name": "Panel Audit Strategic Pivot 2026",
+                "path": "Advisory Panel/Consultations/Markdown/panel_audit_strategic_pivot_2026-02-17.md",
+                "pdf": false
             }
         ]
     },
@@ -230,11 +235,6 @@
                 "name": "Wnq Ike Approach Plan",
                 "path": "WNQ/Website & Strategy/wnq_ike_approach_plan.md",
                 "pdf": false
-            },
-            {
-                "name": "Wnq Monetization Proposal V1",
-                "path": "WNQ/Website & Strategy/wnq_monetization_proposal_v1.md",
-                "pdf": false
             }
         ]
     },
@@ -314,6 +314,11 @@
             {
                 "name": "Captains Log 2026",
                 "path": "Resources/Walkthroughs/captains_log_2026-02-15.md",
+                "pdf": false
+            },
+            {
+                "name": "Daily Summary 2026",
+                "path": "Resources/Walkthroughs/daily_summary_2026-02-17.md",
                 "pdf": false
             }
         ]
