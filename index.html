@@ -7,6 +7,7 @@
     <title>Setup Concierge — Master Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <style id="main-styles">
         /* ========== THEMES & VARIABLES ========== */
         :root {
@@ -384,6 +385,7 @@
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
+            -webkit-user-select: none;
             user-select: none;
         }
 
@@ -587,6 +589,7 @@
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.8);
+            -webkit-backdrop-filter: blur(8px);
             backdrop-filter: blur(8px);
             z-index: 2000;
             display: none;
@@ -1136,6 +1139,40 @@
                 font-size: 1rem;
             }
         }
+
+        /* 📱 iPad & Tablet Split-View Specialization */
+        @media (min-width: 769px) and (max-width: 1366px) {
+            .main {
+                grid-template-columns: 280px 1fr !important;
+                gap: 16px;
+            }
+
+            .right-col {
+                display: none !important;
+                /* Contextual collapse for more workspace */
+            }
+
+            .viewer-content {
+                max-width: 95%;
+            }
+        }
+
+        /* 🔗 Mobile Deep Link Visibility */
+        .section-highlight {
+            animation: highlight-pulse 2s ease-out;
+            border-color: var(--gold) !important;
+            box-shadow: 0 0 20px var(--gold-dim);
+        }
+
+        @keyframes highlight-pulse {
+            0% {
+                background: var(--gold-dim);
+            }
+
+            100% {
+                background: transparent;
+            }
+        }
     </style>
 </head>
 
@@ -1466,7 +1503,8 @@
             // BUSINESS ACTIONS
             { id: "a23", text: "Extract inline Hub CSS to hub-core.css", urgency: "soon", source: "Refactor", lane: "business" },
             { id: "a32", text: "Audit 'antigravity/workflows' for manual vs auto drift", urgency: "now", source: "Morning Brief", lane: "business" },
-            { id: "a33", text: "Process raw foundation files into system refinements", urgency: "now", source: "Morning Brief", lane: "business" }
+            { id: "a33", text: "Process raw foundation files into system refinements", urgency: "now", source: "Morning Brief", lane: "business" },
+            { id: "a34", text: "Audit WNQ Staging Site for Best Flow narrative compliance", urgency: "later", source: "User Request", lane: "business" }
         ];
 
         class MasterApp {
@@ -1721,10 +1759,15 @@
                 content.innerHTML = '<div style="text-align:center; padding:40px;">⌛ Loading engine...</div>';
 
                 try {
-                    const res = await fetch(url);
-                    if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
-                    const raw = await res.text();
-                    content.innerHTML = this.parseMarkdown(raw);
+                    if (url.toLowerCase().endsWith('.pdf')) {
+                        // PDF.js Integration Point
+                        content.innerHTML = `<iframe src="${url}" width="100%" height="700px" style="border:none; border-radius:8px;"></iframe>`;
+                    } else {
+                        const res = await fetch(url);
+                        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+                        const raw = await res.text();
+                        content.innerHTML = this.parseMarkdown(raw);
+                    }
                     overlay.scrollTop = 0;
                 } catch (e) {
                     content.innerHTML = `<div style="color:var(--red); padding:40px; border:1px solid var(--red); border-radius:8px; background:rgba(255,255,255,0.03);">
