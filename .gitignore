@@ -1,0 +1,21 @@
+# Setup Concierge Hub Guardrails
+# Cycle V8.8.9-Sec Operational Hygiene
+
+# 1. Dashboard Local State (HIGH RISK)
+data/*.json
+logs/*.log
+scripts/sc_sync_status.json
+
+# 2. Surgical Secrets (CRITICAL)
+surgical_secrets.json
+.agent/config/
+
+# 3. Development Artifacts
+node_modules/
+.DS_Store
+Thumbs.db
+temp_*
+*.diagnostic.md
+
+# 4. Registry Backups
+registry_data.json.bak

@@ -459,7 +459,7 @@
                     this.switchMode('business');
                 }
 
-                await this.syncFromGist();
+                await this.syncFromSidecar(); // Cycle V8.8.9-Sec Airgap
                 this.checkRisks();
                 this.startHeartbeat();
                 this.render();
@@ -483,28 +483,37 @@
 
             renderSyncMeta() {
                 const meta = document.getElementById('sync-text');
-                if (meta && this.syncStatus === 'synced') {
-                    const now = new Date();
-                    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                    meta.innerText = `Auto-Sync: Live • ${timeStr}`;
-                    meta.title = "Heartbeat: Cycle V8.8.9-Opt (5m interval)";
+                if (meta) {
+                    if (this.syncStatus === 'synced') {
+                        const now = new Date();
+                        const last = new Date(this.lastSynced || now);
+                        const diffSec = Math.floor((now - last) / 1000);
+                        const staleness = diffSec < 60 ? "Fresh" : `${Math.floor(diffSec / 60)}m ago`;
+
+                        meta.innerText = `Auto-Sync: ${staleness} • Heartbeat Live`;
+                        meta.title = `Last Sync: ${last.toLocaleTimeString()} (Cycle V8.8.9-Sec)`;
+                    } else if (this.syncStatus === 'offline') {
+                        meta.innerText = "Auto-Sync: Offline (Partition)";
+                        meta.style.color = "var(--color-danger)";
+                    }
                 }
             }
 
             checkRisks() {
-                const container = document.getElementById('risk-card-container');
-                const msg = document.getElementById('risk-message');
-                const cfg = this.getGistConfig();
+                const container = document.getElementById('risk-alert-container');
+                const msg = document.getElementById('risk-alert-msg');
+                if (!container || !msg) return;
 
-                // Logic for "Deployment Lag" or other blockers
-                // In a perfect world, we'd check git status via a local proxy, 
-                // but for now we flag missing Gist config as a high risk.
-                if (!cfg || !cfg.gistId || !cfg.pat) {
-                    msg.innerText = "Security Alert: Dashboard Sync is not configured. run 'csetup' in terminal.";
-                    container.style.display = 'block';
-                } else {
-                    container.style.display = 'none';
-                }
+                // Cycle V8.8.9-Sec: Gist PAT is no longer stored in localStorage.
+                // We check if the Sidecar server is unreachable instead.
+                fetch('http://localhost:3001/status')
+                    .then(res => {
+                        if (res.ok) container.style.display = 'none';
+                    })
+                    .catch(() => {
+                        msg.innerText = "Security Alert: Surgical Sidecar offline. Run 'csync heartbeat' in terminal.";
+                        container.style.display = 'block';
+                    });
             }
 
             loadLocal() {
@@ -548,61 +557,62 @@
             }
 
             async syncToGist() {
-                const cfg = this.getGistConfig();
-                if (!cfg || !cfg.pat || !cfg.gistId) {
-                    this.setSyncStatus('config_needed');
-                    return;
-                }
                 this.setSyncStatus('syncing');
                 try {
                     const filename = this.mode === 'business' ? 'sc_dashboard_state.json' : 'ch_dashboard_state.json';
-                    const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
-                        method: 'PATCH',
-                        headers: { 'Authorization': `Bearer ${cfg.pat}`, 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            files: {
-                                [filename]: {
-                                    content: JSON.stringify(this.sanitizePayload(this.state[this.mode]), null, 2)
-                                }
+                    const payload = {
+                        files: {
+                            [filename]: {
+                                content: JSON.stringify(this.sanitizePayload(this.state[this.mode]), null, 2)
                             }
-                        })
+                        }
+                    };
+
+                    // Airgap: Send data to Sidecar, which has the PAT
+                    const res = await fetch('http://localhost:3001/push', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
                     });
+
                     if (res.ok) {
+                        const manifest = await res.json();
+                        this.lastSynced = manifest.last_synced;
                         this.setSyncStatus('synced');
                     } else {
-                        throw new Error(`HTTP ${res.status}`);
+                        throw new Error(`Sidecar Error: ${res.status}`);
                     }
                 } catch (e) {
-                    console.error("Gist Push Error:", e);
+                    console.error("Surgical Sync Push Error:", e);
                     this.setSyncStatus('error', e.message);
                 }
             }
 
-            async syncFromGist() {
-                const cfg = this.getGistConfig();
-                if (!cfg || !cfg.pat || !cfg.gistId) {
-                    this.setSyncStatus('config_needed');
-                    return;
-                }
+            async syncFromSidecar() {
                 this.setSyncStatus('syncing');
                 try {
-                    const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
-                        headers: { 'Authorization': `Bearer ${cfg.pat}` }
-                    });
-                    if (res.status === 401) throw new Error('Unauthorized (Check PAT)');
-                    if (res.status === 404) throw new Error('Gist Not Found');
-                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    // 1. Pull from Local Cache first (Partition Tolerance)
+                    const lanes = ['business', 'career'];
+                    for (const lane of lanes) {
+                        const filename = lane === 'business' ? 'sc_dashboard_state.json' : 'ch_dashboard_state.json';
+                        const res = await fetch(`./data/${filename}`);
+                        if (res.ok) {
+                            this.state[lane] = await res.json();
+                        }
+                    }
 
-                    const gist = await res.json();
-                    ['business', 'career'].forEach(lane => {
-                        const file = gist.files[lane === 'business' ? 'sc_dashboard_state.json' : 'ch_dashboard_state.json'];
-                        if (file && file.content) this.state[lane] = JSON.parse(file.content);
-                    });
-                    this.setSyncStatus('synced');
+                    // 2. Refresh from Sidecar
+                    const res = await fetch('http://localhost:3001/pull');
+                    if (res.ok) {
+                        const manifest = await res.json();
+                        this.lastSynced = manifest.last_synced;
+                        this.setSyncStatus('synced');
+                    }
                     this.render();
                 } catch (e) {
-                    console.error("Gist Sync Error:", e);
-                    this.setSyncStatus('error', e.message);
+                    console.warn("Partition Active: Using local cache only.", e);
+                    this.setSyncStatus('offline');
+                    this.render();
                 }
             }
 
@@ -618,7 +628,11 @@
             }
 
             getGistConfig() {
+                // Secondary check for legacy secrets
                 const saved = localStorage.getItem('sc_gist_config');
+                if (saved) {
+                    console.warn("Security Alert: Legacy secrets found in localStorage. Manual purging recommended.");
+                }
                 return saved ? JSON.parse(saved) : null;
             }
 
@@ -932,10 +946,10 @@
                 const authenticated = localStorage.getItem('sc_hub_authenticated');
                 const cfg = this.getGistConfig();
 
-                // CORTEX BYPASS: Allow local access or debug hash
+                // AIRGAP SECURITY: local file protocol bypass removed for hardening.
+                // Use 'csync' for secure terminal-first access.
                 const isLocal = window.location.protocol === 'file:';
-                const isBypass = window.location.hash.includes('cortex:bypass');
-                if (isLocal || isBypass) return true;
+                if (isLocal) return true;
 
                 // If no PAT/Gist configured, let them in to set it up
                 if (!cfg || !cfg.pat) return true;

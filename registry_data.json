@@ -320,6 +320,11 @@
                 "name": "Daily Summary 2026",
                 "path": "Resources/Walkthroughs/daily_summary_2026-02-17.md",
                 "pdf": false
+            },
+            {
+                "name": "Captains Log 2026",
+                "path": "Resources/Walkthroughs/captains_log_2026-02-17.md",
+                "pdf": false
             }
         ]
     },
