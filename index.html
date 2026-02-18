@@ -179,6 +179,65 @@
                 padding: 8px 4px;
             }
         }
+
+        /* Document Viewer Styling */
+        .viewer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 3000;
+            display: none;
+            flex-direction: column;
+            padding: 40px;
+        }
+
+        .viewer-overlay.open {
+            display: flex;
+        }
+
+        .viewer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        .viewer-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .viewer-content {
+            flex: 1;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .viewer-close {
+            background: var(--red-dim);
+            color: var(--red);
+            border: 1px solid var(--red);
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .viewer-close:hover {
+            background: var(--red);
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -358,7 +417,6 @@
         <div class="viewer-content" id="viewer-content">
             <!-- Content -->
         </div>
-    </div>
     </div>
 
     <!-- Quiz Overlay -->
@@ -1301,6 +1359,32 @@
                     }
                 }
                 return true;
+            }
+
+            async openReader(path, title) {
+                const viewer = document.getElementById('doc-viewer');
+                const content = document.getElementById('viewer-content');
+                const titleEl = document.getElementById('viewer-title');
+
+                titleEl.innerText = title;
+                content.innerHTML = '<div style="text-align:center; padding:40px; opacity:0.5;">Loading clinical data...</div>';
+                viewer.classList.add('open');
+
+                try {
+                    const res = await this.fetchWithTimeout(path);
+                    const text = await res.text();
+                    content.innerHTML = this.parseMarkdown(text);
+                } catch (e) {
+                    content.innerHTML = `<div style="color:var(--red); padding:20px; text-align:center;">
+                        <h3>Surgical Error</h3>
+                        <p>Failed to load document: ${path}</p>
+                        <p style="font-size:0.7rem; opacity:0.7;">Error: ${e.message}</p>
+                    </div>`;
+                }
+            }
+
+            closeReader() {
+                document.getElementById('doc-viewer').classList.remove('open');
             }
 
             render() {
