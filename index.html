@@ -751,15 +751,26 @@
 
             parseLinks(text) {
                 if (!text) return '';
-                // Robust regex for [label](url) -> <a href="url">label</a> 
-                return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, label, url) => {
-                    // Simple file link detection
+                // 1. Handle standard [label](url)
+                let html = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, label, url) => {
                     const isFile = url.endsWith('.md') || url.endsWith('.pdf') || url.includes('/docs/');
                     if (isFile) {
-                        return `<a href="#" onclick="window.app.openReader('${url}', '${label}'); return false;" class="task-link" style="color:var(--text-bright);text-decoration:underline;cursor:pointer;font-weight:600;">${label}</a>`;
+                        return `<a href="#" onclick="event.stopPropagation(); window.app.openReader('${url}', '${label}'); return false;" class="task-link" style="color:var(--text-bright);text-decoration:underline;cursor:pointer;font-weight:600;">${label}</a>`;
                     }
-                    return `<a href="${url}" class="task-link" style="color:var(--text-bright);text-decoration:underline;cursor:pointer;font-weight:600;">${label}</a>`;
+                    return `<a href="${url}" onclick="event.stopPropagation();" class="task-link" style="color:var(--text-bright);text-decoration:underline;cursor:pointer;font-weight:600;">${label}</a>`;
                 });
+
+                // 2. Handle raw file paths (e.g. Finances/sc_finances_investment_tracker.md)
+                // Matches items ending in .md or .pdf that are not already inside a link
+                const pathRegex = /(^|\s)([a-zA-Z0-9_\-\/]+\.(?:md|pdf))(?=[\s\.,!\?;:)]|$)/g;
+                html = html.replace(pathRegex, (match, space, path) => {
+                    // Check if already processed by the [label](path) regex
+                    if (html.indexOf(`>'${path}'<`) !== -1 || html.indexOf(`="${path}"`) !== -1) return match;
+
+                    return `${space}<a href="#" onclick="event.stopPropagation(); window.app.openReader('${path}', '${path}'); return false;" class="task-link" style="color:var(--text-bright);text-decoration:underline;cursor:pointer;font-weight:600;">${path}</a>`;
+                });
+
+                return html;
             }
 
             setupIntercept() {
@@ -1599,7 +1610,7 @@
                             <div class="action-item ${isDone ? 'completed' : ''}" onclick="app.toggleAction('${a.id}')">
                                 <div class="action-check"></div>
                                 <div>
-                                    <div class="task-text" style="font-size:0.8rem;">${a.text}</div>
+                                    <div class="task-text" style="font-size:0.8rem;">${this.parseLinks(a.text)}</div>
                                     <div class="status-label" style="font-size:0.6rem;">${a.source}</div>
                                 </div>
                             </div>
