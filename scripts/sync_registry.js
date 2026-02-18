@@ -15,7 +15,10 @@ const CATEGORY_MAP = {
     'Business Ideas/Setup Concierge/Resources/Walkthroughs': 'history',
     'Business Ideas/Setup Concierge/Resources/Walkthroughs/Markdown': 'history',
     'Business Ideas/Setup Concierge/Advisory Panel/Consultations/Assets/Markdown': 'ideas',
-    'Business Ideas/Setup Concierge/Strategy/Parking Lot': 'ideas'
+    'Business Ideas/Setup Concierge/Strategy/Parking Lot': 'ideas',
+    'command-center/business/docs': 'advisory',
+    'command-center/career/docs': 'career',
+    'command-center/playbook': 'governance'
 };
 
 function scanDocs() {
