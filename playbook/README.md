@@ -21,3 +21,4 @@ This playbook documents the operational system behind Setup Concierge. Each page
 - **One screen per page.** If you're scrolling, it's too long.
 - **ELI5 first, details later.** Lead with the analogy, follow with the how.
 - **Auto-staleness.** `/consolidate` flags pages that haven't been updated in 7 days.
+- **Hardening V8.8.9.** System hardened on 2026-02-17 (Telemetry, CSS, Surgical Triggers).

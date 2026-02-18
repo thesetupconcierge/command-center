@@ -9,8 +9,58 @@
         "docs": [
             {
                 "name": "Clinical Architecture",
-                "path": "Playbook/clinical-architecture.md",
+                "path": "playbook/clinical-architecture.md",
                 "pdf": true
+            },
+            {
+                "name": "Governance Charter",
+                "path": "playbook/governance-charter.md",
+                "pdf": false
+            },
+            {
+                "name": "Surgical Scripting",
+                "path": "playbook/surgical-scripting.md",
+                "pdf": true
+            },
+            {
+                "name": "Playbook index",
+                "path": "playbook/README.md",
+                "pdf": false
+            },
+            {
+                "name": "01 Workspace Layout",
+                "path": "playbook/01-workspace.md",
+                "pdf": false
+            },
+            {
+                "name": "02 Dashboards",
+                "path": "playbook/02-dashboards.md",
+                "pdf": false
+            },
+            {
+                "name": "03 Workflows",
+                "path": "playbook/03-workflows.md",
+                "pdf": false
+            },
+            {
+                "name": "04 Git Strategy",
+                "path": "playbook/04-git-strategy.md",
+                "pdf": false
+            },
+            {
+                "name": "05 Advisory Panel",
+                "path": "playbook/05-advisory-panel.md",
+                "pdf": false
+            },
+            {
+                "name": "06 Action Items",
+                "path": "playbook/06-action-items.md",
+                "pdf": false
+            },
+            {
+                "name": "07 Client Ops",
+                "path": "playbook/07-client-ops.md",
+                "pdf": false
             },
             {
                 "name": "WNQ Completion Roadmap",
@@ -71,6 +121,11 @@
                 "name": "GA Panel Review (Feb 18)",
                 "path": "Advisory Panel/Consultations/Markdown/full_panel_review_GA_2026-02-18.md",
                 "pdf": true
+            },
+            {
+                "name": "Silas Vance Money Shot",
+                "path": "business/docs/Silas_Vance_Money_Shot_Report.md",
+                "pdf": false
             }
         ]
     },
@@ -200,6 +255,51 @@
                 "name": "Sterling Onboarding Checklist",
                 "path": "career/onboarding/sterling_checklist.md",
                 "pdf": false
+            },
+            {
+                "name": "Screening Call (Feb 9)",
+                "path": "career/docs/2026-02-09_screening_call.md",
+                "pdf": true
+            },
+            {
+                "name": "Interview Questions Bank",
+                "path": "career/docs/interview_questions.md",
+                "pdf": true
+            },
+            {
+                "name": "Dossier: Panel Interview Strategy",
+                "path": "career/docs/panel_review_interview_strategy.md",
+                "pdf": true
+            },
+            {
+                "name": "Reference Selection Plan",
+                "path": "career/docs/reference_selection.md",
+                "pdf": true
+            },
+            {
+                "name": "Salary Research & Market Stats",
+                "path": "career/docs/salary_research.md",
+                "pdf": true
+            },
+            {
+                "name": "STAR Stories Bank",
+                "path": "career/docs/star_stories_bank.md",
+                "pdf": true
+            },
+            {
+                "name": "Thank You Email Drafts",
+                "path": "career/docs/thank_you_email_draft.md",
+                "pdf": true
+            },
+            {
+                "name": "Company Research Dossier",
+                "path": "career/docs/company_research.md",
+                "pdf": true
+            },
+            {
+                "name": "Certifications Summary",
+                "path": "career/docs/certifications_summary.md",
+                "pdf": true
             }
         ]
     },
@@ -434,7 +534,7 @@
             {
                 "name": "Investment & ROI Tracker",
                 "path": "Finances/sc_finances_investment_tracker.md",
-                "pdf": true
+                "pdf": false
             }
         ]
     }

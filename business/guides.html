@@ -70,6 +70,7 @@
             top: 0;
             z-index: 100;
             background: rgba(10, 10, 15, 0.85);
+            -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 12px 24px;
@@ -172,6 +173,7 @@
             justify-content: space-between;
             padding: 14px 16px;
             cursor: pointer;
+            -webkit-user-select: none;
             user-select: none;
             transition: background 0.15s;
         }
@@ -698,12 +700,17 @@
                 docs: [
                     { name: "Decision Log", repo: "thesetupconcierge/antigravity", file: "architecture/decision-log.md", type: "md", meta: "Living document" },
                     { name: "Antigravity Restructure Response", repo: "thesetupconcierge/antigravity", file: "docs/antigravity_restructure_response.md", type: "md", meta: "Master strategy doc" },
+                    { name: "Silas Vance Money Shot Report", file: "docs/Silas_Vance_Money_Shot_Report.md", type: "md", meta: "High-leverage clinical audit" },
                 ]
             },
             {
                 section: "📖 Playbook (CDA Standard)",
                 color: "var(--purple)",
                 docs: [
+                    { name: "Clinical Architecture", file: "playbook/clinical-architecture.md", type: "md", meta: "v2.0 · Core Blueprint" },
+                    { name: "Surgical Scripting", file: "playbook/surgical-scripting.md", type: "md", meta: "v1.5 · Automation Standards" },
+                    { name: "Divorce Clause: Governance Charter", file: "playbook/governance-charter.md", type: "md", meta: "v1.0 · IP Protection" },
+                    { name: "Playbook README", file: "playbook/README.md", type: "md", meta: "Index & Rules" },
                     { name: "01 — Workspace Layout", file: "playbook/01-workspace.md", type: "md", meta: "Structure & Setup" },
                     { name: "02 — Dashboards & Sync", file: "playbook/02-dashboards.md", type: "md", meta: "Command Center Ops" },
                     { name: "03 — Workflows & Commands", file: "playbook/03-workflows.md", type: "md", meta: "Surgical Automation" },
@@ -770,6 +777,21 @@
                     { name: "Daily Summary — Feb 14", file: "../../Business Ideas/Setup Concierge/Resources/Walkthroughs/daily_summary_2026-02-14.md", type: "md", meta: "Active Session" },
                     { name: "Daily Summary — Feb 14 (PDF)", file: "../../Business Ideas/Setup Concierge/Resources/Walkthroughs/daily_summary_2026-02-14.pdf", type: "pdf", meta: "Active Session" },
                     { name: "Workshop Review — Feb 15", file: "../../Advisory Panel/Consultations/Markdown/panel_review_2026-02-15.md", type: "md", meta: "Latest Panel Review" },
+                ]
+            },
+            {
+                section: "🚀 Career Research & Prep",
+                color: "var(--blue)",
+                docs: [
+                    { name: "Screening Call (Feb 9)", file: "../career/docs/2026-02-09_screening_call.md", type: "md", meta: "Initial Intake" },
+                    { name: "Interview Questions Bank", file: "../career/docs/interview_questions.md", type: "md", meta: "Technical & Behavioral" },
+                    { name: "Dossier: Panel Interview Strategy", file: "../career/docs/panel_review_interview_strategy.md", type: "md", meta: "Strategic Prep" },
+                    { name: "Reference Selection Plan", file: "../career/docs/reference_selection.md", type: "md", meta: "Vetting Standards" },
+                    { name: "Salary Research & Market Stats", file: "../career/docs/salary_research.md", type: "md", meta: "Benchmarking" },
+                    { name: "STAR Stories Bank", file: "../career/docs/star_stories_bank.md", type: "md", meta: "Impact Evidence" },
+                    { name: "Thank You Email Drafts", file: "../career/docs/thank_you_email_draft.md", type: "md", meta: "Standard templates" },
+                    { name: "Company Research Dossier", file: "../career/docs/company_research.md", type: "md", meta: "Target Intel" },
+                    { name: "Certifications Summary", file: "../career/docs/certifications_summary.md", type: "md", meta: "Evidence Vault" },
                 ]
             }
         ];
