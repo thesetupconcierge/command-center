@@ -182,6 +182,11 @@
                 "pdf": true
             },
             {
+                "name": "Interview Negotiation Intel",
+                "path": "career/docs/Interview_Negotiating_Intel.md",
+                "pdf": true
+            },
+            {
                 "name": "Sterling Onboarding Checklist",
                 "path": "career/onboarding/sterling_checklist.md",
                 "pdf": false
@@ -410,6 +415,11 @@
                 "name": "Panel Consultation Sterling Intake 2026",
                 "path": "Advisory Panel/Consultations/Assets/Markdown/panel_consultation_sterling_intake_2026-02-15.md",
                 "pdf": false
+            },
+            {
+                "name": "Deferred Ideas Ledger",
+                "path": "business/docs/Deferred_Ideas_Ledger.md",
+                "pdf": true
             }
         ]
     }
