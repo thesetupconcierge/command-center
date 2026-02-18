@@ -9,7 +9,7 @@
         rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-    <link rel="stylesheet" href="hub-core.css">
+    <link rel="stylesheet" href="hub_core.css">
     <style>
         .pdf-tool-stage {
             background: rgba(255, 255, 255, 0.02);
@@ -161,7 +161,7 @@
             padding: 0 10px;
         }
 
-        /* High-Fidelity Finance & Markdown Extensions */
+        /* High-Fidelity Finance & markdown Extensions */
         .table-wrap {
             overflow-x: auto;
             margin: 20px 0;
@@ -351,7 +351,7 @@
                 Agency</span>
             <div class="business-only governance-badge">
                 <span class="governance-dot"></span>
-                Governed by **Sprint Command**
+                Governed by **sprint_command**
             </div>
         </div>
 
@@ -362,13 +362,13 @@
             </div>
             <span class="status-value" id="revenue-current">...</span>
             <div style="display:flex;gap:16px;">
-                <a href="playbook/clinical-architecture.md" class="status-link">📋 Strategy</a>
-                <a href="business/docs/wnq_wix_completion_guide_2026-02-12.md" class="status-link">🗺️ Roadmap</a>
+                <a href="playbook/clinical_architecture.md" class="status-link">📋 strategy</a>
+                <a href="business/docs/wnq_wix_completion_guide_2026_02_12.md" class="status-link">🗺️ Roadmap</a>
             </div>
         </div>
 
         <div class="status-item business-only">
-            <span class="status-label">WNQ Health:</span>
+            <span class="status-label">wnq Health:</span>
             <span class="status-value" style="color:var(--green)">100% OPERATIONAL</span>
         </div>
 
@@ -382,7 +382,7 @@
 
     <div class="hud-nav">
         <button class="nav-btn active" id="btn-business" onclick="app.switchMode('business')">🏢 Business Hub</button>
-        <button class="nav-btn" id="btn-career" onclick="app.switchMode('career')">🚀 Career Hub</button>
+        <button class="nav-btn" id="btn-career" onclick="app.switchMode('career')">🚀 career_hub</button>
         <button class="nav-btn" id="btn-registry" onclick="app.switchMode('registry')">🗄️ Registry Hub</button>
         <button class="nav-btn" id="btn-finance" onclick="app.switchMode('finance')">💰 Finance Hub</button>
     </div>
@@ -461,7 +461,7 @@
             </div>
 
             <div id="advisory-container" style="display: none;">
-                <!-- Silas Vance Card Rendered Here -->
+                <!-- silas_vance Card Rendered Here -->
             </div>
 
             <div id="task-sections-container">
@@ -561,17 +561,17 @@
             // BUSINESS LANE
             phase1a: {
                 lane: 'business', area: "sc", title: "⚡ Phase 1A — Monetization Sprint", icon: "⚡", badge: "Launch Feb 27", badgeColor: "var(--gold)", tasks: [
-                    { id: "p1a1", text: "Scope WNQ website as paid deliverable ($3,000 flat fee)", preChecked: true },
+                    { id: "p1a1", text: "Scope wnq website as paid deliverable ($3,000 flat fee)", preChecked: true },
                     { id: "p1a0", text: "Send proposal + collect 50% upfront ($1,500) — URGENT: Feb 15", preChecked: true },
-                    { id: "p1a2", text: "Build WNQ site using existing pipeline" },
+                    { id: "p1a2", text: "Build wnq site using existing pipeline" },
                     { id: "p1a6", text: "Capture proof: before/after screenshots, metrics" },
                     { id: "p1a7", text: "Soft pre-sell to board (Feb 25)" },
-                    { id: "p1a3", text: "🎯 Launch WNQ website (Feb 27) + collect 50% ($1,500)" },
-                    { id: "p1a4", text: "Create WNQ Case Study IMMEDIATELY on launch day" }
+                    { id: "p1a3", text: "🎯 Launch wnq website (Feb 27) + collect 50% ($1,500)" },
+                    { id: "p1a4", text: "Create wnq Case Study IMMEDIATELY on launch day" }
                 ]
             },
             wnq_phase1: {
-                lane: 'business', area: "wnq", title: "WNQ — Phase 1: Foundation Polish", icon: "🎨", badge: "In Progress", badgeColor: "var(--orange)", tasks: [
+                lane: 'business', area: "wnq", title: "wnq — Phase 1: Foundation Polish", icon: "🎨", badge: "In Progress", badgeColor: "var(--orange)", tasks: [
                     { id: "w1", text: "Add social media icons (TikTok, IG) to header/footer", preChecked: true },
                     { id: "w2", text: "Integrate 'Struggle Lion' narrative behind Hero/legacy", preChecked: false },
                     { id: "w3", text: "Align Brand Pillars: Integrity, Strength, Faith", preChecked: false },
@@ -582,14 +582,14 @@
                 ]
             },
             wnq_phase2: {
-                lane: 'business', area: "wnq", title: "WNQ — Phase 2: Tribute & Scholarship", icon: "🎓", badge: "Week of Feb 17", badgeColor: "var(--red)", tasks: [
+                lane: 'business', area: "wnq", title: "wnq — Phase 2: Tribute & Scholarship", icon: "🎓", badge: "Week of Feb 17", badgeColor: "var(--red)", tasks: [
                     { id: "w9", text: "Build Coach Ike Riley Sr. Tribute page (museum feel)" },
                     { id: "w12", text: "Build Ike Riley Sr Memorial Scholarship page" },
                     { id: "w25_ref", text: "Scaffold Coach Tribute Memorial (Museum Style)" }
                 ]
             },
             bn_collab: {
-                lane: 'business', area: "bn", title: "Black Nexus — Collaboration Hub", icon: "🤝", badge: "Live", badgeColor: "var(--green)", tasks: [
+                lane: 'business', area: "bn", title: "black_nexus — Collaboration Hub", icon: "🤝", badge: "Live", badgeColor: "var(--green)", tasks: [
                     { id: "b23", text: "GitHub collaboration guide created", preChecked: true },
                     { id: "b24", text: "GitHub org created: blacknexuscda", preChecked: true },
                     { id: "b25", text: "JB Scott invited — pending acceptance", preChecked: true },
@@ -609,14 +609,14 @@
             },
             prep_sterling: {
                 lane: 'career', area: "interview", title: "🎯 AbbVie / Sterling Follow-Up", icon: "🎯", badge: "Post-Interview", badgeColor: "var(--cyan)", tasks: [
-                    { id: "c1", text: "Sterling/Xenqu Onboarding Paperwork", preChecked: true },
+                    { id: "c1", text: "Sterling/Xenqu onboarding Paperwork", preChecked: true },
                     { id: "c2", text: "Submit I-9 Documentation", preChecked: true },
                     { id: "f1_ref", text: "Review & personalize thank-you email draft" },
                     { id: "f3_ref", text: "Fill out Sterling Reference Request Form (.doc)" }
                 ]
             },
             career_intel: {
-                lane: 'career', area: "research", title: "🔍 Career Intel — Completed Feb 15 ✅", icon: "🔍", badge: "Archive", badgeColor: "var(--teal)", tasks: [
+                lane: 'career', area: "research", title: "🔍 Career Intel — completed Feb 15 ✅", icon: "🔍", badge: "Archive", badgeColor: "var(--teal)", tasks: [
                     { id: "r_arc", text: "Dossiers for Gino, John, Michael archived to action_items_archive.md", preChecked: true }
                 ]
             },
@@ -630,13 +630,13 @@
 
             // SHARED / UTILITY
             session_archival: {
-                lane: 'business', area: "docs", title: "Session Archival — Completed Feb 15 ✅", icon: "📂", badge: "Archive", badgeColor: "var(--purple)", tasks: [
+                lane: 'business', area: "docs", title: "Session Archival — completed Feb 15 ✅", icon: "📂", badge: "Archive", badgeColor: "var(--purple)", tasks: [
                     { id: "sa_arc", text: "Feb 14-15 logs and summaries archived.", preChecked: true }
                 ]
             },
             key_documents: {
-                lane: 'shared', area: "docs", title: "📂 Master Docs — Completed Feb 15 ✅", icon: "📂", badge: "Archive", badgeColor: "var(--purple)", tasks: [
-                    { id: "kd_arc", text: "Playbook, Brand Kit, and Benefits Guide finalized.", preChecked: true }
+                lane: 'shared', area: "docs", title: "📂 Master Docs — completed Feb 15 ✅", icon: "📂", badge: "Archive", badgeColor: "var(--purple)", tasks: [
+                    { id: "kd_arc", text: "playbook, Brand Kit, and Benefits Guide finalized.", preChecked: true }
                 ]
             }
         };
@@ -675,7 +675,7 @@
                     },
                     {
                         q: "What is the primary role of the Captain's Log?",
-                        options: ["Social Media Posts", "Clinical Event Streaming", "Billing Only", "Design Mockups"],
+                        options: ["Social media Posts", "Clinical Event Streaming", "Billing Only", "Design Mockups"],
                         correct: 1
                     }
                 ]
@@ -684,16 +684,17 @@
 
         const NEXT_ACTIONS = [
             // CAREER ACTIONS
-            { id: "a30", text: "Complete Siemens Platform Deep-Dive (Insight/Desigo)", urgency: "now", source: "Career Hub", lane: "career" },
-            { id: "a31", text: "Review Technical Talking Points for Siemens Peer Interview", urgency: "soon", source: "Career Hub", lane: "career" },
+            { id: "a30", text: "Complete Siemens Platform Deep-Dive (Insight/Desigo)", urgency: "now", source: "career_hub", lane: "career" },
+            { id: "a31", text: "Review Technical Talking Points for Siemens Peer Interview", urgency: "soon", source: "career_hub", lane: "career" },
             { id: "a39", text: "Verify 'Nomad Mode' sync on iPhone", urgency: "now", source: "V8.9.1", lane: "career" },
 
             // BUSINESS ACTIONS
-            { id: "a35", text: "sc-setup: Initialize .agent/config/surgical_secrets.json", urgency: "now", source: "Ops", lane: "business", preChecked: true },
+            { id: "a43", text: "Complete root folder renames for Business Ideas and Career Hub (blocked by handles)", urgency: "now", source: "RayRay/Ops", lane: "business" },
             { id: "a40", text: "Home Tunnel Setup: Cloudflare Zero Trust for Secure Global Access", urgency: "soon", source: "Nomad Prep", lane: "business" },
-            { id: "a41", text: "Advanced Scaling: Research VPS/OAuth integration for V9.0", urgency: "later", source: "Strategy", lane: "business" },
+            { id: "a41", text: "Advanced Scaling: Research VPS/OAuth integration for V9.0", urgency: "later", source: "strategy", lane: "business" },
             { id: "a42", text: "Monitor Sidecar heartbeat stability (24h soak test)", urgency: "now", source: "Ops", lane: "business" },
-            { id: "a34", text: "Audit WNQ Staging Site for Best Flow narrative compliance", urgency: "later", source: "User Request", lane: "business" },
+            { id: "a44", text: "Implement Burn Rate tracking in Finance Hub (Freedom Level Alignment)", urgency: "soon", source: "Aiden", lane: "business" },
+            { id: "a45", text: "Surgical Link Audit for deferred ideas (Nexus Coherence)", urgency: "later", source: "RayRay", lane: "business" },
             { id: "a37", text: "Standardize Diagnostic Alpha as mandatory start point", urgency: "soon", source: "Darius/Ops", lane: "business" },
             { id: "a38", text: "Consolidate dashboard UI logic into Command Core stylesheet", urgency: "soon", source: "Mira/Workflow", lane: "business" }
         ];
@@ -721,7 +722,7 @@
                 // Strip landing folder and clean filename
                 let filename = rawPath.split('/').pop();
 
-                // Strip .md if we are going for PDF
+                // Strip .md if we are going for pdf
                 if (isPdf && filename.toLowerCase().endsWith('.md')) {
                     filename = filename.slice(0, -3);
                 } else if (isPdf && filename.toLowerCase().endsWith('.pdf')) {
@@ -730,22 +731,22 @@
 
                 let pathLower = rawPath.toLowerCase();
 
-                // 1. Career Documents
+                // 1. Career documents
                 if (pathLower.includes('career/docs/')) {
                     return `career/docs/${filename}${isPdf ? '.pdf' : ''}`;
                 }
 
-                // 2. Playbook / Governance
+                // 2. playbook / governance
                 if (pathLower.includes('playbook/')) {
                     return `playbook/${filename}${isPdf ? '.pdf' : ''}`;
                 }
 
-                // 3. Resources (PDF ONLY)
+                // 3. resources (pdf ONLY)
                 if (pathLower.includes('resources/') && isPdf) {
                     return `business/docs/resources/${filename}.pdf`;
                 }
 
-                // 4. Default Business Docs (Black Nexus, WNQ, Advisory Panel)
+                // 4. Default Business Docs (black_nexus, wnq, advisory_panel)
                 return `business/docs/${filename}${isPdf ? '.pdf' : ''}`;
             }
 
@@ -760,7 +761,7 @@
                     return `<a href="${url}" onclick="event.stopPropagation();" class="task-link" style="color:var(--text-bright);text-decoration:underline;cursor:pointer;font-weight:600;">${label}</a>`;
                 });
 
-                // 2. Handle raw file paths (e.g. Finances/sc_finances_investment_tracker.md)
+                // 2. Handle raw file paths (e.g. finances/sc_finances_investment_tracker.md)
                 // Matches items ending in .md or .pdf that are not already inside a link
                 const pathRegex = /(^|\s)([a-zA-Z0-9_\-\/]+\.(?:md|pdf))(?=[\s\.,!\?;:)]|$)/g;
                 html = html.replace(pathRegex, (match, space, path) => {
@@ -854,7 +855,12 @@
 
                 this.statusInterval = setInterval(() => {
                     this.renderSyncMeta();
+                    this.updateSyncTimestamp(); // Mira: Freshness confirmation
                 }, 30000);
+            }
+
+            updateSyncTimestamp() {
+                this.renderSyncMeta();
             }
 
             async fetchWithTimeout(resource, options = {}) {
@@ -881,10 +887,13 @@
                         const now = new Date();
                         const last = this.lastSynced ? new Date(this.lastSynced) : now;
                         const diffSec = Math.floor((now - last) / 1000);
-                        const staleness = diffSec < 60 ? "Fresh" : `${Math.floor(diffSec / 60)}m ago`;
+                        let staleness = "Just Now";
+                        if (diffSec >= 60) {
+                            staleness = `${Math.floor(diffSec / 60)}m ago`;
+                        }
 
                         meta.innerText = `Auto-Sync: ${staleness}${handshakeTag} • Heartbeat Live`;
-                        meta.title = `Last Sync: ${last.toLocaleTimeString()} (Cycle V8.9.1-Sec)`;
+                        meta.title = `Last Sync: ${last.toLocaleTimeString()} (Cycle V8.9.2-Panel)`;
                         meta.style.color = "var(--text-dim)";
                     } else if (this.syncStatus === 'offline' || this.syncStatus === 'error') {
                         meta.innerText = `Auto-Sync: Local Only${handshakeTag} (Airgap Mode)`;
@@ -944,7 +953,7 @@
 
                 // Initialize state if switching to a mode for the first time
                 // Render Main Content Area
-                const laneTasks = Object.values(TASK_DATA).filter(s => s.lane === this.mode || s.lane === 'shared');
+                const lanetasks = Object.values(TASK_DATA).filter(s => s.lane === this.mode || s.lane === 'shared');
                 const currentModeState = this.state[this.mode] || { tasks: {}, logs: [], completedActions: {}, collapsed: {} };
 
                 this.render();
@@ -1049,7 +1058,7 @@
             async scaffoldDiagnostic() {
                 this.addLog("Executing Surgical Protocol: Diagnostic Alpha...");
                 try {
-                    const shellPath = 'Setup Concierge/Resources/Templates/Diagnostic_Alpha_Surgical_Shell.md';
+                    const shellPath = 'setup_concierge/resources/templates/diagnostic_alpha_surgical_shell.md';
                     this.addLog(`Scaffolding active. Template: ${shellPath}`);
 
                     // Simulate pre-fill by opening the reader with the shell path
@@ -1086,7 +1095,7 @@
                 }
             }
 
-            parseMarkdown(text) {
+            parsemarkdown(text) {
                 if (!text) return '';
 
                 // 1. Initial Escape
@@ -1114,7 +1123,7 @@
 
                         processedLines.push(`<div class="alert alert-${type}">
                             <div class="alert-title"><span>${icon}</span> ${type}</div>
-                            <div class="alert-body">${this.parseMarkdown(alertContent.join('\n'))}</div>
+                            <div class="alert-body">${this.parsemarkdown(alertContent.join('\n'))}</div>
                         </div>`);
                         continue;
                     }
@@ -1198,7 +1207,7 @@
                     } else {
                         const res = await this.fetchWithTimeout(path);
                         const text = await res.text();
-                        content.innerHTML = this.parseMarkdown(text);
+                        content.innerHTML = this.parsemarkdown(text);
                     }
                     viewer.scrollTop = 0;
                 } catch (e) {
@@ -1233,7 +1242,7 @@
 
                 // Load Finance Data as well (Surgical Integration)
                 try {
-                    const finRes = await this.fetchWithTimeout('Finances/sc_finances_investment_tracker.md', { timeout: 3000 });
+                    const finRes = await this.fetchWithTimeout('finances/sc_finances_investment_tracker.md', { timeout: 3000 });
                     if (finRes.ok) {
                         this.financeTrackerRaw = await finRes.text();
                     }
@@ -1242,15 +1251,15 @@
 
             renderFinance() {
                 const container = document.getElementById('task-sections-container');
-                const content = this.financeTrackerRaw ? this.parseMarkdown(this.financeTrackerRaw) : `
+                const content = this.financeTrackerRaw ? this.parsemarkdown(this.financeTrackerRaw) : `
                     <div class="card">
                         <div class="card-title">Finance Hub Offline</div>
-                        <p style="color:var(--text-dim)">Investment tracker not found at <code>Finances/sc_finances_investment_tracker.md</code>.</p>
+                        <p style="color:var(--text-dim)">Investment tracker not found at <code>finances/sc_finances_investment_tracker.md</code>.</p>
                     </div>
                 `;
 
                 // Goal Progress (Aiden)
-                const monthlyRev = 400; // Hardcoded for Feb WNQ
+                const monthlyRev = 400; // Hardcoded for Feb wnq
                 const goal = 5000;
                 const goalPct = Math.min(100, Math.round((monthlyRev / goal) * 100));
 
@@ -1277,10 +1286,10 @@
                         </div>
                             <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Operational Actions</div>
                             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:20px;">
-                                <div class="diag-badge" style="cursor:pointer;" onclick="app.openReader('Finances/invoices_sent/', 'Invoices Sent')">📁 Invoices Sent</div>
-                                <div class="diag-badge" style="cursor:pointer;" onclick="app.openReader('Finances/expenses/', 'Expenses')">📁 Expense Records</div>
-                                <div class="diag-badge" style="cursor:pointer;" onclick="app.openReader('Finances/invoices_received/', 'Invoices Received')">📁 Invoices Received</div>
-                                <div class="diag-badge" style="cursor:pointer;" onclick="window.open('https://github.com/thesetupconcierge/command-center/tree/main/Finances', '_blank')">🌐 GitHub Repo</div>
+                                <div class="diag-badge" style="cursor:pointer;" onclick="app.openReader('finances/invoices_sent/', 'Invoices Sent')">📁 Invoices Sent</div>
+                                <div class="diag-badge" style="cursor:pointer;" onclick="app.openReader('finances/expenses/', 'Expenses')">📁 Expense Records</div>
+                                <div class="diag-badge" style="cursor:pointer;" onclick="app.openReader('finances/invoices_received/', 'Invoices Received')">📁 Invoices Received</div>
+                                <div class="diag-badge" style="cursor:pointer;" onclick="window.open('https://github.com/thesetupconcierge/command-center/tree/main/finances', '_blank')">🌐 GitHub Repo</div>
                             </div>
                         </div>
                     </div>
@@ -1437,7 +1446,7 @@
                         <p style="margin-bottom:24px;color:var(--text-dim)">Knowledge verification saved to session log.</p>
                         <button onclick="app.closeQuiz()" style="background:var(--primary);color:#000;border:none;padding:12px 24px;border-radius:8px;font-weight:700;cursor:pointer;width:100%">Close Diagnostic</button>
                     `;
-                    this.addLog(`Completed ${qd.title}: Score ${final}%`);
+                    this.addLog(`completed ${qd.title}: Score ${final}%`);
                 }
             }
 
@@ -1543,10 +1552,10 @@
                 // If core UI is missing (e.g. Access Denied screen active), abort silently.
                 if (!ring || !stats) return;
 
-                const laneTasks = Object.values(TASK_DATA).filter(s => s.lane === this.mode || s.lane === 'shared');
-                const allLaneTasks = laneTasks.flatMap(s => s.tasks);
-                const done = allLaneTasks.filter(t => this.getTaskState(t.id) === 'done').length;
-                const pct = allLaneTasks.length ? Math.round((done / allLaneTasks.length) * 100) : 0;
+                const lanetasks = Object.values(TASK_DATA).filter(s => s.lane === this.mode || s.lane === 'shared');
+                const allLanetasks = lanetasks.flatMap(s => s.tasks);
+                const done = allLanetasks.filter(t => this.getTaskState(t.id) === 'done').length;
+                const pct = allLanetasks.length ? Math.round((done / allLanetasks.length) * 100) : 0;
 
                 // Progress Ring
                 const circ = 2 * Math.PI * 62;
@@ -1567,14 +1576,16 @@
 
                 // Stats Panel
                 stats.innerHTML = `
-                    <div class="stat-row"><span class="status-label">Total Workload</span><span class="status-value">${allLaneTasks.length} units</span></div>
+                    <div class="stat-row"><span class="status-label">Total Workload</span><span class="status-value">${allLanetasks.length} units</span></div>
                     <div class="stat-row"><span class="status-label">Shipped</span><span class="status-value" style="color:var(--green)">${done}</span></div>
                 `;
 
-                // Sidebar Contextual (Diagnostic Tools)
+                // Sidebar Contextual (Noa: Contextual space reclaim)
                 if (sideCtx) {
+                    const hideDiagnostics = this.mode === 'finance' || this.mode === 'registry';
                     const diagList = Object.entries(QUIZ_DATA).filter(([id, q]) => q.lane === this.mode);
-                    if (diagList.length) {
+
+                    if (diagList.length && !hideDiagnostics) {
                         sideCtx.innerHTML = `
                             <div class="card fade-in" style="margin-top:16px;">
                                 <div class="status-label">Diagnostic Tools</div>
@@ -1631,7 +1642,7 @@
                                 <div class="advisory-header">
                                     <div class="advisory-avatar">🦉</div>
                                     <div class="advisory-info">
-                                        <div class="advisory-name">Silas Vance</div>
+                                        <div class="advisory-name">silas_vance</div>
                                         <div class="advisory-title">Strategic Lead</div>
                                     </div>
                                     <div class="section-badge" style="background:var(--purple-dim); color:var(--purple)">DEEP INSIGHT</div>
@@ -1640,7 +1651,7 @@
                                     "Price the value, not the hours. The ecosystem survives on the Clinical Standard, or it doesn't survive at all."
                                 </div>
                                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                                    <button class="advisory-btn" onclick="app.openReader('business/docs/Silas_Vance_Money_Shot_Report.md', 'Silas Vance Money Shot')">View Money Shot →</button>
+                                    <button class="advisory-btn" onclick="app.openReader('business/docs/silas_vance_money_shot_report.md', 'silas_vance Money Shot')">View Money Shot →</button>
                                     <button class="advisory-btn" style="background:var(--cyan-dim); border-color:var(--cyan); color:var(--cyan);" onclick="app.scaffoldDiagnostic()">Surgical Trigger</button>
                                 </div>
                             </div>
@@ -1661,7 +1672,7 @@
                     if (sectionsContainer) {
                         sectionsContainer.innerHTML = `
                             <div id="${this.mode}-portal" class="hub-container fade-in">
-                                ${laneTasks.map(s => {
+                                ${lanetasks.map(s => {
                             const sDone = s.tasks.filter(t => this.getTaskState(t.id) === 'done').length;
                             const sectionKey = Object.keys(TASK_DATA).find(key => TASK_DATA[key] === s);
                             const isCollapsed = this.state[this.mode].collapsed ? this.state[this.mode].collapsed[s.title] !== false : true;
@@ -1728,7 +1739,7 @@
                 container.innerHTML = `
             <div class="hub-container fade-in" >
                         <div class="card" style="margin-bottom:20px;">
-                            <div class="card-title"><span class="dot" style="background:var(--primary)"></span>PDF Surgical Laboratory</div>
+                            <div class="card-title"><span class="dot" style="background:var(--primary)"></span>pdf Surgical Laboratory</div>
                             <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:20px;">Surgical document modification. All processing happens locally in-browser [V8.8.9-Alpha].</p>
                             
                             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
@@ -1739,7 +1750,7 @@
                                 </div>
                                 <div class="diag-badge ${this.activePdfTool === 'merge' ? 'active' : ''}" style="padding:16px; height:auto; flex-direction:column; align-items:flex-start; gap:8px;" onclick="app.setPdfTool('merge')">
                                     <span style="font-size:1.2rem;">🔗</span>
-                                    <div style="font-weight:700;">Merge PDFs</div>
+                                    <div style="font-weight:700;">Merge pdfs</div>
                                     <div style="font-size:0.65rem; opacity:0.7;">Combine multiple files</div>
                                 </div>
                                 <div class="diag-badge ${this.activePdfTool === 'flatten' ? 'active' : ''}" style="padding:16px; height:auto; flex-direction:column; align-items:flex-start; gap:8px;" onclick="app.setPdfTool('flatten')">
@@ -1769,7 +1780,7 @@
             <div class="pdf-tool-stage fade-in" >
                             <div class="pdf-tool-header">
                                 <h3 style="color:var(--text-bright)">Surgical Overlay Engine</h3>
-                                <button class="advisory-btn sc-gold-btn" style="width:auto; padding:8px 20px;" onclick="app.executePdfOverlay()">Download Modified PDF</button>
+                                <button class="advisory-btn sc-gold-btn" style="width:auto; padding:8px 20px;" onclick="app.executePdfOverlay()">Download Modified pdf</button>
                             </div>
                             <div class="pdf-editor-grid">
                                 <div class="pdf-controls">
@@ -1807,11 +1818,11 @@
             <div class="pdf-tool-stage fade-in" >
                             <div class="pdf-tool-header">
                                 <h3 style="color:var(--text-bright)">Document Merger Lab</h3>
-                                <button class="advisory-btn sc-gold-btn" style="width:auto; padding:8px 20px;" onclick="app.executePdfMerge()">Generate Merged PDF</button>
+                                <button class="advisory-btn sc-gold-btn" style="width:auto; padding:8px 20px;" onclick="app.executePdfMerge()">Generate Merged pdf</button>
                             </div>
                             <div class="pdf-dropzone" onclick="document.getElementById('pdf-merge-input').click()">
                                 <div style="font-size:2rem; margin-bottom:8px;">📚</div>
-                                <div style="font-weight:700;">Upload 2+ PDF Documents</div>
+                                <div style="font-weight:700;">Upload 2+ pdf documents</div>
                                 <div style="font-size:0.7rem; opacity:0.6;">Files will be merged in order of selection</div>
                                 <input type="file" id="pdf-merge-input" multiple style="display:none" onchange="app.handlePdfMergeLoad(event)">
                             </div>
@@ -1825,7 +1836,7 @@
                 const file = event.target.files[0];
                 if (!file) return;
                 this.currentPdfFile = file;
-                this.addLog(`PDF Loaded: ${file.name} `);
+                this.addLog(`pdf Loaded: ${file.name} `);
 
                 // Visual feedback: Activate pulse
                 const dropzone = document.querySelector('.pdf-dropzone');
@@ -1842,19 +1853,19 @@
             }
 
             async executePdfOverlay() {
-                if (!this.currentPdfFile) { alert("Load a PDF first."); return; }
+                if (!this.currentPdfFile) { alert("Load a pdf first."); return; }
                 this.addLog("Executing Surgical Overlay...");
 
                 try {
                     const arrayBuffer = await this.currentPdfFile.arrayBuffer();
-                    const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+                    const pdfDoc = await pdfLib.pdfDocument.load(arrayBuffer);
                     const pages = pdfDoc.getPages();
                     const firstPage = pages[0];
                     const text = document.getElementById('pdf-text-value').value || "Justice McKinney";
                     const x = parseInt(document.getElementById('pdf-text-x').value);
                     const y = parseInt(document.getElementById('pdf-text-y').value);
 
-                    firstPage.drawText(text, { x, y, size: 12, color: PDFLib.rgb(0, 0, 0) });
+                    firstPage.drawText(text, { x, y, size: 12, color: pdfLib.rgb(0, 0, 0) });
 
                     const pdfBytes = await pdfDoc.save();
                     this.downloadPdf(pdfBytes, `Modified_${this.currentPdfFile.name} `);
@@ -1878,14 +1889,14 @@
             }
 
             async executePdfMerge() {
-                if (!this.mergeFiles || this.mergeFiles.length < 2) { alert("Load at least 2 PDFs."); return; }
+                if (!this.mergeFiles || this.mergeFiles.length < 2) { alert("Load at least 2 pdfs."); return; }
                 this.addLog("Initiating Document Merge...");
 
                 try {
-                    const mergedPdf = await PDFLib.PDFDocument.create();
+                    const mergedPdf = await pdfLib.pdfDocument.create();
                     for (const file of this.mergeFiles) {
                         const bytes = await file.arrayBuffer();
-                        const pdf = await PDFLib.PDFDocument.load(bytes);
+                        const pdf = await pdfLib.pdfDocument.load(bytes);
                         const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
                         copiedPages.forEach((page) => mergedPdf.addPage(page));
                     }
@@ -1939,12 +1950,22 @@
                 let html = '<div class="hub-container fade-in">';
 
                 // Registry Header (Surgical Vault Pivot - Silas)
+                const isVault = document.getElementById('vault-toggle')?.checked ?? true;
                 html += `
-            <div class= "card" >
-                        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Surgical Vault [V8.9]</div>
-                        <p style="font-size:0.8rem; color:var(--text-dim);">High-leverage clinical assets and core strategic playbooks.</p>
+                    <div class="card" style="margin-bottom:20px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Surgical Vault [V8.9.2]</div>
+                            <label class="switch-ui" style="display:flex; align-items:center; gap:8px; cursor:pointer;" title="Silas Vance Optimization: Hide lower-leverage files">
+                                <span style="font-size:0.7rem; font-weight:700; opacity:0.6;">VAULT MODE</span>
+                                <input type="checkbox" id="vault-toggle" ${isVault ? 'checked' : ''} onchange="app.render()" style="display:none;">
+                                <div class="switch-bg" style="width:34px; height:18px; background:${isVault ? 'var(--gold)' : 'var(--border)'}; border-radius:10px; position:relative; transition:background 0.3s;">
+                                    <div class="switch-knob" style="width:14px; height:14px; background:#000; border-radius:50%; position:absolute; ${isVault ? 'right' : 'left'}:2px; top:2px; transition:all 0.3s;"></div>
+                                </div>
+                            </label>
+                        </div>
+                        <p style="font-size:0.8rem; color:var(--text-dim); margin-top:8px;">High-leverage clinical assets and core strategic playbooks.</p>
                     </div>
-            `;
+                `;
 
                 const entries = Object.entries(this.registryData);
                 if (entries.length === 0) {
@@ -1961,9 +1982,6 @@
                     const isVisible = (this.mode === 'registry' || cat.lanes.includes(this.mode) || cat.lanes.includes('shared'));
                     if (!isVisible) return;
 
-                    // Default to collapsed unless explicitly set to false
-                    const isCollapsed = this.state[this.mode].collapsed ? this.state[this.mode].collapsed[cat.title] !== false : true;
-
                     // Sort: Latest to Oldest
                     const sortedDocs = [...cat.docs].sort((a, b) => {
                         const dateA = this.extractDate(a);
@@ -1972,9 +1990,27 @@
                         return a.name.localeCompare(b.name);
                     });
 
-                    // Separate archived and active
-                    const activeDocs = sortedDocs.filter(d => !this.state.archivedDocs.includes(d.path));
-                    const archivedDocs = sortedDocs.filter(d => this.state.archivedDocs.includes(d.path));
+                    // Silas Vance: Vault Filtering
+                    const isVault = document.getElementById('vault-toggle')?.checked ?? true;
+                    let filteredDocs = sortedDocs;
+                    if (isVault) {
+                        filteredDocs = sortedDocs.filter(d =>
+                            d.priority === 'high' ||
+                            d.path.includes('playbook') ||
+                            d.path.includes('Revenue') ||
+                            d.path.includes('Deferred') ||
+                            d.path.includes('Money_Shot')
+                        );
+                    }
+
+                    if (filteredDocs.length === 0) return;
+
+                    // Default to collapsed unless explicitly set to false
+                    const isCollapsed = this.state[this.mode].collapsed ? this.state[this.mode].collapsed[cat.title] !== false : true;
+
+                    // Separate archived and active for filtered set
+                    const activeDocs = filteredDocs.filter(d => !this.state.archivedDocs.includes(d.path));
+                    const archivedDocs = filteredDocs.filter(d => this.state.archivedDocs.includes(d.path));
 
                     const renderDoc = (doc) => {
                         const mdPath = doc.isOnlyPdf ? '#' : this.resolveDocPath(doc.path, false);
@@ -1983,7 +2019,7 @@
                         const isVaulted = this.state.vaultedDocs.includes(doc.path);
 
                         return `
-            <div class="registry-item ${isArchived ? 'archived' : ''} ${isVaulted ? 'vaulted' : ''}" >
+                            <div class="registry-item ${isArchived ? 'archived' : ''} ${isVaulted ? 'vaulted' : ''}" >
                                 <div class="registry-info">
                                     <div class="registry-name">${doc.name} ${isArchived ? '💎' : ''} ${isVaulted ? '📁' : ''}</div>
                                     <div class="registry-meta">${doc.path.split('/').pop().split('.').shift()}</div>
@@ -1991,16 +2027,16 @@
                                 <div class="registry-actions">
                                     <button class="action-icon" title="${isArchived ? 'Restore' : 'Flag for Value Essence Archive'}" onclick="app.toggleArchive('${doc.path}')">${isArchived ? '🔓' : '💎'}</button>
                                     ${isArchived ? `<button class="action-icon" title="${isVaulted ? 'Unflag for Vault' : 'Ready for Deep Storage Vault'}" onclick="app.toggleVault('${doc.path}')">${isVaulted ? '🔙' : '📁'}</button>` : ''}
-                                    ${!doc.isOnlyPdf ? `<a href="${mdPath}" class="action-icon" title="View Markdown" onclick="app.openReader('${mdPath}', '${doc.name}'); return false;">📝</a>` : ''}
-                                    ${doc.pdf ? `<a id="pdf-${key}" href="${pdfPath}" class="action-icon pdf" title="View PDF">📕</a>` : ''}
+                                    ${!doc.isOnlyPdf ? `<a href="${mdPath}" class="action-icon" title="View markdown" onclick="app.openReader('${mdPath}', '${doc.name}'); return false;">📝</a>` : ''}
+                                    ${doc.pdf ? `<a id="pdf-${key}" href="${pdfPath}" class="action-icon pdf" title="View pdf">📕</a>` : ''}
                                 </div>
                             </div>
-            `;
+                        `;
                     };
 
                     if (activeDocs.length > 0 || archivedDocs.length > 0) {
                         html += `
-            <div class="registry-lane ${isCollapsed ? 'collapsed' : ''}" >
+                            <div class="registry-lane ${isCollapsed ? 'collapsed' : ''}" >
                                 <div class="registry-lane-title" onclick="app.toggleSection('${cat.title}')">
                                     <span class="section-chevron" style="transform: ${isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)'}; margin-right:8px;">▼</span>
                                     ${cat.icon} ${cat.title}
@@ -2010,14 +2046,14 @@
                                     ${archivedDocs.map(d => renderDoc(d)).join('')}
                                 </div>
                             </div>
-            `;
+                        `;
                     }
                 });
 
-                // PDF Surgical Laboratory - Integrated at bottom
+                // pdf Surgical Laboratory - Integrated at bottom
                 html += `
             <div class="card" style = "margin-top:40px; border-top: 2px solid var(--primary-dim);" >
-                        <div class="card-title"><span class="dot" style="background:var(--gold)"></span>PDF Surgical Laboratory</div>
+                        <div class="card-title"><span class="dot" style="background:var(--gold)"></span>pdf Surgical Laboratory</div>
                         <p style="font-size:0.8rem; color:var(--text-dim); margin-bottom:20px;">Surgical document modification. Tool integrated for direct registry workflow [V8.8.9-Alpha].</p>
                         
                         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
@@ -2028,7 +2064,7 @@
                             </div>
                             <div class="diag-badge ${this.activePdfTool === 'merge' ? 'active' : ''}" style="padding:16px; height:auto; flex-direction:column; align-items:flex-start; gap:8px;" onclick="app.setPdfTool('merge')">
                                 <span style="font-size:1.2rem;">🔗</span>
-                                <div style="font-weight:700;">Merge PDFs</div>
+                                <div style="font-weight:700;">Merge pdfs</div>
                                 <div style="font-size:0.65rem; opacity:0.7;">Combine multiple files</div>
                             </div>
                             <div class="diag-badge ${this.activePdfTool === 'flatten' ? 'active' : ''}" style="padding:16px; height:auto; flex-direction:column; align-items:flex-start; gap:8px;" onclick="app.setPdfTool('flatten')">
