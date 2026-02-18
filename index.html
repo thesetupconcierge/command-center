@@ -1297,23 +1297,40 @@
             }
 
             updateFinance() {
+                const now = new Date();
+                const currentMonth = now.getMonth(); // 0-indexed (1 is Feb, 2 is March)
+
                 // Baseline: Sterling $60/hr * 40hrs * 4.33 weeks = ~$10,400
-                const careerGross = 10400;
-                // Currently assume business revenue is starting at $400 (Actual current status)
-                const businessRevenue = 400;
+                // Start date is March 2nd, 2026.
+                let careerGross = 10400;
+                let businessRevenue = 400; // Hardcoded baseline for Feb
+
+                // If currently in February, career revenue is $0
+                if (currentMonth === 1) {
+                    careerGross = 0;
+                }
+
                 const totalEcosystem = careerGross + businessRevenue;
-                const growthFactor = (businessRevenue / careerGross) * 100;
+                const growthFactor = careerGross > 0 ? (businessRevenue / careerGross) * 100 : 100;
 
                 const growthBar = document.getElementById('growthBar');
                 const growthPct = document.getElementById('growthPercent');
                 const projGross = document.getElementById('projGross');
 
                 if (growthBar) growthBar.style.width = `${Math.min(growthFactor, 100)}%`;
-                if (growthPct) growthPct.innerText = `${growthFactor.toFixed(1)}%`;
+                if (growthPct) growthPct.innerText = careerGross > 0 ? `${growthFactor.toFixed(1)}%` : "100% (SC Only)";
                 if (projGross) projGross.innerText = `$${totalEcosystem.toLocaleString()}`;
 
+                // Update Revenue Mini Bar in Header
+                const revFill = document.getElementById('revenue-fill');
+                const revCurrent = document.getElementById('revenue-current');
+                const goal = 5000;
+                const pct = Math.min(100, (businessRevenue / goal) * 100);
+
+                if (revFill) revFill.style.width = `${pct}%`;
+                if (revCurrent) revCurrent.innerText = `$${businessRevenue.toLocaleString()}`;
+
                 // Calculate Shield Status
-                const now = new Date();
                 const hour = now.getHours();
                 const statusEl = document.getElementById('timeShieldStatus');
 
@@ -1323,7 +1340,7 @@
                         statusEl.parentElement.style.background = "rgba(59, 130, 246, 0.15)";
                         statusEl.parentElement.style.borderColor = "#3b82f6";
                     } else {
-                        statusEl.innerText = "Shield Standby: Sterling Hours";
+                        statusEl.innerText = "Shield Standby: SC Core Hours";
                         statusEl.parentElement.style.background = "rgba(16, 185, 129, 0.1)";
                         statusEl.parentElement.style.borderColor = "rgba(16, 185, 129, 0.2)";
                         statusEl.previousElementSibling.style.background = "#10b981"; // pulse

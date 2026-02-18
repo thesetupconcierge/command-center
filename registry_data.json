@@ -10,7 +10,7 @@
             {
                 "name": "Clinical Architecture",
                 "path": "playbook/clinical_architecture.md",
-                "pdf": true
+                "pdf": false
             },
             {
                 "name": "Governance Charter",
@@ -20,7 +20,7 @@
             {
                 "name": "Surgical Scripting",
                 "path": "playbook/surgical_scripting.md",
-                "pdf": true
+                "pdf": false
             },
             {
                 "name": "Playbook index",
@@ -60,6 +60,11 @@
             {
                 "name": "07 Client Ops",
                 "path": "playbook/07_client_ops.md",
+                "pdf": false
+            },
+            {
+                "name": "Clinical Os",
+                "path": "playbook/clinical_os.md",
                 "pdf": false
             }
         ]
@@ -121,6 +126,11 @@
                 "name": "Strategic Fold In Proposal 2026 02 13",
                 "path": "advisory_panel/consultations/markdown/strategic_fold_in_proposal_2026_02_13.md",
                 "pdf": false
+            },
+            {
+                "name": "Readme",
+                "path": "business/docs/readme.md",
+                "pdf": false
             }
         ]
     },
@@ -131,7 +141,28 @@
             "business",
             "shared"
         ],
-        "docs": []
+        "docs": [
+            {
+                "name": "Github Collaboration Guide 2026 02 10",
+                "path": "github_collaboration_guide_2026_02_10.md",
+                "pdf": false
+            },
+            {
+                "name": "Implementation Plan 2026 02 06",
+                "path": "implementation_plan_2026_02_06.md",
+                "pdf": false
+            },
+            {
+                "name": "Phase1 Execution Plan 2026 02 06",
+                "path": "phase1_execution_plan_2026_02_06.md",
+                "pdf": false
+            },
+            {
+                "name": "Strategic Business Framework 2026 02 06",
+                "path": "strategic_business_framework_2026_02_06.md",
+                "pdf": false
+            }
+        ]
     },
     "concierge": {
         "title": "Setup Concierge Playbook",
@@ -188,12 +219,77 @@
             {
                 "name": "Justice McKinney - BAS Focused",
                 "path": "career/docs/justice_mckinney_bas_focused.md",
-                "pdf": true
+                "pdf": false
             },
             {
                 "name": "Interview Negotiation Intel",
                 "path": "career/docs/interview_negotiating_intel.md",
+                "pdf": false
+            },
+            {
+                "name": "Company Research",
+                "path": "company_research.md",
                 "pdf": true
+            },
+            {
+                "name": "Mock Qa Drill",
+                "path": "mock_qa_drill.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Review Interview Strategy",
+                "path": "panel_review_interview_strategy.md",
+                "pdf": true
+            },
+            {
+                "name": "Reference Selection",
+                "path": "reference_selection.md",
+                "pdf": true
+            },
+            {
+                "name": "Salary Research",
+                "path": "salary_research.md",
+                "pdf": true
+            },
+            {
+                "name": "Star Stories Bank",
+                "path": "star_stories_bank.md",
+                "pdf": true
+            },
+            {
+                "name": "2026 02 09 Screening Call",
+                "path": "2026_02_09_screening_call.md",
+                "pdf": false
+            },
+            {
+                "name": "Certifications Summary",
+                "path": "certifications_summary.md",
+                "pdf": false
+            },
+            {
+                "name": "Gino Pisano",
+                "path": "gino_pisano.md",
+                "pdf": false
+            },
+            {
+                "name": "Interview Questions",
+                "path": "interview_questions.md",
+                "pdf": false
+            },
+            {
+                "name": "John Walters",
+                "path": "john_walters.md",
+                "pdf": false
+            },
+            {
+                "name": "Michael Ester",
+                "path": "michael_ester.md",
+                "pdf": false
+            },
+            {
+                "name": "Thank You Email Draft",
+                "path": "thank_you_email_draft.md",
+                "pdf": false
             }
         ]
     },
@@ -316,7 +412,7 @@
             {
                 "name": "Deferred Ideas Ledger",
                 "path": "business/docs/deferred_ideas_ledger.md",
-                "pdf": true
+                "pdf": false
             },
             {
                 "name": "Action Triage Mobile Vs Terminal 2026 02 12",
