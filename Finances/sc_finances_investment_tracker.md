@@ -11,6 +11,7 @@
 | Date | Item | Cost | Purpose | Project Linked | Revenue Generated | ROI Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 2026-02-08 | Lighting Kit (WNQ Session) | $0 (Owned) | High-Fidelity Portraits | WNQ Photos | $400 | **PROFITABLE** |
+| 2026-02-18 | **Tax Allocation (25%)** | ($100) | Tax Reserve | Multi-Project | N/A | **RESERVED** |
 | | | | | | | |
 
 ---

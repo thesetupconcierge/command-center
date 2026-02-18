@@ -430,6 +430,11 @@
                 "name": "Deferred Ideas Ledger",
                 "path": "business/docs/Deferred_Ideas_Ledger.md",
                 "pdf": true
+            },
+            {
+                "name": "Investment & ROI Tracker",
+                "path": "Finances/sc_finances_investment_tracker.md",
+                "pdf": true
             }
         ]
     }
