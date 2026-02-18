@@ -61,6 +61,16 @@
                 "name": "Panel Audit Strategic Pivot 2026",
                 "path": "Advisory Panel/Consultations/Markdown/panel_audit_strategic_pivot_2026-02-17.md",
                 "pdf": false
+            },
+            {
+                "name": "Full Panel Review (Feb 18)",
+                "path": "Advisory Panel/Consultations/Markdown/full_panel_review_2026-02-18.md",
+                "pdf": true
+            },
+            {
+                "name": "GA Panel Review (Feb 18)",
+                "path": "Advisory Panel/Consultations/Markdown/full_panel_review_GA_2026-02-18.md",
+                "pdf": true
             }
         ]
     },

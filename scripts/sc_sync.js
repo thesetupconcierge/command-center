@@ -77,8 +77,9 @@ async function request(method, gistId, pat, payload = null) {
 
 // --- Core Operations ---
 
-async function pull() {
-    const { gistId, pat } = loadConfig();
+async function pull(providedPat = null) {
+    const { gistId, pat: localPat } = loadConfig();
+    const pat = providedPat || localPat;
     log(`📡 Initiating Pull from Gist: ${gistId}...`);
 
     try {
@@ -106,8 +107,9 @@ async function pull() {
     }
 }
 
-async function push(specificFiles = null) {
-    const { gistId, pat } = loadConfig();
+async function push(specificFiles = null, providedPat = null) {
+    const { gistId, pat: localPat } = loadConfig();
+    const pat = providedPat || localPat;
     log(`🚀 Initiating Push to Gist: ${gistId}...`);
 
     try {
@@ -171,7 +173,8 @@ function startServer() {
             req.on('end', async () => {
                 try {
                     const payload = JSON.parse(body);
-                    const manifest = await push(payload.files);
+                    // Pass PAT if provided, else use local secret
+                    const manifest = await push(payload.files, payload.pat);
                     res.writeHead(200, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify(manifest));
                 } catch (e) {
@@ -179,19 +182,59 @@ function startServer() {
                     res.end(e.message);
                 }
             });
+        } else if (req.url === '/config' && req.method === 'GET') {
+            try {
+                const { gistId } = loadConfig();
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ gistId, sidecar: true, version: 'V8.9.1' }));
+            } catch (e) {
+                res.writeHead(500);
+                res.end(e.message);
+            }
         } else if (req.url === '/status' && req.method === 'GET') {
             const manifestPath = path.join(DATA_DIR, 'sync_manifest.json');
             const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')) : { status: 'unknown' };
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(manifest));
+        } else if (req.url.startsWith('/fetch') && req.method === 'GET') {
+            try {
+                const url = new URL(req.url, `http://${req.headers.host}`);
+                const relativePath = url.searchParams.get('path');
+                if (!relativePath) throw new Error("Missing path parameter");
+
+                const fullPath = path.join(BASE_DIR, 'command-center', relativePath);
+
+                // Security: Prevent directory traversal outside of command-center
+                const resolvedRoot = path.resolve(path.join(BASE_DIR, 'command-center'));
+                const resolvedTarget = path.resolve(fullPath);
+                if (!resolvedTarget.startsWith(resolvedRoot)) {
+                    res.writeHead(403);
+                    res.end("Forbidden: Outside of workspace");
+                    return;
+                }
+
+                if (!fs.existsSync(fullPath)) {
+                    res.writeHead(404);
+                    res.end("File Not Found");
+                    return;
+                }
+
+                const ext = path.extname(fullPath).toLowerCase();
+                const mimeTypes = { '.json': 'application/json', '.md': 'text/markdown', '.html': 'text/html' };
+                res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'text/plain' });
+                res.end(fs.readFileSync(fullPath));
+            } catch (e) {
+                res.writeHead(500);
+                res.end(e.message);
+            }
         } else {
             res.writeHead(404);
             res.end("Not Found");
         }
     });
 
-    server.listen(SIDECAR_PORT, () => {
-        log(`🚀 Surgical Sidecar listening on port ${SIDECAR_PORT}`);
+    server.listen(SIDECAR_PORT, '127.0.0.1', () => {
+        log(`🚀 Surgical Sidecar listening on 127.0.0.1:${SIDECAR_PORT} (Loopback Secured)`);
     });
 }
 

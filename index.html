@@ -130,6 +130,55 @@
             border-radius: 8px;
             border: 1px solid var(--border);
         }
+
+        /* Tables - Mobile Health */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .finance-table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 0 -10px;
+            padding: 0 10px;
+        }
+
+        @media (max-width: 600px) {
+            .registry-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-row {
+                font-size: 0.75rem;
+            }
+
+            table {
+                font-size: 0.7rem;
+            }
+
+            th,
+            td {
+                padding: 8px 4px;
+            }
+        }
     </style>
 </head>
 
@@ -325,9 +374,11 @@
             <h2>⚙️ Hub Settings</h2>
             <label class="status-label" for="gist-id">GitHub Gist ID</label>
             <input type="text" id="gist-id" class="input-field" placeholder="Gist ID" title="Enter Gist ID">
-            <label class="status-label" for="gist-pat">GitHub PAT</label>
-            <input type="password" id="gist-pat" class="input-field" placeholder="Personal Access Token"
-                title="Enter GitHub PAT">
+            <div id="pat-config-area">
+                <label class="status-label" for="gist-pat">GitHub PAT</label>
+                <input type="password" id="gist-pat" class="input-field" placeholder="Personal Access Token"
+                    title="Enter GitHub PAT">
+            </div>
             <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:20px;">
                 <label class="status-label">🛠️ Maintenance</label>
                 <button onclick="app.clearLogs()" title="Archive and condense current session logs"
@@ -500,6 +551,7 @@
                 if (!this.state.archivedDocs) this.state.archivedDocs = [];
                 if (!this.state.vaultedDocs) this.state.vaultedDocs = [];
                 this.registryData = null;
+                this.isInitialized = false;
                 this.init();
             }
 
@@ -571,6 +623,7 @@
             }
 
             async init() {
+                await this.attemptHandshake();
                 if (!this.checkAuthentication()) return;
                 this.loadLocal();
 
@@ -590,8 +643,33 @@
                 await this.syncFromSidecar(); // Cycle V8.8.9-Sec Airgap
                 this.checkRisks();
                 this.startHeartbeat();
+                this.isInitialized = true;
                 this.render();
                 if (fullHash.includes(':')) this.handleDeepLink();
+            }
+
+            async attemptHandshake() {
+                try {
+                    const res = await this.fetchWithTimeout('http://127.0.0.1:3001/config', { timeout: 2000 });
+                    if (res.ok) {
+                        const config = await res.json();
+                        this.sidecarConfig = config;
+                        this.sidecarActive = true;
+                        // Auto-adopt Gist ID if sidecar is providing it
+                        if (config.gistId) {
+                            const current = this.getGistConfig() || {};
+                            if (current.gistId !== config.gistId) {
+                                localStorage.setItem('sc_gist_config', JSON.stringify({ ...current, gistId: config.gistId }));
+                            }
+                        }
+                        this.addLog("🔐 Secure Handshake: Sidecar Connected.");
+                    } else {
+                        this.sidecarActive = false;
+                    }
+                } catch (e) {
+                    this.sidecarActive = false;
+                    console.warn("Handshake Failed: Sidecar unreachable.");
+                }
             }
 
             startHeartbeat() {
@@ -609,6 +687,10 @@
             }
 
             async fetchWithTimeout(resource, options = {}) {
+                // If sidecar is active and the resource is a local path (doesn't start with http/https), proxy it
+                if (this.sidecarActive && !resource.startsWith('http')) {
+                    resource = `http://127.0.0.1:3001/fetch?path=${encodeURIComponent(resource)}`;
+                }
                 const { timeout = 8000 } = options;
                 const controller = new AbortController();
                 const id = setTimeout(() => controller.abort(), timeout);
@@ -623,16 +705,18 @@
             renderSyncMeta() {
                 const meta = document.getElementById('sync-text');
                 if (meta) {
+                    const handshakeTag = this.sidecarActive ? " • 🔐 Handshake" : "";
                     if (this.syncStatus === 'synced') {
                         const now = new Date();
-                        const last = new Date(this.lastSynced || now);
+                        const last = this.lastSynced ? new Date(this.lastSynced) : now;
                         const diffSec = Math.floor((now - last) / 1000);
                         const staleness = diffSec < 60 ? "Fresh" : `${Math.floor(diffSec / 60)}m ago`;
 
-                        meta.innerText = `Auto-Sync: ${staleness} • Heartbeat Live`;
-                        meta.title = `Last Sync: ${last.toLocaleTimeString()} (Cycle V8.8.9-Sec)`;
+                        meta.innerText = `Auto-Sync: ${staleness}${handshakeTag} • Heartbeat Live`;
+                        meta.title = `Last Sync: ${last.toLocaleTimeString()} (Cycle V8.9.1-Sec)`;
+                        meta.style.color = "var(--text-dim)";
                     } else if (this.syncStatus === 'offline' || this.syncStatus === 'error') {
-                        meta.innerText = "Auto-Sync: Local Only (Airgap Mode)";
+                        meta.innerText = `Auto-Sync: Local Only${handshakeTag} (Airgap Mode)`;
                         meta.style.color = "var(--red)";
                     } else if (this.syncStatus === 'syncing') {
                         meta.innerText = "Auto-Sync: Syncing...";
@@ -642,13 +726,13 @@
             }
 
             checkRisks() {
-                const container = document.getElementById('risk-alert-container');
-                const msg = document.getElementById('risk-alert-msg');
+                const container = document.getElementById('risk-card-container');
+                const msg = document.getElementById('risk-message');
                 if (!container || !msg) return;
 
                 // Cycle V8.8.9-Sec: Gist PAT is no longer stored in localStorage.
                 // We check if the Sidecar server is unreachable instead.
-                fetch('http://localhost:3001/status')
+                fetch('http://127.0.0.1:3001/status')
                     .then(res => {
                         if (res.ok) container.style.display = 'none';
                     })
@@ -721,7 +805,7 @@
                         }
                     };
 
-                    const res = await this.fetchWithTimeout('http://localhost:3001/push', {
+                    const res = await this.fetchWithTimeout('http://127.0.0.1:3001/push', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload),
@@ -755,7 +839,7 @@
                         } catch (e) { /* ignore individual local load failures */ }
                     }
 
-                    const res = await this.fetchWithTimeout('http://localhost:3001/pull', { timeout: 5000 });
+                    const res = await this.fetchWithTimeout('http://127.0.0.1:3001/pull', { timeout: 5000 });
                     if (res.ok) {
                         const manifest = await res.json();
                         this.lastSynced = manifest.last_synced;
@@ -938,16 +1022,32 @@
                     </div>
                 `;
 
+                // Goal Progress (Aiden)
+                const monthlyRev = 400; // Hardcoded for Feb WNQ
+                const goal = 5000;
+                const goalPct = Math.min(100, Math.round((monthlyRev / goal) * 100));
+
                 container.innerHTML = `
                     <div class="hub-container fade-in">
                         <div class="card">
                             <div class="card-title"><span class="dot" style="background:var(--accent)"></span>Capital & ROI Ledger</div>
                             <div style="margin-top:20px; font-size:0.9rem;">
-                                ${content}
+                                <div class="finance-table-wrap">
+                                    ${content}
+                                </div>
                             </div>
                         </div>
 
-                        <div class="card" style="margin-top:24px;">
+                        <div class="card" style="margin-top:24px; border-left: 4px solid var(--gold);">
+                            <div class="status-label" style="color:var(--gold)">Scaling Target: $5,000/mo</div>
+                            <div class="revenue-progress" style="height:12px; margin: 12px 0;">
+                                <div id="goal-progress-fill" style="width:${goalPct}%; background:var(--gold); box-shadow: 0 0 15px var(--gold-dim);"></div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.75rem; font-weight:700;">
+                                <span style="color:var(--text-bright)">$${monthlyRev} Current</span>
+                                <span style="opacity:0.6;">${goalPct}% of Freedom Level</span>
+                            </div>
+                        </div>
                             <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Operational Actions</div>
                             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:20px;">
                                 <div class="diag-badge" style="cursor:pointer;" onclick="app.openReader('Finances/invoices_sent/', 'Invoices Sent')">📁 Invoices Sent</div>
@@ -1039,12 +1139,45 @@
                 this.render();
             }
 
-            toggleSettings() { document.getElementById('settings-overlay').classList.toggle('open'); }
+            toggleSettings() {
+                const overlay = document.getElementById('settings-overlay');
+                if (!overlay) return;
+                overlay.classList.toggle('open');
+
+                if (overlay.classList.contains('open')) {
+                    const cfg = this.getGistConfig() || {};
+                    document.getElementById('gist-id').value = cfg.gistId || '';
+
+                    const patArea = document.getElementById('pat-config-area');
+                    if (this.sidecarActive) {
+                        patArea.innerHTML = `
+                            <div style="background:rgba(16, 185, 129, 0.1); border:1px solid var(--primary); padding:12px; border-radius:8px; display:flex; gap:12px; align-items:center; margin-top:8px;">
+                                <span style="font-size:1.2rem;">🔐</span>
+                                <div>
+                                    <div style="font-weight:700; color:var(--primary); font-size:0.75rem;">Surgically Connected</div>
+                                    <div style="font-size:0.65rem; opacity:0.7;">PAT is managed by local Sidecar daemon.</div>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        patArea.innerHTML = `
+                            <label class="status-label" for="gist-pat">GitHub PAT</label>
+                            <input type="password" id="gist-pat" class="input-field" placeholder="Personal Access Token" value="${cfg.pat || ''}">
+                        `;
+                    }
+                }
+            }
 
             saveSettings() {
                 const id = document.getElementById('gist-id').value;
-                const pat = document.getElementById('gist-pat').value;
-                localStorage.setItem('sc_gist_config', JSON.stringify({ gistId: id, pat: pat }));
+                const patField = document.getElementById('gist-pat');
+                const pat = patField ? patField.value : '';
+
+                const current = this.getGistConfig() || {};
+                localStorage.setItem('sc_gist_config', JSON.stringify({
+                    gistId: id || current.gistId,
+                    pat: pat || current.pat
+                }));
                 this.toggleSettings();
                 this.syncFromGist();
             }
@@ -1134,25 +1267,34 @@
             checkAuthentication() {
                 const authenticated = localStorage.getItem('sc_hub_authenticated');
                 const cfg = this.getGistConfig();
-
-                // AIRGAP SECURITY: local file protocol bypass removed for hardening.
-                // Use 'csync' for secure terminal-first access.
                 const isLocal = window.location.protocol === 'file:';
-                if (isLocal) return true;
+
+                console.log("Auth Diagnostic:", { isLocal, sidecarActive: this.sidecarActive, authenticated });
+
+                // Loopback/Local bypass
+                if (isLocal || this.sidecarActive) {
+                    console.log("Auth Passed: Secure Environment.");
+                    return true;
+                }
 
                 // If no PAT/Gist configured, let them in to set it up
-                if (!cfg || !cfg.pat) return true;
+                if (!cfg || !cfg.pat) {
+                    console.log("Auth Passed: No secrets found, jumping to settings.");
+                    return true;
+                }
 
                 if (!authenticated) {
                     const pass = prompt('Enter Hub Passcode:');
-                    if (pass === cfg.pat.substring(0, 4)) {
+                    if (pass && pass === cfg.pat.substring(0, 4)) {
                         localStorage.setItem('sc_hub_authenticated', 'true');
                         return true;
                     } else {
-                        document.body.innerHTML = `<div style="height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; color:var(--text-dim); font-family:sans-serif;">
+                        console.error("Auth Failed: Passcode mismatch or prompt canceled.");
+                        document.body.innerHTML = `<div style="height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; color:var(--text-dim); font-family:sans-serif; text-align:center; padding:20px;">
                             <h1 style="color:var(--red)">Access Denied</h1>
-                            <p>Invalid Passcode. (Hint: First 4 chars of PAT)</p>
-                            <button onclick="location.reload()" style="margin-top:20px; background:var(--gold); color:#000; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:700;">Retry</button>
+                            <p>Handshake failed and Passcode was incorrect.</p>
+                            <p style="font-size:0.7rem; opacity:0.6; margin-top:10px;">Sidecar Status: ${this.sidecarActive ? '🟢 Connected' : '🔴 Offline'}</p>
+                            <button onclick="location.reload()" style="margin-top:20px; background:var(--gold); color:#000; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:700;">Retry Handshake</button>
                         </div>`;
                         return false;
                     }
@@ -1161,105 +1303,125 @@
             }
 
             render() {
+                if (!this.isInitialized) return;
+
+                const ring = document.getElementById('readiness-ring');
+                const stats = document.getElementById('stats-panel');
+                const sideCtx = document.getElementById('sidebar-contextual');
+                const actionsList = document.getElementById('action-list');
+                const advContainer = document.getElementById('advisory-container');
+                const revenuePanel = document.getElementById('global-revenue');
+
+                // If core UI is missing (e.g. Access Denied screen active), abort silently.
+                if (!ring || !stats) return;
+
                 const laneTasks = Object.values(TASK_DATA).filter(s => s.lane === this.mode || s.lane === 'shared');
                 const allLaneTasks = laneTasks.flatMap(s => s.tasks);
                 const done = allLaneTasks.filter(t => this.getTaskState(t.id) === 'done').length;
                 const pct = allLaneTasks.length ? Math.round((done / allLaneTasks.length) * 100) : 0;
 
-                // Rings
+                // Progress Ring
                 const circ = 2 * Math.PI * 62;
                 const offset = circ - (pct / 100) * circ;
-                document.getElementById('readiness-ring').innerHTML = `
-          <div class="big-ring-wrap">
-            <div class="big-ring">
-              <svg viewBox="0 0 140 140">
-                <circle class="bg" cx="70" cy="70" r="62"/>
-                <circle class="fill" cx="70" cy="70" r="62" stroke="var(--primary)" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/>
-              </svg>
-              <div class="big-ring-pct"><div class="num">${pct}%</div><div class="label">${this.mode === 'business' ? 'Consulting Ready' : 'Interview Ready'}</div></div>
-            </div>
-          </div>`;
-
-                // Stats
-                document.getElementById('stats-panel').innerHTML = `
-          <div class="stat-row"><span class="status-label">Total Workload</span><span class="status-value">${allLaneTasks.length} units</span></div>
-          <div class="stat-row"><span class="status-label">Shipped</span><span class="status-value" style="color:var(--green)">${done}</span></div>
-        `;
-
-                // Sidebar Contextual
-                const sideCtx = document.getElementById('sidebar-contextual');
-                const diagList = Object.entries(QUIZ_DATA).filter(([id, q]) => q.lane === this.mode);
-                if (diagList.length) {
-                    sideCtx.innerHTML = `
-                        <div class="card fade-in" style="margin-top:16px;">
-                            <div class="status-label">Diagnostic Tools</div>
-                            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-                                ${diagList.map(([id, q]) => `
-                                    <div class="diag-badge" onclick="app.startQuiz('${id}')">
-                                        ⚡ ${q.title}
-                                    </div>
-                                `).join('')}
+                ring.innerHTML = `
+                    <div class="big-ring-wrap">
+                        <div class="big-ring">
+                            <svg viewBox="0 0 140 140">
+                                <circle class="bg" cx="70" cy="70" r="62"/>
+                                <circle class="fill" cx="70" cy="70" r="62" stroke="var(--primary)" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/>
+                            </svg>
+                            <div class="big-ring-pct">
+                                <div class="num">${pct}%</div>
+                                <div class="label">${this.mode === 'business' ? 'Consulting Ready' : 'Interview Ready'}</div>
                             </div>
                         </div>
-                    `;
-                } else {
-                    sideCtx.innerHTML = '';
+                    </div>`;
+
+                // Stats Panel
+                stats.innerHTML = `
+                    <div class="stat-row"><span class="status-label">Total Workload</span><span class="status-value">${allLaneTasks.length} units</span></div>
+                    <div class="stat-row"><span class="status-label">Shipped</span><span class="status-value" style="color:var(--green)">${done}</span></div>
+                `;
+
+                // Sidebar Contextual (Diagnostic Tools)
+                if (sideCtx) {
+                    const diagList = Object.entries(QUIZ_DATA).filter(([id, q]) => q.lane === this.mode);
+                    if (diagList.length) {
+                        sideCtx.innerHTML = `
+                            <div class="card fade-in" style="margin-top:16px;">
+                                <div class="status-label">Diagnostic Tools</div>
+                                <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+                                    ${diagList.map(([id, q]) => `
+                                        <div class="diag-badge" onclick="app.startQuiz('${id}')">
+                                            ⚡ ${q.title}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        sideCtx.innerHTML = '';
+                    }
                 }
 
-                // Revenue Spotlight (Only in Business)
-                const rev = 400;
-                const revenuePanel = document.getElementById('global-revenue');
+                // Revenue Spotlight
                 if (revenuePanel) {
-                    document.getElementById('revenue-current').innerText = `$${rev.toLocaleString()}`;
-                    document.getElementById('revenue-fill').style.width = `${(rev / 5000) * 100}%`;
+                    const rev = 400;
+                    const rCurrent = document.getElementById('revenue-current');
+                    const rFill = document.getElementById('revenue-fill');
+                    if (rCurrent) rCurrent.innerText = `$${rev.toLocaleString()}`;
+                    if (rFill) rFill.style.width = `${(rev / 5000) * 100}%`;
                 }
 
-                // Actions
-                const actions = NEXT_ACTIONS.filter(a => a.lane === this.mode);
-                document.getElementById('action-list').innerHTML = actions.map(a => {
-                    const isDone = (this.state[this.mode].completedActions && this.state[this.mode].completedActions[a.id]) || a.preChecked;
-                    return `
-                        <div class="action-item ${isDone ? 'completed' : ''}" onclick="app.toggleAction('${a.id}')">
-                            <div class="action-check"></div>
-                            <div>
-                                <div class="task-text" style="font-size:0.8rem;">${a.text}</div>
-                                <div class="status-label" style="font-size:0.6rem;">${a.source}</div>
+                // Action List Spotlight
+                if (actionsList) {
+                    const actions = NEXT_ACTIONS.filter(a => a.lane === this.mode);
+                    actionsList.innerHTML = actions.map(a => {
+                        const isDone = (this.state[this.mode].completedActions && this.state[this.mode].completedActions[a.id]) || a.preChecked;
+                        return `
+                            <div class="action-item ${isDone ? 'completed' : ''}" onclick="app.toggleAction('${a.id}')">
+                                <div class="action-check"></div>
+                                <div>
+                                    <div class="task-text" style="font-size:0.8rem;">${a.text}</div>
+                                    <div class="status-label" style="font-size:0.6rem;">${a.source}</div>
+                                </div>
                             </div>
-                        </div>
-                    `;
-                }).join('');
+                        `;
+                    }).join('');
+                }
 
+                // Extra Links Visibility (Career only)
                 const extraLinks = document.getElementById('extra-links');
                 if (extraLinks) extraLinks.style.display = this.mode === 'career' ? 'block' : 'none';
 
-                // Advisory Card (Silas Vance)
-                const advContainer = document.getElementById('advisory-container');
-                if (this.mode === 'business') {
-                    advContainer.style.display = 'block';
-                    advContainer.innerHTML = `
-                        <div class="card advisory-card fade-in">
-                            <div class="advisory-header">
-                                <div class="advisory-avatar">🦉</div>
-                                <div class="advisory-info">
-                                    <div class="advisory-name">Silas Vance</div>
-                                    <div class="advisory-title">Strategic Lead</div>
+                // Advisory Card
+                if (advContainer) {
+                    if (this.mode === 'business') {
+                        advContainer.style.display = 'block';
+                        advContainer.innerHTML = `
+                            <div class="card advisory-card fade-in">
+                                <div class="advisory-header">
+                                    <div class="advisory-avatar">🦉</div>
+                                    <div class="advisory-info">
+                                        <div class="advisory-name">Silas Vance</div>
+                                        <div class="advisory-title">Strategic Lead</div>
+                                    </div>
+                                    <div class="section-badge" style="background:var(--purple-dim); color:var(--purple)">DEEP INSIGHT</div>
                                 </div>
-                                <div class="section-badge" style="background:var(--purple-dim); color:var(--purple)">DEEP INSIGHT</div>
+                                <div class="advisory-quote">
+                                    "Price the value, not the hours. The ecosystem survives on the Clinical Standard, or it doesn't survive at all."
+                                </div>
+                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                                    <button class="advisory-btn" onclick="window.open('business/docs/Silas_Vance_Money_Shot_Report.pdf', '_blank')">View Money Shot →</button>
+                                    <button class="advisory-btn" style="background:var(--cyan-dim); border-color:var(--cyan); color:var(--cyan);" onclick="app.scaffoldDiagnostic()">Surgical Trigger</button>
+                                </div>
                             </div>
-                            <div class="advisory-quote">
-                                "Price the value, not the hours. The ecosystem survives on the Clinical Standard, or it doesn't survive at all."
-                            </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                                <button class="advisory-btn" onclick="window.open('business/docs/Silas_Vance_Money_Shot_Report.pdf', '_blank')">View Money Shot →</button>
-                                <button class="advisory-btn" style="background:var(--cyan-dim); border-color:var(--cyan); color:var(--cyan);" onclick="app.scaffoldDiagnostic()">Surgical Trigger</button>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    advContainer.style.display = 'none';
+                        `;
+                    } else {
+                        advContainer.style.display = 'none';
+                    }
                 }
 
-                // Sections
                 if (this.mode === 'registry') {
                     this.renderRegistry();
                 } else if (this.mode === 'finance') {
@@ -1267,59 +1429,64 @@
                 } else if (this.mode === 'pdf') {
                     this.renderPdfUtility();
                 } else {
-                    document.getElementById('task-sections-container').innerHTML = `
-                        <div id="${this.mode}-portal" class="hub-container fade-in">
-                            ${laneTasks.map(s => {
-                        const sDone = s.tasks.filter(t => this.getTaskState(t.id) === 'done').length;
-                        const sectionKey = Object.keys(TASK_DATA).find(key => TASK_DATA[key] === s);
-                        const isCollapsed = this.state[this.mode].collapsed && this.state[this.mode].collapsed[s.title];
-                        return `
-                                    <div class="card ${isCollapsed ? 'collapsed' : ''}" id="${sectionKey}">
-                                        <div class="task-section-header" onclick="app.toggleSection('${s.title}')">
-                                            <div class="section-title">
-                                                <span class="section-chevron" style="transform: ${isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)'}; margin-right:8px;">▼</span>
-                                                ${s.icon || ''} ${s.title} 
-                                                <span class="section-badge" style="background:${s.badgeColor}20;color:${s.badgeColor}">${s.badge}</span>
+                    const sectionsContainer = document.getElementById('task-sections-container');
+                    if (sectionsContainer) {
+                        sectionsContainer.innerHTML = `
+                            <div id="${this.mode}-portal" class="hub-container fade-in">
+                                ${laneTasks.map(s => {
+                            const sDone = s.tasks.filter(t => this.getTaskState(t.id) === 'done').length;
+                            const sectionKey = Object.keys(TASK_DATA).find(key => TASK_DATA[key] === s);
+                            const isCollapsed = this.state[this.mode].collapsed ? this.state[this.mode].collapsed[s.title] !== false : true;
+                            return `
+                                        <div class="card ${isCollapsed ? 'collapsed' : ''}" id="${sectionKey}">
+                                            <div class="task-section-header" onclick="app.toggleSection('${s.title}')">
+                                                <div class="section-title">
+                                                    <span class="section-chevron" style="transform: ${isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)'}; margin-right:8px;">▼</span>
+                                                    ${s.icon || ''} ${s.title} 
+                                                    <span class="section-badge" style="background:${s.badgeColor}20;color:${s.badgeColor}">${s.badge}</span>
+                                                </div>
+                                                <div class="status-label">${sDone}/${s.tasks.length}</div>
+                                                <span class="deeplink-btn" title="Copy Deep Link" onclick="event.stopPropagation(); app.copyDeepLink('${sectionKey}')">🔗</span>
                                             </div>
-                                            <div class="status-label">${sDone}/${s.tasks.length}</div>
-                                            <span class="deeplink-btn" title="Copy Deep Link" onclick="event.stopPropagation(); app.copyDeepLink('${sectionKey}')">🔗</span>
-                                        </div>
-                                        <div class="section-body" style="display: ${isCollapsed ? 'none' : 'block'}">
-                                            <div class="task-list">
-                                                ${s.tasks.map(t => `
-                                                    <div class="task-item" data-status="${this.getTaskState(t.id)}">
-                                                        <div class="task-check" data-state="${this.getTaskState(t.id)}" onclick="app.cycleTask('${t.id}')"></div>
-                                                        <div class="task-text">${this.parseLinks(t.text)}</div>
-                                                    </div>
-                                                `).join('')}
+                                            <div class="section-body" style="display: ${isCollapsed ? 'none' : 'block'}">
+                                                <div class="task-list">
+                                                    ${s.tasks.map(t => `
+                                                        <div class="task-item" data-status="${this.getTaskState(t.id)}">
+                                                            <div class="task-check" data-state="${this.getTaskState(t.id)}" onclick="app.cycleTask('${t.id}')"></div>
+                                                            <div class="task-text">${this.parseLinks(t.text)}</div>
+                                                        </div>
+                                                    `).join('')}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                `;
-                    }).join('')}
-                        </div>
-                    `;
+                                    `;
+                        }).join('')}
+                            </div>
+                        `;
+                    }
                 }
 
-                // Logs
+                // Logs Rendering
+                const logList = document.getElementById('log-list');
                 const filterBtn = document.getElementById('filter-handoff');
-                const isFiltered = filterBtn ? filterBtn.checked : false;
+                if (logList) {
+                    const isFiltered = filterBtn ? filterBtn.checked : false;
+                    let currentLogs = (this.state[this.mode] && this.state[this.mode].logs) ? this.state[this.mode].logs : (this.state['business'] ? this.state['business'].logs : []);
 
-                let currentLogs = (this.state[this.mode] && this.state[this.mode].logs) ? this.state[this.mode].logs : (this.state['business'] ? this.state['business'].logs : []);
+                    if (isFiltered) {
+                        currentLogs = currentLogs.filter(l => l.text.toLowerCase().includes('#handoff') || l.text.toLowerCase().includes('#jb'));
+                    }
 
-                if (isFiltered) {
-                    currentLogs = currentLogs.filter(l => l.text.toLowerCase().includes('#handoff') || l.text.toLowerCase().includes('#jb'));
+                    logList.innerHTML = currentLogs.map(l => {
+                        const isHandoff = l.text.toLowerCase().includes('#handoff') || l.text.toLowerCase().includes('#jb');
+                        return `
+                            <div class="log-entry" ${isHandoff ? 'data-category="handoff"' : ''}>
+                                <div class="log-time">${l.time}</div>
+                                <div class="log-text">${this.parseLinks(l.text)}</div>
+                            </div>
+                        `;
+                    }).join('');
                 }
-
-                document.getElementById('log-list').innerHTML = currentLogs.map(l => {
-                    const isHandoff = l.text.toLowerCase().includes('#handoff') || l.text.toLowerCase().includes('#jb');
-                    return `
-                        <div class="log-entry" ${isHandoff ? 'data-category="handoff"' : ''}>
-                            <div class="log-time">${l.time}</div>
-                            <div class="log-text">${this.parseLinks(l.text)}</div>
-                        </div>
-                    `;
-                }).join('');
             }
 
             setPdfTool(tool) {
@@ -1543,11 +1710,11 @@
                 const container = document.getElementById('task-sections-container');
                 let html = '<div class="hub-container fade-in">';
 
-                // Registry Header
+                // Registry Header (Surgical Vault Pivot - Silas)
                 html += `
             <div class= "card" >
-                        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Registry Archive</div>
-                        <p style="font-size:0.8rem; color:var(--text-dim);">Historical document registry and Value Essence tracking.</p>
+                        <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Surgical Vault [V8.9]</div>
+                        <p style="font-size:0.8rem; color:var(--text-dim);">High-leverage clinical assets and core strategic playbooks.</p>
                     </div>
             `;
 
@@ -1566,7 +1733,8 @@
                     const isVisible = (this.mode === 'registry' || cat.lanes.includes(this.mode) || cat.lanes.includes('shared'));
                     if (!isVisible) return;
 
-                    const isCollapsed = this.state[this.mode].collapsed && this.state[this.mode].collapsed[cat.title];
+                    // Default to collapsed unless explicitly set to false
+                    const isCollapsed = this.state[this.mode].collapsed ? this.state[this.mode].collapsed[cat.title] !== false : true;
 
                     // Sort: Latest to Oldest
                     const sortedDocs = [...cat.docs].sort((a, b) => {
@@ -1668,7 +1836,7 @@
         window.app = new MasterApp();
 
         window.addEventListener('load', () => {
-            window.app.render();
+            // Initial render removed - handled by init()
             window.app.handleDeepLink();
         });
         window.addEventListener('hashchange', () => window.app.handleDeepLink());

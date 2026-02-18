@@ -35,7 +35,7 @@ Setup Concierge utilizes a dual-engine tracking system to monitor both career st
 
 Located at `Setup Concierge\Finances\`:
 
-```
+```markdown
 Finances\
 ├── Invoices Sent\      — Billed via J4AFoundation LLC
 ├── Invoices Received\  — Vendor & service billing
@@ -54,7 +54,11 @@ The **Master Hub Header** displays real-time growth metrics:
 ### Invoicing Protocol
 
 1. **Draft:** Create invoice in Markdown using the `Invoices Sent\` template.
-2. **Review:** Ensure J4AFoundation LLC branding and correct EIN/Payment details.
+2. **Review:** Ensure J4AFoundation LLC branding is present and details are verified:
+   - **Business Name:** J4AFoundation LLC
+   - **Tax ID (EIN):** `[INSERT EIN FROM SECURE VAULT]`
+   - **Routing Number:** `[INSERT ROUTING FROM SECURE VAULT]`
+   - **Account Number:** `[INSERT ACCOUNT FROM SECURE VAULT]`
 3. **Export:** Convert to PDF using `npx md-to-pdf` or the `/generate-pdfs` workflow.
 4. **Send:** Deliver link/PDF to client via preferred comms channel.
 
