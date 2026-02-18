@@ -974,43 +974,6 @@
                 }
             }
 
-            async openReader(url, title = "Document") {
-                const overlay = document.getElementById('doc-viewer');
-                const content = document.getElementById('viewer-content');
-                const titleEl = document.getElementById('viewer-title');
-
-                if (!overlay || !content) return;
-
-                overlay.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-                titleEl.innerText = title;
-                content.innerHTML = '<div style="text-align:center; padding:40px;">⌛ Loading engine...</div>';
-
-                try {
-                    if (url.toLowerCase().endsWith('.pdf')) {
-                        // PDF.js Integration Point
-                        content.innerHTML = `<iframe src="${url}" width="100%" height="700px" style="border:none; border-radius:8px;"></iframe>`;
-                    } else {
-                        const res = await fetch(url);
-                        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
-                        const raw = await res.text();
-                        content.innerHTML = this.parseMarkdown(raw);
-                    }
-                    overlay.scrollTop = 0;
-                } catch (e) {
-                    content.innerHTML = `<div style="color:var(--red); padding:40px; border:1px solid var(--red); border-radius:8px; background:rgba(255,255,255,0.03);">
-                        <h3>Read Failure</h3>
-                        <p>${e.message}</p>
-                        <p style="margin-top:20px; font-size:0.8rem; opacity:0.6;">Path: ${url}</p>
-                    </div>`;
-                }
-            }
-
-            closeReader() {
-                document.getElementById('doc-viewer').style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-
             parseMarkdown(text) {
                 // Ported regex parser from guides.html for zero-dependency speed
                 let html = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -1046,6 +1009,42 @@
                 html = html.replace(/<p>\s*<\/p>/g, '');
 
                 return html;
+            }
+
+            async openReader(path, title = "Document") {
+                const viewer = document.getElementById('doc-viewer');
+                const content = document.getElementById('viewer-content');
+                const titleEl = document.getElementById('viewer-title');
+
+                if (!viewer || !content) return;
+
+                titleEl.innerText = title;
+                content.innerHTML = '<div style="text-align:center; padding:40px; opacity:0.5;">Loading clinical data...</div>';
+                viewer.classList.add('open');
+                document.body.style.overflow = 'hidden';
+
+                try {
+                    if (path.toLowerCase().endsWith('.pdf')) {
+                        content.innerHTML = `<iframe src="${path}" width="100%" height="700px" style="border:none; border-radius:8px;"></iframe>`;
+                    } else {
+                        const res = await this.fetchWithTimeout(path);
+                        const text = await res.text();
+                        content.innerHTML = this.parseMarkdown(text);
+                    }
+                    viewer.scrollTop = 0;
+                } catch (e) {
+                    content.innerHTML = `<div style="color:var(--red); padding:20px; text-align:center;">
+                        <h3>Surgical Error</h3>
+                        <p>Failed to load document: ${path}</p>
+                        <p style="font-size:0.7rem; opacity:0.7;">Error: ${e.message}</p>
+                    </div>`;
+                }
+            }
+
+            closeReader() {
+                const viewer = document.getElementById('doc-viewer');
+                if (viewer) viewer.classList.remove('open');
+                document.body.style.overflow = 'auto';
             }
 
             async loadRegistryData() {
@@ -1361,31 +1360,6 @@
                 return true;
             }
 
-            async openReader(path, title) {
-                const viewer = document.getElementById('doc-viewer');
-                const content = document.getElementById('viewer-content');
-                const titleEl = document.getElementById('viewer-title');
-
-                titleEl.innerText = title;
-                content.innerHTML = '<div style="text-align:center; padding:40px; opacity:0.5;">Loading clinical data...</div>';
-                viewer.classList.add('open');
-
-                try {
-                    const res = await this.fetchWithTimeout(path);
-                    const text = await res.text();
-                    content.innerHTML = this.parseMarkdown(text);
-                } catch (e) {
-                    content.innerHTML = `<div style="color:var(--red); padding:20px; text-align:center;">
-                        <h3>Surgical Error</h3>
-                        <p>Failed to load document: ${path}</p>
-                        <p style="font-size:0.7rem; opacity:0.7;">Error: ${e.message}</p>
-                    </div>`;
-                }
-            }
-
-            closeReader() {
-                document.getElementById('doc-viewer').classList.remove('open');
-            }
 
             render() {
                 if (!this.isInitialized) return;

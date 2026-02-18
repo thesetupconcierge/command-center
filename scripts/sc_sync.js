@@ -202,6 +202,8 @@ function startServer() {
                 const relativePath = url.searchParams.get('path');
                 if (!relativePath) throw new Error("Missing path parameter");
 
+                log(`🔗 Sidecar Fetch: ${relativePath}`);
+
                 const fullPath = path.join(BASE_DIR, 'command-center', relativePath);
 
                 // Security: Prevent directory traversal outside of command-center
