@@ -894,49 +894,52 @@
 
         // ==================== MARKDOWN RENDERER ====================
         function rendermarkdown(md) {
-            let html = md
-                // Escape HTML
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
+            // 1. Extract fenced code blocks first (protect from processing)
+            const codeBlocks = [];
+            md = md.replace(/```([\w]*)\n([\s\S]*?)```/g, (_, lang, code) => {
+                const i = codeBlocks.length;
+                codeBlocks.push(`<pre><code>${code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').trim()}</code></pre>`);
+                return `\x00CB${i}\x00`;
+            });
 
-            // Code blocks (before other processing)
-            html = html.replace(/```[\w]*\n([\s\S]*?)```/g, (_, code) =>
-                `<pre><code>${code.trim()}</code></pre>`
-            );
+            // 2. Escape HTML in remaining content
+            md = md.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-            // Headers
+            let html = md;
+
+            // 3. Headers
             html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
             html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
             html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
             html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
 
-            // Horizontal rules
+            // 4. Horizontal rules
             html = html.replace(/^---+$/gm, '<hr>');
 
-            // Blockquotes
+            // 5. Blockquotes (match escaped &gt;)
             html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
-            // Merge consecutive blockquotes
             html = html.replace(/<\/blockquote>\n<blockquote>/g, '<br>');
 
-            // Bold and italic
+            // 6. Bold and italic
             html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
             html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
 
-            // Inline code
+            // 7. Inline code
             html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-            // Checkboxes
-            html = html.replace(/- \[x\] (.+)/g, '<li><input type="checkbox" checked disabled> $1</li>');
-            html = html.replace(/- \[ \] (.+)/g, '<li><input type="checkbox" disabled> $1</li>');
+            // 8. Links  [text](url)
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color:var(--cyan);text-decoration:underline">$1</a>');
 
-            // Lists
+            // 9. Checkboxes
+            html = html.replace(/^- \[x\] (.+)$/gm, '<li><input type="checkbox" checked disabled> $1</li>');
+            html = html.replace(/^- \[ \] (.+)$/gm, '<li><input type="checkbox" disabled> $1</li>');
+
+            // 10. Unordered and ordered lists
             html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
             html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
-            // Wrap consecutive <li> in <ul>
             html = html.replace(/((<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
 
-            // Tables
+            // 11. Tables
             html = html.replace(/^(\|.+\|)\n(\|[-| :]+\|)\n((?:\|.+\|\n?)*)/gm, (_, header, align, rows) => {
                 const headers = header.split('|').filter(c => c.trim());
                 const rowList = rows.trim().split('\n').filter(Boolean);
@@ -949,11 +952,14 @@
         </table>`;
             });
 
-            // Paragraphs (lines that aren't already wrapped)
-            html = html.replace(/^(?!<[a-z]|$)(.+)$/gm, '<p>$1</p>');
+            // 12. Paragraphs (lines not already wrapped in HTML tags)
+            html = html.replace(/^(?!<[a-z/]|$|\x00)(.+)$/gm, '<p>$1</p>');
 
-            // Clean up empty paragraphs
+            // 13. Clean up empty paragraphs
             html = html.replace(/<p>\s*<\/p>/g, '');
+
+            // 14. Restore code blocks
+            html = html.replace(/\x00CB(\d+)\x00/g, (_, i) => codeBlocks[i]);
 
             return html;
         }
