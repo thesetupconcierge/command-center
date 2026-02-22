@@ -228,67 +228,67 @@
             },
             {
                 "name": "Company Research",
-                "path": "company_research.md",
+                "path": "career/docs/company_research.md",
                 "pdf": true
             },
             {
                 "name": "Mock Qa Drill",
-                "path": "mock_qa_drill.md",
+                "path": "career/docs/mock_qa_drill.md",
                 "pdf": false
             },
             {
                 "name": "Panel Review Interview Strategy",
-                "path": "panel_review_interview_strategy.md",
+                "path": "career/docs/panel_review_interview_strategy.md",
                 "pdf": true
             },
             {
                 "name": "Reference Selection",
-                "path": "reference_selection.md",
+                "path": "career/docs/reference_selection.md",
                 "pdf": true
             },
             {
                 "name": "Salary Research",
-                "path": "salary_research.md",
+                "path": "career/docs/salary_research.md",
                 "pdf": true
             },
             {
                 "name": "Star Stories Bank",
-                "path": "star_stories_bank.md",
+                "path": "career/docs/star_stories_bank.md",
                 "pdf": true
             },
             {
                 "name": "2026 02 09 Screening Call",
-                "path": "2026_02_09_screening_call.md",
+                "path": "career/docs/2026_02_09_screening_call.md",
                 "pdf": false
             },
             {
                 "name": "Certifications Summary",
-                "path": "certifications_summary.md",
+                "path": "career/docs/certifications_summary.md",
                 "pdf": false
             },
             {
                 "name": "Gino Pisano",
-                "path": "gino_pisano.md",
+                "path": "career/docs/gino_pisano.md",
                 "pdf": false
             },
             {
                 "name": "Interview Questions",
-                "path": "interview_questions.md",
+                "path": "career/docs/interview_questions.md",
                 "pdf": false
             },
             {
                 "name": "John Walters",
-                "path": "john_walters.md",
+                "path": "career/docs/john_walters.md",
                 "pdf": false
             },
             {
                 "name": "Michael Ester",
-                "path": "michael_ester.md",
+                "path": "career/docs/michael_ester.md",
                 "pdf": false
             },
             {
                 "name": "Thank You Email Draft",
-                "path": "thank_you_email_draft.md",
+                "path": "career/docs/thank_you_email_draft.md",
                 "pdf": false
             }
         ]
