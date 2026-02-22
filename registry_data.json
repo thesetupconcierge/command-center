@@ -299,7 +299,33 @@
         "lanes": [
             "business"
         ],
-        "docs": []
+        "docs": [
+            {
+                "name": "WNQ Website Revamp Proposal",
+                "path": "business/docs/wnq_website_revamp_proposal.md",
+                "pdf": false
+            },
+            {
+                "name": "WNQ CDA Case Study Template",
+                "path": "business/docs/wnq_cda_case_study_template.md",
+                "pdf": false
+            },
+            {
+                "name": "WNQ Ike Approach Plan",
+                "path": "business/docs/wnq_ike_approach_plan.md",
+                "pdf": false
+            },
+            {
+                "name": "Nonprofit Digital Revamp One-Pager",
+                "path": "business/docs/nonprofit_digital_revamp_onepager.md",
+                "pdf": false
+            },
+            {
+                "name": "Email WNQ Proposal Feb 2026",
+                "path": "business/docs/email_wnq_proposal_feb2026.md",
+                "pdf": false
+            }
+        ]
     },
     "history": {
         "title": "Logs & Walkthroughs",
