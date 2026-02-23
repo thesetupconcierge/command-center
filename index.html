@@ -675,12 +675,45 @@
 
             // BUSINESS ACTIONS
             { id: "a43", text: "Complete root folder renames for Business Ideas and Career Hub (blocked by handles)", urgency: "now", source: "RayRay/Ops", lane: "business" },
-            { id: "a44", text: "Implement Burn Rate tracking in Finance Hub (Freedom Level Alignment)", urgency: "soon", source: "Aiden", lane: "business" },
             { id: "a45", text: "Surgical Link Audit for deferred ideas (Nexus Coherence)", urgency: "later", source: "RayRay", lane: "business" },
             { id: "a40", text: "Home Tunnel Setup: Cloudflare Zero Trust for Secure Global Access", urgency: "soon", source: "Nomad Prep", lane: "business" },
             { id: "a41", text: "Advanced Scaling: Research VPS/OAuth integration for V9.0", urgency: "later", source: "strategy", lane: "business" },
             { id: "a42", text: "Monitor Sidecar heartbeat stability (24h soak test)", urgency: "now", source: "Ops", lane: "business" }
         ];
+
+        // ═══════════════════════════════════════════════════════
+        // FINANCE_CONFIG — Burn Rate & Freedom Level Data
+        // ═══════════════════════════════════════════════════════
+        // GA (Aiden) Advisory: Track every dollar flowing in and out.
+        // Update these numbers monthly. The dashboard calculates the rest.
+        const FINANCE_CONFIG = {
+            // Income streams (monthly)
+            income: [
+                { id: 'sterling', label: 'Sterling Engineering (W-2)', amount: 10400, startMonth: 2, type: 'career' },
+                { id: 'wnq', label: 'WNQ Photography', amount: 400, startMonth: 1, type: 'business' },
+                // Add new streams here:
+                // { id: 'nexus', label: 'Black Nexus Clients', amount: 0, startMonth: 2, type: 'business' },
+            ],
+            // Monthly fixed expenses (update these with real numbers)
+            expenses: [
+                { id: 'rent', label: 'Rent / Housing', amount: 0, category: 'essentials' },
+                { id: 'utilities', label: 'Utilities', amount: 0, category: 'essentials' },
+                { id: 'food', label: 'Food & Groceries', amount: 0, category: 'essentials' },
+                { id: 'transport', label: 'Transport / Gas', amount: 0, category: 'essentials' },
+                { id: 'insurance', label: 'Insurance', amount: 0, category: 'essentials' },
+                { id: 'phone', label: 'Phone / Internet', amount: 0, category: 'essentials' },
+                { id: 'subscriptions', label: 'Software & Subs', amount: 0, category: 'ops' },
+                { id: 'domains', label: 'Domains & Hosting', amount: 0, category: 'ops' },
+                { id: 'tax_reserve', label: 'Tax Reserve (25%)', amount: 100, category: 'ops' },
+                { id: 'misc', label: 'Misc / Variable', amount: 0, category: 'flex' },
+            ],
+            // Current liquid reserve
+            savings: 0,
+            // Freedom Level = monthly SC revenue needed to be fully W-2 independent
+            freedomLevel: 5000,
+            // Revenue goal for the $5k progress bar
+            revenueGoal: 5000
+        };
 
         class MasterApp {
             constructor() {
@@ -1232,6 +1265,49 @@
                 } catch (e) { /* silent fail for finance tracker */ }
             }
 
+            calculateBurnRate() {
+                const now = new Date();
+                const currentMonth = now.getMonth(); // 0-indexed
+
+                // Calculate active income for current month
+                let totalIncome = 0;
+                let businessIncome = 0;
+                let careerIncome = 0;
+                FINANCE_CONFIG.income.forEach(stream => {
+                    if (currentMonth >= stream.startMonth) {
+                        totalIncome += stream.amount;
+                        if (stream.type === 'business') businessIncome += stream.amount;
+                        else careerIncome += stream.amount;
+                    }
+                });
+
+                // Calculate total expenses
+                let totalExpenses = 0;
+                const categories = {};
+                FINANCE_CONFIG.expenses.forEach(exp => {
+                    totalExpenses += exp.amount;
+                    if (!categories[exp.category]) categories[exp.category] = { total: 0, items: [] };
+                    categories[exp.category].total += exp.amount;
+                    categories[exp.category].items.push(exp);
+                });
+
+                // Net and runway
+                const netPosition = totalIncome - totalExpenses;
+                const runway = totalExpenses > 0 && FINANCE_CONFIG.savings > 0
+                    ? Math.round(FINANCE_CONFIG.savings / totalExpenses)
+                    : totalExpenses === 0 ? Infinity : 0;
+
+                // Freedom Level gap
+                const freedomGap = Math.max(0, FINANCE_CONFIG.freedomLevel - businessIncome);
+                const freedomPct = Math.min(100, Math.round((businessIncome / FINANCE_CONFIG.freedomLevel) * 100));
+
+                return {
+                    totalIncome, businessIncome, careerIncome,
+                    totalExpenses, netPosition, runway,
+                    freedomGap, freedomPct, categories
+                };
+            }
+
             renderFinance() {
                 const container = document.getElementById('task-sections-container');
                 const content = this.financeTrackerRaw ? this.parsemarkdown(this.financeTrackerRaw) : `
@@ -1241,33 +1317,124 @@
                     </div>
                 `;
 
-                // Goal Progress (Aiden)
-                const monthlyRev = 400; // Hardcoded for Feb wnq
-                const goal = 5000;
+                // Calculate burn rate from FINANCE_CONFIG
+                const burn = this.calculateBurnRate();
+                const isDeficit = burn.netPosition < 0;
+                const healthClass = isDeficit ? 'deficit' : '';
+                const healthLabel = isDeficit ? 'DEFICIT' : burn.totalExpenses === 0 ? 'AWAITING DATA' : 'NET POSITIVE';
+
+                // Gauge proportions
+                const gaugeTotal = Math.max(burn.totalIncome, burn.totalExpenses, 1);
+                const incomePct = Math.round((burn.totalIncome / gaugeTotal) * 100);
+                const expensePct = Math.round((burn.totalExpenses / gaugeTotal) * 100);
+
+                // Runway display
+                const runwayDisplay = burn.runway === Infinity ? '∞' : burn.runway === 0 ? '—' : `${burn.runway}`;
+
+                // Freedom gap badge
+                const freedomClass = burn.freedomPct >= 100 ? 'achieved' : '';
+                const freedomIcon = burn.freedomPct >= 100 ? '✅' : '🎯';
+                const freedomText = burn.freedomPct >= 100
+                    ? 'Freedom Level Achieved!'
+                    : `$${burn.freedomGap.toLocaleString()}/mo to Freedom Level`;
+
+                // Category breakdown rows
+                const categoryColors = { essentials: 'var(--cyan)', ops: 'var(--purple)', flex: 'var(--gold)' };
+                const categoryLabels = { essentials: '🏠 Essentials', ops: '⚙️ Operations', flex: '🎲 Variable' };
+                let breakdownHtml = '';
+                if (burn.totalExpenses > 0) {
+                    Object.entries(burn.categories).forEach(([cat, data]) => {
+                        if (data.total > 0) {
+                            const pct = Math.round((data.total / burn.totalExpenses) * 100);
+                            const color = categoryColors[cat] || 'var(--text-dim)';
+                            breakdownHtml += `
+                                <div class="burn-category-row">
+                                    <span class="burn-category-label">${categoryLabels[cat] || cat}</span>
+                                    <div class="burn-category-bar">
+                                        <div class="burn-category-fill" style="width:${pct}%; background:${color};"></div>
+                                    </div>
+                                    <span class="burn-category-amount">$${data.total.toLocaleString()}</span>
+                                </div>`;
+                        }
+                    });
+                } else {
+                    breakdownHtml = '<div style="color:var(--text-dim); font-size:0.7rem; text-align:center; padding:12px;">Update FINANCE_CONFIG expenses to see breakdown</div>';
+                }
+
+                // Revenue goal (from config)
+                const monthlyRev = burn.businessIncome;
+                const goal = FINANCE_CONFIG.revenueGoal;
                 const goalPct = Math.min(100, Math.round((monthlyRev / goal) * 100));
 
                 container.innerHTML = `
                     <div class="hub-container fade-in">
                         <div class="card">
-                            <div class="card-title"><span class="dot" style="background:var(--accent)"></span>Capital & ROI Ledger</div>
-                            <div style="margin-top:20px; font-size:0.9rem;">
-                                <div class="finance-table-wrap">
-                                    ${content}
+                            <div class="card-title"><span class="dot dot-primary"></span>Capital & ROI Ledger</div>
+                            <div class="finance-table-wrap" style="margin-top:20px; font-size:0.9rem;">
+                                ${content}
+                            </div>
+                        </div>
+
+                        <div class="card burn-rate-card">
+                            <div class="burn-rate-header">
+                                <div class="card-title" style="margin:0;"><span class="dot" style="background:var(--cyan)"></span>Burn Rate Dashboard</div>
+                                <div class="burn-rate-health ${healthClass}">
+                                    <span class="health-dot"></span>
+                                    ${healthLabel}
                                 </div>
+                            </div>
+
+                            <div class="burn-gauge">
+                                <div class="burn-gauge-income" style="width:${incomePct}%"></div>
+                                <div class="burn-gauge-expense" style="width:${expensePct}%"></div>
+                            </div>
+                            <div class="burn-gauge-labels">
+                                <span class="income-label">↑ Income: $${burn.totalIncome.toLocaleString()}/mo</span>
+                                <span class="expense-label">↓ Expenses: $${burn.totalExpenses.toLocaleString()}/mo</span>
+                            </div>
+
+                            <div class="burn-metrics">
+                                <div class="burn-metric">
+                                    <div class="burn-metric-value" style="color:var(--red)">$${burn.totalExpenses.toLocaleString()}</div>
+                                    <div class="burn-metric-label">Monthly Burn</div>
+                                </div>
+                                <div class="burn-metric">
+                                    <div class="burn-metric-value" style="color:${isDeficit ? 'var(--red)' : 'var(--green)'}">
+                                        ${isDeficit ? '-' : '+'}$${Math.abs(burn.netPosition).toLocaleString()}
+                                    </div>
+                                    <div class="burn-metric-label">Net Position</div>
+                                </div>
+                                <div class="burn-metric">
+                                    <div class="burn-metric-value" style="color:var(--cyan)">${runwayDisplay}</div>
+                                    <div class="burn-metric-label">Runway (months)</div>
+                                </div>
+                                <div class="burn-metric">
+                                    <div class="burn-metric-value" style="color:var(--gold)">${burn.freedomPct}%</div>
+                                    <div class="burn-metric-label">Freedom Level</div>
+                                </div>
+                            </div>
+
+                            <div class="burn-breakdown">
+                                <div class="burn-breakdown-title">Expense Breakdown</div>
+                                ${breakdownHtml}
+                            </div>
+
+                            <div class="freedom-gap-badge ${freedomClass}">
+                                ${freedomIcon} ${freedomText}
                             </div>
                         </div>
 
                         <div class="card" style="margin-top:24px; border-left: 4px solid var(--gold);">
-                            <div class="status-label" style="color:var(--gold)">Scaling Target: $5,000/mo</div>
+                            <div class="status-label" style="color:var(--gold)">Scaling Target: $${goal.toLocaleString()}/mo</div>
                             <div class="revenue-progress" style="height:12px; margin: 12px 0;">
                                 <div id="goal-progress-fill" style="width:${goalPct}%; background:var(--gold); box-shadow: 0 0 15px var(--gold-dim);"></div>
                             </div>
                             <div style="display:flex; justify-content:space-between; font-size:0.75rem; font-weight:700;">
-                                <span style="color:var(--text-bright)">$${monthlyRev} Current</span>
+                                <span style="color:var(--text-bright)">$${monthlyRev.toLocaleString()} Current (SC Revenue)</span>
                                 <span style="opacity:0.6;">${goalPct}% of Freedom Level</span>
                             </div>
                         </div>
-                            <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Operational Actions</div>
+                            <div class="card-title"><span class="dot dot-primary"></span>Operational Actions</div>
                             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:20px;">
                                 <div class="diag-badge" style="cursor:pointer;" onclick="app.openReader('finances/invoices_sent/', 'Invoices Sent')">📁 Invoices Sent</div>
                                 <div class="diag-badge" style="cursor:pointer;" onclick="app.openReader('finances/expenses/', 'Expenses')">📁 Expense Records</div>
