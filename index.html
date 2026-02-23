@@ -347,7 +347,7 @@
     <div class="status-bar">
         <div class="status-items">
             <div class="branding-logo">CD</div>
-            <span id="hub-title" style="font-weight:700; font-size:1rem; letter-spacing:-0.02em;">Clinical Development
+            <span id="hub-title">Clinical Development
                 Agency</span>
             <div class="business-only governance-badge">
                 <span class="governance-dot"></span>
@@ -361,7 +361,7 @@
                 <div class="revenue-mini-fill" id="revenue-fill"></div>
             </div>
             <span class="status-value" id="revenue-current">...</span>
-            <div style="display:flex;gap:16px;">
+            <div class="status-link-row">
                 <a href="playbook/clinical_architecture.md" class="status-link">📋 strategy</a>
                 <a href="business/docs/wnq_wix_completion_guide_2026_02_12.md" class="status-link">🗺️ Roadmap</a>
             </div>
@@ -373,9 +373,7 @@
         </div>
 
         <div class="status-item">
-            <button onclick="app.toggleSettings()"
-                style="background:none; border:none; cursor:pointer; color:var(--text-dim); font-size:1.1rem; padding: 4px; transition: color 0.2s;"
-                onmouseover="this.style.color='var(--primary)'"
+            <button onclick="app.toggleSettings()" class="settings-btn" onmouseover="this.style.color='var(--primary)'"
                 onmouseout="this.style.color='var(--text-dim)'">⚙️</button>
         </div>
     </div>
@@ -391,9 +389,9 @@
         <!-- Left Sidebar: Progress & Pulse -->
         <div class="left-col">
             <div class="card">
-                <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Mode Readiness</div>
+                <div class="card-title"><span class="dot dot-primary"></span>Mode Readiness</div>
                 <div id="readiness-ring"></div>
-                <div id="stats-panel" style="margin-top:16px;"></div>
+                <div id="stats-panel"></div>
             </div>
 
             <!-- Finance Tracker -->
@@ -449,13 +447,12 @@
             </div>
 
             <div class="card spotlight-card">
-                <div class="card-title"><span class="dot" style="background:var(--primary)"></span>Next Actions
+                <div class="card-title"><span class="dot dot-primary"></span>Next Actions
                     Spotlight</div>
                 <div id="action-list"></div>
-                <div id="extra-links"
-                    style="margin-top:16px; border-top:1px solid var(--border); padding-top:12px; display:none;">
-                    <a id="tech-prep-link" href="career/siemens_prep.html" target="_blank"
-                        style="color:var(--cyan); text-decoration:none; font-size:0.75rem; font-weight:700;">📘 Siemens
+                <div id="extra-links" class="extra-links" style="display:none;">
+                    <a id="tech-prep-link" href="career/siemens_prep.html" target="_blank" class="tech-prep-link">📘
+                        Siemens
                         / PPCL Study Guide →</a>
                 </div>
             </div>
@@ -472,38 +469,32 @@
         <!-- Right: Logs & Knowledge -->
         <div class="right-col">
             <div class="card">
-                <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
-                    <span><span class="dot" style="background:var(--purple)"></span>Captain's Log</span>
-                    <label
-                        style="font-size: 0.6rem; color: var(--text-dim); display:flex; align-items:center; gap:4px; cursor:pointer;"
-                        title="Show only handoffs/JB">
+                <div class="card-title log-card-title">
+                    <span><span class="dot dot-purple"></span>Captain's Log</span>
+                    <label class="handoff-filter" title="Show only handoffs/JB">
                         <input type="checkbox" id="filter-handoff" onclick="app.render()"> Handoffs
                     </label>
                 </div>
                 <div class="log-entries" id="log-list"></div>
-                <div style="margin-top:16px; display:flex; gap:8px;">
+                <div class="log-input-row">
                     <input type="text" id="log-input" class="input-field" placeholder="New entry..."
                         style="margin-bottom:0;" onkeydown="if(event.key==='Enter') app.addLog(this.value)">
                     <button onclick="app.addLog(document.getElementById('log-input').value)"
-                        style="background:var(--primary); color:#000; border:none; padding:0 16px; border-radius:8px; font-weight:700; cursor:pointer;">+</button>
+                        class="log-add-btn">+</button>
                 </div>
             </div>
 
-            <div style="margin-top:16px; border-top:1px solid var(--border); padding-top:12px;">
-                <button onclick="app.lockHub()"
-                    style="background:none; border:none; color:var(--text-dim); text-decoration:none; font-size:0.7rem; display:flex; align-items:center; gap:6px; cursor:pointer;">
+            <div class="lock-hub-row">
+                <button onclick="app.lockHub()" class="lock-hub-btn">
                     🔒 Lock Hub
                 </button>
             </div>
         </div>
 
-        <div id="sync-status" onclick="app.showSyncDetail()"
-            style="font-size:0.65rem; color:var(--text-dim); text-align:right; padding:0 10px; cursor:pointer;"
-            title="Click for details">
-            <span id="sync-dot"
-                style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--border); margin-right:4px;"></span>
+        <div id="sync-status" onclick="app.showSyncDetail()" title="Click for details">
+            <span id="sync-dot" class="sync-dot"></span>
             <span id="sync-text">Local Only</span>
-            <div style="margin-top:8px; opacity:0.6; font-size:0.6rem;">
+            <div class="sync-version">
                 V8.8.8 Engine • Last Session: Feb 22
             </div>
         </div>
@@ -538,19 +529,15 @@
                 <input type="password" id="gist-pat" class="input-field" placeholder="Personal Access Token"
                     title="Enter GitHub PAT">
             </div>
-            <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:20px;">
+            <div class="settings-maintenance">
                 <label class="status-label">🛠️ Maintenance</label>
                 <button onclick="app.clearLogs()" title="Archive and condense current session logs"
-                    style="background:rgba(255, 68, 68, 0.1); color:var(--red); border:1px solid var(--red); padding:10px 16px; border-radius:8px; font-weight:700; cursor:pointer; width:100%; transition:all 0.2s;"
-                    onmouseover="this.style.background='var(--red)'; this.style.color='#fff';"
-                    onmouseout="this.style.background='rgba(255, 68, 68, 0.1)'; this.style.color='var(--red)';">Archive
+                    class="btn-destructive">Archive
                     & Condense Session (Current Hub)</button>
             </div>
-            <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:20px;">
-                <button onclick="app.toggleSettings()"
-                    style="background:none; border:none; color:var(--text-dim); cursor:pointer;">Cancel</button>
-                <button onclick="app.saveSettings()"
-                    style="background:var(--primary); color:#000; border:none; padding:10px 24px; border-radius:8px; font-weight:700; cursor:pointer;">Save
+            <div class="settings-footer">
+                <button onclick="app.toggleSettings()" class="btn-cancel">Cancel</button>
+                <button onclick="app.saveSettings()" class="btn-save">Save
                     & Sync</button>
             </div>
         </div>
@@ -687,15 +674,12 @@
             { id: "a39", text: "Verify 'Nomad Mode' sync on iPhone", urgency: "now", source: "V8.9.1", lane: "career" },
 
             // BUSINESS ACTIONS
-            { id: "a50", text: "Mail SOS Response Package — Record #32541488 (Deadline: March 8)", urgency: "now", source: "The One Eye Trust", lane: "business" },
             { id: "a43", text: "Complete root folder renames for Business Ideas and Career Hub (blocked by handles)", urgency: "now", source: "RayRay/Ops", lane: "business" },
             { id: "a44", text: "Implement Burn Rate tracking in Finance Hub (Freedom Level Alignment)", urgency: "soon", source: "Aiden", lane: "business" },
             { id: "a45", text: "Surgical Link Audit for deferred ideas (Nexus Coherence)", urgency: "later", source: "RayRay", lane: "business" },
             { id: "a40", text: "Home Tunnel Setup: Cloudflare Zero Trust for Secure Global Access", urgency: "soon", source: "Nomad Prep", lane: "business" },
             { id: "a41", text: "Advanced Scaling: Research VPS/OAuth integration for V9.0", urgency: "later", source: "strategy", lane: "business" },
-            { id: "a42", text: "Monitor Sidecar heartbeat stability (24h soak test)", urgency: "now", source: "Ops", lane: "business" },
-            { id: "a37", text: "Standardize Diagnostic Alpha as mandatory start point", urgency: "soon", source: "Darius/Ops", lane: "business" },
-            { id: "a38", text: "Consolidate dashboard UI logic into Command Core stylesheet", urgency: "soon", source: "Mira/Workflow", lane: "business" }
+            { id: "a42", text: "Monitor Sidecar heartbeat stability (24h soak test)", urgency: "now", source: "Ops", lane: "business" }
         ];
 
         class MasterApp {

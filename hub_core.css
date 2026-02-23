@@ -1102,6 +1102,198 @@ section:target,
     font-weight: 700;
 }
 
+/* ========== CONSOLIDATED INLINE STYLES ========== */
+
+/* Hub title in status bar */
+#hub-title {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+}
+
+/* Status bar link row */
+.status-link-row {
+    display: flex;
+    gap: 16px;
+}
+
+/* Settings gear button */
+.settings-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    padding: 4px;
+    transition: color 0.2s;
+}
+
+.settings-btn:hover {
+    color: var(--primary);
+}
+
+/* Stats panel spacing */
+#stats-panel {
+    margin-top: 16px;
+}
+
+/* Card title dot variants */
+.dot-primary {
+    background: var(--primary);
+}
+
+.dot-purple {
+    background: var(--purple);
+}
+
+/* Extra links section below spotlight */
+.extra-links {
+    margin-top: 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+}
+
+/* Tech prep link */
+.tech-prep-link {
+    color: var(--cyan);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Captain's Log header with filter */
+.log-card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Handoff filter label */
+.handoff-filter {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+/* Log input row */
+.log-input-row {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+}
+
+/* Log add button */
+.log-add-btn {
+    background: var(--primary);
+    color: #000;
+    border: none;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Lock hub row */
+.lock-hub-row {
+    margin-top: 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+}
+
+/* Lock hub button */
+.lock-hub-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+/* Sync status bar */
+#sync-status {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-align: right;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+/* Sync dot indicator */
+.sync-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    margin-right: 4px;
+}
+
+/* Sync version label */
+.sync-version {
+    margin-top: 8px;
+    opacity: 0.6;
+    font-size: 0.6rem;
+}
+
+/* Settings panel maintenance section */
+.settings-maintenance {
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+/* Destructive action button */
+.btn-destructive {
+    background: rgba(255, 68, 68, 0.1);
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s;
+}
+
+.btn-destructive:hover {
+    background: var(--red);
+    color: #fff;
+}
+
+/* Settings footer actions */
+.settings-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Settings cancel button */
+.btn-cancel {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+}
+
+/* Settings save button */
+.btn-save {
+    background: var(--primary);
+    color: #000;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
 /* ========== EXECUTIVE ADVISORY STYLES ========== */
 .advisory-card {
     background: linear-gradient(135deg, rgba(167, 139, 250, 0.1) 0%, rgba(34, 211, 238, 0.05) 100%);
@@ -1112,8 +1304,8 @@ section:target,
     border-radius: 16px;
     margin-bottom: 24px;
     position: relative;
-    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
 }
 
 @keyframes advisory-entry {
