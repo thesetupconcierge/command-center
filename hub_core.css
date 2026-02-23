@@ -51,6 +51,7 @@
 
 html {
     font-size: 14px;
+    overflow-x: hidden;
 }
 
 body {
@@ -66,14 +67,14 @@ body {
 body::before {
     content: '';
     position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     background: radial-gradient(ellipse at 20% 20%, var(--primary-dim) 0%, transparent 50%),
         radial-gradient(ellipse at 80% 80%, var(--accent-dim) 0%, transparent 50%);
     z-index: -1;
     transition: all 0.5s ease;
+    pointer-events: none;
 }
 
 /* ========== SCROLLBAR ========== */
