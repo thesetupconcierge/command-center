@@ -98,16 +98,6 @@
                 "pdf": false
             },
             {
-                "name": "Manager Sync Tightening 2026 02 13",
-                "path": "advisory_panel/consultations/markdown/manager_sync_tightening_2026_02_13.md",
-                "pdf": false
-            },
-            {
-                "name": "Panel Audit Bn Cda Pivot 2026 02 13",
-                "path": "advisory_panel/consultations/markdown/panel_audit_bn_cda_pivot_2026_02_13.md",
-                "pdf": false
-            },
-            {
                 "name": "Panel Audit Strategic Pivot 2026 02 17",
                 "path": "advisory_panel/consultations/markdown/panel_audit_strategic_pivot_2026_02_17.md",
                 "pdf": false
@@ -115,16 +105,6 @@
             {
                 "name": "Panel Review 2026 02 15",
                 "path": "advisory_panel/consultations/markdown/panel_review_2026_02_15.md",
-                "pdf": false
-            },
-            {
-                "name": "Security Privacy Protocol 2026 02 13",
-                "path": "advisory_panel/consultations/markdown/security_privacy_protocol_2026_02_13.md",
-                "pdf": false
-            },
-            {
-                "name": "Strategic Fold In Proposal 2026 02 13",
-                "path": "advisory_panel/consultations/markdown/strategic_fold_in_proposal_2026_02_13.md",
                 "pdf": false
             },
             {
@@ -341,16 +321,6 @@
                 "pdf": false
             },
             {
-                "name": "Captains Log 2026 02 14",
-                "path": "resources/walkthroughs/captains_log_2026_02_14.md",
-                "pdf": false
-            },
-            {
-                "name": "Captains Log 2026 02 15",
-                "path": "resources/walkthroughs/captains_log_2026_02_15.md",
-                "pdf": false
-            },
-            {
                 "name": "Captains Log 2026 02 17",
                 "path": "resources/walkthroughs/captains_log_2026_02_17.md",
                 "pdf": false
@@ -361,68 +331,8 @@
                 "pdf": false
             },
             {
-                "name": "Daily Summary 2026 02 14",
-                "path": "resources/walkthroughs/daily_summary_2026_02_14.md",
-                "pdf": true
-            },
-            {
-                "name": "Daily Summary 2026 02 15",
-                "path": "resources/walkthroughs/daily_summary_2026_02_15.md",
-                "pdf": false
-            },
-            {
                 "name": "Daily Summary 2026 02 17",
                 "path": "resources/walkthroughs/daily_summary_2026_02_17.md",
-                "pdf": false
-            },
-            {
-                "name": "01 File Organization And Dating 2026 02 08",
-                "path": "resources/walkthroughs/markdown/01_file_organization_and_dating_2026_02_08.md",
-                "pdf": false
-            },
-            {
-                "name": "02 Automation Workflows And Templates 2026 02 08",
-                "path": "resources/walkthroughs/markdown/02_automation_workflows_and_templates_2026_02_08.md",
-                "pdf": false
-            },
-            {
-                "name": "03 Site Review And Panel Setup 2026 02 08",
-                "path": "resources/walkthroughs/markdown/03_site_review_and_panel_setup_2026_02_08.md",
-                "pdf": false
-            },
-            {
-                "name": "04 System Refinements 2026 02 08",
-                "path": "resources/walkthroughs/markdown/04_system_refinements_2026_02_08.md",
-                "pdf": false
-            },
-            {
-                "name": "05 Website Generation Pipeline 2026 02 08",
-                "path": "resources/walkthroughs/markdown/05_website_generation_pipeline_2026_02_08.md",
-                "pdf": false
-            },
-            {
-                "name": "Captains Log 2026 02 11",
-                "path": "resources/walkthroughs/markdown/captains_log_2026_02_11.md",
-                "pdf": false
-            },
-            {
-                "name": "Cms Deep Dive 2026 02 09",
-                "path": "resources/walkthroughs/markdown/cms_deep_dive_2026_02_09.md",
-                "pdf": false
-            },
-            {
-                "name": "Daily Summary 2026 02 12",
-                "path": "resources/walkthroughs/markdown/daily_summary_2026_02_12.md",
-                "pdf": false
-            },
-            {
-                "name": "Daily Summary 2026 02 13",
-                "path": "resources/walkthroughs/markdown/daily_summary_2026_02_13.md",
-                "pdf": false
-            },
-            {
-                "name": "Workflow Learning Guide 2026 02 10",
-                "path": "resources/walkthroughs/markdown/workflow_learning_guide_2026_02_10.md",
                 "pdf": false
             }
         ]
@@ -441,73 +351,13 @@
                 "pdf": false
             },
             {
-                "name": "Action Triage Mobile Vs Terminal 2026 02 12",
-                "path": "advisory_panel/consultations/assets/markdown/action_triage_mobile_vs_terminal_2026_02_12.md",
-                "pdf": false
-            },
-            {
-                "name": "Ecosystem Architecture Audit 2026 02 11",
-                "path": "advisory_panel/consultations/assets/markdown/ecosystem_architecture_audit_2026_02_11.md",
-                "pdf": false
-            },
-            {
                 "name": "Panel Brainstorm Bn Governance 2026 02 13",
                 "path": "advisory_panel/consultations/assets/markdown/panel_brainstorm_bn_governance_2026_02_13.md",
                 "pdf": false
             },
             {
-                "name": "Panel Consultation Dashboard Features 2026 02 08",
-                "path": "advisory_panel/consultations/assets/markdown/panel_consultation_dashboard_features_2026_02_08.md",
-                "pdf": false
-            },
-            {
                 "name": "Panel Consultation Sterling Intake 2026 02 15",
                 "path": "advisory_panel/consultations/assets/markdown/panel_consultation_sterling_intake_2026_02_15.md",
-                "pdf": false
-            },
-            {
-                "name": "Panel Refinement Photography Update 2026 02 08",
-                "path": "advisory_panel/consultations/assets/markdown/panel_refinement_photography_update_2026_02_08.md",
-                "pdf": false
-            },
-            {
-                "name": "Panel Response Site Review 2026 02 08",
-                "path": "advisory_panel/consultations/assets/markdown/panel_response_site_review_2026_02_08.md",
-                "pdf": false
-            },
-            {
-                "name": "Panel Review Guides Page 2026 02 09",
-                "path": "advisory_panel/consultations/assets/markdown/panel_review_guides_page_2026_02_09.md",
-                "pdf": false
-            },
-            {
-                "name": "Panel Review Mobile Command Center 2026 02 11",
-                "path": "advisory_panel/consultations/assets/markdown/panel_review_mobile_command_center_2026_02_11.md",
-                "pdf": false
-            },
-            {
-                "name": "Panel Review System 2026 02 10",
-                "path": "advisory_panel/consultations/assets/markdown/panel_review_system_2026_02_10.md",
-                "pdf": false
-            },
-            {
-                "name": "Panel Review Web Dev Pipeline 2026 02 08",
-                "path": "advisory_panel/consultations/assets/markdown/panel_review_web_dev_pipeline_2026_02_08.md",
-                "pdf": false
-            },
-            {
-                "name": "Panel Review Wnq Website Build 2026 02 12",
-                "path": "advisory_panel/consultations/assets/markdown/panel_review_wnq_website_build_2026_02_12.md",
-                "pdf": false
-            },
-            {
-                "name": "Setupconcierge Site Review 2026 02 08",
-                "path": "advisory_panel/consultations/assets/markdown/setupconcierge_site_review_2026_02_08.md",
-                "pdf": false
-            },
-            {
-                "name": "Website Photography Update Proposal 2026 02 08",
-                "path": "advisory_panel/consultations/assets/markdown/website_photography_update_proposal_2026_02_08.md",
                 "pdf": false
             }
         ]
