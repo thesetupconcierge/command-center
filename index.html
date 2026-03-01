@@ -339,6 +339,133 @@
             background: var(--red);
             color: #fff;
         }
+
+        /* ========== STRATEGIC PHASE INDICATOR ========== */
+        .phase-bar {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 8px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 0.75rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .phase-bar .phase-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #818cf8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .phase-bar .phase-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #818cf8;
+            box-shadow: 0 0 8px rgba(129, 140, 248, 0.5);
+            animation: phase-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes phase-pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .phase-bar .phase-meta {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+        }
+
+        .phase-bar .phase-meta strong {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .phase-bar .phase-days {
+            background: rgba(129, 140, 248, 0.15);
+            color: #a5b4fc;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 0.03em;
+        }
+
+        .phase-bar .phase-north-star {
+            color: rgba(255, 255, 255, 0.35);
+            font-style: italic;
+            font-size: 0.7rem;
+        }
+
+        /* ========== OKR PROGRESS WIDGET ========== */
+        .okr-widget {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+
+        .okr-widget .okr-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .okr-obj {
+            margin-bottom: 10px;
+        }
+
+        .okr-obj-label {
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .okr-bar-bg {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .okr-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.6s ease;
+        }
+
+        .okr-bar-fill.obj1 {
+            background: linear-gradient(90deg, #818cf8, #6366f1);
+        }
+
+        .okr-bar-fill.obj2 {
+            background: linear-gradient(90deg, #34d399, #10b981);
+        }
+
+        .okr-bar-fill.obj3 {
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+        }
     </style>
 </head>
 
@@ -385,6 +512,17 @@
         <button class="nav-btn" id="btn-finance" onclick="app.switchMode('finance')">💰 Finance Hub</button>
     </div>
 
+    <!-- Strategic Phase Indicator Bar -->
+    <div class="phase-bar business-only" id="phase-bar">
+        <div class="phase-label">
+            <span class="phase-dot"></span>
+            PHASE A — DEPTH-BUILDING
+        </div>
+        <div class="phase-meta">Lever: <strong>Increase Technical Depth</strong></div>
+        <div class="phase-days" id="phase-days">Day 0</div>
+        <div class="phase-north-star">"I understand systems deeply enough to operate calmly inside complexity."</div>
+    </div>
+
     <div class="main">
         <!-- Left Sidebar: Progress & Pulse -->
         <div class="left-col">
@@ -424,6 +562,29 @@
                 <div class="time-shield">
                     <div class="shield-pulse"></div>
                     <div id="timeShieldStatus">Shield Active: 20:00 - 22:00</div>
+                </div>
+            </div>
+
+            <!-- OKR Progress Widget -->
+            <div class="okr-widget business-only">
+                <div class="okr-title">🎯 Q1 2026 OKRs — Depth-Building</div>
+                <div class="okr-obj">
+                    <div class="okr-obj-label">Obj 1: Establish Depth-Building Rhythm (1/3)</div>
+                    <div class="okr-bar-bg">
+                        <div class="okr-bar-fill obj1" style="width: 33%"></div>
+                    </div>
+                </div>
+                <div class="okr-obj">
+                    <div class="okr-obj-label">Obj 2: Systematize Strategic Alignment (3/3) ✅</div>
+                    <div class="okr-bar-bg">
+                        <div class="okr-bar-fill obj2" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="okr-obj">
+                    <div class="okr-obj-label">Obj 3: Maintain Financial Stability (0/2)</div>
+                    <div class="okr-bar-bg">
+                        <div class="okr-bar-fill obj3" style="width: 0%"></div>
+                    </div>
                 </div>
             </div>
 
@@ -671,14 +832,20 @@
 
         const NEXT_ACTIONS = [
             // CAREER ACTIONS
-            { id: "a39", text: "Verify 'Nomad Mode' sync on iPhone", urgency: "now", source: "V8.9.1", lane: "career" },
+            { id: "a39", text: "Verify 'Nomad Mode' sync on iPhone", urgency: "now", source: "V8.9.1", lane: "career", phase: "depth" },
 
-            // BUSINESS ACTIONS
-            { id: "a43", text: "Complete root folder renames for Business Ideas and Career Hub (blocked by handles)", urgency: "now", source: "RayRay/Ops", lane: "business" },
-            { id: "a45", text: "Surgical Link Audit for deferred ideas (Nexus Coherence)", urgency: "later", source: "RayRay", lane: "business" },
-            { id: "a40", text: "Execute Cloudflare Tunnel Setup (Guide: playbook/08_cloudflare_tunnel.md)", urgency: "soon", source: "Nomad Prep", lane: "business" },
-            { id: "a41", text: "Advanced Scaling: Research VPS/OAuth integration for V9.0", urgency: "later", source: "strategy", lane: "business" },
-            { id: "a42", text: "Monitor Sidecar heartbeat stability (24h soak test)", urgency: "now", source: "Ops", lane: "business" }
+            // BUSINESS ACTIONS — Phase-tagged per strategic directive
+            { id: "a43", text: "Complete root folder renames for Business Ideas and Career Hub (blocked by handles)", urgency: "now", source: "RayRay/Ops", lane: "business", phase: "stability" },
+            { id: "a45", text: "Surgical Link Audit for deferred ideas (Nexus Coherence)", urgency: "later", source: "RayRay", lane: "business", phase: "stability" },
+            { id: "a40", text: "Execute Cloudflare Tunnel Setup (Guide: playbook/08_cloudflare_tunnel.md)", urgency: "soon", source: "Nomad Prep", lane: "business", phase: "depth" },
+            { id: "a41", text: "Advanced Scaling: Research VPS/OAuth integration for V9.0", urgency: "later", source: "strategy", lane: "business", phase: "deferred" },
+            { id: "a42", text: "Monitor Sidecar heartbeat stability (24h soak test)", urgency: "now", source: "Ops", lane: "business", phase: "stability" },
+
+            // STRATEGIC ALIGNMENT — From Panel Review 2026-02-28
+            { id: "a50", text: "Complete Systems Literacy Baseline scores (framework Section 11)", urgency: "now", source: "Framework", lane: "business", phase: "depth" },
+            { id: "a51", text: "Define financial floor (minimum monthly income for depth-building)", urgency: "now", source: "Framework §4", lane: "business", phase: "stability" },
+            { id: "a52", text: "Create first Proof of Depth archive entry", urgency: "soon", source: "OKR Q1", lane: "business", phase: "depth" },
+            { id: "a53", text: "Review employment agreements for IP clauses", urgency: "soon", source: "Cassandra/Legal", lane: "business", phase: "stability" }
         ];
 
         // ═══════════════════════════════════════════════════════
@@ -2265,6 +2432,15 @@
         }
 
         window.app = new MasterApp();
+
+        // Strategic Phase Indicator — Days Counter
+        (function updatePhaseCounter() {
+            const phaseAStart = new Date('2026-02-28');
+            const now = new Date();
+            const days = Math.floor((now - phaseAStart) / (1000 * 60 * 60 * 24));
+            const el = document.getElementById('phase-days');
+            if (el) el.textContent = `Day ${days}`;
+        })();
 
         window.addEventListener('load', () => {
             // Initial render removed - handled by init()
