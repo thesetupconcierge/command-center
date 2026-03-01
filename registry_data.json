@@ -1,12 +1,112 @@
 {
-    "governance": {
-        "title": "Strategic Core",
-        "icon": "🎯",
+    "strategy": {
+        "title": "Strategy & Architecture",
+        "icon": "🧠",
         "lanes": [
             "business",
             "shared"
         ],
         "docs": [
+            {
+                "name": "Silas Vance — Money Shot Report",
+                "path": "business/docs/silas_vance_money_shot_report.md",
+                "pdf": false
+            },
+            {
+                "name": "Strategic Business Framework",
+                "path": "strategic_business_framework_2026_02_06.md",
+                "pdf": false
+            }
+        ]
+    },
+    "advisory": {
+        "title": "Advisory Panel Archives",
+        "icon": "⚖️",
+        "lanes": [
+            "business",
+            "shared"
+        ],
+        "docs": [
+            {
+                "name": "Full Panel Review — Feb 18",
+                "path": "advisory_panel/consultations/markdown/full_panel_review_2026_02_18.md",
+                "pdf": false
+            },
+            {
+                "name": "Full Panel Review — GA Feb 18",
+                "path": "advisory_panel/consultations/markdown/full_panel_review_ga_2026_02_18.md",
+                "pdf": false
+            },
+            {
+                "name": "Panel Review — Feb 15",
+                "path": "advisory_panel/consultations/markdown/panel_review_2026_02_15.md",
+                "pdf": false
+            },
+            {
+                "name": "Strategic Pivot Audit — Feb 17",
+                "path": "advisory_panel/consultations/markdown/panel_audit_strategic_pivot_2026_02_17.md",
+                "pdf": false
+            },
+            {
+                "name": "Full Panel Review — Feb (Initial)",
+                "path": "advisory_panel/consultations/markdown/full_panel_review_2026_02.md",
+                "pdf": true
+            }
+        ]
+    },
+    "governance": {
+        "title": "Playbook (CDA Standard)",
+        "icon": "📖",
+        "lanes": [
+            "business",
+            "shared"
+        ],
+        "docs": [
+            {
+                "name": "Playbook Index",
+                "path": "playbook/readme.md",
+                "pdf": false
+            },
+            {
+                "name": "01 — Workspace Layout",
+                "path": "playbook/01_workspace.md",
+                "pdf": false
+            },
+            {
+                "name": "02 — Dashboards",
+                "path": "playbook/02_dashboards.md",
+                "pdf": false
+            },
+            {
+                "name": "03 — Workflows",
+                "path": "playbook/03_workflows.md",
+                "pdf": false
+            },
+            {
+                "name": "04 — Git Strategy",
+                "path": "playbook/04_git_strategy.md",
+                "pdf": false
+            },
+            {
+                "name": "05 — Advisory Panel",
+                "path": "playbook/05_advisory_panel.md",
+                "pdf": false
+            },
+            {
+                "name": "06 — Action Items",
+                "path": "playbook/06_action_items.md",
+                "pdf": false
+            },
+            {
+                "name": "07 — Client Ops",
+                "path": "playbook/07_client_ops.md",
+                "pdf": false
+            },
+            {
+                "name": "08 — Cloudflare Tunnel",
+                "path": "playbook/08_cloudflare_tunnel.md",
+                "pdf": false
+            },
             {
                 "name": "Clinical Architecture",
                 "path": "playbook/clinical_architecture.md",
@@ -23,99 +123,48 @@
                 "pdf": false
             },
             {
-                "name": "Playbook index",
-                "path": "playbook/readme.md",
-                "pdf": false
-            },
-            {
-                "name": "01 Workspace Layout",
-                "path": "playbook/01_workspace.md",
-                "pdf": false
-            },
-            {
-                "name": "02 Dashboards",
-                "path": "playbook/02_dashboards.md",
-                "pdf": false
-            },
-            {
-                "name": "03 Workflows",
-                "path": "playbook/03_workflows.md",
-                "pdf": false
-            },
-            {
-                "name": "04 Git Strategy",
-                "path": "playbook/04_git_strategy.md",
-                "pdf": false
-            },
-            {
-                "name": "05 Advisory Panel",
-                "path": "playbook/05_advisory_panel.md",
-                "pdf": false
-            },
-            {
-                "name": "06 Action Items",
-                "path": "playbook/06_action_items.md",
-                "pdf": false
-            },
-            {
-                "name": "07 Client Ops",
-                "path": "playbook/07_client_ops.md",
-                "pdf": false
-            },
-            {
-                "name": "Clinical Os",
+                "name": "Clinical OS",
                 "path": "playbook/clinical_os.md",
                 "pdf": false
             }
         ]
     },
-    "advisory": {
-        "title": "Advisory Panel Archives",
-        "icon": "⚖️",
+    "proposals": {
+        "title": "Proposals & Client Docs",
+        "icon": "📋",
         "lanes": [
-            "business",
-            "shared"
+            "business"
         ],
         "docs": [
             {
-                "name": "Silas Vance Money Shot",
-                "path": "business/docs/silas_vance_money_shot_report.md",
+                "name": "WNQ Website Revamp Proposal",
+                "path": "business/docs/wnq_website_revamp_proposal.md",
                 "pdf": false
             },
             {
-                "name": "Full Panel Review 2026 02",
-                "path": "advisory_panel/consultations/markdown/full_panel_review_2026_02.md",
-                "pdf": true
-            },
-            {
-                "name": "Full Panel Review 2026 02 18",
-                "path": "advisory_panel/consultations/markdown/full_panel_review_2026_02_18.md",
+                "name": "WNQ Proposal Email Draft",
+                "path": "business/docs/email_wnq_proposal_feb2026.md",
                 "pdf": false
             },
             {
-                "name": "Full Panel Review Ga 2026 02 18",
-                "path": "advisory_panel/consultations/markdown/full_panel_review_ga_2026_02_18.md",
+                "name": "Nonprofit Digital Revamp One-Pager",
+                "path": "business/docs/nonprofit_digital_revamp_onepager.md",
                 "pdf": false
             },
             {
-                "name": "Panel Audit Strategic Pivot 2026 02 17",
-                "path": "advisory_panel/consultations/markdown/panel_audit_strategic_pivot_2026_02_17.md",
+                "name": "CDA WNQ Case Study (Draft)",
+                "path": "business/docs/wnq_cda_case_study_template.md",
                 "pdf": false
             },
             {
-                "name": "Panel Review 2026 02 15",
-                "path": "advisory_panel/consultations/markdown/panel_review_2026_02_15.md",
-                "pdf": false
-            },
-            {
-                "name": "Readme",
-                "path": "business/docs/readme.md",
+                "name": "WNQ Ike Approach Plan",
+                "path": "business/docs/wnq_ike_approach_plan.md",
                 "pdf": false
             }
         ]
     },
     "nexus": {
-        "title": "Black Nexus Strategics",
+        "title": "Black Nexus",
         "icon": "⬢",
         "lanes": [
             "business",
@@ -123,64 +172,94 @@
         ],
         "docs": [
             {
-                "name": "Github Collaboration Guide 2026 02 10",
+                "name": "BN Roadmap — Feb 13",
+                "path": "debriefs/bn_roadmap_2026_02_13.md",
+                "pdf": false
+            },
+            {
+                "name": "BN Debrief — Feb 13",
+                "path": "debriefs/bn_debrief_2026_02_13.md",
+                "pdf": false
+            },
+            {
+                "name": "GitHub Collaboration Guide",
                 "path": "github_collaboration_guide_2026_02_10.md",
                 "pdf": false
             },
             {
-                "name": "Implementation Plan 2026 02 06",
+                "name": "Implementation Plan",
                 "path": "implementation_plan_2026_02_06.md",
                 "pdf": false
             },
             {
-                "name": "Phase1 Execution Plan 2026 02 06",
+                "name": "Phase 1 Execution Plan",
                 "path": "phase1_execution_plan_2026_02_06.md",
-                "pdf": false
-            },
-            {
-                "name": "Strategic Business Framework 2026 02 06",
-                "path": "strategic_business_framework_2026_02_06.md",
                 "pdf": false
             }
         ]
     },
-    "concierge": {
-        "title": "Setup Concierge Playbook",
-        "icon": "📋",
+    "resources": {
+        "title": "Resources & Reference",
+        "icon": "📦",
         "lanes": [
             "business",
             "shared"
         ],
         "docs": [
             {
-                "name": "Automation Tips And Tricks 2026 02 08",
-                "path": "resources/automation_tips_and_tricks_2026_02_08.md",
-                "pdf": true
-            },
-            {
-                "name": "Branch Discipline Guide 2026 02 11",
-                "path": "resources/branch_discipline_guide_2026_02_11.md",
-                "pdf": false
-            },
-            {
-                "name": "Commit Convention Guide 2026 02 11",
-                "path": "resources/commit_convention_guide_2026_02_11.md",
-                "pdf": false
-            },
-            {
-                "name": "Dashboard 2026 02 08",
+                "name": "Dashboard Reference",
                 "path": "resources/dashboard_2026_02_08.md",
                 "pdf": true
             },
             {
-                "name": "Naming Conventions 2026 02 08",
+                "name": "Naming Conventions",
                 "path": "resources/naming_conventions_2026_02_08.md",
                 "pdf": true
             },
             {
-                "name": "Workflow Quick Reference 2026 02 08",
+                "name": "Workflow Quick Reference",
                 "path": "resources/workflow_quick_reference_2026_02_08.md",
                 "pdf": true
+            },
+            {
+                "name": "Automation Tips & Tricks",
+                "path": "resources/automation_tips_and_tricks_2026_02_08.md",
+                "pdf": true
+            },
+            {
+                "name": "Branch Discipline Guide",
+                "path": "resources/branch_discipline_guide_2026_02_11.md",
+                "pdf": false
+            },
+            {
+                "name": "Commit Convention Guide",
+                "path": "resources/commit_convention_guide_2026_02_11.md",
+                "pdf": false
+            },
+            {
+                "name": "Deferred Ideas Ledger",
+                "path": "business/docs/deferred_ideas_ledger.md",
+                "pdf": false
+            }
+        ]
+    },
+    "history": {
+        "title": "Session Logs",
+        "icon": "📅",
+        "lanes": [
+            "business",
+            "shared"
+        ],
+        "docs": [
+            {
+                "name": "Captain's Log — Feb 17",
+                "path": "resources/walkthroughs/captains_log_2026_02_17.md",
+                "pdf": false
+            },
+            {
+                "name": "Daily Summary — Feb 17",
+                "path": "resources/walkthroughs/daily_summary_2026_02_17.md",
+                "pdf": false
             }
         ]
     },
@@ -197,7 +276,7 @@
                 "pdf": true
             },
             {
-                "name": "Justice McKinney - BAS Focused",
+                "name": "Justice McKinney — BAS Focused",
                 "path": "career/docs/justice_mckinney_bas_focused.md",
                 "pdf": false
             },
@@ -207,17 +286,17 @@
                 "pdf": false
             },
             {
-                "name": "Company Research",
+                "name": "Company Research Dossier",
                 "path": "career/docs/company_research.md",
                 "pdf": true
             },
             {
-                "name": "Mock Qa Drill",
+                "name": "Mock QA Drill",
                 "path": "career/docs/mock_qa_drill.md",
                 "pdf": false
             },
             {
-                "name": "Panel Review Interview Strategy",
+                "name": "Panel Review — Interview Strategy",
                 "path": "career/docs/panel_review_interview_strategy.md",
                 "pdf": true
             },
@@ -232,12 +311,12 @@
                 "pdf": true
             },
             {
-                "name": "Star Stories Bank",
+                "name": "STAR Stories Bank",
                 "path": "career/docs/star_stories_bank.md",
                 "pdf": true
             },
             {
-                "name": "2026 02 09 Screening Call",
+                "name": "Screening Call — Feb 9",
                 "path": "career/docs/2026_02_09_screening_call.md",
                 "pdf": false
             },
@@ -247,117 +326,13 @@
                 "pdf": false
             },
             {
-                "name": "Gino Pisano",
-                "path": "career/docs/gino_pisano.md",
-                "pdf": false
-            },
-            {
                 "name": "Interview Questions",
                 "path": "career/docs/interview_questions.md",
                 "pdf": false
             },
             {
-                "name": "John Walters",
-                "path": "career/docs/john_walters.md",
-                "pdf": false
-            },
-            {
-                "name": "Michael Ester",
-                "path": "career/docs/michael_ester.md",
-                "pdf": false
-            },
-            {
                 "name": "Thank You Email Draft",
                 "path": "career/docs/thank_you_email_draft.md",
-                "pdf": false
-            }
-        ]
-    },
-    "wnq": {
-        "title": "WNQ Project Archives",
-        "icon": "🦁",
-        "lanes": [
-            "business"
-        ],
-        "docs": [
-            {
-                "name": "WNQ Website Revamp Proposal",
-                "path": "business/docs/wnq_website_revamp_proposal.md",
-                "pdf": false
-            },
-            {
-                "name": "WNQ CDA Case Study Template",
-                "path": "business/docs/wnq_cda_case_study_template.md",
-                "pdf": false
-            },
-            {
-                "name": "WNQ Ike Approach Plan",
-                "path": "business/docs/wnq_ike_approach_plan.md",
-                "pdf": false
-            },
-            {
-                "name": "Nonprofit Digital Revamp One-Pager",
-                "path": "business/docs/nonprofit_digital_revamp_onepager.md",
-                "pdf": false
-            },
-            {
-                "name": "Email WNQ Proposal Feb 2026",
-                "path": "business/docs/email_wnq_proposal_feb2026.md",
-                "pdf": false
-            }
-        ]
-    },
-    "history": {
-        "title": "Logs & Walkthroughs",
-        "icon": "🕰️",
-        "lanes": [
-            "business",
-            "shared"
-        ],
-        "docs": [
-            {
-                "name": "Captains Log 2026",
-                "path": "resources/walkthroughs/captains_log_2026-02-17.md",
-                "pdf": false
-            },
-            {
-                "name": "Captains Log 2026 02 17",
-                "path": "resources/walkthroughs/captains_log_2026_02_17.md",
-                "pdf": false
-            },
-            {
-                "name": "Daily Summary 2026",
-                "path": "resources/walkthroughs/daily_summary_2026-02-17.md",
-                "pdf": false
-            },
-            {
-                "name": "Daily Summary 2026 02 17",
-                "path": "resources/walkthroughs/daily_summary_2026_02_17.md",
-                "pdf": false
-            }
-        ]
-    },
-    "ideas": {
-        "title": "Brainstorms & Future Mapping",
-        "icon": "💡",
-        "lanes": [
-            "business",
-            "shared"
-        ],
-        "docs": [
-            {
-                "name": "Deferred Ideas Ledger",
-                "path": "business/docs/deferred_ideas_ledger.md",
-                "pdf": false
-            },
-            {
-                "name": "Panel Brainstorm Bn Governance 2026 02 13",
-                "path": "advisory_panel/consultations/assets/markdown/panel_brainstorm_bn_governance_2026_02_13.md",
-                "pdf": false
-            },
-            {
-                "name": "Panel Consultation Sterling Intake 2026 02 15",
-                "path": "advisory_panel/consultations/assets/markdown/panel_consultation_sterling_intake_2026_02_15.md",
                 "pdf": false
             }
         ]

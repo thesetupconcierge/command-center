@@ -685,24 +685,26 @@
         // ==================== DOCUMENT REGISTRY ====================
         const DOCS = [
             {
-                section: "📋 proposals & Offers",
-                color: "var(--gold)",
-                docs: [
-                    { name: "wnq Website Revamp Proposal", file: "docs/wnq_website_revamp_proposal.md", type: "md", meta: "Feb 2026 · $3,000" },
-                    { name: "wnq Proposal Email Draft", file: "docs/email_wnq_proposal_feb2026.md", type: "md", meta: "Send to Ike · Delivery checklist" },
-                    { name: "Nonprofit Digital Revamp One-Pager", file: "docs/nonprofit_digital_revamp_onepager.md", type: "md", meta: "Productized offer · $3,500" },
-                    { name: "CDA wnq Case Study (Draft)", file: "docs/wnq_cda_case_study_template.md", type: "md", meta: "ROI & Metrics Template" },
-                ]
-            },
-            {
-                section: "🧠 strategy & Architecture",
+                section: "🧠 Strategy & Architecture",
                 color: "var(--blue)",
                 docs: [
-                    { name: "silas_vance Money Shot Report", file: "docs/silas_vance_money_shot_report.md", type: "md", meta: "High-leverage clinical audit" },
+                    { name: "Silas Vance — Money Shot Report", file: "docs/silas_vance_money_shot_report.md", type: "md", meta: "High-leverage clinical audit" },
+                    { name: "Strategic Business Framework", file: "../strategic_business_framework_2026_02_06.md", type: "md", meta: "Ecosystem positioning · Feb 6" },
                 ]
             },
             {
-                section: "📖 playbook (CDA Standard)",
+                section: "⚖️ Advisory Panel Archives",
+                color: "var(--purple)",
+                docs: [
+                    { name: "Full Panel Review — Feb 18", file: "../advisory_panel/consultations/markdown/full_panel_review_2026_02_18.md", type: "md", meta: "Sprint Command + General Advisory" },
+                    { name: "Full Panel Review — GA Feb 18", file: "../advisory_panel/consultations/markdown/full_panel_review_ga_2026_02_18.md", type: "md", meta: "General Advisory focused" },
+                    { name: "Panel Review — Feb 15", file: "../advisory_panel/consultations/markdown/panel_review_2026_02_15.md", type: "md", meta: "Workshop review" },
+                    { name: "Strategic Pivot Audit — Feb 17", file: "../advisory_panel/consultations/markdown/panel_audit_strategic_pivot_2026_02_17.md", type: "md", meta: "Strategic realignment" },
+                    { name: "Full Panel Review — Feb (Initial)", file: "../advisory_panel/consultations/markdown/full_panel_review_2026_02.md", type: "md", meta: "First comprehensive review" },
+                ]
+            },
+            {
+                section: "📖 Playbook (CDA Standard)",
                 color: "var(--purple)",
                 docs: [
                     { name: "Playbook README", file: "../playbook/readme.md", type: "md", meta: "Index & Rules" },
@@ -717,57 +719,46 @@
                 ]
             },
             {
-                section: "🏷️ wnq Client Docs",
-                color: "var(--green)",
+                section: "📋 Proposals & Client Docs",
+                color: "var(--gold)",
                 docs: [
-                    { name: "wnq Ike Approach Plan", file: "docs/wnq_ike_approach_plan.md", type: "md", meta: "Client strategy" },
+                    { name: "WNQ Website Revamp Proposal", file: "docs/wnq_website_revamp_proposal.md", type: "md", meta: "Feb 2026 · $3,000" },
+                    { name: "WNQ Proposal Email Draft", file: "docs/email_wnq_proposal_feb2026.md", type: "md", meta: "Send to Ike · Delivery checklist" },
+                    { name: "Nonprofit Digital Revamp One-Pager", file: "docs/nonprofit_digital_revamp_onepager.md", type: "md", meta: "Productized offer · $3,500" },
+                    { name: "CDA WNQ Case Study (Draft)", file: "docs/wnq_cda_case_study_template.md", type: "md", meta: "ROI & Metrics Template" },
+                    { name: "WNQ Ike Approach Plan", file: "docs/wnq_ike_approach_plan.md", type: "md", meta: "Client strategy" },
                 ]
             },
             {
-                section: "⚡ black_nexus",
+                section: "⬢ Black Nexus",
                 color: "var(--green)",
                 docs: [
                     { name: "BN Roadmap — Feb 13", file: "../debriefs/bn_roadmap_2026_02_13.md", type: "md", meta: "Active tasks · JB Scott" },
                     { name: "BN Debrief — Feb 13", file: "../debriefs/bn_debrief_2026_02_13.md", type: "md", meta: "Status & Findings" },
                     { name: "GitHub Collaboration Guide", file: "../github_collaboration_guide_2026_02_10.md", type: "md", meta: "Git workflow · Feb 10" },
+                    { name: "Implementation Plan", file: "../implementation_plan_2026_02_06.md", type: "md", meta: "Phase 1 build plan" },
+                    { name: "Phase 1 Execution Plan", file: "../phase1_execution_plan_2026_02_06.md", type: "md", meta: "90-day sprint" },
                 ]
             },
-
             {
-                section: "📦 resources",
+                section: "📦 Resources & Reference",
                 color: "var(--orange)",
                 docs: [
                     { name: "Dashboard Reference", file: "docs/dashboard_2026_02_08.pdf", type: "pdf", meta: "Resource · Feb 8" },
                     { name: "Naming Conventions", file: "docs/naming_conventions_2026_02_08.pdf", type: "pdf", meta: "Resource · Feb 8" },
                     { name: "Workflow Quick Reference", file: "docs/workflow_quick_reference_2026_02_08.pdf", type: "pdf", meta: "Resource · Feb 8" },
                     { name: "Automation Tips & Tricks", file: "docs/automation_tips_and_tricks_2026_02_08.pdf", type: "pdf", meta: "Resource · Feb 8" },
+                    { name: "Deferred Ideas Ledger", file: "docs/deferred_ideas_ledger.md", type: "md", meta: "Parking lot for future ideas" },
                 ]
             },
             {
-                section: "📅 Session Logs & Summaries",
+                section: "📅 Session Logs",
                 color: "var(--blue)",
                 docs: [
-                    { name: "Captain's Log — Feb 14", file: "../resources/walkthroughs/captains_log_2026_02_14.md", type: "md", meta: "Active Session" },
-                    { name: "Daily Summary — Feb 14", file: "../resources/walkthroughs/daily_summary_2026_02_14.md", type: "md", meta: "Active Session" },
-
-                    { name: "Workshop Review — Feb 15", file: "../advisory_panel/consultations/markdown/panel_review_2026_02_15.md", type: "md", meta: "Latest Panel Review" },
+                    { name: "Captain's Log — Feb 17", file: "../resources/walkthroughs/captains_log_2026_02_17.md", type: "md", meta: "Latest session" },
+                    { name: "Daily Summary — Feb 17", file: "../resources/walkthroughs/daily_summary_2026_02_17.md", type: "md", meta: "Latest summary" },
                 ]
             },
-            {
-                section: "🚀 Career Research & Prep",
-                color: "var(--blue)",
-                docs: [
-                    { name: "Screening Call (Feb 9)", file: "../career/docs/2026_02_09_screening_call.md", type: "md", meta: "Initial Intake" },
-                    { name: "Interview questions Bank", file: "../career/docs/interview_questions.md", type: "md", meta: "Technical & Behavioral" },
-                    { name: "Dossier: Panel Interview strategy", file: "../career/docs/panel_review_interview_strategy.md", type: "md", meta: "Strategic Prep" },
-                    { name: "Reference Selection Plan", file: "../career/docs/reference_selection.md", type: "md", meta: "Vetting Standards" },
-                    { name: "Salary Research & Market Stats", file: "../career/docs/salary_research.md", type: "md", meta: "Benchmarking" },
-                    { name: "STAR Stories Bank", file: "../career/docs/star_stories_bank.md", type: "md", meta: "Impact Evidence" },
-                    { name: "Thank You Email Drafts", file: "../career/docs/thank_you_email_draft.md", type: "md", meta: "Standard templates" },
-                    { name: "Company Research Dossier", file: "../career/docs/company_research.md", type: "md", meta: "Target Intel" },
-                    { name: "certifications Summary", file: "../career/docs/certifications_summary.md", type: "md", meta: "Evidence Vault" },
-                ]
-            }
         ];
 
         let currentDoc = null;
